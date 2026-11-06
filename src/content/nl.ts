@@ -349,35 +349,62 @@ export const segments: Segment[] = [
 ];
 
 export type IntegrationStatus = "live" | "beta" | "planned";
-export type Integration = { name: string; category: string; status: IntegrationStatus; body: string; logo?: "gmail" | "outlook" | "whatsapp" | "imap" };
+export type Integration = {
+  name: string;
+  category: string;
+  status: IntegrationStatus;
+  body: string;
+  /** Logo file in /public/logos (favicon of the provider's domain, as in the app's integration settings). */
+  slug?: string;
+  /** Sharper SVG mark for inbox channels. */
+  channel?: "gmail" | "outlook" | "whatsapp" | "imap";
+  connectsTo?: { name: string; slug: string; soon?: boolean }[];
+};
 
-export const integrationCategories = ["Voertuiggegevens", "Marktplaatsen", "Berichten", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Website"] as const;
+export const integrationCategories = ["Marktplaatsen", "Berichten", "Voertuiggegevens", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Betalen & ondertekenen", "Website"] as const;
 
 export const integrations: Integration[] = [
-  { name: "RDW Open Data", category: "Voertuiggegevens", status: "live", body: "Kentekengegevens, APK en tellerstandoordeel." },
-  { name: "Autotelex", category: "Voertuiggegevens", status: "planned", body: "Uitgebreide voertuig- en optiegegevens." },
-  { name: "VWE", category: "Voertuiggegevens", status: "planned", body: "Voertuiggegevens en waarde-indicaties." },
-  { name: "carVertical", category: "Voertuiggegevens", status: "planned", body: "Internationale voertuighistorie." },
-  { name: "mobile.de", category: "Marktplaatsen", status: "live", body: "Publiceren via de Seller-API." },
-  { name: "AutoScout24", category: "Marktplaatsen", status: "beta", body: "Publiceren als dataleverancier, ook naar AutoTrack." },
-  { name: "Marktplaats Admarkt", category: "Marktplaatsen", status: "planned", body: "Advertenties op Marktplaats." },
-  { name: "Gaspedaal", category: "Marktplaatsen", status: "planned", body: "Voorraad op Gaspedaal.nl." },
-  { name: "ViaBOVAG", category: "Marktplaatsen", status: "planned", body: "Voorraad op ViaBOVAG.nl." },
-  { name: "WhatsApp Business", category: "Berichten", status: "live", body: "Klantgesprekken in de gedeelde inbox.", logo: "whatsapp" },
-  { name: "Gmail", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", logo: "gmail" },
-  { name: "Outlook / Microsoft 365", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", logo: "outlook" },
-  { name: "E-mail (IMAP/SMTP)", category: "Berichten", status: "live", body: "Via de mailserver van je eigen domein.", logo: "imap" },
-  { name: "Google Agenda", category: "Agenda", status: "live", body: "Afspraken in de agenda van wie ze uitvoert." },
-  { name: "Outlook-agenda", category: "Agenda", status: "live", body: "Afspraken in de agenda van wie ze uitvoert." },
-  { name: "KVK Handelsregister", category: "Relatiecontroles", status: "live", body: "Bedrijfsgegevens invullen bij relaties." },
-  { name: "VIES", category: "Relatiecontroles", status: "live", body: "Btw-nummers controleren, met bewijs." },
-  { name: "Creditsafe", category: "Relatiecontroles", status: "planned", body: "Kredietwaardigheid van zakelijke klanten." },
-  { name: "Autoboeker", category: "Boekhouding & financiering", status: "live", body: "Facturen en kosten naar je boekhouding." },
-  { name: "Autus Finance", category: "Boekhouding & financiering", status: "live", body: "Financiering aanvragen voor je klant." },
-  { name: "Exact Online", category: "Boekhouding & financiering", status: "planned", body: "Facturen en kosten exporteren." },
-  { name: "Moneybird", category: "Boekhouding & financiering", status: "planned", body: "Facturen en kosten exporteren." },
-  { name: "Mollie", category: "Boekhouding & financiering", status: "planned", body: "Online betalen van facturen." },
-  { name: "Websitefeed", category: "Website", status: "live", body: "Je voorraad op je eigen website, met aanvraagformulieren." },
+  { name: "mobile.de", category: "Marktplaatsen", status: "live", body: "Publiceren via de Seller-API, met prijs en status automatisch bijgewerkt.", slug: "mobilede" },
+  { name: "AutoScout24", category: "Marktplaatsen", status: "beta", body: "Publiceren als dataleverancier, gekoppeld aan je klantnummer.", slug: "autoscout24" },
+  { name: "AutoTrack", category: "Marktplaatsen", status: "beta", body: "Tegelijk met AutoScout24 online, met één vinkje.", slug: "autotrack" },
+  { name: "Marktplaats Admarkt", category: "Marktplaatsen", status: "planned", body: "Advertenties op Marktplaats.", slug: "marktplaats" },
+  { name: "Gaspedaal", category: "Marktplaatsen", status: "planned", body: "Voorraad op Gaspedaal.nl.", slug: "gaspedaal" },
+  { name: "ViaBOVAG", category: "Marktplaatsen", status: "planned", body: "Voorraad op ViaBOVAG.nl.", slug: "viabovag" },
+  { name: "AutoWereld", category: "Marktplaatsen", status: "planned", body: "Voorraad op AutoWereld.nl.", slug: "autowereld" },
+  { name: "WhatsApp Business", category: "Berichten", status: "live", body: "Klantgesprekken in de gedeelde inbox, met media en snelle antwoorden.", channel: "whatsapp" },
+  { name: "Gmail", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", channel: "gmail" },
+  { name: "Outlook / Microsoft 365", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", channel: "outlook" },
+  { name: "E-mail (IMAP/SMTP)", category: "Berichten", status: "live", body: "Via de mailserver van je eigen domein.", channel: "imap" },
+  { name: "RDW Open Data", category: "Voertuiggegevens", status: "live", body: "Kentekengegevens, APK, keuringen en tellerstandoordeel.", slug: "rdw" },
+  { name: "Autotelex", category: "Voertuiggegevens", status: "planned", body: "Uitgebreide voertuig- en optiegegevens.", slug: "autotelex" },
+  { name: "VWE", category: "Voertuiggegevens", status: "planned", body: "Voertuiggegevens en waarde-indicaties.", slug: "vwe" },
+  { name: "carVertical", category: "Voertuiggegevens", status: "planned", body: "Internationale voertuighistorie.", slug: "carvertical" },
+  { name: "CARFAX", category: "Voertuiggegevens", status: "planned", body: "Historierapporten op VIN.", slug: "carfax" },
+  { name: "Google Agenda", category: "Agenda", status: "live", body: "Afspraken in de agenda van wie ze uitvoert.", slug: "gcal" },
+  { name: "Outlook-agenda", category: "Agenda", status: "live", body: "Afspraken in de agenda van wie ze uitvoert.", slug: "outlook" },
+  { name: "KVK Handelsregister", category: "Relatiecontroles", status: "live", body: "Bedrijfsnaam typen, KVK-nummer en adres ingevuld.", slug: "kvk" },
+  { name: "VIES", category: "Relatiecontroles", status: "live", body: "Btw-nummers controleren, met het resultaat als bewijs.", slug: "vies" },
+  { name: "Creditsafe", category: "Relatiecontroles", status: "planned", body: "Kredietwaardigheid van zakelijke klanten.", slug: "creditsafe" },
+  {
+    name: "Autoboeker",
+    category: "Boekhouding & financiering",
+    status: "live",
+    body: "Facturen en kosten automatisch naar je boekhouding.",
+    slug: "autoboeker",
+    connectsTo: [
+      { name: "Exact Online", slug: "exact" },
+      { name: "Twinfield", slug: "twinfield" },
+      { name: "SnelStart", slug: "snelstart" },
+      { name: "e-Boekhouden.nl", slug: "eboekhouden" },
+      { name: "Moneybird", slug: "moneybird", soon: true },
+    ],
+  },
+  { name: "Autus Finance", category: "Boekhouding & financiering", status: "live", body: "Financiering aanvragen voor je klant, vanuit de deal.", slug: "autus" },
+  { name: "Exact Online", category: "Boekhouding & financiering", status: "planned", body: "Directe export van facturen en kosten.", slug: "exact" },
+  { name: "Moneybird", category: "Boekhouding & financiering", status: "planned", body: "Directe export van facturen en kosten.", slug: "moneybird" },
+  { name: "Mollie", category: "Betalen & ondertekenen", status: "planned", body: "Online betalen van facturen en aanbetalingen.", slug: "mollie" },
+  { name: "Signhost", category: "Betalen & ondertekenen", status: "planned", body: "Gekwalificeerd digitaal ondertekenen. Ingebouwd tekenen werkt al.", slug: "signhost" },
+  { name: "Websitefeed", category: "Website", status: "live", body: "Je voorraad op je eigen website, met aanvraagformulieren.", slug: "site" },
 ];
 
 export const securityControls = [

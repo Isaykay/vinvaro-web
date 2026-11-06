@@ -12,10 +12,11 @@ import { Button, Container, Eyebrow, SectionHeader } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { CheckItem, IconTile } from "@/components/icons";
 import { FAQ } from "@/components/faq";
-import { ChannelLogo } from "@/components/channel-logo";
-import { BrandMarquee, CTASection, ContactStrip } from "@/components/sections";
-import { HeroWorkspace, VehicleJourney } from "@/components/product/hero";
-import { IntelligenceScan, StaffApp, VehicleDossier, WorkflowRun } from "@/components/product/ops";
+import { BrandMarquee, CTASection, ContactStrip, IntegrationWall } from "@/components/sections";
+import { HeroWorkspace, PipelineBoard, VehicleJourney } from "@/components/product/hero";
+import { MobileCapture, MobileDashboard, MobileReview } from "@/components/product/mobile";
+import { IntegrationLogo } from "@/components/product/kit";
+import { IntelligenceScan, VehicleDossier, WorkflowRun } from "@/components/product/ops";
 import { InboxView, PublishFlow } from "@/components/product/sales";
 
 const copy = defineCopy({
@@ -153,20 +154,21 @@ export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata({ lang, path: "/", title: copy[lang].metaTitle, description: site.description });
 }
 
-const worksWith: { name: string; logo?: "whatsapp" | "gmail" | "outlook"; dot?: string }[] = [
-  { name: "RDW", dot: "#1d4ed8" },
-  { name: "mobile.de", dot: "#f97316" },
-  { name: "AutoScout24", dot: "#f5c400" },
-  { name: "WhatsApp", logo: "whatsapp" },
-  { name: "Gmail", logo: "gmail" },
-  { name: "Outlook", logo: "outlook" },
-];
+const worksWith: { name: string; slug?: string; channel?: "whatsapp" | "gmail" | "outlook" }[] = [
+  { name: "RDW", slug: "rdw" },
+  { name: "mobile.de", slug: "mobilede" },
+  { name: "AutoScout24", slug: "autoscout24" },
+  { name: "WhatsApp", channel: "whatsapp" },
+  { name: "Gmail", channel: "gmail" },
+  { name: "Outlook", channel: "outlook" },
+  { name: "Google Agenda", slug: "gcal" },
+  { name: "KVK", slug: "kvk" },
+]
 
 export default async function Home() {
   const lang = await getLang();
-  const { faq, platform, securityControls, site, integrations } = getContent(lang);
+  const { faq, platform, securityControls, site } = getContent(lang);
   const t = copy[lang];
-  const live = integrations.filter((i) => i.status !== "planned");
   return (
     <>
       <JsonLd data={[softwareApplicationLd(lang), faqLd(faq, lang)]} />
@@ -203,7 +205,7 @@ export default async function Home() {
               <span>{t.worksWith}</span>
               {worksWith.map((w) => (
                 <span key={w.name} className="inline-flex items-center gap-1.5 font-medium text-ink-2">
-                  {w.logo ? <ChannelLogo kind={w.logo} size={14} /> : <span className="size-2 rounded-full" style={{ background: w.dot }} />}
+                  <IntegrationLogo slug={w.slug} channel={w.channel} className="size-6 rounded-[7px]" size={14} />
                   {w.name}
                 </span>
               ))}
@@ -271,6 +273,11 @@ export default async function Home() {
           </Reveal>
           <Reveal delay={0.1} className="mx-auto mt-16 max-w-[1040px]">
             <VehicleJourney />
+          </Reveal>
+          <Reveal delay={0.1} className="mx-auto mt-16 max-w-[1100px]">
+            <div className="bg-stage rounded-[26px] p-3 sm:p-6">
+              <PipelineBoard />
+            </div>
           </Reveal>
         </Container>
       </section>
@@ -343,8 +350,16 @@ export default async function Home() {
               </Button>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="bg-stage rounded-[28px] px-4 pt-10 pb-6 sm:px-8">
-                <StaffApp />
+              <div className="bg-stage relative flex h-[580px] items-end justify-center overflow-hidden rounded-[28px] px-4 pt-10">
+                <div className="absolute bottom-[-40px] left-1/2 hidden origin-bottom -translate-x-[136%] scale-[0.86] rotate-[-7deg] sm:block">
+                  <MobileCapture />
+                </div>
+                <div className="relative z-10 mb-[-40px]">
+                  <MobileDashboard />
+                </div>
+                <div className="absolute bottom-[-40px] left-1/2 hidden origin-bottom translate-x-[36%] scale-[0.86] rotate-[7deg] sm:block">
+                  <MobileReview />
+                </div>
               </div>
             </Reveal>
           </div>
@@ -383,7 +398,7 @@ export default async function Home() {
 
       <section className="py-28 sm:py-36">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr]">
             <Reveal>
               <SectionHeader eyebrow={t.integrations.eyebrow} title={t.integrations.title} lead={t.integrations.lead} />
               <Button href="/integraties" variant="secondary" arrow className="mt-9">
@@ -391,25 +406,7 @@ export default async function Home() {
               </Button>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="flex flex-wrap gap-2.5">
-                {live.map((i, idx) => (
-                  <span
-                    key={i.name}
-                    className="inline-flex animate-row-in items-center gap-2 rounded-full bg-surface py-2 pr-4 pl-2 text-[14px] font-medium shadow-card ring-1 ring-line"
-                    style={{ animationDelay: `${idx * 0.04}s` }}
-                  >
-                    {i.logo ? (
-                      <span className="flex size-7 items-center justify-center rounded-full bg-canvas ring-1 ring-line">
-                        <ChannelLogo kind={i.logo} size={15} />
-                      </span>
-                    ) : (
-                      <IconTile text={`${i.name} ${i.category}`} hint={i.body} size="sm" />
-                    )}
-                    {i.name}
-                    <span className={clsx("size-1.5 rounded-full", i.status === "live" ? "bg-ok" : "bg-brand")} />
-                  </span>
-                ))}
-              </div>
+              <IntegrationWall />
             </Reveal>
           </div>
         </Container>

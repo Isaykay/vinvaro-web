@@ -1,7 +1,8 @@
 "use client";
 
 import type { ModuleVisualKey } from "@/lib/content";
-import { IntelligenceScan, StaffApp, VehicleDossier, WorkflowRun } from "@/components/product/ops";
+import { IntelligenceScan, StaffApp, VehicleDossier } from "@/components/product/ops";
+import { PipelineBoard } from "@/components/product/hero";
 import { AgendaWeek, ContractSign, InboxView, PublishFlow, SalesPipeline } from "@/components/product/sales";
 
 export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
@@ -9,7 +10,7 @@ export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
     case "inventory":
       return <VehicleDossier />;
     case "intake":
-      return <WorkflowRun />;
+      return <PipelineBoard />;
     case "intelligence":
       return <IntelligenceScan />;
     case "app":

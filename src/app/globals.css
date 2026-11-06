@@ -176,6 +176,19 @@
   }
 }
 
+/* From the web client's dashboard (kpi-visuals). */
+@keyframes bar-grow {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes bar-fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
 /* A car rolling in from the left, pausing, then leaving: used on the pipeline lanes. */
 @keyframes lane {
   0% {

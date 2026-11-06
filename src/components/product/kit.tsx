@@ -1,7 +1,9 @@
 import Image from "next/image";
 import clsx from "clsx";
 import type { CSSProperties, ReactNode } from "react";
+import { Globe } from "lucide-react";
 import { Mark } from "@/components/ui";
+import { ChannelLogo, type ChannelKind } from "@/components/channel-logo";
 
 /** Side-profile car illustration (front faces right). Wheels can spin; the body can be tinted. */
 export function Car({
@@ -70,18 +72,52 @@ function Wheel({ cx, spin, tone }: { cx: number; spin?: boolean; tone: "light" |
   );
 }
 
-/** Dutch-style yellow number plate with the blue EU strip. */
-export function Plate({ children, className, size = "sm" }: { children: ReactNode; className?: string; size?: "sm" | "md" }) {
+const plateSizes = {
+  xs: { height: 17, font: 10.5, band: 9, code: 5, star: 5, pad: 4 },
+  sm: { height: 22, font: 12.5, band: 12, code: 6.5, star: 7, pad: 6 },
+  md: { height: 30, font: 17, band: 16, code: 8.5, star: 9.5, pad: 8 },
+};
+
+function EuStars({ size }: { size: number }) {
+  const r = size / 2 - 0.6;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden>
+      {Array.from({ length: 12 }, (_, i) => {
+        const a = (i / 12) * Math.PI * 2;
+        return <circle key={i} cx={(size / 2 + Math.sin(a) * r).toFixed(2)} cy={(size / 2 - Math.cos(a) * r).toFixed(2)} r={(size / 16 + 0.25).toFixed(2)} fill="#FFCC00" />;
+      })}
+    </svg>
+  );
+}
+
+/** Dutch number plate, drawn like the LicensePlate component in the web app (EU band with stars). */
+export function Plate({ children, className, size = "sm" }: { children: ReactNode; className?: string; size?: keyof typeof plateSizes }) {
+  const s = plateSizes[size];
   return (
     <span
-      className={clsx(
-        "inline-flex shrink-0 items-stretch overflow-hidden rounded-[4px] bg-[#f7c600] font-mono font-bold tracking-[0.04em] text-ink ring-1 ring-ink/20",
-        size === "sm" ? "h-[18px] text-[10.5px]" : "h-6 text-[13px]",
-        className,
-      )}
+      className={clsx("inline-flex shrink-0 items-stretch overflow-hidden align-middle shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08)]", className)}
+      style={{ height: s.height, borderRadius: Math.max(3, s.height / 9), background: "#F5C400", border: "1.5px solid #1F2937" }}
     >
-      <span className={clsx("flex flex-col items-center justify-end bg-[#1d4ed8] text-white", size === "sm" ? "w-2.5 pb-px text-[5px]" : "w-3.5 pb-0.5 text-[6.5px]")}>NL</span>
-      <span className={clsx("flex items-center", size === "sm" ? "px-1.5" : "px-2")}>{children}</span>
+      <span className="flex flex-col items-center justify-center gap-px font-semibold text-white" style={{ width: s.band, background: "#003399", fontSize: s.code }}>
+        <EuStars size={s.star} />
+        <span className="leading-none">NL</span>
+      </span>
+      <span
+        className="flex flex-1 items-center justify-center font-bold whitespace-nowrap text-[#111]"
+        style={{ fontSize: s.font, paddingInline: s.pad, letterSpacing: "0.04em", fontFamily: "'DIN Condensed', 'Arial Narrow', 'Roboto Condensed', ui-sans-serif, sans-serif", fontStretch: "condensed" }}
+      >
+        {children}
+      </span>
+    </span>
+  );
+}
+
+/** Integration logo tile (favicons from /public/logos, like the app's integration settings). */
+export function LogoTile({ slug, className, size = 28 }: { slug: string; className?: string; size?: number }) {
+  return (
+    <span className={clsx("grid shrink-0 place-items-center overflow-hidden rounded-[9px] border border-line bg-white", className ?? "size-10")}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`/logos/${slug}.png`} alt="" width={size} height={size} decoding="async" className="rounded-[4px] object-contain" style={{ width: size, height: size }} />
     </span>
   );
 }
@@ -90,6 +126,41 @@ export function BrandLogo({ make, className }: { make: string; className?: strin
   return (
     <span className={clsx("relative flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-surface ring-1 ring-line", className ?? "size-8")}>
       <Image src={`/brands/${make}.png`} alt="" width={64} height={43} className="h-auto w-[78%] object-contain" />
+    </span>
+  );
+}
+
+/** Logo for an integration: SVG mark for inbox channels, favicon file otherwise, globe for the website feed. */
+export function IntegrationLogo({
+  slug,
+  channel,
+  className,
+  size = 22,
+}: {
+  slug?: string;
+  channel?: ChannelKind;
+  className?: string;
+  size?: number;
+}) {
+  const box = clsx("grid shrink-0 place-items-center overflow-hidden rounded-[10px] border border-line bg-white", className ?? "size-10");
+  if (channel) {
+    return (
+      <span className={box}>
+        <ChannelLogo kind={channel} size={size} />
+      </span>
+    );
+  }
+  if (!slug || slug === "site") {
+    return (
+      <span className={clsx(box, "bg-brand-50 text-brand")}>
+        <Globe style={{ width: size * 0.85, height: size * 0.85 }} strokeWidth={1.8} />
+      </span>
+    );
+  }
+  return (
+    <span className={box}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`/logos/${slug}.png`} alt="" width={size} height={size} decoding="async" className="rounded-[4px] object-contain" style={{ width: size, height: size }} />
     </span>
   );
 }

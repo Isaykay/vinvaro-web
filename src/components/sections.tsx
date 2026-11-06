@@ -9,8 +9,7 @@ import { Button, Container, Eyebrow, Mark } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { IconTile } from "@/components/icons";
 import { OfficeHours } from "@/components/office-hours";
-import { ChannelLogo } from "@/components/channel-logo";
-import { Car } from "@/components/product/kit";
+import { Car, IntegrationLogo } from "@/components/product/kit";
 
 const copy = defineCopy({
   nl: {
@@ -22,6 +21,10 @@ const copy = defineCopy({
     terms: ["Demo van 30 minuten", "Hulp bij de overstap", "Modulair: kies wat je nodig hebt"],
     status: { live: "Live", beta: "Bèta", planned: "Gepland" } satisfies Record<IntegrationStatus, string>,
     marquee: "Van Abarth tot Volvo: elk merk in één dossier",
+    connectsTo: "Koppelt met",
+    soon: "binnenkort",
+    liveCount: (n: number) => `${n} live`,
+    plannedCount: (n: number) => `${n} gepland`,
   },
   en: {
     ctaEyebrow: "Book a demo",
@@ -32,6 +35,10 @@ const copy = defineCopy({
     terms: ["30-minute demo", "Help with switching", "Modular: pick what you need"],
     status: { live: "Live", beta: "Beta", planned: "Planned" } satisfies Record<IntegrationStatus, string>,
     marquee: "From Abarth to Volvo: every make in one dossier",
+    connectsTo: "Connects to",
+    soon: "soon",
+    liveCount: (n: number) => `${n} live`,
+    plannedCount: (n: number) => `${n} planned`,
   },
 });
 
@@ -158,31 +165,102 @@ function StatusBadge({ status, lang }: { status: IntegrationStatus; lang: Lang }
 export async function IntegrationGrid({ only }: { only?: IntegrationStatus[] }) {
   const lang = await getLang();
   const { integrations, integrationCategories } = getContent(lang);
+  const t = copy[lang];
   const list = only ? integrations.filter((i) => only.includes(i.status)) : integrations;
   return (
-    <div className="space-y-10">
+    <div className="space-y-14">
       {integrationCategories.map((cat) => {
         const items = list.filter((i) => i.category === cat);
         if (items.length === 0) return null;
+        const live = items.filter((i) => i.status !== "planned").length;
         return (
-          <div key={cat}>
-            <p className="mb-4 font-mono text-[11.5px] tracking-[0.1em] text-subtle uppercase">{cat}</p>
+          <div key={cat} id={cat} className="scroll-mt-24">
+            <div className="mb-5 flex items-end justify-between gap-4 border-b border-line pb-3">
+              <div className="flex items-center gap-3">
+                <span className="flex -space-x-2">
+                  {items.slice(0, 4).map((i) => (
+                    <IntegrationLogo key={i.name} slug={i.slug} channel={i.channel} className="size-8 rounded-full ring-2 ring-canvas" size={16} />
+                  ))}
+                </span>
+                <h3 className="text-[19px] font-semibold tracking-[-0.025em]">{cat}</h3>
+              </div>
+              <p className="font-mono text-[11.5px] text-muted">
+                {live > 0 && <span className="text-ok">{t.liveCount(live)}</span>}
+                {live > 0 && items.length - live > 0 && " · "}
+                {items.length - live > 0 && t.plannedCount(items.length - live)}
+              </p>
+            </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((i) => (
-                <div key={i.name} className={clsx("flex items-start gap-3.5 rounded-2xl bg-surface p-5 shadow-card", i.status === "planned" && "opacity-80")}>
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-canvas ring-1 ring-line">
-                    {i.logo ? <ChannelLogo kind={i.logo} size={20} /> : <IconTile text={`${i.name} ${i.category}`} hint={i.body} size="sm" tone={i.status === "planned" ? "neutral" : "brand"} />}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="flex items-start justify-between gap-2">
-                      <span className="text-[14.5px] font-semibold tracking-[-0.015em]">{i.name}</span>
-                      <StatusBadge status={i.status} lang={lang} />
+                <div
+                  key={i.name}
+                  className={clsx(
+                    "group flex flex-col rounded-[14px] border border-line bg-surface p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-float",
+                    i.status === "planned" && "bg-surface/70",
+                  )}
+                >
+                  <div className="flex items-center gap-3.5">
+                    <IntegrationLogo slug={i.slug} channel={i.channel} className={clsx("size-12 rounded-[12px]", i.status === "planned" && "grayscale-[35%]")} size={28} />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[15px] font-semibold tracking-[-0.015em]">{i.name}</span>
+                      <span className="mt-1 inline-flex">
+                        <StatusBadge status={i.status} lang={lang} />
+                      </span>
                     </span>
-                    <span className="mt-1 block text-[13px] leading-snug text-muted">{i.body}</span>
-                  </span>
+                  </div>
+                  <p className="mt-3.5 text-[13.5px] leading-snug text-muted">{i.body}</p>
+                  {i.connectsTo && (
+                    <div className="mt-4 border-t border-line pt-3">
+                      <p className="mb-2 text-[11px] font-medium text-muted">{t.connectsTo}</p>
+                      <ul className="flex flex-wrap gap-1.5">
+                        {i.connectsTo.map((pkg) => (
+                          <li key={pkg.name} className="inline-flex h-7 items-center gap-1.5 rounded-full border border-line px-2.5 text-[12px] text-ink-2">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={`/logos/${pkg.slug}.png`} alt="" width={14} height={14} className="size-3.5 rounded-[3px]" />
+                            {pkg.name}
+                            {pkg.soon && <span className="text-[11px] text-muted">· {t.soon}</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Compact logo wall grouped by category, for the homepage. */
+export async function IntegrationWall() {
+  const lang = await getLang();
+  const { integrations, integrationCategories } = getContent(lang);
+  return (
+    <div className="overflow-hidden rounded-[18px] border border-line bg-surface">
+      {integrationCategories.map((cat) => {
+        const items = integrations.filter((i) => i.category === cat);
+        if (items.length === 0) return null;
+        return (
+          <div key={cat} className="grid gap-3 border-b border-line px-5 py-4 last:border-0 sm:grid-cols-[150px_1fr] sm:items-center">
+            <p className="text-[12px] font-semibold tracking-[0.04em] text-muted">{cat}</p>
+            <ul className="flex flex-wrap gap-2">
+              {items.map((i) => (
+                <li
+                  key={i.name}
+                  className={clsx(
+                    "inline-flex h-9 items-center gap-2 rounded-full border border-line bg-surface py-1 pr-3 pl-1 text-[13px] font-medium transition-colors hover:border-line-strong",
+                    i.status === "planned" && "text-muted",
+                  )}
+                >
+                  <IntegrationLogo slug={i.slug} channel={i.channel} className={clsx("size-7 rounded-full border-0", i.status === "planned" && "opacity-70 grayscale-[40%]")} size={17} />
+                  {i.name}
+                  <span className={clsx("size-1.5 rounded-full", i.status === "live" ? "bg-ok" : i.status === "beta" ? "bg-brand" : "bg-line-strong")} />
+                </li>
+              ))}
+            </ul>
           </div>
         );
       })}

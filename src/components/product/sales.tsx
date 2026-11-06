@@ -1,12 +1,12 @@
 "use client";
 
 import clsx from "clsx";
-import { ArrowRight, Building2, CalendarCheck, Check, FileSignature, Globe, Receipt, Send, Sparkles } from "lucide-react";
+import { ArrowRight, Building2, CalendarCheck, Check, FileSignature, Receipt, Send, Sparkles } from "lucide-react";
 import { useLang } from "@/components/lang-provider";
 import { defineCopy } from "@/lib/i18n";
 import { ChannelLogo, type ChannelKind } from "@/components/channel-logo";
 import { Mark } from "@/components/ui";
-import { AppWindow, BrandLogo, Car, Pill, Plate, delay } from "@/components/product/kit";
+import { AppWindow, BrandLogo, Car, IntegrationLogo, Pill, Plate, delay } from "@/components/product/kit";
 
 const copy = defineCopy({
   nl: {
@@ -440,8 +440,8 @@ export function ContractSign() {
 export function PublishFlow() {
   const t = copy[useLang()];
   const channels = [
-    { name: "mobile.de", color: "#f97316", y: 18 },
-    { name: "AutoScout24", color: "#f5c400", y: 50 },
+    { name: "mobile.de", color: "#f97316", y: 18, slug: "mobilede" },
+    { name: "AutoScout24", color: "#f5c400", y: 50, slug: "autoscout24" },
     { name: t.yourSite, color: "#2563eb", y: 82, site: true },
   ];
   return (
@@ -487,9 +487,7 @@ export function PublishFlow() {
       <div className="relative z-10 flex flex-col gap-3">
         {channels.map((c, i) => (
           <div key={c.name} className="flex animate-toast-in items-center gap-3 rounded-2xl bg-surface p-3.5 shadow-float" style={delay(0.4 + i * 0.25)}>
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl ring-1 ring-line" style={{ background: `${c.color}14` }}>
-              {c.site ? <Globe className="size-4.5 text-brand" /> : <span className="size-3 rounded-full" style={{ background: c.color }} />}
-            </span>
+            <IntegrationLogo slug={c.site ? "site" : c.slug} className="size-10 rounded-xl" size={24} />
             <span className="min-w-0 flex-1">
               <span className="block text-[13px] font-semibold">{c.name}</span>
               <span className="block truncate text-[11px] text-muted">{c.site ? t.feedButton : `Online · ${t.newPrice}`}</span>

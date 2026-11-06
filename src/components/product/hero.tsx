@@ -1,245 +1,372 @@
 "use client";
 
 import clsx from "clsx";
-import { AlertTriangle, CalendarDays, Car as CarIcon, Check, ClipboardCheck, Inbox, LayoutGrid, Plus, Rocket, Search, Users } from "lucide-react";
 import { useLang } from "@/components/lang-provider";
 import { defineCopy } from "@/lib/i18n";
-import { Mark } from "@/components/ui";
+import { Icon, type IconName } from "@/components/app-icons";
 import { ChannelLogo } from "@/components/channel-logo";
-import { AppWindow, BrandLogo, Car, Dot, Pill, Plate, delay } from "@/components/product/kit";
+import { Car } from "@/components/product/kit";
+import {
+  AppBadge,
+  AppButton,
+  AppCard,
+  AppMetricCard,
+  AppSidebar,
+  AppTopbar,
+  BrowserFrame,
+  FinanceCard,
+  PageHeader,
+  PipelineCard,
+  SegmentBar,
+  StageColumn,
+  TrendBars,
+  VehicleCell,
+  type BadgeTone,
+  type NavGroup,
+  type PipelineCardData,
+} from "@/components/product/app-ui";
+import { MobileDashboard } from "@/components/product/mobile";
 
-const copy = defineCopy({
+const shell = defineCopy({
   nl: {
-    greeting: "Goedemorgen, Sanne",
-    sub: "Donderdag · 4 proefritten vandaag",
-    search: "Zoek op kenteken, VIN of klant",
-    add: "Voertuig",
-    kpis: [
-      ["In voorraad", "48", "+3"],
-      ["Verkoopklaar", "12", "+2"],
-      ["Open bevindingen", "3", "−1"],
-      ["Proefritten vandaag", "4", ""],
-    ],
-    stages: ["Intake", "Inspectie", "Voorbereiding", "Verkoop", "Aflevering"],
-    intake: "Intake 3/8",
-    finding: "1 bevinding",
-    valet: "Poetsen",
-    photos: "Fotografie",
-    online: "Online",
-    handover: "Za 10:00",
-    gate: "Verplicht voor Verkoop",
-    toastWa: "Is de XC40 nog beschikbaar? Kan ik zaterdag een proefrit maken?",
-    testDrive: "Proefrit",
-    lead: "Lead 86",
-    findingTitle: "Tweede sleutel ontbreekt",
-    findingBody: "BMW 320e · Intake · verwacht 2, aangetroffen 1",
-    published: "Gepubliceerd",
-    illustrative: "Illustratie",
+    nav: [
+      { items: [["dashboard", "Overzicht"], ["vehicle", "Voertuigen"], ["pipeline", "Pijplijn"]] },
+      { label: "Operatie", items: [["chat", "Inbox", 4], ["mail", "Aanvragen"], ["calendar", "Agenda"], ["check", "Taken"], ["scan", "Bevindingen"], ["workflow", "Workflows"]] },
+      { label: "Verkoop", items: [["users", "Relaties"], ["contract", "Contracten"], ["euro", "Facturen"], ["gauge", "Financieel rapport"]] },
+    ] as NavGroup[],
+    org: "Autobedrijf De Vries",
+    role: "Eigenaar",
+    search: "Zoeken",
+    import: ["Document importeren", "Sleep een pdf hierheen"] as [string, string],
   },
   en: {
-    greeting: "Good morning, Sanne",
-    sub: "Thursday · 4 test drives today",
-    search: "Search registration, VIN or customer",
-    add: "Vehicle",
-    kpis: [
-      ["In stock", "48", "+3"],
-      ["Sale-ready", "12", "+2"],
-      ["Open findings", "3", "−1"],
-      ["Test drives today", "4", ""],
-    ],
-    stages: ["Intake", "Inspection", "Preparation", "Sales", "Delivery"],
-    intake: "Intake 3/8",
-    finding: "1 finding",
-    valet: "Valeting",
-    photos: "Photography",
-    online: "Online",
-    handover: "Sat 10:00",
-    gate: "Required for Sales",
-    toastWa: "Is the XC40 still available? Could I take a test drive on Saturday?",
-    testDrive: "Test drive",
-    lead: "Lead 86",
-    findingTitle: "Second key missing",
-    findingBody: "BMW 320e · Intake · expected 2, found 1",
-    published: "Published",
-    illustrative: "Illustrative",
+    nav: [
+      { items: [["dashboard", "Overview"], ["vehicle", "Vehicles"], ["pipeline", "Pipeline"]] },
+      { label: "Operations", items: [["chat", "Inbox", 4], ["mail", "Inquiries"], ["calendar", "Calendar"], ["check", "Tasks"], ["scan", "Findings"], ["workflow", "Workflows"]] },
+      { label: "Sales", items: [["users", "Contacts"], ["contract", "Contracts"], ["euro", "Invoices"], ["gauge", "Finance report"]] },
+    ] as NavGroup[],
+    org: "De Vries Automotive",
+    role: "Owner",
+    search: "Search",
+    import: ["Import document", "Drop a PDF here"] as [string, string],
   },
 });
 
-type CardData = { make: string; model: string; plate: string; tag: React.ReactNode; progress?: number; pulse?: boolean };
+const copy = defineCopy({
+  nl: {
+    title: "Je bedrijf, in één oogopslag.",
+    subtitle: "Voertuigen, team en de volgende actie.",
+    customize: "Indeling aanpassen",
+    add: "Voertuig toevoegen",
+    metrics: [
+      ["Voertuigen in voorraad", "48", "Open voorraadperiodes", "vehicle"],
+      ["Lopende workflows", "9", "Intake, aflevering en inspecties", "workflow"],
+      ["Open bevindingen", "3", "Menselijke bevestiging nodig", "warning"],
+      ["Openstaande taken", "12", "Opvolgacties voor je team", "check"],
+    ] as [string, string, string, IconName][],
+    ytd: "Dit jaar",
+    invoiced: ["Gefactureerd", "€ 412.380", "38 facturen · € 498.979 incl. btw", "+12,4%"],
+    outstanding: ["Openstaand", "€ 23.415", "6 facturen · € 4.120 te laat"],
+    aging: ["Niet vervallen", "1–30 d", "31–60 d"],
+    margin: ["Marge", "€ 61.240", "14,9% marge · 31 verkocht", "+8,1%"],
+    stock: ["Voorraadwaarde", "€ 1.184.500", "48 auto's · vraagprijs € 1,39 mln"],
+    buckets: ["0–30 d", "31–60 d", "61–90 d", "90+ d"],
+    table: "Voertuigen in behandeling",
+    viewAll: "Bekijk voorraad",
+    cols: ["Voertuig", "Fase", "Km", "Vraagprijs", "In voorraad", "APK", "Status"],
+    rows: [
+      ["bmw", "BMW 320e Touring", "S-208-KL", "2022 · Plug-in hybride · 41.200 km", "Inspectie", "warning", "41.200", "€ 34.950", "6 d", "14-08-2027", "Niet te koop", "neutral"],
+      ["kia", "Kia EV6 GT-Line", "T-114-NB", "2023 · Elektrisch · 18.950 km", "Voorbereiding", "info", "18.950", "€ 42.750", "12 d", "02-03-2027", "Beschikbaar", "success"],
+      ["volvo", "Volvo XC40 Recharge", "P-771-RD", "2023 · Elektrisch · 18.400 km", "Verkoopklaar", "success", "18.400", "€ 38.950", "21 d", "19-11-2027", "Gereserveerd", "warning"],
+      ["volkswagen", "Volkswagen Golf 1.5 eTSI", "R-512-FX", "2022 · Benzine · 34.512 km", "Intake", "warning", "34.512", "€ 24.950", "2 d", "07-06-2027", "Niet te koop", "neutral"],
+    ] as [string, string, string, string, string, BadgeTone, string, string, string, string, string, BadgeTone][],
+    toastTitle: "Nieuw bericht van Mark Jansen",
+    toast: "Is de XC40 nog beschikbaar? Kan ik zaterdag een proefrit maken?",
+    open: "Openen",
+  },
+  en: {
+    title: "Your business, at a glance.",
+    subtitle: "Vehicles, team and the next action.",
+    customize: "Customise layout",
+    add: "Add vehicle",
+    metrics: [
+      ["Vehicles in stock", "48", "Open stock periods", "vehicle"],
+      ["Active workflows", "9", "Intake, delivery and inspections", "workflow"],
+      ["Open findings", "3", "Human confirmation needed", "warning"],
+      ["Open tasks", "12", "Follow-ups for your team", "check"],
+    ] as [string, string, string, IconName][],
+    ytd: "Year to date",
+    invoiced: ["Invoiced", "€412,380", "38 invoices · €498,979 incl. VAT", "+12.4%"],
+    outstanding: ["Outstanding", "€23,415", "6 invoices · €4,120 overdue"],
+    aging: ["Not due", "1–30 d", "31–60 d"],
+    margin: ["Margin", "€61,240", "14.9% margin · 31 sold", "+8.1%"],
+    stock: ["Stock value", "€1,184,500", "48 cars · asking €1.39m"],
+    buckets: ["0–30 d", "31–60 d", "61–90 d", "90+ d"],
+    table: "Vehicles in progress",
+    viewAll: "View inventory",
+    cols: ["Vehicle", "Stage", "Km", "Asking price", "In stock", "MOT", "Status"],
+    rows: [
+      ["bmw", "BMW 320e Touring", "S-208-KL", "2022 · Plug-in hybrid · 41,200 km", "Inspection", "warning", "41,200", "€34,950", "6 d", "14-08-2027", "Not for sale", "neutral"],
+      ["kia", "Kia EV6 GT-Line", "T-114-NB", "2023 · Electric · 18,950 km", "Preparation", "info", "18,950", "€42,750", "12 d", "02-03-2027", "Available", "success"],
+      ["volvo", "Volvo XC40 Recharge", "P-771-RD", "2023 · Electric · 18,400 km", "Sale-ready", "success", "18,400", "€38,950", "21 d", "19-11-2027", "Reserved", "warning"],
+      ["volkswagen", "Volkswagen Golf 1.5 eTSI", "R-512-FX", "2022 · Petrol · 34,512 km", "Intake", "warning", "34,512", "€24,950", "2 d", "07-06-2027", "Not for sale", "neutral"],
+    ] as [string, string, string, string, string, BadgeTone, string, string, string, string, string, BadgeTone][],
+    toastTitle: "New message from Mark Jansen",
+    toast: "Is the XC40 still available? Could I take a test drive on Saturday?",
+    open: "Open",
+  },
+});
 
-function VehicleCard({ c, i }: { c: CardData; i: number }) {
+/** Workspace shell exactly as in the web client: sidebar, sticky topbar, padded main. */
+export function AppShell({ active, children }: { active: string; children: React.ReactNode }) {
+  const s = shell[useLang()];
   return (
-    <div
-      className={clsx("animate-row-in rounded-xl bg-surface p-2.5 shadow-card", c.pulse && "animate-soft-pulse ring-1 ring-brand/40")}
-      style={delay(0.35 + i * 0.08)}
-    >
-      <div className="flex items-center gap-2">
-        <BrandLogo make={c.make} className="size-7" />
+    <BrowserFrame>
+      <div className="flex bg-canvas">
+        <AppSidebar groups={s.nav} active={active} org={s.org} role={s.role} import={s.import} />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[11.5px] font-semibold tracking-[-0.01em]">{c.model}</p>
-          <Plate className="mt-0.5">{c.plate}</Plate>
+          <AppTopbar search={s.search} initials="SB" />
+          <main className="p-4 sm:p-5">{children}</main>
         </div>
       </div>
-      {c.progress !== undefined && (
-        <div className="mt-2.5 h-1 overflow-hidden rounded-full bg-sunken">
-          <span className="block h-full origin-left animate-progress rounded-full bg-brand" style={{ width: `${c.progress}%`, ...delay(i * 0.3) }} />
-        </div>
-      )}
-      <div className="mt-2 flex flex-wrap gap-1">{c.tag}</div>
-    </div>
+    </BrowserFrame>
   );
 }
 
+/** The dashboard page (src/app/(workspace)/page.tsx) with illustrative data. */
+export function DashboardScreen() {
+  const t = copy[useLang()];
+  const s = shell[useLang()];
+  return (
+    <AppShell active={s.nav[0].items[0][1]}>
+      <PageHeader
+        title={t.title}
+        subtitle={t.subtitle}
+        actions={
+          <>
+            <span className="hidden sm:inline-flex">
+              <AppButton icon="dashboard">{t.customize}</AppButton>
+            </span>
+            <span className="relative" data-cursor-target>
+              <AppButton primary icon="plus">
+                {t.add}
+              </AppButton>
+              <span className="pointer-events-none absolute inset-0 rounded-[8px]" style={{ animation: "click-ring 6s ease-out infinite", animationDelay: "2.6s" }} />
+            </span>
+          </>
+        }
+      />
+      <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
+        {t.metrics.map(([label, value, caption, icon], i) => (
+          <AppMetricCard key={label} label={label} value={value} caption={caption} icon={icon} delay={80 + i * 60} />
+        ))}
+        <FinanceCard label={t.invoiced[0]} ytd={t.ytd} value={t.invoiced[1]} hint={t.invoiced[2]} delta={t.invoiced[3]} delay={320}>
+          <TrendBars values={[30, 42, 38, 55, 48, 62, 58, 71, 66, 80, 74, 92]} previous={[26, 35, 40, 44, 41, 52, 50, 60, 57, 66, 70, 74]} />
+        </FinanceCard>
+        <FinanceCard label={t.outstanding[0]} value={t.outstanding[1]} hint={t.outstanding[2]} delay={380}>
+          <SegmentBar
+            segments={[
+              { label: t.aging[0], value: 14, className: "bg-ok/70" },
+              { label: t.aging[1], value: 6, className: "bg-[#92400e]/60" },
+              { label: t.aging[2], value: 3, className: "bg-danger/70" },
+            ]}
+          />
+        </FinanceCard>
+        <FinanceCard label={t.margin[0]} ytd={t.ytd} value={t.margin[1]} hint={t.margin[2]} delta={t.margin[3]} delay={440}>
+          <TrendBars values={[12, 18, 15, 22, 20, 26, 24, 30, 27, 33, 31, 38]} previous={[10, 14, 16, 18, 17, 21, 22, 24, 25, 27, 29, 30]} />
+        </FinanceCard>
+        <FinanceCard label={t.stock[0]} value={t.stock[1]} hint={t.stock[2]} delay={500}>
+          <SegmentBar
+            segments={[
+              { label: t.buckets[0], value: 22, className: "bg-brand" },
+              { label: t.buckets[1], value: 14, className: "bg-brand/55" },
+              { label: t.buckets[2], value: 8, className: "bg-[#92400e]/70" },
+              { label: t.buckets[3], value: 4, className: "bg-danger/70" },
+            ]}
+          />
+        </FinanceCard>
+      </div>
+
+      <AppCard flush className="mt-2.5" title={t.table} actions={<span className="inline-flex items-center gap-1 text-[10.5px] text-[#475569]">{t.viewAll} <Icon name="arrowRight" size={11} /></span>}>
+        <div className="grid grid-cols-[2.6fr_1fr_1fr] gap-3 border-y border-line bg-canvas px-4 py-1.5 text-[9.5px] font-semibold text-muted lg:grid-cols-[2.6fr_1fr_0.7fr_0.9fr_0.7fr_0.9fr_1fr]">
+          {t.cols.map((c, i) => (
+            <span key={c} className={clsx(i > 0 && i < 6 && i !== 1 && "hidden lg:block", (i === 2 || i === 3 || i === 4) && "text-right")}>
+              {c}
+            </span>
+          ))}
+        </div>
+        {t.rows.map(([make, name, plate, specs, stage, stageTone, km, price, days, apk, status, statusTone], i) => (
+          <div
+            key={plate}
+            className="grid animate-row-in grid-cols-[2.6fr_1fr_1fr] items-center gap-3 border-b border-line px-4 py-2 last:border-0 lg:grid-cols-[2.6fr_1fr_0.7fr_0.9fr_0.7fr_0.9fr_1fr]"
+            style={{ animationDelay: `${560 + i * 90}ms` }}
+          >
+            <VehicleCell make={make} name={name} plate={plate} specs={specs} />
+            <span>
+              <AppBadge tone={stageTone} small>
+                {stage}
+              </AppBadge>
+            </span>
+            <span className="hidden text-right text-[10.5px] tabular-nums lg:block">{km}</span>
+            <span className="hidden text-right text-[10.5px] font-semibold tabular-nums lg:block">{price}</span>
+            <span className="hidden text-right text-[10.5px] text-muted tabular-nums lg:block">{days}</span>
+            <span className="hidden text-[10.5px] tabular-nums lg:block">{apk}</span>
+            <span>
+              <AppBadge tone={statusTone} dot small>
+                {status}
+              </AppBadge>
+            </span>
+          </div>
+        ))}
+      </AppCard>
+    </AppShell>
+  );
+}
+
+/** Animated pointer that glides to "Voertuig toevoegen" and clicks it. */
+function Cursor() {
+  return (
+    <span className="pointer-events-none absolute z-30 hidden lg:block" style={{ animation: "cursor-path 6s cubic-bezier(.45,0,.25,1) infinite", animationDelay: "1.2s", left: "58%", top: "62%" }}>
+      <svg width="22" height="22" viewBox="0 0 24 24" className="drop-shadow-[0_2px_4px_rgb(0_0_0/0.25)]" style={{ animation: "cursor-press 6s ease-in-out infinite", animationDelay: "1.2s" }}>
+        <path d="M5 3l14 7.2-6.2 1.6L10 18z" fill="#0b0f14" stroke="#fff" strokeWidth="1.6" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
+}
+
+/** Hero composition: dashboard, the app's live inbox notification, a clicking cursor and the mobile app. */
 export function HeroWorkspace() {
   const t = copy[useLang()];
-  const columns: CardData[][] = [
-    [{ make: "volkswagen", model: "Golf 1.5 eTSI", plate: "R-512-FX", tag: <Pill tone="brand">{t.intake}</Pill>, progress: 38 }],
-    [
-      {
-        make: "bmw",
-        model: "320e Touring",
-        plate: "S-208-KL",
-        tag: (
-          <Pill tone="warn">
-            <AlertTriangle className="size-2.5" /> {t.finding}
-          </Pill>
-        ),
-        pulse: true,
-      },
-    ],
-    [
-      { make: "kia", model: "EV6 GT-Line", plate: "T-114-NB", tag: <Pill>{t.valet}</Pill>, progress: 64 },
-      { make: "mercedes-benz", model: "A 250 e", plate: "L-390-PZ", tag: <Pill>{t.photos}</Pill>, progress: 82 },
-    ],
-    [
-      {
-        make: "volvo",
-        model: "XC40 Recharge",
-        plate: "P-771-RD",
-        tag: (
-          <>
-            <Pill tone="ok">
-              <Dot className="bg-ok" /> {t.online}
-            </Pill>
-            <Pill>mobile.de</Pill>
-          </>
-        ),
-      },
-    ],
-    [{ make: "peugeot", model: "308 SW Hybrid", plate: "N-009-GH", tag: <Pill tone="brand">{t.handover}</Pill> }],
-  ];
-  const nav = [LayoutGrid, CarIcon, Inbox, ClipboardCheck, Users, CalendarDays, Rocket];
   return (
     <div className="relative">
-      <AppWindow>
-        <div className="grid grid-cols-[48px_1fr] sm:grid-cols-[56px_1fr]">
-          <aside className="flex flex-col items-center gap-1.5 bg-obsidian py-3.5">
-            <span className="mb-3 flex size-8 items-center justify-center rounded-lg bg-white/[0.06]">
-              <Mark className="h-3 w-auto text-white" />
-            </span>
-            {nav.map((Icon, i) => (
-              <span key={i} className={clsx("flex size-8 items-center justify-center rounded-lg", i === 1 ? "bg-brand text-white" : "text-white/40")}>
-                <Icon className="size-4" strokeWidth={1.9} />
-              </span>
-            ))}
-          </aside>
-          <div className="min-w-0 bg-canvas p-3.5 sm:p-5">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-[15px] font-semibold tracking-[-0.02em] sm:text-[17px]">{t.greeting}</p>
-                <p className="text-[11.5px] text-muted">{t.sub}</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="hidden h-8 items-center gap-2 rounded-lg bg-surface px-3 text-[11.5px] text-subtle ring-1 ring-line md:flex">
-                  <Search className="size-3.5" /> {t.search}
-                  <kbd className="ml-4 rounded bg-sunken px-1 font-mono text-[10px]">⌘K</kbd>
-                </span>
-                <span className="flex h-8 items-center gap-1 rounded-lg bg-brand px-3 text-[11.5px] font-semibold text-white">
-                  <Plus className="size-3.5" /> {t.add}
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-4">
-              {t.kpis.map(([label, value, delta], i) => (
-                <div key={label} className="animate-row-in rounded-xl bg-surface p-3 shadow-card" style={delay(0.1 + i * 0.06)}>
-                  <p className="text-[10.5px] text-muted">{label}</p>
-                  <p className="mt-1 flex items-baseline gap-1.5">
-                    <span className="text-[20px] font-semibold tracking-[-0.03em] tabular-nums">{value}</span>
-                    {delta && <span className={clsx("font-mono text-[10px]", delta.startsWith("−") ? "text-ok" : "text-brand")}>{delta}</span>}
-                  </p>
-                  <div className="mt-2 flex h-5 items-end gap-[3px]">
-                    {[40, 55, 35, 70, 50, 80, 65].map((h, j) => (
-                      <span
-                        key={j}
-                        className={clsx("flex-1 origin-bottom animate-row-in rounded-sm", j === 6 ? "bg-brand" : "bg-brand-100")}
-                        style={{ height: `${h - i * 5}%`, ...delay(0.3 + j * 0.05) }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-5">
-              {columns.map((col, ci) => (
-                <div key={ci} className={clsx("rounded-xl bg-sunken/70 p-2 ring-1 ring-line/70", ci > 1 && "hidden md:block")}>
-                  <div className="mb-2 flex items-center justify-between px-1">
-                    <p className="text-[11px] font-semibold text-ink-2">{t.stages[ci]}</p>
-                    <span className="font-mono text-[10px] text-subtle">{[6, 4, 9, 12, 3][ci]}</span>
-                  </div>
-                  <div className="space-y-2">
-                    {col.map((c, i) => (
-                      <VehicleCard key={c.plate} c={c} i={ci + i} />
-                    ))}
-                  </div>
-                  {ci === 2 && (
-                    <p className="mt-2 flex items-center gap-1 px-1 text-[9.5px] text-muted">
-                      <ClipboardCheck className="size-3 text-brand" /> {t.gate}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </AppWindow>
-
-      <div className="pointer-events-none absolute -top-6 -right-4 hidden w-[290px] animate-toast-in rounded-2xl bg-surface p-3.5 shadow-float lg:block xl:-right-14" style={delay(1.1)}>
-        <div className="flex items-center gap-2">
+      <DashboardScreen />
+      <Cursor />
+      <div
+        className="pointer-events-none absolute bottom-6 left-[230px] z-20 hidden w-[300px] items-start gap-3 rounded-[12px] border border-line bg-surface p-3 shadow-lg md:flex"
+        style={{ animation: "toast-cycle 9s cubic-bezier(.2,0,0,1) infinite", animationDelay: "3s", opacity: 0 }}
+      >
+        <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full border border-line bg-white">
           <ChannelLogo kind="whatsapp" size={16} />
-          <span className="text-[12px] font-semibold">Mark Jansen</span>
-          <span className="ml-auto font-mono text-[10px] text-subtle">09:41</span>
-        </div>
-        <p className="mt-2 rounded-xl rounded-tl-sm bg-[#e7fbe0] px-3 py-2 text-[12px] leading-snug text-ink-2">{t.toastWa}</p>
-        <div className="mt-2 flex gap-1.5">
-          <Pill tone="brand">{t.testDrive}</Pill>
-          <Pill tone="ai">✦ {t.lead}</Pill>
-        </div>
-      </div>
-
-      <div className="pointer-events-none absolute -bottom-8 -left-4 hidden w-[280px] animate-toast-in rounded-2xl bg-surface p-3.5 shadow-float lg:block xl:-left-12" style={delay(1.7)}>
-        <div className="flex items-start gap-2.5">
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-warn-50 text-warn">
-            <AlertTriangle className="size-4" />
-          </span>
-          <div>
-            <p className="text-[12.5px] font-semibold">{t.findingTitle}</p>
-            <p className="mt-0.5 text-[11px] leading-snug text-muted">{t.findingBody}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="pointer-events-none absolute right-6 -bottom-6 hidden animate-toast-in items-center gap-2 rounded-full bg-ink py-2 pr-4 pl-2 text-white shadow-float lg:flex" style={delay(2.3)}>
-        <span className="flex size-6 items-center justify-center rounded-full bg-ok">
-          <Check className="size-3.5" strokeWidth={3} />
         </span>
-        <span className="text-[12px] font-medium">{t.published}</span>
-        <span className="text-[11px] text-white/55">mobile.de · AutoScout24</span>
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-[12px] font-semibold">{t.toastTitle}</span>
+          <span className="line-clamp-2 text-[11.5px] text-[#475569]">{t.toast}</span>
+          <span className="mt-1 inline-block text-[11px] font-medium text-brand-600">{t.open} →</span>
+        </span>
+        <Icon name="x" size={13} className="text-muted" />
       </div>
+      <div className="pointer-events-none absolute -right-10 -bottom-20 z-20 hidden origin-bottom-right scale-[0.88] animate-toast-in lg:block xl:-right-36" style={{ animationDelay: "0.7s" }}>
+        <MobileDashboard />
+      </div>
+      <style>{`
+        @keyframes cursor-path {
+          0% { left: 58%; top: 70%; opacity: 0; }
+          8% { opacity: 1; }
+          38%, 62% { left: calc(100% - 118px); top: 98px; opacity: 1; }
+          80% { left: 72%; top: 46%; opacity: 1; }
+          92%, 100% { left: 72%; top: 46%; opacity: 0; }
+        }
+        @keyframes cursor-press { 0%, 40%, 50%, 100% { transform: scale(1); } 45% { transform: scale(.82); } }
+        @keyframes click-ring { 0%, 22% { box-shadow: 0 0 0 0 rgb(37 99 235 / 0); } 25% { box-shadow: 0 0 0 0 rgb(37 99 235 / .5); } 40%, 100% { box-shadow: 0 0 0 10px rgb(37 99 235 / 0); } }
+        @keyframes toast-cycle { 0% { opacity: 0; transform: translateY(8px) scale(.98); } 6%, 70% { opacity: 1; transform: none; } 78%, 100% { opacity: 0; transform: translateY(8px) scale(.98); } }
+      `}</style>
     </div>
   );
 }
+
+const boardCopy = defineCopy({
+  nl: {
+    title: "Pijplijn",
+    subtitle: "Van inkoop tot aflevering",
+    tabs: ["Voorraad", "Verkoop"],
+    avg: (d: number) => `gem. ${d} d`,
+    stages: [
+      ["Intake", "warning", "€ 59.900", 3, "Intake vereist"],
+      ["Voorbereiding", "info", "€ 77.700", 6, "Intake, Poetsen vereist"],
+      ["Verkoopklaar", "success", "€ 186.400", 9, "Fotografie vereist"],
+      ["Aflevering", "ai", "€ 31.750", 2, "Verkocht vereist"],
+    ] as [string, BadgeTone, string, number, string][],
+    cards: [
+      [
+        { make: "volkswagen", title: "VW Golf", price: "€ 24.950", specs: "1.5 eTSI Life · 2022 · 34.512 km", plate: "R-512-FX", status: "Niet te koop", tone: "neutral", missing: "Tweede sleutel, onderhoudsboekje", days: 2, stock: "V-041", tasks: 2, done: 1, total: 4 },
+        { make: "bmw", title: "BMW 320e Touring", price: "€ 34.950", specs: "M Sport · 2022 · 41.200 km", plate: "S-208-KL", status: "Niet te koop", tone: "neutral", days: 6, stock: "V-038", tasks: 1, done: 2, total: 4 },
+      ],
+      [
+        { make: "kia", title: "Kia EV6", price: "€ 42.750", specs: "GT-Line · 2023 · 18.950 km", plate: "T-114-NB", status: "Beschikbaar", tone: "success", days: 12, stock: "V-033", done: 3, total: 4 },
+        { make: "mercedes-benz", title: "Mercedes A 250 e", price: "€ 34.950", specs: "AMG Line · 2021 · 52.300 km", plate: "L-390-PZ", status: "Beschikbaar", tone: "success", days: 34, stock: "V-027", tasks: 1, done: 2, total: 4 },
+      ],
+      [
+        { make: "volvo", title: "Volvo XC40 Recharge", price: "€ 38.950", specs: "Plus · 2023 · 18.400 km", plate: "P-771-RD", status: "Gereserveerd", tone: "warning", days: 21, stock: "V-031", testDrives: 2, done: 4, total: 4 },
+        { make: "toyota", title: "Toyota Yaris Cross", price: "€ 27.450", specs: "Hybrid Dynamic · 2022 · 29.800 km", plate: "K-662-JD", status: "Beschikbaar", tone: "success", days: 64, stock: "V-019", done: 4, total: 4 },
+      ],
+      [{ make: "peugeot", title: "Peugeot 308 SW", price: "€ 31.750", specs: "Hybrid GT · 2023 · 12.100 km", plate: "N-009-GH", status: "Verkocht", tone: "info", days: 28, stock: "V-024", tasks: 1, done: 3, total: 4 }],
+    ] as PipelineCardData[][],
+  },
+  en: {
+    title: "Pipeline",
+    subtitle: "From purchase to delivery",
+    tabs: ["Stock", "Sales"],
+    avg: (d: number) => `avg ${d} d`,
+    stages: [
+      ["Intake", "warning", "€59,900", 3, "Intake required"],
+      ["Preparation", "info", "€77,700", 6, "Intake, Valeting required"],
+      ["Sale-ready", "success", "€186,400", 9, "Photography required"],
+      ["Delivery", "ai", "€31,750", 2, "Sold required"],
+    ] as [string, BadgeTone, string, number, string][],
+    cards: [
+      [
+        { make: "volkswagen", title: "VW Golf", price: "€24,950", specs: "1.5 eTSI Life · 2022 · 34,512 km", plate: "R-512-FX", status: "Not for sale", tone: "neutral", missing: "Second key, service book", days: 2, stock: "V-041", tasks: 2, done: 1, total: 4 },
+        { make: "bmw", title: "BMW 320e Touring", price: "€34,950", specs: "M Sport · 2022 · 41,200 km", plate: "S-208-KL", status: "Not for sale", tone: "neutral", days: 6, stock: "V-038", tasks: 1, done: 2, total: 4 },
+      ],
+      [
+        { make: "kia", title: "Kia EV6", price: "€42,750", specs: "GT-Line · 2023 · 18,950 km", plate: "T-114-NB", status: "Available", tone: "success", days: 12, stock: "V-033", done: 3, total: 4 },
+        { make: "mercedes-benz", title: "Mercedes A 250 e", price: "€34,950", specs: "AMG Line · 2021 · 52,300 km", plate: "L-390-PZ", status: "Available", tone: "success", days: 34, stock: "V-027", tasks: 1, done: 2, total: 4 },
+      ],
+      [
+        { make: "volvo", title: "Volvo XC40 Recharge", price: "€38,950", specs: "Plus · 2023 · 18,400 km", plate: "P-771-RD", status: "Reserved", tone: "warning", days: 21, stock: "V-031", testDrives: 2, done: 4, total: 4 },
+        { make: "toyota", title: "Toyota Yaris Cross", price: "€27,450", specs: "Hybrid Dynamic · 2022 · 29,800 km", plate: "K-662-JD", status: "Available", tone: "success", days: 64, stock: "V-019", done: 4, total: 4 },
+      ],
+      [{ make: "peugeot", title: "Peugeot 308 SW", price: "€31,750", specs: "Hybrid GT · 2023 · 12,100 km", plate: "N-009-GH", status: "Sold", tone: "info", days: 28, stock: "V-024", tasks: 1, done: 3, total: 4 }],
+    ] as PipelineCardData[][],
+  },
+});
+
+/** The stock pipeline board (src/components/pipeline/board.tsx), with a card travelling to the next stage. */
+export function PipelineBoard() {
+  const t = boardCopy[useLang()];
+  const s = shell[useLang()];
+  return (
+    <AppShell active={s.nav[0].items[2][1]}>
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <h2 className="text-[17px] leading-tight">{t.title}</h2>
+          <p className="mt-0.5 text-[10.5px] text-[#475569]">{t.subtitle}</p>
+        </div>
+        <span className="flex rounded-[8px] bg-sunken p-0.5 text-[10.5px] font-medium">
+          {t.tabs.map((tab, i) => (
+            <span key={tab} className={clsx("rounded-[6px] px-2.5 py-1", i === 0 ? "bg-surface text-ink shadow-sm" : "text-muted")}>
+              {tab}
+            </span>
+          ))}
+        </span>
+      </div>
+      <div className="relative flex gap-2.5 overflow-hidden">
+        {t.stages.map(([name, tone, value, avg, requires], si) => (
+          <StageColumn key={name} width={236} name={name} tone={tone} count={t.cards[si].length} value={value} avg={t.avg(avg)} requires={requires}>
+            {t.cards[si].map((card, ci) => (
+              <PipelineCard key={card.plate} card={card} delay={200 + si * 120 + ci * 80} highlight={si === 1 && ci === 0} />
+            ))}
+          </StageColumn>
+        ))}
+        <span className="pointer-events-none absolute top-[118px] left-[252px] z-10 hidden w-[224px] lg:block" style={{ animation: "card-travel 7s cubic-bezier(.45,0,.25,1) infinite", animationDelay: "1.5s", opacity: 0 }}>
+          <PipelineCard card={t.cards[1][0]} highlight />
+        </span>
+      </div>
+      <style>{`@keyframes card-travel { 0%, 10% { opacity: 0; transform: translate(0,0) rotate(0); } 16% { opacity: 1; transform: translate(0,-4px) rotate(-1.5deg); } 55% { opacity: 1; transform: translate(246px,-4px) rotate(1.5deg); } 62%, 100% { opacity: 0; transform: translate(246px,0) rotate(0); } }`}</style>
+    </AppShell>
+  );
+}
+
 
 const journeyCopy = defineCopy({
   nl: { stages: ["Intake", "Inspectie", "Voorbereiding", "Verkoop", "Aflevering"], notes: ["Kenteken via RDW", "Afwijking → bevinding", "Poetsen · foto's", "Online · proefrit", "Getekend · sleutels"] },

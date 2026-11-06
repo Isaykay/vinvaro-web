@@ -9,14 +9,25 @@ import { pageMetadata } from "@/lib/seo";
 import { JsonLd, breadcrumbLd, faqLd, softwareApplicationLd } from "@/components/json-ld";
 import { Button, Container, SectionHeader } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
-import { IconTile } from "@/components/icons";
+import { CheckItem, IconTile } from "@/components/icons";
+import { AppPhones } from "@/components/product/app-phones";
 import { CTASection, FeatureList, PageHero } from "@/components/sections";
 import { FAQ } from "@/components/faq";
 import { ModuleVisual } from "@/components/product/module-visual";
 
 const copy = defineCopy({
-  nl: { demo: "Plan een demo", platform: "Bekijk het platform", more: "Meer van het platform", view: "Bekijk", faqEyebrow: "Veelgestelde vragen", faqTitle: (name: string) => `Vragen over ${name}` },
-  en: { demo: "Book a demo", platform: "Explore the platform", more: "More of the platform", view: "View", faqEyebrow: "FAQ", faqTitle: (name: string) => `Questions about ${name}` },
+  nl: {
+    appEyebrow: "VINVARO-app voor iOS en Android",
+    appTitle: "Ook in de app. Waar je ook staat.",
+    appLead: "Dezelfde gegevens, rechten en workflows als op het web. Je team werkt verder op de werkvloer, in de showroom of onderweg, ook zonder bereik.",
+    appPoints: ["Realtime gesynchroniseerd met de webomgeving", "Offline vastleggen, later automatisch verstuurd", "Pushmeldingen voor taken en berichten"],
+    demo: "Plan een demo", platform: "Bekijk het platform", more: "Meer van het platform", view: "Bekijk", faqEyebrow: "Veelgestelde vragen", faqTitle: (name: string) => `Vragen over ${name}` },
+  en: {
+    appEyebrow: "VINVARO app for iOS and Android",
+    appTitle: "In the app too. Wherever you are.",
+    appLead: "The same data, permissions and workflows as on the web. Your team carries on on the floor, in the showroom or on the road, even without signal.",
+    appPoints: ["Synced in real time with the web workspace", "Capture offline, sent automatically later", "Push notifications for tasks and messages"],
+    demo: "Book a demo", platform: "Explore the platform", more: "More of the platform", view: "View", faqEyebrow: "FAQ", faqTitle: (name: string) => `Questions about ${name}` },
 });
 
 export function generateStaticParams() {
@@ -93,6 +104,24 @@ export default async function PlatformModulePage({ params }: PageProps<"/[lang]/
           <Reveal>
             <FeatureList items={mod.points} columns={mod.points.length % 3 === 0 ? 3 : 2} />
           </Reveal>
+        </Container>
+      </section>
+
+      <section className="border-t border-line bg-surface py-20 sm:py-28">
+        <Container>
+          <div className="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+            <Reveal>
+              <SectionHeader eyebrow={t.appEyebrow} title={t.appTitle} lead={t.appLead} />
+              <ul className="mt-8 space-y-3">
+                {t.appPoints.map((p) => (
+                  <CheckItem key={p}>{p}</CheckItem>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <AppPhones visual={mod.visual} />
+            </Reveal>
+          </div>
         </Container>
       </section>
 
