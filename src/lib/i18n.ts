@@ -25,6 +25,7 @@ const englishPaths: [nl: string, en: string][] = [
   ["/voor-autobedrijven/specialisten", "/for-dealers/specialists"],
   ["/voor-autobedrijven", "/for-dealers"],
   ["/integraties", "/integrations"],
+  ["/prijzen", "/pricing"],
   ["/bedankt", "/thank-you"],
 ];
 

@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...platform.map((p) => ({ path: `/platform/${p.slug}`, priority: 0.8 })),
     ...segments.map((s) => ({ path: `/voor-autobedrijven/${s.slug}`, priority: 0.7 })),
     { path: "/integraties", priority: 0.7 },
+    { path: "/prijzen", priority: 0.8 },
     { path: "/demo", priority: 0.7 },
     { path: "/contact", priority: 0.6 },
   ];

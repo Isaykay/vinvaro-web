@@ -18,6 +18,7 @@ const copy = defineCopy({
     company: "VINVARO",
     allPlatform: "Platformoverzicht",
     integrations: "Integraties",
+    pricing: "Prijzen",
     demo: "Plan een demo",
     login: "Inloggen",
     madeIn: "Gebouwd in Nederland",
@@ -31,6 +32,7 @@ const copy = defineCopy({
     company: "VINVARO",
     allPlatform: "Platform overview",
     integrations: "Integrations",
+    pricing: "Pricing",
     demo: "Book a demo",
     login: "Log in",
     madeIn: "Built in the Netherlands",
@@ -55,6 +57,7 @@ export async function Footer() {
       links: [
         { label: t.allPlatform, href: "/platform" },
         { label: t.integrations, href: "/integraties" },
+        { label: t.pricing, href: "/prijzen" },
         { label: "Contact", href: "/contact" },
         { label: t.demo, href: "/demo" },
         { label: t.login, href: site.appUrl },

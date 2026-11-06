@@ -3,6 +3,8 @@ export const site = {
   url: "https://vinvaro.com",
   /** to-confirm: production URL of the web app. */
   appUrl: "https://app.vinvaro.com/login",
+  /** to-confirm: self-service sign-up in the web app (src/app/signup). */
+  signupUrl: "https://app.vinvaro.com/signup",
   /** to-confirm: public contact details. Leave phone/address null until confirmed; they are hidden when null. */
   email: "info@vinvaro.com",
   phone: null as string | null,
@@ -102,6 +104,7 @@ export const nav: {
     ],
   },
   { label: "Integraties", href: "/integraties" },
+  { label: "Prijzen", href: "/prijzen" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -422,5 +425,57 @@ export const faq = [
   { q: "Welke kanalen komen in de inbox?", a: "WhatsApp Business, Gmail, Outlook / Microsoft 365 en e-mail via je eigen mailserver (IMAP/SMTP)." },
   { q: "Is er een app voor mijn team?", a: "Ja. De VINVARO-app voor iOS en Android werkt ook offline: foto's en workflowantwoorden worden verstuurd zodra er weer bereik is." },
   { q: "Hoe snel kan ik overstappen?", a: "Je voorraad en relaties importeer je uit Excel of csv; kanalen en agenda's koppel je zelf in een paar minuten. We plannen de overstap samen in de demo." },
-  { q: "Wat kost VINVARO?", a: "VINVARO is modulair: je kiest de modules die je nodig hebt. We maken in of na de demo een voorstel op maat van je organisatie." },
+  { q: "Wat kost VINVARO?", a: "Het Dealer-plan kost € 199 per maand plus € 4 per voertuig in voorraad, exclusief btw. Alle modules, gebruikers en partners zijn inbegrepen. Je start met 30 dagen proefperiode." },
 ];
+
+/**
+ * Pricing, mirrored from the billing catalogue in vinvaro-web-client
+ * (supabase/migrations/20261106120000_billing.sql and 20261106130000_billing_dealer_pricing.sql). Amounts in cents, excl. VAT.
+ */
+export type PriceItem = {
+  key: string;
+  name: string;
+  unit: string;
+  description: string;
+  kind: "recurring" | "usage";
+  /** Website module slug the item belongs to. */
+  module: string;
+  unitPriceCents: number;
+  /** Included per month; null means unlimited. */
+  included: number | null;
+};
+
+export const pricing = {
+  plan: "Dealer",
+  planBody: "Alles voor één autobedrijf.",
+  basePriceCents: 19900,
+  trialDays: 30,
+  vatRate: 21,
+  thresholdCents: 25000,
+  items: [
+    { key: "users", name: "Gebruikers", unit: "gebruiker", description: "Actieve teamleden", kind: "recurring", module: "team-app", unitPriceCents: 0, included: null },
+    { key: "partners", name: "Partners", unit: "partner", description: "Transporteurs, poetsers en garages", kind: "recurring", module: "intake-en-aflevering", unitPriceCents: 0, included: null },
+    { key: "stock_vehicles", name: "Voertuigen in voorraad", unit: "voertuig", description: "Open voorraadposities", kind: "recurring", module: "voorraad", unitPriceCents: 400, included: 0 },
+    { key: "marketplaces", name: "Marktplaatsen", unit: "koppeling", description: "Gekoppelde marktplaatsen", kind: "recurring", module: "publiceren", unitPriceCents: 1000, included: 0 },
+    { key: "website_feed", name: "Websitefeed", unit: "feed", description: "Actieve voorraadfeeds", kind: "recurring", module: "publiceren", unitPriceCents: 1500, included: 0 },
+    { key: "ai_actions", name: "AI-acties", unit: "actie", description: "Labels, leadscores en conceptantwoorden", kind: "usage", module: "intelligence", unitPriceCents: 2, included: 500 },
+    { key: "sign_requests", name: "Digitale ondertekeningen", unit: "verzoek", description: "Contracten verstuurd om te tekenen", kind: "usage", module: "contracten-en-facturen", unitPriceCents: 50, included: 10 },
+    { key: "kvk_lookups", name: "KVK-opvragingen", unit: "opvraging", description: "Bedrijfsgegevens uit het Handelsregister", kind: "usage", module: "crm-en-verkoop", unitPriceCents: 10, included: 50 },
+  ] as PriceItem[],
+  included: [
+    "Alle modules: voorraad, workflows, inbox, CRM, agenda, contracten, facturen, publiceren en AI",
+    "Onbeperkt gebruikers en partners",
+    "Team-app voor iOS en Android",
+    "RDW-gegevens, KVK en VIES",
+    "Koppelingen met Gmail, Outlook, WhatsApp en je agenda",
+    "Hulp bij de overstap en import van je voorraad",
+  ],
+  faq: [
+    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 4 per voertuig dat in voorraad staat. Gekoppelde marktplaatsen en een websitefeed tel je erbij op; AI-acties, ondertekeningen en KVK-opvragingen hebben een ruime maandbundel. Alle prijzen zijn exclusief btw." },
+    { q: "Hoe wordt een voertuig in voorraad geteld?", a: "Elke open voorraadpositie telt. Verkoop of lever je een auto af en sluit je de voorraadperiode, dan telt hij niet meer mee in de volgende periode." },
+    { q: "Betaal ik per gebruiker?", a: "Nee. Gebruikers en externe partners zijn onbeperkt en gratis. Je hele team, inclusief werkplaats en poetsers, werkt in VINVARO zonder extra kosten." },
+    { q: "Hoe werkt de proefperiode?", a: "Je probeert VINVARO 30 dagen met alle modules. De proefperiode is kosteloos; daarna start je eerste maandperiode." },
+    { q: "Wanneer factureren jullie?", a: "Aan het einde van elke maandperiode. Loopt het verbruik binnen een periode op tot de factuurdrempel (standaard € 250), dan factureren we dat verbruik tussentijds. Je ziet het verbruik live terug onder Instellingen › Facturatie." },
+    { q: "Kan ik modules uitzetten?", a: "Alle modules zitten in het Dealer-plan. Gebruik je een onderdeel niet, zoals marktplaatsen of de websitefeed, dan betaal je er ook niets voor." },
+  ],
+};

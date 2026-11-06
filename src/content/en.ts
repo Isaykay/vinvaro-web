@@ -1,5 +1,5 @@
 import type { Integration, NavFeatured, NavLink, PlatformModule, Segment } from "@/content/nl";
-import { integrations as nlIntegrations, site as nlSite } from "@/content/nl";
+import { integrations as nlIntegrations, pricing as nlPricing, site as nlSite } from "@/content/nl";
 
 export const site = {
   ...nlSite,
@@ -87,6 +87,7 @@ export const nav: {
     ],
   },
   { label: "Integrations", href: "/integraties" },
+  { label: "Pricing", href: "/prijzen" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -380,5 +381,38 @@ export const faq = [
   { q: "Which channels come into the inbox?", a: "WhatsApp Business, Gmail, Outlook / Microsoft 365 and email through your own mail server (IMAP/SMTP)." },
   { q: "Is there an app for my team?", a: "Yes. The VINVARO app for iOS and Android works offline too: photos and workflow answers are sent once there's signal again." },
   { q: "How quickly can I switch?", a: "Import your stock and contacts from Excel or CSV; connect channels and calendars yourself in a few minutes. We plan the switch together in the demo." },
-  { q: "What does VINVARO cost?", a: "VINVARO is modular: you choose the modules you need. We'll put together a proposal tailored to your organisation during or after the demo." },
+  { q: "What does VINVARO cost?", a: "The Dealer plan costs €199 per month plus €4 per vehicle in stock, excluding VAT. All modules, users and partners are included. You start with a 30-day trial." },
 ];
+
+const itemEn: Record<string, [string, string, string]> = {
+  users: ["Users", "user", "Active team members"],
+  partners: ["Partners", "partner", "Transporters, detailers and garages"],
+  stock_vehicles: ["Vehicles in stock", "vehicle", "Open stock entries"],
+  marketplaces: ["Marketplaces", "connection", "Connected marketplaces"],
+  website_feed: ["Website feed", "feed", "Active stock feeds"],
+  ai_actions: ["AI actions", "action", "Labels, lead scores and reply drafts"],
+  sign_requests: ["E-sign requests", "request", "Contracts sent for signing"],
+  kvk_lookups: ["KVK lookups", "lookup", "Company details from the trade register"],
+};
+
+export const pricing: typeof nlPricing = {
+  ...nlPricing,
+  planBody: "Everything for one dealership.",
+  items: nlPricing.items.map((i) => ({ ...i, name: itemEn[i.key][0], unit: itemEn[i.key][1], description: itemEn[i.key][2] })),
+  included: [
+    "Every module: inventory, workflows, inbox, CRM, calendar, contracts, invoices, publishing and AI",
+    "Unlimited users and partners",
+    "Staff app for iOS and Android",
+    "RDW data, KVK and VIES",
+    "Gmail, Outlook, WhatsApp and calendar connections",
+    "Help with switching and importing your stock",
+  ],
+  faq: [
+    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €4 per vehicle in stock. Connected marketplaces and a website feed are added on top; AI actions, e-sign requests and KVK lookups come with a generous monthly bundle. All prices exclude VAT." },
+    { q: "How is a vehicle in stock counted?", a: "Every open stock entry counts. Sell or deliver a car and close its stock period, and it no longer counts in the next period." },
+    { q: "Do I pay per user?", a: "No. Users and external partners are unlimited and free. Your whole team, including the workshop and detailers, works in VINVARO at no extra cost." },
+    { q: "How does the trial work?", a: "You try VINVARO for 30 days with every module. The trial is free; your first monthly period starts afterwards." },
+    { q: "When do you invoice?", a: "At the end of each monthly period. If usage within a period reaches the invoice threshold (€250 by default), we invoice that usage in between. You see usage live under Settings › Billing." },
+    { q: "Can I switch modules off?", a: "Every module is part of the Dealer plan. If you don't use something, such as marketplaces or the website feed, you don't pay for it." },
+  ],
+};

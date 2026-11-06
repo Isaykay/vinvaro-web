@@ -64,9 +64,9 @@ const copy = defineCopy({
       cta: "Bekijk de team-app",
     },
     modules: {
-      eyebrow: "Eén platform, modulair",
+      eyebrow: "Eén platform, één plan",
       title: "Alles wat een autobedrijf draait.",
-      lead: "Kies de modules die je nodig hebt. Ze werken samen op hetzelfde voertuigdossier, met dezelfde rollen, dezelfde historie en hetzelfde auditlog.",
+      lead: "Alle modules zitten in één plan van € 199 per maand. Ze werken samen op hetzelfde voertuigdossier, met dezelfde rollen, dezelfde historie en hetzelfde auditlog.",
       all: "Platformoverzicht",
       view: "Bekijk",
     },
@@ -127,9 +127,9 @@ const copy = defineCopy({
       cta: "Explore the staff app",
     },
     modules: {
-      eyebrow: "One platform, modular",
+      eyebrow: "One platform, one plan",
       title: "Everything an automotive business runs on.",
-      lead: "Choose the modules you need. They work together on the same vehicle dossier, with the same roles, the same history and the same audit log.",
+      lead: "Every module is part of one plan at €199 per month. They work together on the same vehicle dossier, with the same roles, the same history and the same audit log.",
       all: "Platform overview",
       view: "View",
     },
