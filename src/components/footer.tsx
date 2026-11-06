@@ -23,6 +23,8 @@ const copy = defineCopy({
     login: "Inloggen",
     madeIn: "Gebouwd in Nederland",
     illustrative: "Alle schermen, kentekens en gegevens op deze website zijn illustratief.",
+    privacy: "Privacy",
+    terms: "Voorwaarden",
   },
   en: {
     tagline: "The operating system for automotive businesses. Vehicles, customers and operations together in one workspace, from intake to delivery.",
@@ -37,6 +39,8 @@ const copy = defineCopy({
     login: "Log in",
     madeIn: "Built in the Netherlands",
     illustrative: "All screens, registrations and data on this website are illustrative.",
+    privacy: "Privacy",
+    terms: "Terms",
   },
 });
 
@@ -117,6 +121,12 @@ export async function Footer() {
             <p className="mt-1 text-[12px]">{t.illustrative}</p>
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link href="/privacy" className="transition-colors hover:text-brand">
+              {t.privacy}
+            </Link>
+            <Link href="/voorwaarden" className="transition-colors hover:text-brand">
+              {t.terms}
+            </Link>
             <span className="flex items-center gap-2">
               <span className="flex size-4 items-center justify-center overflow-hidden rounded-full ring-1 ring-line" aria-hidden>
                 <svg viewBox="0 0 9 6" className="h-full w-auto">

@@ -19,6 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/prijzen", priority: 0.8 },
     { path: "/demo", priority: 0.7 },
     { path: "/contact", priority: 0.6 },
+    { path: "/privacy", priority: 0.3 },
+    { path: "/voorwaarden", priority: 0.3 },
   ];
   return pages.flatMap(({ path, priority }) => {
     const languages = { "nl-NL": url("nl", path), en: url("en", path), "x-default": url("nl", path) };

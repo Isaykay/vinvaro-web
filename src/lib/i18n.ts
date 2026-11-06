@@ -27,6 +27,7 @@ const englishPaths: [nl: string, en: string][] = [
   ["/integraties", "/integrations"],
   ["/prijzen", "/pricing"],
   ["/bedankt", "/thank-you"],
+  ["/voorwaarden", "/terms"],
 ];
 
 /** Paths handled by redirects in next.config; they are never prefixed. */
