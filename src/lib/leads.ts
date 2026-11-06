@@ -27,14 +27,41 @@ async function forward(lead: Lead) {
   return res.ok;
 }
 
-/** Delivers a lead by email (Resend) and/or webhook. Returns false only when a configured destination failed. */
+/**
+ * Delivers a lead by email (Resend) and/or webhook. Without any destination a
+ * production lead would be lost, so that counts as a failure there; locally
+ * the lead is only logged.
+ */
 export async function deliverLead(lead: Lead) {
   const [mailed, forwarded] = await Promise.all([sendEmail(lead).catch(() => false), forward(lead).catch(() => false)]);
   if (mailed === null && forwarded === null) {
-    console.info(`[${lead.type}] lead received without RESEND_API_KEY/LEADS_TO_EMAIL or a webhook configured`, lead.payload);
+    if (process.env.NODE_ENV === "production") {
+      console.error(`[${lead.type}] lead rejected: set RESEND_API_KEY and LEADS_TO_EMAIL or a webhook URL`);
+      return false;
+    }
+    console.info(`[${lead.type}] lead received without a destination configured`, lead.payload);
     return true;
   }
   return Boolean(mailed || forwarded);
+}
+
+const hits = new Map<string, number[]>();
+
+/**
+ * Cheap bot filter for the public forms: a hidden "website" field that people
+ * never fill in, and at most 5 submissions per IP per 10 minutes (per server
+ * instance, which is enough to stop simple floods).
+ */
+export function spamCheck(request: Request, body: Record<string, unknown> | null): "ok" | "bot" | "limited" {
+  if (typeof body?.website === "string" && body.website.trim()) return "bot";
+  const ip = request.headers.get("x-real-ip") ?? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < 10 * 60_000);
+  if (recent.length >= 5) return "limited";
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return "ok";
 }
 
 export const text = (v: unknown, max = 200) => (typeof v === "string" ? v.trim().slice(0, max) : "");

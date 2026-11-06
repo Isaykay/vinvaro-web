@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "@/components/link";
+import { Honeypot, honeypotValue } from "@/components/honeypot";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
@@ -470,7 +471,7 @@ export function DemoQualifier() {
       const res = await fetch("/api/demo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...contact, slot, answers: summary(), lang, page: window.location.pathname, referrer: document.referrer }),
+        body: JSON.stringify({ ...contact, website: honeypotValue(e.currentTarget), slot, answers: summary(), lang, page: window.location.pathname, referrer: document.referrer }),
       });
       if (!res.ok) throw new Error();
       try {
@@ -666,7 +667,8 @@ export function DemoQualifier() {
                 )}
 
                 {step === contactStep && (
-                  <form id="demo-contact-form" onSubmit={submit}>
+                  <form id="demo-contact-form" onSubmit={submit} className="relative">
+                    <Honeypot />
                     <h2 className="text-h3">{t.contactTitle}</h2>
                     <p className="mt-1.5 text-[14px] text-muted">{t.contactLead}</p>
                     {slot && (

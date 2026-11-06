@@ -1,8 +1,12 @@
 import { defaultLang, hasLang } from "@/lib/i18n";
-import { deliverLead, text, validEmail } from "@/lib/leads";
+import { deliverLead, spamCheck, text, validEmail } from "@/lib/leads";
 
 export async function POST(request: Request) {
   const body = (await request.json().catch(() => null)) as Record<string, unknown> | null;
+  const spam = spamCheck(request, body);
+  // Bots get a normal answer so they don't learn to work around the trap.
+  if (spam === "bot") return Response.json({ ok: true });
+  if (spam === "limited") return Response.json({ ok: false, error: "rate_limited" }, { status: 429 });
   const name = text(body?.name);
   const email = text(body?.email);
   const message = text(body?.message, 5000);

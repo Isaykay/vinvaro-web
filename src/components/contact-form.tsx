@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, ChevronRight } from "lucide-react";
+import { Honeypot, honeypotValue } from "@/components/honeypot";
 import { getContent } from "@/lib/content";
 import { defineCopy } from "@/lib/i18n";
 import { useLang } from "@/components/lang-provider";
@@ -55,7 +56,7 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, lang, page: window.location.pathname, referrer: document.referrer }),
+        body: JSON.stringify({ ...form, website: honeypotValue(e.currentTarget), lang, page: window.location.pathname, referrer: document.referrer }),
       });
       setState(res.ok ? "done" : "error");
     } catch {
@@ -79,7 +80,8 @@ export function ContactForm() {
     "h-11 w-full rounded-xl bg-canvas px-3.5 text-[16px] ring-1 sm:text-[15px] ring-line transition-shadow outline-none placeholder:text-subtle focus:bg-surface focus:ring-2 focus:ring-brand";
 
   return (
-    <form onSubmit={submit} className="rounded-[22px] bg-surface p-6 shadow-card sm:p-8">
+    <form onSubmit={submit} className="relative rounded-[22px] bg-surface p-6 shadow-card sm:p-8">
+      <Honeypot />
       <p className="text-[17px] font-semibold tracking-[-0.02em]">{t.title}</p>
       <p className="mt-1 text-[14px] text-muted">{t.lead}</p>
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
