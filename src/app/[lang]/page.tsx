@@ -177,7 +177,7 @@ export default async function Home() {
     <>
       <JsonLd data={[softwareApplicationLd(lang), faqLd(faq, lang)]} />
 
-      <section className="relative overflow-hidden pt-28 sm:pt-32">
+      <section className="relative overflow-hidden pt-20 sm:pt-24">
         <div className="bg-grid mask-fade-b pointer-events-none absolute inset-x-0 top-0 h-[780px]" />
         <div className="pointer-events-none absolute top-[360px] left-1/2 h-[520px] w-[1100px] -translate-x-1/2 rounded-full bg-brand/[0.08] blur-3xl" />
         <div className="pointer-events-none absolute top-[560px] left-[15%] h-[300px] w-[420px] rounded-full bg-ask-400/[0.07] blur-3xl" />
@@ -185,7 +185,7 @@ export default async function Home() {
           <div className="mx-auto max-w-[920px] animate-rise text-center">
             <Link
               href={site.news.href}
-              className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full bg-surface py-1 pr-3 pl-1 text-[13px] text-ink-2 shadow-card transition-colors hover:text-ink"
+              className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-surface py-1 pr-3 pl-1 text-[13px] text-ink-2 shadow-card transition-colors hover:text-ink"
             >
               <span className="rounded-full bg-brand-50 px-2 py-0.5 font-mono text-[11px] font-medium tracking-[0.06em] text-brand uppercase">{t.news}</span>
               {site.news.label}
