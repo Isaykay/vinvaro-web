@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         ["Pagina", text(body?.page, 300)],
       ] as [string, string][]
     ).filter(([, v]) => v),
-    payload: { name, email, company, subject, message, lang, submittedAt: new Date().toISOString() },
+    payload: { name, email, company, subject, message, lang, page: text(body?.page, 300), submittedAt: new Date().toISOString() },
   });
   return ok ? Response.json({ ok: true }) : Response.json({ ok: false }, { status: 502 });
 }
