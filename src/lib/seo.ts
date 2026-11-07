@@ -10,7 +10,29 @@ type PageMetadataInput = {
   title: string;
   description: string;
   noindex?: boolean;
+  /** Share image text; defaults to the title and the section of the path. */
+  og?: { title?: string; kicker?: string };
 };
+
+const SECTIONS: Record<string, Record<Lang, string>> = {
+  platform: { nl: "Platform", en: "Platform" },
+  "voor-autobedrijven": { nl: "Voor autobedrijven", en: "For dealers" },
+  integraties: { nl: "Integraties", en: "Integrations" },
+  prijzen: { nl: "Prijzen", en: "Pricing" },
+  demo: { nl: "Demo", en: "Demo" },
+  contact: { nl: "Contact", en: "Contact" },
+  privacy: { nl: "Privacy", en: "Privacy" },
+  voorwaarden: { nl: "Voorwaarden", en: "Terms" },
+};
+
+/** Generated share image for a page; the home page keeps the designed default. */
+function shareImage(lang: Lang, path: string, title: string, og?: PageMetadataInput["og"]) {
+  if (path === "/") return "/og-default.png";
+  const kicker = og?.kicker ?? SECTIONS[path.split("/")[1] ?? ""]?.[lang] ?? "";
+  const text = og?.title ?? (kicker && title.startsWith(`${kicker}:`) ? title.slice(kicker.length + 1).trim() : title);
+  const params = new URLSearchParams({ lang, title: text, ...(kicker ? { kicker } : {}) });
+  return `/og?${params.toString()}`;
+}
 
 /** Search engines show about 155 characters; cut at a sentence end when possible, otherwise at a word. */
 export function clipDescription(text: string, max = 158) {
@@ -22,12 +44,12 @@ export function clipDescription(text: string, max = 158) {
 }
 
 /** Full page metadata: canonical + hreflang, Open Graph, Twitter card and robots. */
-export function pageMetadata({ lang, path, title, description: fullDescription, noindex }: PageMetadataInput): Metadata {
+export function pageMetadata({ lang, path, title, description: fullDescription, noindex, og }: PageMetadataInput): Metadata {
   const { site } = getContent(lang);
   const description = clipDescription(fullDescription);
   const absolute = title.includes(site.name) || title.length + site.name.length + 3 > 62;
   const fullTitle = absolute ? title : `${title} | ${site.name}`;
-  const image = { url: "/og-default.png", width: 1200, height: 630, alt: fullTitle, type: "image/png" };
+  const image = { url: shareImage(lang, path, title, og), width: 1200, height: 630, alt: fullTitle, type: "image/png" };
 
   return {
     title: absolute ? { absolute: title } : title,

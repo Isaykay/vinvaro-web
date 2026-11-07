@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/platform/[
   const { slug } = await params;
   const lang = await getLang();
   const mod = getContent(lang).platform.find((p) => p.slug === slug);
-  return mod ? pageMetadata({ lang, path: `/platform/${slug}`, title: `${mod.name}: ${mod.title}`, description: mod.lead }) : {};
+  return mod ? pageMetadata({ lang, path: `/platform/${slug}`, title: `${mod.name}: ${mod.title}`, description: mod.lead, og: { kicker: mod.name, title: mod.title } }) : {};
 }
 
 export default async function PlatformModulePage({ params }: PageProps<"/[lang]/platform/[slug]">) {

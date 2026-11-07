@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/voor-autob
   const { slug } = await params;
   const lang = await getLang();
   const seg = getContent(lang).segments.find((s) => s.slug === slug);
-  return seg ? pageMetadata({ lang, path: `/voor-autobedrijven/${slug}`, title: `${seg.name}: ${seg.title}`, description: seg.lead }) : {};
+  return seg ? pageMetadata({ lang, path: `/voor-autobedrijven/${slug}`, title: `${seg.name}: ${seg.title}`, description: seg.lead, og: { kicker: seg.name, title: seg.title } }) : {};
 }
 
 export default async function SegmentPage({ params }: PageProps<"/[lang]/voor-autobedrijven/[slug]">) {
