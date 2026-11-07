@@ -4,6 +4,7 @@ import type { ModuleVisualKey } from "@/lib/content";
 import { IntelligenceScan, StaffApp, VehicleDossier } from "@/components/product/ops";
 import { PipelineBoard } from "@/components/product/hero";
 import { AgendaWeek, ContractSign, InboxView, PublishFlow, SalesPipeline } from "@/components/product/sales";
+import { MarketGrid, TradeFlow } from "@/components/product/network";
 
 export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
   switch (visual) {
@@ -25,5 +26,9 @@ export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
       return <ContractSign />;
     case "publish":
       return <PublishFlow />;
+    case "trade":
+      return <TradeFlow />;
+    case "market":
+      return <MarketGrid />;
   }
 }

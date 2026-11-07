@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import clsx from "clsx";
 import { getContent } from "@/lib/content";
 import { defineCopy, numberLocale } from "@/lib/i18n";
 import { useLang } from "@/components/lang-provider";
 import { Icon } from "@/components/app-icons";
 import { Mark } from "@/components/ui";
+import { LogoTile } from "@/components/product/kit";
 
 const copy = defineCopy({
   nl: {
@@ -16,9 +17,19 @@ const copy = defineCopy({
       stock_vehicles: "Voertuigen in voorraad",
       marketplaces: "Gekoppelde marktplaatsen",
       ai_actions: "AI-acties per maand",
+      photo_edits: "Foto-bewerkingen per maand",
       sign_requests: "Digitale ondertekeningen per maand",
       kvk_lookups: "KVK-opvragingen per maand",
     } as Record<string, string>,
+    hints: {
+      stock_vehicles: "Elke auto die open in je voorraad staat. Verkocht en afgesloten telt niet meer mee.",
+      marketplaces: "Elke marktplaats die je koppelt om advertenties op te publiceren.",
+      ai_actions: "Elke keer dat AI iets voor je doet: een bericht labelen, een lead scoren of een conceptantwoord schrijven.",
+      photo_edits: "Een AI-bewerking in de foto-editor, zoals achtergrond weg, studio-achtergrond, auto-retouche of kenteken afdekken.",
+      sign_requests: "Een koopovereenkomst of ander contract dat je digitaal laat ondertekenen.",
+      kvk_lookups: "Bedrijfsgegevens ophalen uit het Handelsregister door een bedrijfsnaam of KVK-nummer in te typen.",
+    } as Record<string, string>,
+    planned: "gepland",
     feed: "Websitefeed op je eigen site",
     estimate: "Indicatie per maand",
     plan: "Dealer-plan",
@@ -37,9 +48,19 @@ const copy = defineCopy({
       stock_vehicles: "Vehicles in stock",
       marketplaces: "Connected marketplaces",
       ai_actions: "AI actions per month",
+      photo_edits: "Photo edits per month",
       sign_requests: "E-sign requests per month",
       kvk_lookups: "KVK lookups per month",
     } as Record<string, string>,
+    hints: {
+      stock_vehicles: "Every car that's open in your stock. Sold and closed cars no longer count.",
+      marketplaces: "Every marketplace you connect to publish listings to.",
+      ai_actions: "Every time AI does something for you: labelling a message, scoring a lead or writing a reply draft.",
+      photo_edits: "One AI edit in the photo editor, such as removing the background, a studio background, auto-retouch or covering the plate.",
+      sign_requests: "A purchase agreement or other contract you send out to be signed digitally.",
+      kvk_lookups: "Fetching company details from the trade register by typing a company name or KVK number.",
+    } as Record<string, string>,
+    planned: "planned",
     feed: "Website feed on your own site",
     estimate: "Monthly estimate",
     plan: "Dealer plan",
@@ -54,25 +75,35 @@ const copy = defineCopy({
 });
 
 const ranges: Record<string, { max: number; step: number; initial: number }> = {
-  stock_vehicles: { max: 300, step: 1, initial: 45 },
-  marketplaces: { max: 4, step: 1, initial: 2 },
-  ai_actions: { max: 5000, step: 50, initial: 800 },
-  sign_requests: { max: 120, step: 1, initial: 20 },
-  kvk_lookups: { max: 300, step: 5, initial: 30 },
+  stock_vehicles: { max: 5000, step: 1, initial: 45 },
+  ai_actions: { max: 100000, step: 50, initial: 800 },
+  photo_edits: { max: 25000, step: 10, initial: 300 },
+  sign_requests: { max: 2000, step: 1, initial: 20 },
+  kvk_lookups: { max: 5000, step: 5, initial: 30 },
 };
+
+/** Sliders run on a quadratic curve so small dealers keep precision while large ones can reach the top. */
+const CURVE = 2;
+const SLIDER_STEPS = 1000;
+const toValue = (pos: number, r: { max: number; step: number }) => Math.round((r.max * (pos / SLIDER_STEPS) ** CURVE) / r.step) * r.step;
+const toPos = (value: number, r: { max: number }) => Math.round(SLIDER_STEPS * Math.min(value / r.max, 1) ** (1 / CURVE));
 
 export function PricingCalculator() {
   const lang = useLang();
   const t = copy[lang];
-  const { pricing } = getContent(lang);
+  const { pricing, integrations, integrationCategories } = getContent(lang);
+  const marketplaceOptions = integrations.filter((i) => i.category === integrationCategories[0] && i.slug);
   const [values, setValues] = useState<Record<string, number>>(Object.fromEntries(Object.entries(ranges).map(([k, r]) => [k, r.initial])));
+  const [marketplaces, setMarketplaces] = useState<string[]>(["mobilede", "autoscout24"]);
   const [feed, setFeed] = useState(true);
+  const marketItem = pricing.items.find((i) => i.key === "marketplaces")!;
+  const toggleMarketplace = (slug: string) => setMarketplaces((m) => (m.includes(slug) ? m.filter((s) => s !== slug) : [...m, slug]));
 
   const money = (cents: number) =>
     new Intl.NumberFormat(numberLocale[lang], { style: "currency", currency: "EUR", minimumFractionDigits: cents % 100 ? 2 : 0, maximumFractionDigits: 2 }).format(cents / 100);
   const num = (n: number) => new Intl.NumberFormat(numberLocale[lang]).format(n);
 
-  const quantity = (key: string) => (key === "website_feed" ? (feed ? 1 : 0) : (values[key] ?? 0));
+  const quantity = (key: string) => (key === "website_feed" ? (feed ? 1 : 0) : key === "marketplaces" ? marketplaces.length : (values[key] ?? 0));
   const lines = pricing.items
     .filter((i) => i.unitPriceCents > 0)
     .map((i) => {
@@ -93,27 +124,78 @@ export function PricingCalculator() {
           {Object.entries(ranges).map(([key, r]) => {
             const item = pricing.items.find((i) => i.key === key)!;
             const value = values[key];
+            const fill = (toPos(value, r) / SLIDER_STEPS) * 100;
+            const setValue = (n: number) => setValues((v) => ({ ...v, [key]: Math.max(0, Math.round(n) || 0) }));
             return (
-              <label key={key} className="block">
-                <span className="flex items-baseline justify-between gap-3">
-                  <span className="text-[14px] font-medium">{t.sliders[key]}</span>
-                  <span className="text-[15px] font-semibold tabular-nums">{num(value)}</span>
-                </span>
-                <input
-                  type="range"
-                  min={0}
-                  max={r.max}
-                  step={r.step}
-                  value={value}
-                  onChange={(e) => setValues((v) => ({ ...v, [key]: Number(e.target.value) }))}
-                  className="mt-2.5 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-sunken accent-brand [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand [&::-webkit-slider-thumb]:shadow-[0_0_0_4px_rgb(37_99_235/0.18)]"
-                  style={{ background: `linear-gradient(to right, var(--color-brand) ${(value / r.max) * 100}%, var(--color-sunken) ${(value / r.max) * 100}%)` }}
-                />
-                <span className="mt-1 block text-[12px] text-muted">
-                  {money(item.unitPriceCents)} / {item.unit}
-                  {item.included ? ` · ${t.included(num(item.included))}` : ""}
-                </span>
-              </label>
+              <Fragment key={key}>
+                <div>
+                  <span className="flex items-center justify-between gap-3">
+                    <label htmlFor={`calc-${key}`} className="text-[14px] font-medium">
+                      {t.sliders[key]}
+                    </label>
+                    <input
+                      type="number"
+                      inputMode="numeric"
+                      min={0}
+                      step={r.step}
+                      value={value}
+                      onChange={(e) => setValue(Number(e.target.value))}
+                      aria-label={t.sliders[key]}
+                      className="w-24 rounded-md border border-transparent bg-transparent px-1.5 py-0.5 text-right text-[15px] font-semibold tabular-nums [appearance:textfield] hover:border-line focus:border-brand focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    />
+                  </span>
+                  <span className="block max-w-[46ch] text-[12.5px] leading-snug text-muted">{t.hints[key]}</span>
+                  <input
+                    id={`calc-${key}`}
+                    type="range"
+                    min={0}
+                    max={SLIDER_STEPS}
+                    step={1}
+                    value={toPos(value, r)}
+                    onChange={(e) => setValue(toValue(Number(e.target.value), r))}
+                    aria-valuetext={num(value)}
+                    className="mt-2.5 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-sunken accent-brand [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand [&::-webkit-slider-thumb]:shadow-[0_0_0_4px_rgb(37_99_235/0.18)]"
+                    style={{ background: `linear-gradient(to right, var(--color-brand) ${fill}%, var(--color-sunken) ${fill}%)` }}
+                  />
+                  <span className="mt-1 block text-[12px] text-subtle">
+                    {money(item.unitPriceCents)} / {item.unit}
+                    {item.included ? ` · ${t.included(num(item.included))}` : ""}
+                  </span>
+                </div>
+                {key === "stock_vehicles" && (
+                  <div>
+                    <span className="flex items-baseline justify-between gap-3">
+                      <span className="text-[14px] font-medium">{t.sliders.marketplaces}</span>
+                      <span className="text-[15px] font-semibold tabular-nums">{num(marketplaces.length)}</span>
+                    </span>
+                    <span className="mt-0.5 block max-w-[46ch] text-[12.5px] leading-snug text-muted">{t.hints.marketplaces}</span>
+                    <div className="mt-2.5 flex flex-wrap gap-2">
+                      {marketplaceOptions.map((m) => {
+                        const on = marketplaces.includes(m.slug!);
+                        return (
+                          <button
+                            key={m.slug}
+                            type="button"
+                            onClick={() => toggleMarketplace(m.slug!)}
+                            aria-pressed={on}
+                            className={clsx(
+                              "flex items-center gap-2 rounded-full border py-1 pr-3 pl-1 text-[13px] font-medium transition-colors",
+                              on ? "border-brand bg-brand-50 text-ink" : "border-line bg-canvas text-muted hover:border-line-strong",
+                            )}
+                          >
+                            <LogoTile slug={m.slug!} className={clsx("size-6 rounded-full border-0", !on && "opacity-60 grayscale")} size={14} />
+                            {m.name}
+                            {m.status === "planned" && <span className="text-[11px] font-normal text-subtle">· {t.planned}</span>}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <span className="mt-1.5 block text-[12px] text-muted">
+                      {money(marketItem.unitPriceCents)} / {marketItem.unit}
+                    </span>
+                  </div>
+                )}
+              </Fragment>
             );
           })}
           <button

@@ -698,6 +698,9 @@ export function moduleScreens(visual: ModuleVisualKey): [() => React.JSX.Element
     case "contracts":
       return [MobileSign, MobileDeals];
     case "publish":
+    case "market":
       return [MobilePublish, MobileVehicle];
+    case "trade":
+      return [MobileDeals, MobileVehicle];
   }
 }

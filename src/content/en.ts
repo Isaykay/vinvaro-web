@@ -8,7 +8,7 @@ export const site = {
   tagline: "Every vehicle. Every detail. Under control.",
   description:
     "VINVARO brings vehicles, customers and operations together in one workspace. From registration and intake to test drive, contract, listing and delivery, for automotive businesses that want control without scattered systems.",
-  news: { label: "Publish to mobile.de and AutoScout24", href: "/platform/publiceren" },
+  news: { label: "New: VINVARO Trade network and Marketplace, free", href: "/platform/handelsplein" },
 };
 
 export const nav: {
@@ -50,6 +50,13 @@ export const nav: {
           { label: "Calendar & test drives", href: "/platform/agenda", description: "Appointments in the calendar of whoever runs them" },
           { label: "Contracts & invoices", href: "/platform/contracten-en-facturen", description: "Sign digitally and invoice" },
           { label: "Publishing", href: "/platform/publiceren", description: "mobile.de, AutoScout24 and your own website" },
+        ],
+      },
+      {
+        title: "VINVARO network",
+        links: [
+          { label: "Trade network", href: "/platform/handelsplein", description: "Buy and sell with other dealers, free" },
+          { label: "Marketplace", href: "/platform/marktplaats", description: "Your stock for consumers, with your reputation" },
         ],
       },
     ],
@@ -260,6 +267,50 @@ export const platform: PlatformModule[] = [
       { title: "More marketplaces on the roadmap", body: "Marktplaats, Gaspedaal, ViaBOVAG and AutoWereld are on the roadmap." },
     ],
   },
+  {
+    slug: "handelsplein",
+    name: "Trade network",
+    module: "VINVARO Trade network",
+    eyebrow: "VINVARO Trade network · free",
+    title: "Trade directly with other dealers.",
+    lead: "The private B2B network inside VINVARO. List a car with a trade price, bid on other dealers' stock and close the deal. The car then moves into the buyer's stock automatically, with photos, options and purchase price. Free, without transaction fees.",
+    visual: "trade",
+    steps: ["Set a trade price", "Offer and counter", "Agreed", "Car in the buyer's stock"],
+    points: [
+      { title: "A trade price per car", body: "Next to your asking price you can set a trade price. Only other dealers see it; consumers never do." },
+      { title: "Offers and counter-offers", body: "Make an offer or buy at the trade price. The seller accepts, declines or counters; you always see whose turn it is." },
+      { title: "The car moves by itself", body: "After the deal the car is in the buyer's stock as a purchase, with photos, options and the agreed price. For the seller it's marked sold, ready for the registration transfer." },
+      { title: "Search the way you're used to", body: "Filter by make, body type, fuel, price, year and mileage. Save a search and get notified when a matching car appears." },
+      { title: "Reputation of other dealers", body: "After every deal buyer and seller review each other. You see how reliable a dealer is with every car." },
+      { title: "You decide what's visible", body: "The trade network is off by default. Join when you want, and switch on per car what you offer." },
+    ],
+    faq: [
+      { q: "What does the trade network cost?", a: "Nothing. It's included for free in every VINVARO plan, without transaction fees or commission." },
+      { q: "Who sees my trade price?", a: "Only other dealers on the trade network. Consumers, your website and marketplaces always show your asking price." },
+      { q: "How is a deal completed?", a: "Once agreed, buyer and seller arrange payment and delivery. The seller completes the deal; the car then appears in the buyer's stock and is marked sold for the seller." },
+    ],
+  },
+  {
+    slug: "marktplaats",
+    name: "Marketplace",
+    module: "VINVARO Marketplace",
+    eyebrow: "VINVARO Marketplace · free",
+    title: "Your stock for consumers. With your reputation.",
+    lead: "On the public VINVARO Marketplace, buyers search the stock of every participating dealer at asking price. Every car shows your reviews and how to get in touch. You're in by default and switch on per car what goes online.",
+    visual: "market",
+    points: [
+      { title: "Search and filter", body: "Make, body type, fuel, transmission, price, year and mileage, with the number of cars per choice." },
+      { title: "Your reputation, public", body: "Ask for a review after a sale. Customer reviews appear on your profile, with your cars and in a card for your own website." },
+      { title: "On or off per car", body: "The VINVARO Marketplace channel sits next to your website, mobile.de and AutoScout24 under Publishing." },
+      { title: "Always the current price", body: "New asking price, reserved or sold: the marketplace follows your stock automatically." },
+      { title: "Public data only", body: "Purchase and trade prices, costs and notes stay internal." },
+      { title: "For your own website", body: "A JSON feed and embeddable pages to show the stock on your own site too." },
+    ],
+    faq: [
+      { q: "What does the Marketplace cost?", a: "Nothing. The VINVARO Marketplace is included for free in every plan, with no fees per lead." },
+      { q: "Can I opt out?", a: "Yes. Switch the marketplace off under Settings › Integrations or Modules. You also decide per car whether it's online." },
+    ],
+  },
 ];
 
 export const segments: Segment[] = [
@@ -320,6 +371,8 @@ const categoryNames: Record<string, string> = {
 export const integrationCategories = ["Marketplaces", "Messaging", "Vehicle data", "Calendar", "Contact checks", "Accounting & financing", "Website"] as const;
 
 const integrationBodies: Record<string, string> = {
+  "VINVARO Marktplaats": "Your stock for free on the public VINVARO Marketplace, with your reputation.",
+  "VINVARO Handelsplein": "Buy and sell with other dealers at trade prices, for free.",
   "mobile.de": "Publish via the Seller API, with price and status updated automatically.",
   AutoScout24: "Publish as a data provider, linked to your customer number.",
   AutoTrack: "Online together with AutoScout24, with one tick.",
@@ -344,6 +397,8 @@ const integrationBodies: Record<string, string> = {
 };
 
 const integrationNames: Record<string, string> = {
+  "VINVARO Marktplaats": "VINVARO Marketplace",
+  "VINVARO Handelsplein": "VINVARO Trade network",
   "Google Agenda": "Google Calendar",
   "Outlook-agenda": "Outlook calendar",
   "E-mail (IMAP/SMTP)": "Email (IMAP/SMTP)",
@@ -370,6 +425,7 @@ export const faq = [
   { q: "Who is VINVARO for?", a: "Independent automotive businesses: independent dealers, specialists and businesses with multiple sites. Owners, sales, the workshop floor and administration work in the same environment." },
   { q: "Does VINVARO work with the RDW?", a: "Yes. For Dutch registrations, VINVARO pulls make, model, MOT, inspections with defects and the odometer verdict from RDW Open Data." },
   { q: "Which marketplaces can I publish to?", a: "Today, mobile.de and AutoScout24 (with AutoTrack), plus your own website via the VINVARO feed. Marktplaats, Gaspedaal, ViaBOVAG and AutoWereld are on the roadmap." },
+  { q: "What are the Trade network and the Marketplace?", a: "Two free VINVARO networks. On the Trade network you trade directly with other dealers at trade prices; after the deal the car moves into the buyer's stock automatically. On the Marketplace, consumers search the stock of every participating dealer, at asking price and with your reputation." },
   { q: "Which channels come into the inbox?", a: "WhatsApp Business, Gmail, Outlook / Microsoft 365 and email through your own mail server (IMAP/SMTP)." },
   { q: "Is there an app for my team?", a: "Yes. The VINVARO app for iOS and Android works offline too: photos and workflow answers are sent once there's signal again." },
   { q: "How quickly can I switch?", a: "Import your stock and contacts from Excel or CSV; connect channels and calendars yourself in a few minutes. We plan the switch together in the demo." },
@@ -383,6 +439,7 @@ const itemEn: Record<string, [string, string, string]> = {
   marketplaces: ["Marketplaces", "connection", "Connected marketplaces"],
   website_feed: ["Website feed", "feed", "Active stock feeds"],
   ai_actions: ["AI actions", "action", "Labels, lead scores and reply drafts"],
+  photo_edits: ["Photo edits", "edit", "AI edits in the photo editor"],
   sign_requests: ["E-sign requests", "request", "Contracts sent for signing"],
   kvk_lookups: ["KVK lookups", "lookup", "Company details from the trade register"],
 };
@@ -398,13 +455,15 @@ export const pricing: typeof nlPricing = {
     "RDW data, KVK and VIES",
     "Gmail, Outlook, WhatsApp and calendar connections",
     "Help with switching and importing your stock",
+    "VINVARO Trade network and Marketplace, free and without transaction fees",
   ],
   faq: [
-    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €4 per vehicle in stock. Connected marketplaces and a website feed are added on top; AI actions, e-sign requests and KVK lookups come with a generous monthly bundle. All prices exclude VAT." },
+    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €4 per vehicle in stock. Connected marketplaces and a website feed are added on top; AI actions, photo edits, e-sign requests and KVK lookups come with a generous monthly bundle. All prices exclude VAT." },
     { q: "How is a vehicle in stock counted?", a: "Every open stock entry counts. Sell or deliver a car and close its stock period, and it no longer counts in the next period." },
     { q: "Do I pay per user?", a: "No. Users and external partners are unlimited and free. Your whole team, including the workshop and detailers, works in VINVARO at no extra cost." },
     { q: "How does the trial work?", a: "You try VINVARO for 30 days with every module. The trial is free; your first monthly period starts afterwards." },
     { q: "When do you invoice?", a: "At the end of each monthly period. If usage within a period reaches the invoice threshold (€250 by default), we invoice that usage in between. You see usage live under Settings › Billing." },
+    { q: "Do the Trade network or Marketplace cost extra?", a: "No. Both VINVARO networks are included for free, without transaction fees, commission or fees per lead." },
     { q: "Can I switch modules off?", a: "Every module is part of the Dealer plan. If you don't use something, such as marketplaces or the website feed, you don't pay for it." },
   ],
 };

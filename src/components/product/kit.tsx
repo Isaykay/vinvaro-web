@@ -150,6 +150,13 @@ export function IntegrationLogo({
       </span>
     );
   }
+  if (slug === "vinvaro") {
+    return (
+      <span className={clsx(box, "bg-ink text-white")}>
+        <Mark className="h-auto" width={size} />
+      </span>
+    );
+  }
   if (!slug || slug === "site") {
     return (
       <span className={clsx(box, "bg-brand-50 text-brand")}>

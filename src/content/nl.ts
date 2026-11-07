@@ -18,7 +18,7 @@ export const site = {
   tagline: "Elk voertuig. Elk detail. Onder controle.",
   description:
     "VINVARO brengt voertuigen, klanten en processen samen in één werkplek. Van kenteken en intake tot proefrit, contract, publicatie en aflevering, voor autobedrijven die overzicht willen zonder losse systemen.",
-  news: { label: "Publiceren naar mobile.de en AutoScout24", href: "/platform/publiceren" },
+  news: { label: "Nieuw: VINVARO Handelsplein en Marktplaats, gratis", href: "/platform/handelsplein" },
 };
 
 export type NavLink = { label: string; href: string; description?: string; logo?: string };
@@ -69,6 +69,13 @@ export const nav: {
           { label: "Publiceren", href: "/platform/publiceren", description: "mobile.de, AutoScout24 en je eigen website" },
         ],
       },
+      {
+        title: "VINVARO-netwerk",
+        links: [
+          { label: "Handelsplein", href: "/platform/handelsplein", description: "Kopen en verkopen met andere autobedrijven, gratis" },
+          { label: "Marktplaats", href: "/platform/marktplaats", description: "Je voorraad voor consumenten, met je reputatie" },
+        ],
+      },
     ],
   },
   {
@@ -108,7 +115,7 @@ export const nav: {
   { label: "Contact", href: "/contact" },
 ];
 
-export type ModuleVisualKey = "inventory" | "intake" | "intelligence" | "app" | "inbox" | "crm" | "agenda" | "contracts" | "publish";
+export type ModuleVisualKey = "inventory" | "intake" | "intelligence" | "app" | "inbox" | "crm" | "agenda" | "contracts" | "publish" | "trade" | "market";
 
 export type PlatformModule = {
   slug: string;
@@ -293,6 +300,50 @@ export const platform: PlatformModule[] = [
       { title: "Meer marktplaatsen op de planning", body: "Marktplaats, Gaspedaal, ViaBOVAG en AutoWereld staan op de roadmap." },
     ],
   },
+  {
+    slug: "handelsplein",
+    name: "Handelsplein",
+    module: "VINVARO Handelsplein",
+    eyebrow: "VINVARO Handelsplein · gratis",
+    title: "Rechtstreeks handelen met andere autobedrijven.",
+    lead: "Het besloten B2B-netwerk in VINVARO. Zet een auto met een handelsprijs op het Handelsplein, bied op het aanbod van collega's en rond de deal af. De auto gaat daarna vanzelf naar de voorraad van de koper, met foto's, opties en inkoopprijs. Gratis, zonder transactiekosten.",
+    visual: "trade",
+    steps: ["Handelsprijs instellen", "Bod en tegenbod", "Akkoord", "Auto in voorraad koper"],
+    points: [
+      { title: "Een handelsprijs per auto", body: "Naast je vraagprijs zet je optioneel een handelsprijs. Alleen andere autobedrijven zien die; consumenten nooit." },
+      { title: "Bieden en tegenbieden", body: "Doe een bod of koop direct voor de handelsprijs. De verkoper accepteert, wijst af of doet een tegenbod; je ziet precies wie aan zet is." },
+      { title: "De auto verhuist vanzelf", body: "Na de deal staat de auto bij de koper in voorraad als inkoop, met foto's, opties en de afgesproken prijs. Bij de verkoper staat hij op verkocht, klaar voor tenaamstelling." },
+      { title: "Zoeken zoals je gewend bent", body: "Filter op merk, carrosserie, brandstof, prijs, bouwjaar en kilometerstand. Bewaar een zoekopdracht en krijg een melding zodra er een passende auto bijkomt." },
+      { title: "Reputatie van collega's", body: "Na elke deal beoordelen koper en verkoper elkaar. Je ziet bij elke auto hoe betrouwbaar het autobedrijf is." },
+      { title: "Jij bepaalt wat zichtbaar is", body: "Het Handelsplein staat standaard uit. Je doet mee wanneer je wilt, en zet per auto aan wat je aanbiedt." },
+    ],
+    faq: [
+      { q: "Wat kost het Handelsplein?", a: "Niets. Het Handelsplein zit gratis in elk VINVARO-plan, zonder transactiekosten of commissie." },
+      { q: "Wie zien mijn handelsprijs?", a: "Alleen andere autobedrijven die meedoen met het Handelsplein. Consumenten, je website en marktplaatsen tonen altijd je vraagprijs." },
+      { q: "Hoe wordt een deal afgerond?", a: "Na akkoord regelen koper en verkoper betaling en levering. De verkoper rondt de deal af; de auto verschijnt dan bij de koper in de voorraad en staat bij de verkoper op verkocht." },
+    ],
+  },
+  {
+    slug: "marktplaats",
+    name: "Marktplaats",
+    module: "VINVARO Marktplaats",
+    eyebrow: "VINVARO Marktplaats · gratis",
+    title: "Je voorraad voor consumenten. Met je reputatie erbij.",
+    lead: "Op de openbare VINVARO Marktplaats zoeken kopers in het aanbod van alle aangesloten autobedrijven, tegen vraagprijs. Bij elke auto staan je beoordelingen en hoe ze contact opnemen. Je doet standaard mee en zet per auto aan wat online staat.",
+    visual: "market",
+    points: [
+      { title: "Zoeken en filteren", body: "Merk, carrosserie, brandstof, transmissie, prijs, bouwjaar en kilometerstand, met het aantal auto's per keuze." },
+      { title: "Jouw reputatie, openbaar", body: "Vraag na een verkoop om een review. Klantbeoordelingen staan op je profiel, bij je auto's en in een kaart voor je eigen website." },
+      { title: "Per auto aan of uit", body: "Het kanaal VINVARO Marktplaats staat naast je website, mobile.de en AutoScout24 bij Publiceren." },
+      { title: "Altijd de actuele prijs", body: "Nieuwe vraagprijs, gereserveerd of verkocht: de marktplaats volgt je voorraad automatisch." },
+      { title: "Alleen openbare gegevens", body: "Inkoop- en handelsprijzen, kosten en notities blijven intern." },
+      { title: "Voor je eigen website", body: "Een JSON-feed en insluitbare pagina's om het aanbod ook op je eigen site te tonen." },
+    ],
+    faq: [
+      { q: "Wat kost de Marktplaats?", a: "Niets. De VINVARO Marktplaats zit gratis in elk plan, zonder kosten per lead." },
+      { q: "Kan ik niet meedoen?", a: "Ja. Je zet de marktplaats uit onder Instellingen › Integraties of Modules. Per auto bepaal je bovendien zelf of hij online staat." },
+    ],
+  },
 ];
 
 export type Segment = {
@@ -367,6 +418,8 @@ export type Integration = {
 export const integrationCategories = ["Marktplaatsen", "Berichten", "Voertuiggegevens", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Website"] as const;
 
 export const integrations: Integration[] = [
+  { name: "VINVARO Marktplaats", category: "Marktplaatsen", status: "live", body: "Je voorraad gratis op de openbare VINVARO Marktplaats, met je reputatie erbij.", slug: "vinvaro" },
+  { name: "VINVARO Handelsplein", category: "Marktplaatsen", status: "live", body: "Gratis kopen en verkopen met andere autobedrijven tegen handelsprijzen.", slug: "vinvaro" },
   { name: "mobile.de", category: "Marktplaatsen", status: "live", body: "Publiceren via de Seller-API, met prijs en status automatisch bijgewerkt.", slug: "mobilede" },
   { name: "AutoScout24", category: "Marktplaatsen", status: "beta", body: "Publiceren als dataleverancier, gekoppeld aan je klantnummer.", slug: "autoscout24" },
   { name: "AutoTrack", category: "Marktplaatsen", status: "beta", body: "Tegelijk met AutoScout24 online, met één vinkje.", slug: "autotrack" },
@@ -415,6 +468,7 @@ export const faq = [
   { q: "Voor wie is VINVARO bedoeld?", a: "Voor zelfstandige autobedrijven: merkonafhankelijke dealers, specialisten en bedrijven met meerdere vestigingen. Eigenaren, verkopers, de werkvloer en de administratie werken in dezelfde omgeving." },
   { q: "Werkt VINVARO met de RDW?", a: "Ja. Voor Nederlandse kentekens haalt VINVARO merk, model, APK, keuringen met gebreken en het tellerstandoordeel op uit RDW Open Data." },
   { q: "Op welke marktplaatsen kan ik publiceren?", a: "Vandaag op mobile.de en AutoScout24 (met AutoTrack), plus je eigen website via de VINVARO-feed. Marktplaats, Gaspedaal, ViaBOVAG en AutoWereld staan op de roadmap." },
+  { q: "Wat zijn het Handelsplein en de Marktplaats?", a: "Twee gratis VINVARO-netwerken. Op het Handelsplein handel je rechtstreeks met andere autobedrijven tegen handelsprijzen; de auto gaat na de deal vanzelf naar de voorraad van de koper. Op de Marktplaats zoeken consumenten in het aanbod van alle aangesloten autobedrijven, tegen vraagprijs en met je reputatie erbij." },
   { q: "Welke kanalen komen in de inbox?", a: "WhatsApp Business, Gmail, Outlook / Microsoft 365 en e-mail via je eigen mailserver (IMAP/SMTP)." },
   { q: "Is er een app voor mijn team?", a: "Ja. De VINVARO-app voor iOS en Android werkt ook offline: foto's en workflowantwoorden worden verstuurd zodra er weer bereik is." },
   { q: "Hoe snel kan ik overstappen?", a: "Je voorraad en relaties importeer je uit Excel of csv; kanalen en agenda's koppel je zelf in een paar minuten. We plannen de overstap samen in de demo." },
@@ -423,7 +477,7 @@ export const faq = [
 
 /**
  * Pricing, mirrored from the billing catalogue in vinvaro-web-client
- * (supabase/migrations/20261106120000_billing.sql and 20261106130000_billing_dealer_pricing.sql). Amounts in cents, excl. VAT.
+ * (supabase/migrations/20261106120000_billing.sql, 20261106130000_billing_dealer_pricing.sql and 20261107123226_billing_photo_edits.sql). Amounts in cents, excl. VAT.
  */
 export type PriceItem = {
   key: string;
@@ -452,6 +506,7 @@ export const pricing = {
     { key: "marketplaces", name: "Marktplaatsen", unit: "koppeling", description: "Gekoppelde marktplaatsen", kind: "recurring", module: "publiceren", unitPriceCents: 1000, included: 0 },
     { key: "website_feed", name: "Websitefeed", unit: "feed", description: "Actieve voorraadfeeds", kind: "recurring", module: "publiceren", unitPriceCents: 1500, included: 0 },
     { key: "ai_actions", name: "AI-acties", unit: "actie", description: "Labels, leadscores en conceptantwoorden", kind: "usage", module: "intelligence", unitPriceCents: 2, included: 500 },
+    { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de foto-editor", kind: "usage", module: "intelligence", unitPriceCents: 10, included: 100 },
     { key: "sign_requests", name: "Digitale ondertekeningen", unit: "verzoek", description: "Contracten verstuurd om te tekenen", kind: "usage", module: "contracten-en-facturen", unitPriceCents: 50, included: 10 },
     { key: "kvk_lookups", name: "KVK-opvragingen", unit: "opvraging", description: "Bedrijfsgegevens uit het Handelsregister", kind: "usage", module: "crm-en-verkoop", unitPriceCents: 10, included: 50 },
   ] as PriceItem[],
@@ -462,13 +517,15 @@ export const pricing = {
     "RDW-gegevens, KVK en VIES",
     "Koppelingen met Gmail, Outlook, WhatsApp en je agenda",
     "Hulp bij de overstap en import van je voorraad",
+    "VINVARO Handelsplein en Marktplaats, gratis en zonder transactiekosten",
   ],
   faq: [
-    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 4 per voertuig dat in voorraad staat. Gekoppelde marktplaatsen en een websitefeed tel je erbij op; AI-acties, ondertekeningen en KVK-opvragingen hebben een ruime maandbundel. Alle prijzen zijn exclusief btw." },
+    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 4 per voertuig dat in voorraad staat. Gekoppelde marktplaatsen en een websitefeed tel je erbij op; AI-acties, foto-bewerkingen, ondertekeningen en KVK-opvragingen hebben een ruime maandbundel. Alle prijzen zijn exclusief btw." },
     { q: "Hoe wordt een voertuig in voorraad geteld?", a: "Elke open voorraadpositie telt. Verkoop of lever je een auto af en sluit je de voorraadperiode, dan telt hij niet meer mee in de volgende periode." },
     { q: "Betaal ik per gebruiker?", a: "Nee. Gebruikers en externe partners zijn onbeperkt en gratis. Je hele team, inclusief werkplaats en poetsers, werkt in VINVARO zonder extra kosten." },
     { q: "Hoe werkt de proefperiode?", a: "Je probeert VINVARO 30 dagen met alle modules. De proefperiode is kosteloos; daarna start je eerste maandperiode." },
     { q: "Wanneer factureren jullie?", a: "Aan het einde van elke maandperiode. Loopt het verbruik binnen een periode op tot de factuurdrempel (standaard € 250), dan factureren we dat verbruik tussentijds. Je ziet het verbruik live terug onder Instellingen › Facturatie." },
+    { q: "Kost het Handelsplein of de Marktplaats extra?", a: "Nee. Beide VINVARO-netwerken zijn gratis inbegrepen, zonder transactiekosten, commissie of kosten per lead." },
     { q: "Kan ik modules uitzetten?", a: "Alle modules zitten in het Dealer-plan. Gebruik je een onderdeel niet, zoals marktplaatsen of de websitefeed, dan betaal je er ook niets voor." },
   ],
 };
