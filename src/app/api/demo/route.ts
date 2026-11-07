@@ -42,7 +42,18 @@ export async function POST(request: Request) {
     subject: `Demo-aanvraag: ${company} · ${date} ${time}`,
     replyTo: email,
     lines,
-    payload: { name, company, email, phone, slot: { date, time, timeZone: "Europe/Amsterdam" }, answers, lang, submittedAt: new Date().toISOString() },
+    payload: {
+      name,
+      company,
+      email,
+      phone,
+      slot: { date, time, timeZone: "Europe/Amsterdam" },
+      answers,
+      lang,
+      page: text(body?.page, 300),
+      referrer: text(body?.referrer, 300),
+      submittedAt: new Date().toISOString(),
+    },
   });
   return ok ? Response.json({ ok: true }) : Response.json({ ok: false }, { status: 502 });
 }

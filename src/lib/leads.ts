@@ -21,7 +21,7 @@ async function sendEmail(lead: Lead) {
 }
 
 async function forward(lead: Lead) {
-  const url = lead.type === "demo" ? process.env.DEMO_WEBHOOK_URL : (process.env.CONTACT_WEBHOOK_URL ?? process.env.DEMO_WEBHOOK_URL);
+  const url = lead.type === "demo" ? process.env.DEMO_WEBHOOK_URL : process.env.CONTACT_WEBHOOK_URL;
   if (!url) return null;
   const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: lead.type, ...lead.payload }) });
   return res.ok;
