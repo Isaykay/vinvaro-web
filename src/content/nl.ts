@@ -272,7 +272,7 @@ export const platform: PlatformModule[] = [
       { title: "Digitaal ondertekenen", body: "De klant tekent via een persoonlijke link op telefoon of laptop. Een uitgegeven contract kan niet meer worden gewijzigd." },
       { title: "Facturen en creditnota's", body: "Met een productcatalogus voor afleverpakketten, accessoires en garantie. De klant bekijkt de factuur online." },
       { title: "Btw- en margeregeling", body: "Btw-auto of marge-auto, vastgelegd per voertuig en zichtbaar op factuur en feed." },
-      { title: "Export naar de boekhouding", body: "Financieel overzicht en export, met een koppeling naar Autoboeker. Exact Online, Twinfield, Moneybird en SnelStart staan op de planning." },
+      { title: "Export naar de boekhouding", body: "Financieel overzicht en export, via Autoboeker direct in Exact Online, Twinfield, SnelStart of e-Boekhouden.nl. Moneybird volgt binnenkort." },
       { title: "Financiering aanvragen", body: "Via Autus Finance vraag je financiering aan voor je klant, vanuit de deal." },
     ],
   },
@@ -364,7 +364,7 @@ export type Integration = {
   connectsTo?: { name: string; slug: string; soon?: boolean }[];
 };
 
-export const integrationCategories = ["Marktplaatsen", "Berichten", "Voertuiggegevens", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Betalen & ondertekenen", "Website"] as const;
+export const integrationCategories = ["Marktplaatsen", "Berichten", "Voertuiggegevens", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Website"] as const;
 
 export const integrations: Integration[] = [
   { name: "mobile.de", category: "Marktplaatsen", status: "live", body: "Publiceren via de Seller-API, met prijs en status automatisch bijgewerkt.", slug: "mobilede" },
@@ -379,15 +379,12 @@ export const integrations: Integration[] = [
   { name: "Outlook / Microsoft 365", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", channel: "outlook" },
   { name: "E-mail (IMAP/SMTP)", category: "Berichten", status: "live", body: "Via de mailserver van je eigen domein.", channel: "imap" },
   { name: "RDW Open Data", category: "Voertuiggegevens", status: "live", body: "Kentekengegevens, APK, keuringen en tellerstandoordeel.", slug: "rdw" },
-  { name: "Autotelex", category: "Voertuiggegevens", status: "planned", body: "Uitgebreide voertuig- en optiegegevens.", slug: "autotelex" },
-  { name: "VWE", category: "Voertuiggegevens", status: "planned", body: "Voertuiggegevens en waarde-indicaties.", slug: "vwe" },
   { name: "carVertical", category: "Voertuiggegevens", status: "planned", body: "Internationale voertuighistorie.", slug: "carvertical" },
   { name: "CARFAX", category: "Voertuiggegevens", status: "planned", body: "Historierapporten op VIN.", slug: "carfax" },
   { name: "Google Agenda", category: "Agenda", status: "live", body: "Afspraken in de agenda van wie ze uitvoert.", slug: "gcal" },
   { name: "Outlook-agenda", category: "Agenda", status: "live", body: "Afspraken in de agenda van wie ze uitvoert.", slug: "outlook" },
   { name: "KVK Handelsregister", category: "Relatiecontroles", status: "live", body: "Bedrijfsnaam typen, KVK-nummer en adres ingevuld.", slug: "kvk" },
   { name: "VIES", category: "Relatiecontroles", status: "live", body: "Btw-nummers controleren, met het resultaat als bewijs.", slug: "vies" },
-  { name: "Creditsafe", category: "Relatiecontroles", status: "planned", body: "Kredietwaardigheid van zakelijke klanten.", slug: "creditsafe" },
   {
     name: "Autoboeker",
     category: "Boekhouding & financiering",
@@ -403,10 +400,6 @@ export const integrations: Integration[] = [
     ],
   },
   { name: "Autus Finance", category: "Boekhouding & financiering", status: "live", body: "Financiering aanvragen voor je klant, vanuit de deal.", slug: "autus" },
-  { name: "Exact Online", category: "Boekhouding & financiering", status: "planned", body: "Directe export van facturen en kosten.", slug: "exact" },
-  { name: "Moneybird", category: "Boekhouding & financiering", status: "planned", body: "Directe export van facturen en kosten.", slug: "moneybird" },
-  { name: "Mollie", category: "Betalen & ondertekenen", status: "planned", body: "Online betalen van facturen en aanbetalingen.", slug: "mollie" },
-  { name: "Signhost", category: "Betalen & ondertekenen", status: "planned", body: "Gekwalificeerd digitaal ondertekenen. Ingebouwd tekenen werkt al.", slug: "signhost" },
   { name: "Websitefeed", category: "Website", status: "live", body: "Je voorraad op je eigen website, met aanvraagformulieren.", slug: "site" },
 ];
 

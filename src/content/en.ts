@@ -239,7 +239,7 @@ export const platform: PlatformModule[] = [
       { title: "Sign digitally", body: "The customer signs via a personal link on phone or laptop. An issued contract can no longer be changed." },
       { title: "Invoices and credit notes", body: "With a product catalogue for delivery packages, accessories and warranty. The customer views the invoice online." },
       { title: "VAT and margin scheme", body: "VAT car or margin car, recorded per vehicle and shown on invoice and feed." },
-      { title: "Export to bookkeeping", body: "Financial overview and export, with a connection to Autoboeker. Exact Online, Twinfield, Moneybird and SnelStart are on the roadmap." },
+      { title: "Export to bookkeeping", body: "Financial overview and export, straight into Exact Online, Twinfield, SnelStart or e-Boekhouden.nl through Autoboeker. Moneybird is coming soon." },
       { title: "Request financing", body: "Request financing for your customer through Autus Finance, from the deal." },
     ],
   },
@@ -314,11 +314,10 @@ const categoryNames: Record<string, string> = {
   Agenda: "Calendar",
   Relatiecontroles: "Contact checks",
   "Boekhouding & financiering": "Accounting & financing",
-  "Betalen & ondertekenen": "Payments & signing",
   Website: "Website",
 };
 
-export const integrationCategories = ["Marketplaces", "Messaging", "Vehicle data", "Calendar", "Contact checks", "Accounting & financing", "Payments & signing", "Website"] as const;
+export const integrationCategories = ["Marketplaces", "Messaging", "Vehicle data", "Calendar", "Contact checks", "Accounting & financing", "Website"] as const;
 
 const integrationBodies: Record<string, string> = {
   "mobile.de": "Publish via the Seller API, with price and status updated automatically.",
@@ -333,21 +332,14 @@ const integrationBodies: Record<string, string> = {
   "Outlook / Microsoft 365": "Receive and send email from VINVARO.",
   "E-mail (IMAP/SMTP)": "Through your own domain's mail server.",
   "RDW Open Data": "Registration data, MOT, inspections and odometer verdict.",
-  Autotelex: "Extended vehicle and option data.",
-  VWE: "Vehicle data and value indications.",
   carVertical: "International vehicle history.",
   CARFAX: "History reports by VIN.",
   "Google Agenda": "Appointments in the calendar of whoever runs them.",
   "Outlook-agenda": "Appointments in the calendar of whoever runs them.",
   "KVK Handelsregister": "Type a company name; KVK number and address are filled in.",
   VIES: "Verify VAT numbers, with the result kept as evidence.",
-  Creditsafe: "Creditworthiness of business customers.",
   Autoboeker: "Invoices and costs to your bookkeeping automatically.",
   "Autus Finance": "Request financing for your customer, from the deal.",
-  "Exact Online": "Direct export of invoices and costs.",
-  Moneybird: "Direct export of invoices and costs.",
-  Mollie: "Online payment of invoices and deposits.",
-  Signhost: "Qualified digital signing. Built-in signing already works.",
   Websitefeed: "Your stock on your own website, with inquiry forms.",
 };
 

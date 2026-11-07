@@ -257,6 +257,14 @@ export async function IntegrationWall() {
                 >
                   <IntegrationLogo slug={i.slug} channel={i.channel} className={clsx("size-7 rounded-full border-0", i.status === "planned" && "opacity-70 grayscale-[40%]")} size={17} />
                   {i.name}
+                  {i.connectsTo && (
+                    <span className="ml-0.5 flex items-center -space-x-1.5" title={i.connectsTo.map((p) => p.name).join(", ")}>
+                      {i.connectsTo.map((pkg) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img key={pkg.slug} src={`/logos/${pkg.slug}.png`} alt={pkg.name} width={20} height={20} className={clsx("size-5 rounded-full bg-surface object-contain ring-2 ring-surface", pkg.soon && "opacity-50")} />
+                      ))}
+                    </span>
+                  )}
                   <span className={clsx("size-1.5 rounded-full", i.status === "live" ? "bg-ok" : i.status === "beta" ? "bg-brand" : "bg-line-strong")} />
                 </li>
               ))}
