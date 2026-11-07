@@ -687,6 +687,8 @@ export function moduleScreens(visual: ModuleVisualKey): [() => React.JSX.Element
       return [MobileMyWork, MobileCapture];
     case "intelligence":
       return [MobileReview, MobileVehicle];
+    case "studio":
+      return [MobileVehicle, MobileCapture];
     case "app":
       return [MobileMyWork, MobileCapture];
     case "inbox":

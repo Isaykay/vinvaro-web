@@ -5,6 +5,7 @@ import { IntelligenceScan, StaffApp, VehicleDossier } from "@/components/product
 import { PipelineBoard } from "@/components/product/hero";
 import { AgendaWeek, ContractSign, InboxView, PublishFlow, SalesPipeline } from "@/components/product/sales";
 import { MarketGrid, TradeFlow } from "@/components/product/network";
+import { PhotoStudio } from "@/components/product/studio";
 
 export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
   switch (visual) {
@@ -14,6 +15,8 @@ export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
       return <PipelineBoard />;
     case "intelligence":
       return <IntelligenceScan />;
+    case "studio":
+      return <PhotoStudio />;
     case "app":
       return <StaffApp />;
     case "inbox":

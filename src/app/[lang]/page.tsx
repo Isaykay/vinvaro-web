@@ -18,6 +18,7 @@ import { MobileCapture, MobileDashboard, MobileReview } from "@/components/produ
 import { IntegrationLogo } from "@/components/product/kit";
 import { IntelligenceScan, VehicleDossier, WorkflowRun } from "@/components/product/ops";
 import { InboxView, PublishFlow } from "@/components/product/sales";
+import { PhotoStudio } from "@/components/product/studio";
 
 const copy = defineCopy({
   nl: {
@@ -44,6 +45,7 @@ const copy = defineCopy({
     },
     splits: {
       inventory: { eyebrow: "Voorraad & dossier", title: "Kenteken in. Dossier compleet.", lead: "Merk, model, APK en tellerstandoordeel uit de RDW. Foto's, documenten, kosten en historie in één dossier, van inkoop tot aflevering.", cta: "Bekijk voorraad & dossier", href: "/platform/voorraad" },
+      studio: { eyebrow: "Fotostudio", title: "Van terreinfoto naar studiofoto. In één klik.", lead: "Haal de achtergrond weg, zet de auto in een lichte studio, retoucheer met AI en dek het kenteken af met een blanco plaat of je logo. Rechtstreeks in het dossier, het origineel blijft bewaard.", cta: "Bekijk de Fotostudio", href: "/platform/fotostudio" },
       intake: { eyebrow: "Intake & aflevering", title: "Afwijking vastgesteld. Bevinding gemaakt.", lead: "Checklists die je team op de telefoon doorloopt. Verwacht en aangetroffen verschillen? Dan ontstaat automatisch een bevinding en zo nodig een taak.", cta: "Bekijk workflows", href: "/platform/intake-en-aflevering" },
       inbox: { eyebrow: "Gedeelde inbox", title: "Elke klantvraag in één inbox. Met de auto erbij.", lead: "WhatsApp Business, Gmail en Outlook samen. AI labelt elk bericht, geeft een leadscore en stelt een antwoord voor in jouw toon.", cta: "Bekijk de inbox", href: "/platform/inbox" },
       publish: { eyebrow: "Publiceren", title: "Eén keer invoeren. Overal online.", lead: "Publiceer naar mobile.de en AutoScout24 en toon je voorraad op je eigen website. Nieuwe prijs of verkocht? Alles wordt bijgewerkt.", cta: "Bekijk publiceren", href: "/platform/publiceren" },
@@ -107,6 +109,7 @@ const copy = defineCopy({
     },
     splits: {
       inventory: { eyebrow: "Inventory & dossier", title: "Registration in. Dossier complete.", lead: "Make, model, MOT and odometer verdict from the RDW. Photos, documents, costs and history in one dossier, from purchase to delivery.", cta: "Explore inventory & dossier", href: "/platform/voorraad" },
+      studio: { eyebrow: "Photo studio", title: "From lot photo to studio shot. In one click.", lead: "Remove the background, place the car in a bright studio, retouch with AI and cover the licence plate with a blank plate or your logo. Right in the dossier, with the original kept.", cta: "Explore the Photo studio", href: "/platform/fotostudio" },
       intake: { eyebrow: "Intake & delivery", title: "Deviation found. Finding created.", lead: "Checklists your team completes on their phone. Expected and found don't match? A finding is created automatically, and a task when needed.", cta: "Explore workflows", href: "/platform/intake-en-aflevering" },
       inbox: { eyebrow: "Shared inbox", title: "Every customer question in one inbox. With the car attached.", lead: "WhatsApp Business, Gmail and Outlook together. AI labels every message, adds a lead score and suggests a reply in your tone.", cta: "Explore the inbox", href: "/platform/inbox" },
       publish: { eyebrow: "Publishing", title: "Enter once. Online everywhere.", lead: "Publish to mobile.de and AutoScout24 and show your stock on your own website. New price or sold? Everything is updated.", cta: "Explore publishing", href: "/platform/publiceren" },
@@ -169,6 +172,7 @@ export default async function Home() {
   const lang = await getLang();
   const { faq, platform, securityControls, site } = getContent(lang);
   const t = copy[lang];
+  const points = (slug: string) => platform.find((p) => p.slug === slug)?.points ?? [];
   return (
     <>
       <JsonLd data={[softwareApplicationLd(lang), faqLd(faq, lang)]} />
@@ -282,10 +286,11 @@ export default async function Home() {
         </Container>
       </section>
 
-      <FeatureSplit {...t.splits.inventory} points={platform[0].points} visual={<VehicleDossier />} />
-      <FeatureSplit reverse {...t.splits.intake} points={platform[1].points} visual={<WorkflowRun />} />
-      <FeatureSplit {...t.splits.inbox} points={platform[4].points} visual={<InboxView />} />
-      <FeatureSplit reverse {...t.splits.publish} points={platform[8].points} visual={<PublishFlow />} />
+      <FeatureSplit {...t.splits.inventory} points={points("voorraad")} visual={<VehicleDossier />} />
+      <FeatureSplit reverse {...t.splits.intake} points={points("intake-en-aflevering")} visual={<WorkflowRun />} />
+      <FeatureSplit {...t.splits.studio} points={points("fotostudio")} visual={<PhotoStudio />} />
+      <FeatureSplit reverse {...t.splits.inbox} points={points("inbox")} visual={<InboxView />} />
+      <FeatureSplit {...t.splits.publish} points={points("publiceren")} visual={<PublishFlow />} />
 
       <section className="bg-obsidian-glow relative overflow-hidden py-28 text-white sm:py-36">
         <div className="bg-grid-dark mask-fade-b pointer-events-none absolute inset-0" />

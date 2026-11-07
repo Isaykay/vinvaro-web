@@ -56,6 +56,7 @@ export const nav: {
           { label: "Voorraad & dossier", href: "/platform/voorraad", description: "Eén voertuig, één complete geschiedenis" },
           { label: "Intake & aflevering", href: "/platform/intake-en-aflevering", description: "Vaste workflows met foto's en handtekening" },
           { label: "AI & bevindingen", href: "/platform/intelligence", description: "Afwijkingen, documenten en leads met AI" },
+          { label: "Fotostudio", href: "/platform/fotostudio", description: "Studiofoto's en kenteken afdekken met AI" },
           { label: "Team-app", href: "/platform/team-app", description: "Vastleggen op de werkvloer, ook offline" },
         ],
       },
@@ -115,10 +116,13 @@ export const nav: {
   { label: "Contact", href: "/contact" },
 ];
 
-export type ModuleVisualKey = "inventory" | "intake" | "intelligence" | "app" | "inbox" | "crm" | "agenda" | "contracts" | "publish" | "trade" | "market";
+export type ModuleVisualKey = "inventory" | "intake" | "intelligence" | "studio" | "app" | "inbox" | "crm" | "agenda" | "contracts" | "publish" | "trade" | "market";
+
+export type ModuleGroup = "vehicles" | "sales" | "network";
 
 export type PlatformModule = {
   slug: string;
+  group: ModuleGroup;
   name: string;
   /** Short product descriptor shown in the module list; maps to the module names in the product. */
   module: string;
@@ -134,6 +138,7 @@ export type PlatformModule = {
 export const platform: PlatformModule[] = [
   {
     slug: "voorraad",
+    group: "vehicles",
     name: "Voorraad & dossier",
     module: "VINVARO Core",
     eyebrow: "Voorraad & voertuigdossier",
@@ -148,8 +153,16 @@ export const platform: PlatformModule[] = [
       { title: "Importeren zonder overtypen", body: "Bestaande voorraad en relaties importeer je uit Excel of csv. VINVARO herkent de kolommen en laat je controleren voor je opslaat." },
       { title: "Bewijs, geen aannames", body: "Waargenomen, geïmporteerde en door AI voorgestelde informatie blijft gescheiden. Een taak kan sluiten; de oorspronkelijke waarneming blijft in de historie." },
       { title: "Zoeken in alles", body: "Zoek op kenteken, VIN, model of klant vanuit elk scherm, met sneltoetsen voor wie de hele dag in VINVARO werkt." },
+      { title: "Start met de juiste workflow", body: "Kies bij het toevoegen van een auto meteen met welke workflow hij begint, bijvoorbeeld transport en ophalen of intake. De eerste taak staat direct klaar." },
+      { title: "APK en keuringen in één kaart", body: "APK-vervaldatum, keuringen met gebreken en het tellerstandoordeel op het overzicht, met één klik opnieuw opgehaald. Een APK-rapport voeg je toe als document." },
+      { title: "Historie checken", body: "Open met één klik een historierapport bij carVertical of CARFAX op het VIN van de auto." },
+      { title: "Tenaamstelling en vrijwaring", body: "Na de verkoop zie je per auto of de tenaamstelling en vrijwaring rond zijn. Een filter toont alle auto's waar de vrijwaring nog openstaat." },
+      { title: "Marge, btw en BPM per auto", body: "Inkoop, kosten, vraagprijs en marge per auto, met btw- of margeregeling en BPM. Aanbetalingen en betalingen staan op het tabblad Betalingen." },
+      { title: "Meerdere auto's tegelijk", body: "Selecteer auto's in de lijst en wijzig in één keer de verkoopstatus, fase, vestiging of prijs op aanvraag, haal APK-gegevens op of zet kanalen aan en uit." },
     ],
     faq: [
+      { q: "Kan ik meerdere auto's tegelijk bewerken?", a: "Ja. In de voertuiglijst selecteer je auto's en wijzig je in één keer de status, fase, vestiging of prijsweergave, ververs je de APK-gegevens of zet je publicatiekanalen aan en uit." },
+      { q: "Zijn grote foto's en pdf's een probleem?", a: "Nee. Foto's en documenten gaan rechtstreeks naar de beveiligde opslag, dus ook grote bestanden van een camera of scanner uploaden zonder problemen." },
       { q: "Welke gegevens haalt VINVARO bij de RDW op?", a: "Voor Nederlandse kentekens: merk, model, uitvoering, brandstof, eerste toelating, APK-vervaldatum, keuringen met gebreken en het oordeel over de tellerstand (NAP). De gegevens komen uit RDW Open Data en je kunt ze altijd opnieuw ophalen." },
       { q: "Kan ik mijn huidige voorraad importeren?", a: "Ja. Je importeert voertuigen en relaties uit Excel of csv. Bij de overstap helpen we je met de eerste import." },
       { q: "Wie ziet welke gegevens?", a: "Rollen en rechten bepalen per gebruiker wat zichtbaar is. Inkoopprijzen, kosten en interne notities blijven intern en worden nooit gedeeld via feeds of marktplaatsen." },
@@ -157,6 +170,7 @@ export const platform: PlatformModule[] = [
   },
   {
     slug: "intake-en-aflevering",
+    group: "vehicles",
     name: "Intake & aflevering",
     module: "VINVARO Workflows",
     eyebrow: "Workflows",
@@ -171,6 +185,9 @@ export const platform: PlatformModule[] = [
       { title: "Taken toewijzen", body: "Wijs stappen toe aan collega's of laat regels het doen. Iedereen ziet in de takenlijst wat er vandaag van hem verwacht wordt." },
       { title: "Externe partners via een link", body: "Poetsbedrijf, schadehersteller of transporteur vult zijn stap in via een beveiligde link, zonder account. Je krijgt een melding met de foto's." },
       { title: "Afleverprotocol met handtekening", body: "Sleutels, documenten, kilometerstand en de handtekening van de klant, vastgelegd bij de aflevering." },
+      { title: "Transport en ophalen", body: "Plan het ophalen van een ingekochte auto met adreszoeker, transporteur en ophaalfoto's. De transporteur vult zijn stap in via een link; jij ziet de foto's direct in het dossier." },
+      { title: "Intake vergeleken met eerder", body: "Bij een nieuwe inspectie zie je wat er sinds de vorige is veranderd. Nieuwe schade of een ontbrekend onderdeel valt meteen op." },
+      { title: "Waarnemingen tussendoor", body: "Iets gezien buiten een workflow om? Leg een waarneming vast met foto. Je beoordeelt hem later en maakt er zo nodig een bevinding of taak van." },
     ],
     faq: [
       { q: "Kan ik workflows zelf aanpassen?", a: "Ja. Je maakt en publiceert je eigen templates. Wijzig je een template, dan krijgt alleen een nieuwe uitvoering de nieuwe versie; lopende uitvoeringen blijven ongewijzigd." },
@@ -180,6 +197,7 @@ export const platform: PlatformModule[] = [
   },
   {
     slug: "intelligence",
+    group: "vehicles",
     name: "AI & bevindingen",
     module: "VINVARO Intelligence",
     eyebrow: "VINVARO Intelligence",
@@ -193,14 +211,47 @@ export const platform: PlatformModule[] = [
       { title: "Bevindingen met bewijs", body: "Afwijkingen bij intake en inspectie staan in één overzicht, met ernst, zone en de originele foto." },
       { title: "Uitlegbaar en herleidbaar", body: "AI-voorstellen blijven gescheiden van wat je team heeft vastgesteld. Het auditlog laat zien wie wat bevestigde." },
       { title: "Jouw data blijft van jou", body: "Gegevens blijven strikt binnen je eigen organisatie en worden niet gebruikt om publieke AI-modellen te trainen." },
+      { title: "Foto's bewerken met AI", body: "Achtergrond weg, studio-achtergrond, retoucheren en het kenteken afdekken, rechtstreeks in de Fotostudio van het dossier." },
+      { title: "Importeren vanuit elke plek", body: "Sleep een document in de webomgeving of scan het met de camera in de app, ook meerdere pagina's. VINVARO herkent het type en stelt de gegevens voor." },
+      { title: "Kosten onder controle", body: "AI-acties en foto-bewerkingen hebben een ruime maandbundel en een daglimiet per organisatie. Je ziet het verbruik live onder Instellingen › Facturatie." },
     ],
     faq: [
+      { q: "Wat kost AI in VINVARO?", a: "Elk plan bevat per maand 500 AI-acties (labels, leadscores en conceptantwoorden) en 100 foto-bewerkingen. Daarboven betaal je € 0,02 per AI-actie en € 0,10 per foto-bewerking, exclusief btw." },
       { q: "Beslist de AI zelf iets?", a: "Nee. VINVARO stelt voor: gegevens uit een document, een label, een leadscore of een concept-antwoord. Je team bevestigt, past aan of verwerpt." },
       { q: "Welke AI-modellen gebruikt VINVARO?", a: "VINVARO werkt met gerenommeerde taalmodellen via een beveiligde gateway. Je gegevens worden alleen gebruikt om de dienst te leveren." },
     ],
   },
   {
+    slug: "fotostudio",
+    group: "vehicles",
+    name: "Fotostudio",
+    module: "VINVARO Studio",
+    eyebrow: "Fotostudio · AI-fotobewerking",
+    title: "Studiofoto's. Zonder fotostudio.",
+    lead: "Bewerk advertentiefoto's rechtstreeks in het voertuigdossier. Haal de achtergrond weg, zet de auto in een lichte studio, retoucheer belichting en kleur of dek het kenteken af met een blanco plaat of je eigen logo. Het origineel blijft altijd bewaard.",
+    visual: "studio",
+    steps: ["Foto kiezen", "AI of handmatig", "Vergelijken", "Opslaan in advertentie"],
+    points: [
+      { title: "Achtergrond weg", body: "De auto wordt vrijgesneden. Kies daarna een witte, grijze of transparante achtergrond voor een rustige, consistente advertentie." },
+      { title: "Studio-achtergrond", body: "Zet de auto in een lichte fotostudio met een zachte schaduw. Een foto op het terrein ziet eruit als een studio-opname." },
+      { title: "Auto-retouche", body: "Corrigeert belichting en kleur en haalt stof, vuil en kleine plekjes weg, in één klik." },
+      { title: "Kenteken afdekken", body: "Vervang het kenteken door een blanco plaat, het logo van je autobedrijf of een eigen afbeelding. Handig voor auto's die nog niet op naam staan." },
+      { title: "Beschrijf je bewerking", body: "Typ wat er anders moet, zoals 'haal de pion naast de auto weg', en de AI past alleen dat deel van de foto aan." },
+      { title: "Wegpoetsen", body: "Kwast over een vlek, een sticker of een object op de achtergrond en het verdwijnt, met een natuurlijk ingevulde ondergrond." },
+      { title: "Aanpassen en bijsnijden", body: "Helderheid, contrast, verzadiging en warmte, draaien, spiegelen en bijsnijden in de verhoudingen die marktplaatsen vragen." },
+      { title: "Vergelijken en terugdraaien", body: "Vergelijk het resultaat met het origineel en draai elke stap terug. Pas als je opslaat wordt er iets bewaard." },
+      { title: "Direct in je advertentie", body: "Vervang de foto op dezelfde plek in de advertentie of sla hem op als kopie. Het origineel blijft bewaard onder Overige foto's." },
+    ],
+    faq: [
+      { q: "Wat kost de Fotostudio?", a: "Handmatig aanpassen, bijsnijden en draaien is altijd gratis. AI-bewerkingen zoals achtergrond weg of retoucheren: 100 per maand zijn inbegrepen, daarna € 0,10 per bewerking, exclusief btw." },
+      { q: "Raak ik mijn originele foto kwijt?", a: "Nee. Een bewerkte foto vervangt de foto alleen in de advertentie of wordt als kopie toegevoegd. Het origineel blijft bewaard in het dossier." },
+      { q: "Werkt het op elke foto?", a: "Het beste resultaat krijg je met een scherpe foto waarop de hele auto staat. Elke bewerking kun je vergelijken met het origineel voordat je opslaat; een AI-resultaat kan afwijken van de werkelijkheid." },
+      { q: "Kan ik een eigen kentekenafbeelding gebruiken?", a: "Ja. Kies bij Kenteken afdekken voor een blanco plaat, het logo van je organisatie of upload een eigen afbeelding in PNG, JPG of WebP." },
+    ],
+  },
+  {
     slug: "team-app",
+    group: "vehicles",
     name: "Team-app",
     module: "VINVARO Staff",
     eyebrow: "Team-app voor iOS en Android",
@@ -213,10 +264,20 @@ export const platform: PlatformModule[] = [
       { title: "Taken en meldingen", body: "Pushmeldingen voor nieuwe taken, toegewezen stappen en klantberichten. Je dagprioriteiten in één scherm." },
       { title: "Inbox op zak", body: "Beantwoord WhatsApp en e-mail met snelle antwoorden of een AI-voorstel, met de auto erbij." },
       { title: "Rechten per rol", body: "Iedere collega ziet alleen de onderdelen die bij zijn rol horen, net als in de webomgeving." },
+      { title: "Auto toevoegen met kenteken", body: "Typ een kenteken of VIN, haal de RDW-gegevens op en kies met welke workflow de auto start. Klaar voor de eerste stap, vanaf de telefoon." },
+      { title: "Documenten scannen", body: "Scan een aankoopfactuur of kentekenbewijs met de camera, ook meerdere pagina's achter elkaar. De gegevens worden voorgesteld, jij bevestigt." },
+      { title: "Meldingen zoals jij wilt", body: "Zet pushmeldingen aan vanuit de app, met de juiste uitleg als je ze eerder hebt uitgezet. Per soort melding bepaal je zelf wat je ontvangt." },
+      { title: "Hulp in de app", body: "Chat met Linda, onze AI-assistent, of volg je supporttickets, zonder opnieuw in te loggen. Tijdens kantooruren neemt een collega het over." },
+    ],
+    faq: [
+      { q: "Voor welke telefoons is de app?", a: "Voor iPhone en Android-telefoons. De app gebruikt hetzelfde account als de webomgeving; je logt in met e-mail en wachtwoord, een inloglink of Google of Microsoft." },
+      { q: "Moet ik de app steeds bijwerken?", a: "Kleine verbeteringen komen automatisch binnen zodra je de app opnieuw opent. Alleen grotere updates lopen via de App Store of Google Play." },
+      { q: "Werkt de app zonder internet?", a: "Je kunt foto's maken en workflowstappen invullen zonder bereik. De app laat zien wat er nog wacht en verstuurt alles zodra er weer verbinding is." },
     ],
   },
   {
     slug: "inbox",
+    group: "sales",
     name: "Inbox",
     module: "VINVARO CRM",
     eyebrow: "Gedeelde inbox",
@@ -234,6 +295,7 @@ export const platform: PlatformModule[] = [
   },
   {
     slug: "crm-en-verkoop",
+    group: "sales",
     name: "CRM & verkoop",
     module: "VINVARO CRM",
     eyebrow: "Relaties & verkoop",
@@ -247,10 +309,14 @@ export const platform: PlatformModule[] = [
       { title: "Btw-nummer gecontroleerd", body: "Controleer een btw-nummer bij VIES. Het resultaat wordt bewaard als bewijs, handig bij intracommunautaire levering." },
       { title: "Taken en opvolging", body: "Openstaande taken per persoon, met deadline en prioriteit. Niemand vergeet de terugbelafspraak." },
       { title: "Importeren", body: "Bestaande relaties importeer je uit Excel, csv of pdf." },
+      { title: "Aanvragen op één plek", body: "Proefritten, informatievragen en terugbelverzoeken van je website en de VINVARO Marktplaats in één lijst, met de auto erbij en de status van de opvolging." },
+      { title: "Reviews vragen", body: "Vraag na een aflevering met één klik om een review, of laat VINVARO dat automatisch doen. Beoordelingen staan op je openbare profiel en bij je auto's." },
+      { title: "Adres zoeken", body: "Typ een straat of bedrijf en kies het juiste adres. Voor relaties, vestigingen, partners en ophaallocaties." },
     ],
   },
   {
     slug: "agenda",
+    group: "sales",
     name: "Agenda & proefritten",
     module: "VINVARO CRM",
     eyebrow: "Agenda & proefritten",
@@ -267,6 +333,7 @@ export const platform: PlatformModule[] = [
   },
   {
     slug: "contracten-en-facturen",
+    group: "sales",
     name: "Contracten & facturen",
     module: "VINVARO Finance",
     eyebrow: "Contracten & facturen",
@@ -281,10 +348,14 @@ export const platform: PlatformModule[] = [
       { title: "Btw- en margeregeling", body: "Btw-auto of marge-auto, vastgelegd per voertuig en zichtbaar op factuur en feed." },
       { title: "Export naar de boekhouding", body: "Financieel overzicht en export, via Autoboeker direct in Exact Online, Twinfield, SnelStart of e-Boekhouden.nl. Moneybird volgt binnenkort." },
       { title: "Financiering aanvragen", body: "Via Autus Finance vraag je financiering aan voor je klant, vanuit de deal." },
+      { title: "Documenten in je huisstijl", body: "Kies layout, kleur, lettertype en logo voor facturen en contracten, met teksten per taal. Klanten krijgen documenten die er professioneel uitzien." },
+      { title: "Meerdere rechtspersonen", body: "Werk je met meerdere bv's? Per vestiging of auto bepaal je welke rechtspersoon op contract en factuur staat." },
+      { title: "Betalingen per auto", body: "Registreer wat je hebt betaald en ontvangen, ook aanbetalingen en deelbetalingen. Je ziet per auto wat er nog openstaat." },
     ],
   },
   {
     slug: "publiceren",
+    group: "sales",
     name: "Publiceren",
     module: "VINVARO Publishing",
     eyebrow: "Publiceren",
@@ -297,11 +368,20 @@ export const platform: PlatformModule[] = [
       { title: "Prijs en status blijven gelijk", body: "Een nieuwe vraagprijs of een verkochte auto wordt doorgezet naar de gekoppelde kanalen." },
       { title: "Voorraad op je eigen website", body: "Een script of iframe met je voorraad, in je eigen kleuren. Bezoekers vragen direct een proefrit aan; elke aanvraag wordt een deal in VINVARO." },
       { title: "Alleen openbare gegevens", body: "Inkoopprijzen, kosten, notities en relaties worden nooit gedeeld. VIN en kenteken staan standaard uit." },
+      { title: "Alle kanalen in één kaart", body: "Op het overzicht van een auto zie je per kanaal of hij online staat, wordt geplaatst of een fout heeft. Met één schakelaar zet je een kanaal aan of uit." },
+      { title: "Publiceren in bulk", body: "Selecteer auto's in de voertuiglijst en zet ze in één keer online of offline, op alle kanalen of op één kanaal." },
+      { title: "VINVARO Marktplaats erbij", body: "Naast mobile.de, AutoScout24 en je website staat de gratis VINVARO Marktplaats als kanaal klaar, met je reputatie bij elke auto." },
       { title: "Meer marktplaatsen op de planning", body: "Marktplaats, Gaspedaal, ViaBOVAG en AutoWereld staan op de roadmap." },
+    ],
+    faq: [
+      { q: "Wat gebeurt er als een auto verkocht is?", a: "Zodra je een auto op gereserveerd of verkocht zet, haalt VINVARO hem automatisch van alle gekoppelde kanalen. Een nieuwe vraagprijs wordt ook overal doorgevoerd." },
+      { q: "Kan ik kiezen welke auto's waar online staan?", a: "Ja. Per auto zet je elk kanaal apart aan of uit, en in de voertuiglijst doe je dat voor meerdere auto's tegelijk." },
+      { q: "Wat kost publiceren?", a: "€ 10 per maand per gekoppelde marktplaats en € 15 per maand per websitefeed, exclusief btw. De VINVARO Marktplaats en het Handelsplein zijn gratis." },
     ],
   },
   {
     slug: "handelsplein",
+    group: "network",
     name: "Handelsplein",
     module: "VINVARO Handelsplein",
     eyebrow: "VINVARO Handelsplein · gratis",
@@ -325,6 +405,7 @@ export const platform: PlatformModule[] = [
   },
   {
     slug: "marktplaats",
+    group: "network",
     name: "Marktplaats",
     module: "VINVARO Marktplaats",
     eyebrow: "VINVARO Marktplaats · gratis",
@@ -461,6 +542,8 @@ export const securityControls = [
   { title: "Rollen en rechten", body: "Per rol bepaal je welke pagina's en gegevens zichtbaar zijn, ook in de app." },
   { title: "Auditlog", body: "Elke wijziging met wie en wanneer. Financiële velden tonen alleen dat er iets veranderde." },
   { title: "Gevoelige gegevens afgeschermd", body: "API-sleutels en koppelingen worden versleuteld bewaard; inkoopprijzen en notities worden nooit gedeeld." },
+  { title: "Veilig inloggen", body: "Wachtwoordregels met een live controle bij aanmelden en herstellen. Inloggen kan ook met een eenmalige inloglink of je Google- of Microsoft-account." },
+  { title: "Je account, jouw keuze", body: "Gebruikers verwijderen hun account zelf, op het web en in de app. Bedrijfsgegevens zoals voertuigen en contracten blijven bij je autobedrijf." },
 ];
 
 export const faq = [
@@ -471,6 +554,8 @@ export const faq = [
   { q: "Wat zijn het Handelsplein en de Marktplaats?", a: "Twee gratis VINVARO-netwerken. Op het Handelsplein handel je rechtstreeks met andere autobedrijven tegen handelsprijzen; de auto gaat na de deal vanzelf naar de voorraad van de koper. Op de Marktplaats zoeken consumenten in het aanbod van alle aangesloten autobedrijven, tegen vraagprijs en met je reputatie erbij." },
   { q: "Welke kanalen komen in de inbox?", a: "WhatsApp Business, Gmail, Outlook / Microsoft 365 en e-mail via je eigen mailserver (IMAP/SMTP)." },
   { q: "Is er een app voor mijn team?", a: "Ja. De VINVARO-app voor iOS en Android werkt ook offline: foto's en workflowantwoorden worden verstuurd zodra er weer bereik is." },
+  { q: "Kan ik advertentiefoto's bewerken in VINVARO?", a: "Ja. In de Fotostudio haal je de achtergrond weg, zet je de auto in een studio, retoucheer je met AI en dek je het kenteken af met een blanco plaat of je logo. Bijsnijden, draaien en kleur aanpassen kan ook. Het origineel blijft altijd bewaard." },
+  { q: "Hoe krijg ik hulp als ik vastloop?", a: "Klik in VINVARO op Support. Linda, onze AI-assistent, beantwoordt vragen direct, dag en nacht. Tijdens kantooruren (ma–vr 09:00–17:00) neemt een collega het gesprek over, en via tickets volg je de voortgang. Het helpcentrum staat vol handleidingen." },
   { q: "Hoe snel kan ik overstappen?", a: "Je voorraad en relaties importeer je uit Excel of csv; kanalen en agenda's koppel je zelf in een paar minuten. We plannen de overstap samen in de demo." },
   { q: "Wat kost VINVARO?", a: "Het Dealer-plan kost € 199 per maand plus € 4 per voertuig in voorraad, exclusief btw. Alle modules, gebruikers en partners zijn inbegrepen. Je start met 30 dagen proefperiode." },
 ];
@@ -506,12 +591,14 @@ export const pricing = {
     { key: "marketplaces", name: "Marktplaatsen", unit: "koppeling", description: "Gekoppelde marktplaatsen", kind: "recurring", module: "publiceren", unitPriceCents: 1000, included: 0 },
     { key: "website_feed", name: "Websitefeed", unit: "feed", description: "Actieve voorraadfeeds", kind: "recurring", module: "publiceren", unitPriceCents: 1500, included: 0 },
     { key: "ai_actions", name: "AI-acties", unit: "actie", description: "Labels, leadscores en conceptantwoorden", kind: "usage", module: "intelligence", unitPriceCents: 2, included: 500 },
-    { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de foto-editor", kind: "usage", module: "intelligence", unitPriceCents: 10, included: 100 },
+    { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de Fotostudio", kind: "usage", module: "fotostudio", unitPriceCents: 10, included: 100 },
     { key: "sign_requests", name: "Digitale ondertekeningen", unit: "verzoek", description: "Contracten verstuurd om te tekenen", kind: "usage", module: "contracten-en-facturen", unitPriceCents: 50, included: 10 },
     { key: "kvk_lookups", name: "KVK-opvragingen", unit: "opvraging", description: "Bedrijfsgegevens uit het Handelsregister", kind: "usage", module: "crm-en-verkoop", unitPriceCents: 10, included: 50 },
   ] as PriceItem[],
   included: [
-    "Alle modules: voorraad, workflows, inbox, CRM, agenda, contracten, facturen, publiceren en AI",
+    "Alle modules: voorraad, workflows, inbox, CRM, agenda, contracten, facturen, publiceren, AI en de Fotostudio",
+    "100 AI-foto-bewerkingen en 500 AI-acties per maand",
+    "Support via Linda (AI, dag en nacht), tickets en het helpcentrum",
     "Onbeperkt gebruikers en partners",
     "Team-app voor iOS en Android",
     "RDW-gegevens, KVK en VIES",

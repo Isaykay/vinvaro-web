@@ -15,26 +15,26 @@ import { HeroWorkspace, VehicleJourney } from "@/components/product/hero";
 const copy = defineCopy({
   nl: {
     metaTitle: "Platform: één werkplek voor je autobedrijf",
-    metaDescription: "Voorraad en voertuigdossier, intake- en afleverworkflows, AI, team-app, gedeelde inbox, CRM, agenda, contracten, facturen en publiceren in één platform voor autobedrijven.",
+    metaDescription: "Voorraad en voertuigdossier, intake- en afleverworkflows, AI, Fotostudio, team-app, gedeelde inbox, CRM, agenda, contracten, facturen, publiceren, Handelsplein en Marktplaats in één platform voor autobedrijven.",
     eyebrow: "Platform",
     title: "Eén werkplek voor voertuigen, klanten en processen.",
-    lead: "Negen modules die samenwerken op hetzelfde voertuigdossier. Allemaal inbegrepen in één plan; je team werkt in één omgeving, op het web en in de app.",
+    lead: "Twaalf modules die samenwerken op hetzelfde voertuigdossier, van voorraad, workflows en Fotostudio tot inbox, contracten en het VINVARO-netwerk. Allemaal in één plan; je team werkt in één omgeving, op het web en in de app.",
     cta: "Plan een demo",
     integrations: "Bekijk integraties",
-    groups: ["Voertuigen", "Klanten & verkoop"],
+    groups: ["Voertuigen", "Klanten & verkoop", "VINVARO-netwerk"],
     journeyEyebrow: "Hoe het samenkomt",
     journeyTitle: "Elke module schuift aan bij hetzelfde voertuig.",
     view: "Bekijk",
   },
   en: {
     metaTitle: "Platform: one workspace for your automotive business",
-    metaDescription: "Inventory and vehicle dossier, intake and delivery workflows, AI, staff app, shared inbox, CRM, calendar, contracts, invoices and publishing in one platform for automotive businesses.",
+    metaDescription: "Inventory and vehicle dossier, intake and delivery workflows, AI, Photo studio, staff app, shared inbox, CRM, calendar, contracts, invoices, publishing, Trade network and Marketplace in one platform for automotive businesses.",
     eyebrow: "Platform",
     title: "One workspace for vehicles, customers and operations.",
-    lead: "Nine modules that work together on the same vehicle dossier. All included in one plan; your team works in one environment, on the web and in the app.",
+    lead: "Twelve modules that work together on the same vehicle dossier, from inventory, workflows and the Photo studio to the inbox, contracts and the VINVARO network. All in one plan; your team works in one environment, on the web and in the app.",
     cta: "Book a demo",
     integrations: "View integrations",
-    groups: ["Vehicles", "Customers & sales"],
+    groups: ["Vehicles", "Customers & sales", "VINVARO network"],
     journeyEyebrow: "How it comes together",
     journeyTitle: "Every module joins the same vehicle.",
     view: "View",
@@ -51,7 +51,7 @@ export default async function PlatformIndex() {
   const lang = await getLang();
   const t = copy[lang];
   const { platform } = getContent(lang);
-  const groups = [platform.slice(0, 4), platform.slice(4)];
+  const groups = (["vehicles", "sales", "network"] as const).map((g) => platform.filter((p) => p.group === g));
   return (
     <>
       <JsonLd
@@ -84,10 +84,10 @@ export default async function PlatformIndex() {
       </section>
 
       {groups.map((group, gi) => (
-        <section key={gi} className={gi === 0 ? "border-t border-line bg-surface py-20 sm:py-24" : "py-20 sm:py-24"}>
+        <section key={gi} className={gi === 1 ? "py-20 sm:py-24" : "border-t border-line bg-surface py-20 sm:py-24"}>
           <Container>
             <p className="mb-6 font-mono text-[11.5px] tracking-[0.12em] text-brand uppercase">{t.groups[gi]}</p>
-            <div className={`grid gap-px overflow-hidden rounded-2xl bg-line shadow-card sm:grid-cols-2 ${gi === 0 ? "lg:grid-cols-4" : "lg:grid-cols-5"}`}>
+            <div className={`grid gap-px overflow-hidden rounded-2xl bg-line shadow-card sm:grid-cols-2 ${group.length >= 5 ? "lg:grid-cols-5" : group.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-2"}`}>
               {group.map((p) => (
                 <Link key={p.slug} href={`/platform/${p.slug}`} className="group flex flex-col bg-surface p-7 transition-colors hover:bg-canvas">
                   <IconTile text={p.name} hint={p.title} size="lg" />
