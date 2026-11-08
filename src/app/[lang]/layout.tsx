@@ -41,6 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: { ...defaults.openGraph, url: undefined, locale: ogLocale[lang] },
     twitter: defaults.twitter,
     appleWebApp: { title: site.name, capable: true, statusBarStyle: "default" },
+    other: { "facebook-domain-verification": "bkq60kb64wpcrt7dh42kmuxxmnrq92" },
   };
 }
 

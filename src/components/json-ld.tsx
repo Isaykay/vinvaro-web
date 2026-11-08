@@ -1,5 +1,6 @@
 import { getContent } from "@/lib/content";
 import { htmlLang, localize, type Lang } from "@/lib/i18n";
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from "@/components/store-badges";
 
 type Thing = Record<string, unknown>;
 
@@ -49,6 +50,7 @@ export function softwareApplicationLd(lang: Lang): Thing {
     operatingSystem: "Web, iOS, Android",
     description: site.description,
     url: absoluteUrl(lang, "/"),
+    downloadUrl: [APP_STORE_URL, GOOGLE_PLAY_URL],
     inLanguage: htmlLang[lang],
     publisher: { "@id": ids.organization() },
   };

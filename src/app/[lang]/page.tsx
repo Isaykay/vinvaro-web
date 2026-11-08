@@ -19,6 +19,7 @@ import { IntegrationLogo } from "@/components/product/kit";
 import { IntelligenceScan, VehicleDossier, WorkflowRun } from "@/components/product/ops";
 import { InboxView, PublishFlow } from "@/components/product/sales";
 import { PhotoStudio } from "@/components/product/studio";
+import { StoreBadges } from "@/components/store-badges";
 
 const copy = defineCopy({
   nl: {
@@ -350,9 +351,12 @@ export default async function Home() {
                   </li>
                 ))}
               </ul>
-              <Button href="/platform/team-app" variant="secondary" size="lg" arrow className="mt-9">
-                {t.app.cta}
-              </Button>
+              <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-4">
+                <Button href="/platform/team-app" variant="secondary" size="lg" arrow>
+                  {t.app.cta}
+                </Button>
+                <StoreBadges lang={lang} />
+              </div>
             </Reveal>
             <Reveal delay={0.1}>
               <div className="bg-stage relative flex h-[580px] items-end justify-center overflow-hidden rounded-[28px] px-4 pt-10">

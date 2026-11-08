@@ -11,6 +11,7 @@ import { Button, Container, SectionHeader } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { CheckItem, IconTile } from "@/components/icons";
 import { AppPhones } from "@/components/product/app-phones";
+import { StoreBadges } from "@/components/store-badges";
 import { CTASection, FeatureList, PageHero } from "@/components/sections";
 import { FAQ } from "@/components/faq";
 import { ModuleVisual } from "@/components/product/module-visual";
@@ -70,6 +71,7 @@ export default async function PlatformModulePage({ params }: PageProps<"/[lang]/
         <Button href="/platform" size="lg" variant="secondary">
           {t.platform}
         </Button>
+        {mod.visual === "app" && <StoreBadges lang={lang} className="w-full sm:w-auto sm:self-center" />}
       </PageHero>
 
       <section className="pb-16">
@@ -117,6 +119,7 @@ export default async function PlatformModulePage({ params }: PageProps<"/[lang]/
                   <CheckItem key={p}>{p}</CheckItem>
                 ))}
               </ul>
+              <StoreBadges lang={lang} className="mt-9" />
             </Reveal>
             <Reveal delay={0.1}>
               <AppPhones visual={mod.visual} />

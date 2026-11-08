@@ -6,6 +6,7 @@ import { Container, Mark } from "@/components/ui";
 import { Logo } from "@/components/header";
 import { LangSwitch } from "@/components/lang-switch";
 import { ContactStrip } from "@/components/sections";
+import { StoreBadges } from "@/components/store-badges";
 
 type FooterLink = { label: string; href: string };
 
@@ -25,6 +26,7 @@ const copy = defineCopy({
     illustrative: "Alle schermen, kentekens en gegevens op deze website zijn illustratief.",
     privacy: "Privacy",
     terms: "Voorwaarden",
+    app: "Download de app",
   },
   en: {
     tagline: "The operating system for automotive businesses. Vehicles, customers and operations together in one workspace, from intake to delivery.",
@@ -41,6 +43,7 @@ const copy = defineCopy({
     illustrative: "All screens, registrations and data on this website are illustrative.",
     privacy: "Privacy",
     terms: "Terms",
+    app: "Get the app",
   },
 });
 
@@ -96,6 +99,10 @@ export async function Footer() {
             </ul>
             <div className="mt-7">
               <ContactStrip stacked />
+            </div>
+            <div className="mt-7">
+              <p className="mb-3 text-[12px] font-medium tracking-[0.06em] text-subtle uppercase">{t.app}</p>
+              <StoreBadges lang={lang} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">

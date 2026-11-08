@@ -13,10 +13,11 @@ import { LangSwitch } from "@/components/lang-switch";
 import { Button, Wordmark } from "@/components/ui";
 import { IconTile } from "@/components/icons";
 import { Car } from "@/components/product/kit";
+import { StoreBadges } from "@/components/store-badges";
 
 const copy = defineCopy({
-  nl: { home: "VINVARO home", mainNav: "Hoofdmenu", login: "Inloggen", demo: "Plan een demo", openMenu: "Menu openen", closeMenu: "Menu sluiten" },
-  en: { home: "VINVARO home", mainNav: "Main navigation", login: "Log in", demo: "Book a demo", openMenu: "Open menu", closeMenu: "Close menu" },
+  nl: { home: "VINVARO home", mainNav: "Hoofdmenu", login: "Inloggen", demo: "Plan een demo", openMenu: "Menu openen", closeMenu: "Menu sluiten", appTitle: "VINVARO-app voor iOS en Android", appBody: "Vastleggen op de werkvloer, ook offline" },
+  en: { home: "VINVARO home", mainNav: "Main navigation", login: "Log in", demo: "Book a demo", openMenu: "Open menu", closeMenu: "Close menu", appTitle: "VINVARO app for iOS and Android", appBody: "Capture on the shop floor, even offline" },
 });
 
 export function Logo({ inverted, onNavigate }: { inverted?: boolean; onNavigate?: () => void }) {
@@ -354,15 +355,30 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
             <div className="mx-auto max-w-[1200px] px-8">
               {/* Only the card itself is interactive, so hovering or clicking beside it counts as "outside". */}
               <div data-megamenu onMouseEnter={cancelClose} className="pointer-events-auto mx-auto flex w-full max-w-[1136px] gap-2 rounded-2xl bg-surface p-2 shadow-float">
-                <div className={clsx("grid flex-1 gap-2", openItem.groups.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
-                  {openItem.groups.map((group) => (
-                    <div key={group.title} className="p-2">
-                      <p className="px-3 pt-1 pb-2 font-mono text-[11px] tracking-[0.1em] text-subtle uppercase">{group.title}</p>
-                      {group.links.map((l) => (
-                        <MenuLink key={`${l.href}-${l.label}`} link={l} />
-                      ))}
-                    </div>
-                  ))}
+                <div className="flex flex-1 flex-col">
+                  <div className={clsx("grid gap-2", openItem.groups.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
+                    {openItem.groups.map((group) => (
+                      <div key={group.title} className="p-2">
+                        <p className="px-3 pt-1 pb-2 font-mono text-[11px] tracking-[0.1em] text-subtle uppercase">{group.title}</p>
+                        {group.links.map((l) => (
+                          <MenuLink key={`${l.href}-${l.label}`} link={l} />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mx-2 mt-auto mb-2 flex items-center justify-between gap-4 rounded-xl bg-sunken px-4 py-3">
+                    <Link href="/platform/team-app" className="group/app flex min-w-0 items-center gap-3">
+                      <IconTile text="app" size="sm" />
+                      <span className="min-w-0">
+                        <span className="flex items-center gap-1 text-[14px] font-medium tracking-[-0.01em] text-ink">
+                          {t.appTitle}
+                          <ArrowRight className="size-3.5 text-subtle transition-transform group-hover/app:translate-x-0.5 group-hover/app:text-ink" />
+                        </span>
+                        <span className="mt-0.5 block text-[13px] leading-snug text-muted">{t.appBody}</span>
+                      </span>
+                    </Link>
+                    <StoreBadges lang={lang} size="sm" className="flex-nowrap" />
+                  </div>
                 </div>
                 {openItem.featured && <FeaturedCard featured={openItem.featured} />}
               </div>
@@ -429,6 +445,10 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
                   </Link>
                 ),
               )}
+              <div className="py-6">
+                <p className="mb-3 font-mono text-[11px] tracking-[0.1em] text-subtle uppercase">{t.appTitle}</p>
+                <StoreBadges lang={lang} />
+              </div>
             </nav>
             <div className="space-y-3 border-t border-line px-5 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
               <div className="flex items-center justify-between">
