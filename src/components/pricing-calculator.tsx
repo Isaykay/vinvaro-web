@@ -30,6 +30,7 @@ const copy = defineCopy({
       kvk_lookups: "Bedrijfsgegevens ophalen uit het Handelsregister door een bedrijfsnaam of KVK-nummer in te typen.",
     } as Record<string, string>,
     planned: "gepland",
+    free: "gratis",
     feed: "Websitefeed op je eigen site",
     estimate: "Indicatie per maand",
     plan: "Dealer-plan",
@@ -61,6 +62,7 @@ const copy = defineCopy({
       kvk_lookups: "Fetching company details from the trade register by typing a company name or KVK number.",
     } as Record<string, string>,
     planned: "planned",
+    free: "free",
     feed: "Website feed on your own site",
     estimate: "Monthly estimate",
     plan: "Dealer plan",
@@ -92,7 +94,9 @@ export function PricingCalculator() {
   const lang = useLang();
   const t = copy[lang];
   const { pricing, integrations, integrationCategories } = getContent(lang);
-  const marketplaceOptions = integrations.filter((i) => i.category === integrationCategories[0] && i.slug);
+  const channels = integrations.filter((i) => i.category === integrationCategories[0] && i.slug);
+  const marketplaceOptions = channels.filter((i) => i.slug !== "vinvaro");
+  const networks = channels.filter((i) => i.slug === "vinvaro");
   const [values, setValues] = useState<Record<string, number>>(Object.fromEntries(Object.entries(ranges).map(([k, r]) => [k, r.initial])));
   const [marketplaces, setMarketplaces] = useState<string[]>(["mobilede", "autoscout24"]);
   const [feed, setFeed] = useState(true);
@@ -189,6 +193,13 @@ export function PricingCalculator() {
                           </button>
                         );
                       })}
+                      {networks.map((n) => (
+                        <span key={n.name} className="flex items-center gap-2 rounded-full border border-ok/25 bg-ok-50 py-1 pr-3 pl-1 text-[13px] font-medium text-ink">
+                          <LogoTile slug="vinvaro" className="size-6 rounded-full border-0" size={14} />
+                          {n.name}
+                          <span className="text-[11px] font-normal text-ok">· {t.free}</span>
+                        </span>
+                      ))}
                     </div>
                     <span className="mt-1.5 block text-[12px] text-muted">
                       {money(marketItem.unitPriceCents)} / {marketItem.unit}

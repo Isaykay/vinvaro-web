@@ -114,6 +114,13 @@ export function Plate({ children, className, size = "sm" }: { children: ReactNod
 
 /** Integration logo tile (favicons from /public/logos, like the app's integration settings). */
 export function LogoTile({ slug, className, size = 28 }: { slug: string; className?: string; size?: number }) {
+  if (slug === "vinvaro") {
+    return (
+      <span className={clsx("grid shrink-0 place-items-center overflow-hidden rounded-[9px] border border-line bg-ink text-white", className ?? "size-10")}>
+        <Mark className="h-auto" width={size} />
+      </span>
+    );
+  }
   return (
     <span className={clsx("grid shrink-0 place-items-center overflow-hidden rounded-[9px] border border-line bg-white", className ?? "size-10")}>
       {/* eslint-disable-next-line @next/next/no-img-element */}

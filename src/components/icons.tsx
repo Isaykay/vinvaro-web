@@ -42,6 +42,10 @@ import {
   Workflow,
   type LucideIcon,
 } from "lucide-react";
+import { Mark } from "@/components/brand-mark";
+
+/** The VINVARO networks (Handelsplein, Marktplaats) carry the V mark instead of a generic icon. */
+const network = /^(vinvaro )?(handelsplein|marktplaats|trade network|marketplace)$/i;
 
 const rules: [RegExp, LucideIcon][] = [
   [/offline|bereik|signal|verbinding|connection/i, WifiOff],
@@ -123,7 +127,11 @@ export function IconTile({
         tone === "dark" && "bg-white/[0.06] text-brand-300 ring-white/10",
       )}
     >
-      <Icon className={clsx(size === "sm" ? "size-3.5" : size === "md" ? "size-[18px]" : "size-5")} strokeWidth={1.9} />
+      {!icon && network.test(text?.trim() ?? "") ? (
+        <Mark className={clsx("h-auto", size === "sm" ? "w-[17px]" : size === "md" ? "w-[21px]" : "w-6")} />
+      ) : (
+        <Icon className={clsx(size === "sm" ? "size-3.5" : size === "md" ? "size-[18px]" : "size-5")} strokeWidth={1.9} />
+      )}
     </span>
   );
 }
