@@ -1,7 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { canonicalHostRedirect } from "@/lib/canonical-host";
 import { toDutchPath, toEnglishPath } from "@/lib/i18n";
 
 export function proxy(request: NextRequest) {
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? "";
+  const canonical = canonicalHostRedirect(host, request.nextUrl);
+  if (canonical) return NextResponse.redirect(canonical, 301);
+
   const url = request.nextUrl.clone();
   const { pathname } = url;
 
