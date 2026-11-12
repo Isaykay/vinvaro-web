@@ -10,6 +10,8 @@ export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { pathname } = url;
 
+  if (pathname === "/pitch" || pathname.startsWith("/pitch/")) return NextResponse.next();
+
   if (pathname === "/nl" || pathname.startsWith("/nl/")) {
     url.pathname = pathname.slice(3) || "/";
     return NextResponse.redirect(url, 308);

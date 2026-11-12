@@ -1,0 +1,66 @@
+@import "../globals.css";
+
+body {
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+.slide-section {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pitch h1,
+.pitch h2 {
+  font-weight: 600;
+  letter-spacing: -0.038em;
+  text-wrap: balance;
+}
+
+.pitch h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.pitch-grid {
+  background-image: linear-gradient(to right, rgb(11 15 20 / 0.028) 1px, transparent 1px), linear-gradient(to bottom, rgb(11 15 20 / 0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.pitch-glass {
+  background: rgb(255 255 255 / 0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgb(226 232 240 / 0.6);
+}
+
+@keyframes pitch-drive {
+  0% {
+    left: -30%;
+  }
+  40%,
+  55% {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  100% {
+    left: 110%;
+    transform: translateX(0);
+  }
+}
+
+/* Presenter switched animations off in the pitch navigation. */
+.animations-off *,
+.animations-off *::before,
+.animations-off *::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+}
+
+.animations-off {
+  scroll-behavior: auto !important;
+}

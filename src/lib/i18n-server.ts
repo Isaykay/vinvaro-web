@@ -5,7 +5,7 @@ import { hasLang, localize, type Lang } from "@/lib/i18n";
 /** Current language in Server Components and generateMetadata. */
 export async function getLang(): Promise<Lang> {
   const value = await rootLang();
-  if (!hasLang(value)) notFound();
+  if (!value || !hasLang(value)) notFound();
   return value;
 }
 
