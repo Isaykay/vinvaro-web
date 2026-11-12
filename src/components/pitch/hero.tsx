@@ -23,7 +23,7 @@ function Source({ kind, size = 14 }: { kind: ChannelKind | string; size?: number
 
 type Item = { name: string; make: string; plate: string; amount: string; note: [string, string]; tone: Tone; status: [string, string]; source: string };
 
-function HeroVisual() {
+export function HeroVisual() {
   const t = useT();
   const items: Item[] = [
     { name: "Volvo XC40", make: "volvo", plate: "P-771-RD", amount: "38.950", note: ["Proefritaanvraag · lead 86", "Test drive request · lead 86"], tone: "brand", status: ["Gelabeld", "Labelled"], source: "whatsapp" },
