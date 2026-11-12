@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AnnouncementBanner } from "@/components/announcement-banner";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LangProvider } from "@/components/lang-provider";
@@ -53,6 +54,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
       <body className="flex min-h-full flex-col font-sans">
         <JsonLd data={organizationLd(lang)} />
         <LangProvider lang={lang}>
+          <AnnouncementBanner />
           <Header nav={nav} appUrl={site.appUrl} />
           <main className="flex-1">{children}</main>
           <Footer />
