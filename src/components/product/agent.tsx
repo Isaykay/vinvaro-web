@@ -88,6 +88,11 @@ const copy = defineCopy({
       max: "Tot 60 per bericht",
       docs: ["Kentekenbewijs.pdf gelezen", "Inkoopfactuur.pdf gelezen"],
       gallery: (n: number) => `Galerij · ${n} foto's`,
+      summary: [
+        ["36 foto's", "photo"],
+        ["1 video", "video"],
+        ["2 pdf's", "pdf"],
+      ] as [string, "photo" | "video" | "pdf"][],
     },
     selection: {
       title: "Voertuigen",
@@ -190,6 +195,11 @@ const copy = defineCopy({
       max: "Up to 60 per message",
       docs: ["Registration-document.pdf read", "Purchase-invoice.pdf read"],
       gallery: (n: number) => `Gallery · ${n} photos`,
+      summary: [
+        ["36 photos", "photo"],
+        ["1 video", "video"],
+        ["2 PDFs", "pdf"],
+      ],
     },
     selection: {
       title: "Vehicles",
@@ -928,7 +938,7 @@ export function AgentVoiceFiles() {
         </p>
       </div>
 
-      <div className="relative min-h-[360px] overflow-hidden rounded-2xl bg-surface p-5 shadow-float">
+      <div className="relative min-h-[380px] overflow-hidden rounded-2xl bg-surface p-5 shadow-float">
         <div className="flex items-center justify-between">
           <span className="inline-flex items-center gap-1.5 text-[12px] font-medium text-ink">
             <Paperclip className="size-3.5 text-muted" /> {v.files(dropped ? 39 : 0)}
@@ -936,11 +946,23 @@ export function AgentVoiceFiles() {
           <Pill tone="ai">{v.max}</Pill>
         </div>
         <motion.div
-          animate={{ opacity: dropped && !fly ? 1 : 0 }}
-          className="pointer-events-none absolute inset-x-5 top-12 bottom-[132px] grid place-items-center rounded-xl border-2 border-dashed border-brand/35 bg-brand-50/50"
+          animate={{ opacity: dropped && t < 4800 ? 1 : 0 }}
+          className="pointer-events-none absolute inset-x-5 top-12 bottom-[172px] grid place-items-center rounded-xl border-2 border-dashed border-brand/35 bg-brand-50/50"
         >
           <span className="mt-auto mb-3 text-[11.5px] font-medium text-brand">{v.drop}</span>
         </motion.div>
+        <AnimatePresence>
+          {reading && (
+            <motion.ul initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="absolute inset-x-5 top-12 bottom-[172px] flex flex-wrap content-center items-center justify-center gap-2">
+              {v.summary.map(([label, kind], i) => (
+                <motion.li key={label} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 + i * 0.1, ...spring }} className="inline-flex items-center gap-2 rounded-full bg-surface py-1 pr-3 pl-1 text-[12px] font-medium text-ink-2 shadow-card">
+                  {kind === "photo" ? <PhotoThumb tone={i} className="h-6 w-8 rounded-full" /> : <FileChipMini kind={kind} />}
+                  {label}
+                </motion.li>
+              ))}
+            </motion.ul>
+          )}
+        </AnimatePresence>
         {flying.map((f, i) => (
           <motion.span
             key={i}
@@ -949,7 +971,7 @@ export function AgentVoiceFiles() {
             animate={
               fly
                 ? { left: "50%", top: "78%", scale: 0.35, rotate: 0, opacity: [1, 1, 0] }
-                : { left: `${f.x}%`, top: `${22 + f.y}%`, scale: dropped ? 1 : 0.6, rotate: f.r, opacity: dropped && !reading ? 1 : 0 }
+                : { left: `${f.x}%`, top: `${24 + f.y * 0.75}%`, scale: dropped ? 1 : 0.6, rotate: f.r, opacity: dropped && !reading ? 1 : 0 }
             }
             transition={fly ? { duration: 0.85, delay: i * 0.09, ease: [0.55, 0, 0.45, 1] } : { duration: dropped ? 0.5 : 0, delay: dropped ? i * 0.05 : 0, ease }}
           >
@@ -960,9 +982,9 @@ export function AgentVoiceFiles() {
           <div className="flex items-center gap-2">
             <Plate size="xs">XV-365-V</Plate>
             <span className="truncate text-[12.5px] font-semibold">Volkswagen Golf</span>
-            <span className="ml-auto font-mono text-[10.5px] text-muted">{v.gallery(reading ? 36 : arrived)}</span>
           </div>
-          <div className="mt-2.5 grid grid-cols-6 gap-1.5">
+          <p className="mt-2 font-mono text-[10.5px] text-muted tabular-nums">{v.gallery(reading ? 36 : arrived)}</p>
+          <div className="mt-1.5 grid grid-cols-6 gap-1.5">
             {Array.from({ length: 6 }, (_, i) => (
               <motion.span key={i} animate={{ opacity: arrived > i * 6 ? 1 : 0.25, scale: arrived > i * 6 ? 1 : 0.92 }} transition={{ duration: 0.3 }}>
                 {arrived > i * 6 ? <PhotoThumb tone={i} className="h-7 rounded-md" /> : <span className="block h-7 rounded-md bg-sunken ring-1 ring-line" />}
@@ -982,6 +1004,18 @@ export function AgentVoiceFiles() {
         </div>
       </div>
     </div>
+  );
+}
+
+function FileChipMini({ kind }: { kind: Flying["kind"] }) {
+  return kind === "pdf" ? (
+    <span className="grid size-6 place-items-center rounded-full bg-danger-50 text-danger">
+      <FileText className="size-3.5" />
+    </span>
+  ) : (
+    <span className="grid size-6 place-items-center rounded-full bg-obsidian-3 text-white">
+      <Play className="size-3 fill-white" />
+    </span>
   );
 }
 
