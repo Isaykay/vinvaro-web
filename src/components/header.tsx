@@ -269,7 +269,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
             </Link>
           ))}
       </div>
-      <div data-navbar className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 sm:px-8">
+      <div data-navbar className="mx-auto flex h-16 max-w-[1320px] items-center justify-between gap-8 px-5 sm:px-8">
         <Logo
           onNavigate={() => {
             setOpen(null);
@@ -278,7 +278,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
           }}
         />
 
-        <nav className="hidden items-center gap-0.5 lg:flex" aria-label={t.mainNav}>
+        <nav className="hidden items-center gap-1 xl:flex" aria-label={t.mainNav}>
           {nav.map((item) =>
             item.groups ? (
               <button
@@ -298,7 +298,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
                 }}
                 aria-expanded={open === item.label}
                 className={clsx(
-                  "flex h-9 items-center gap-1 rounded-full px-2.5 text-[14px] font-medium tracking-[-0.01em] whitespace-nowrap transition-colors xl:px-3.5",
+                  "flex h-9 items-center gap-1 rounded-full px-3.5 text-[14px] font-medium tracking-[-0.01em] whitespace-nowrap transition-colors",
                   open === item.label ? "text-ink" : "text-muted hover:text-ink",
                 )}
               >
@@ -314,7 +314,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
                   closeTimer.current = setTimeout(() => setOpen(null), 120);
                 }}
                 className={clsx(
-                  "flex h-9 items-center gap-1.5 rounded-full px-2.5 text-[14px] font-medium tracking-[-0.01em] whitespace-nowrap transition-colors xl:px-3.5",
+                  "flex h-9 items-center gap-1.5 rounded-full px-3.5 text-[14px] font-medium tracking-[-0.01em] whitespace-nowrap transition-colors",
                   internalPath.startsWith(item.href!) ? "text-ink" : "text-muted hover:text-ink",
                 )}
               >
@@ -325,7 +325,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
           )}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <LangSwitch />
           <Button href={appUrl} variant="ghost">
             {t.login}
@@ -336,7 +336,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
         </div>
 
         <button
-          className="flex size-9 items-center justify-center rounded-full text-ink lg:hidden"
+          className="flex size-9 items-center justify-center rounded-full text-ink xl:hidden"
           onClick={() => {
             setSection(mobile ? null : (nav.find((n) => n.groups)?.label ?? null));
             setMobile(!mobile);
@@ -355,9 +355,9 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="pointer-events-none absolute inset-x-0 top-[60px] hidden pt-1 lg:block"
+            className="pointer-events-none absolute inset-x-0 top-[60px] hidden pt-1 xl:block"
           >
-            <div className="mx-auto max-w-[1200px] px-8">
+            <div className="mx-auto max-w-[1320px] px-8">
               {/* Only the card itself is interactive, so hovering or clicking beside it counts as "outside". */}
               <div data-megamenu onMouseEnter={cancelClose} className="pointer-events-auto mx-auto flex w-full max-w-[1136px] gap-2 rounded-2xl bg-surface p-2 shadow-float">
                 <div className="flex flex-1 flex-col">
@@ -399,7 +399,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="absolute inset-x-0 top-full flex h-[calc(100dvh-100%)] touch-manipulation flex-col bg-canvas lg:hidden"
+            className="absolute inset-x-0 top-full flex h-[calc(100dvh-100%)] touch-manipulation flex-col bg-canvas xl:hidden"
             onClick={onMobileNavClick}
           >
             <nav className="flex-1 overflow-y-auto overscroll-contain px-5" aria-label={t.mainNav}>
