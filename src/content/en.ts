@@ -8,12 +8,13 @@ export const site = {
   tagline: "Every vehicle. Every detail. Under control.",
   description:
     "VINVARO brings vehicles, customers and operations together in one workspace. From registration and intake to test drive, contract, listing and delivery, for automotive businesses that want control without scattered systems.",
-  news: { label: "AI Photo studio, now in the app too", href: "/platform/fotostudio" },
+  news: { label: "The VINVARO Agent: ask in plain language", href: "/agent" },
 };
 
 export const nav: {
   label: string;
   href?: string;
+  badge?: string;
   groups?: { title: string; links: NavLink[] }[];
   featured?: NavFeatured;
 }[] = [
@@ -87,6 +88,7 @@ export const nav: {
         title: "Explore",
         links: [
           { label: "Platform overview", href: "/platform", description: "Every module at a glance" },
+          { label: "VINVARO Agent", href: "/agent", description: "Ask and get things done in plain language" },
           { label: "Integrations", href: "/integraties", description: "RDW, marketplaces, inbox and calendar" },
           { label: "Book a demo", href: "/demo", description: "30 minutes, on your stock and way of working" },
           { label: "Contact", href: "/contact", description: "Ask our team your question" },
@@ -94,6 +96,7 @@ export const nav: {
       },
     ],
   },
+  { label: "Agent", href: "/agent", badge: "New" },
   { label: "Integrations", href: "/integraties" },
   { label: "Pricing", href: "/prijzen" },
   { label: "Contact", href: "/contact" },
@@ -503,6 +506,7 @@ export const securityControls = [
 export const faq = [
   { q: "What is VINVARO?", a: "VINVARO is the operating system for automotive businesses: one workspace for vehicles, customers and operations. Inventory and vehicle dossier, intake and delivery workflows, a shared inbox, CRM, calendar, contracts, invoices and publishing to marketplaces and your own website." },
   { q: "Who is VINVARO for?", a: "Independent automotive businesses: independent dealers, specialists and businesses with multiple sites. Owners, sales, the workshop floor and administration work in the same environment." },
+  { q: "What is the VINVARO Agent?", a: "An AI assistant in VINVARO that carries out your questions and instructions in plain language, typed or dictated. It can do everything you may do: create cars from a registration, change prices and stages, publish, contracts and invoices, workflows and reports. It asks you first before risky actions, and every action is in the audit log." },
   { q: "Does VINVARO work with the RDW?", a: "Yes. For Dutch registrations, VINVARO pulls make, model, MOT, inspections with defects and the odometer verdict from RDW Open Data." },
   { q: "Which marketplaces can I publish to?", a: "Today, mobile.de and AutoScout24 (with AutoTrack), plus your own website via the VINVARO feed. Marktplaats, Gaspedaal, ViaBOVAG and AutoWereld are on the roadmap." },
   { q: "What are the Trade network and the Marketplace?", a: "Two free VINVARO networks. On the Trade network you trade directly with other dealers at trade prices; after the deal the car moves into the buyer's stock automatically. On the Marketplace, consumers search the stock of every participating dealer, at asking price and with your reputation." },

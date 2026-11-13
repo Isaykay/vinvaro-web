@@ -18,7 +18,7 @@ export const site = {
   tagline: "Elk voertuig. Elk detail. Onder controle.",
   description:
     "VINVARO brengt voertuigen, klanten en processen samen in één werkplek. Van kenteken en intake tot proefrit, contract, publicatie en aflevering, voor autobedrijven die overzicht willen zonder losse systemen.",
-  news: { label: "AI-Fotostudio, nu ook in de app", href: "/platform/fotostudio" },
+  news: { label: "De VINVARO Agent: vraag het in gewone taal", href: "/agent" },
 };
 
 export type NavLink = { label: string; href: string; description?: string; logo?: string };
@@ -31,6 +31,7 @@ export type NavFeatured =
 export const nav: {
   label: string;
   href?: string;
+  badge?: string;
   groups?: { title: string; links: NavLink[] }[];
   featured?: NavFeatured;
 }[] = [
@@ -104,6 +105,7 @@ export const nav: {
         title: "Ontdek",
         links: [
           { label: "Platformoverzicht", href: "/platform", description: "Alle modules op een rij" },
+          { label: "VINVARO Agent", href: "/agent", description: "Vraag en regel alles in gewone taal" },
           { label: "Integraties", href: "/integraties", description: "RDW, marktplaatsen, inbox en agenda" },
           { label: "Plan een demo", href: "/demo", description: "30 minuten, op jouw voorraad en werkwijze" },
           { label: "Contact", href: "/contact", description: "Stel je vraag aan ons team" },
@@ -111,6 +113,7 @@ export const nav: {
       },
     ],
   },
+  { label: "Agent", href: "/agent", badge: "Nieuw" },
   { label: "Integraties", href: "/integraties" },
   { label: "Prijzen", href: "/prijzen" },
   { label: "Contact", href: "/contact" },
@@ -549,6 +552,7 @@ export const securityControls = [
 export const faq = [
   { q: "Wat is VINVARO?", a: "VINVARO is het besturingssysteem voor autobedrijven: één werkplek voor voertuigen, klanten en processen. Voorraad en voertuigdossier, workflows voor intake en aflevering, een gedeelde inbox, CRM, agenda, contracten, facturen en publiceren naar marktplaatsen en je eigen website." },
   { q: "Voor wie is VINVARO bedoeld?", a: "Voor zelfstandige autobedrijven: merkonafhankelijke dealers, specialisten en bedrijven met meerdere vestigingen. Eigenaren, verkopers, de werkvloer en de administratie werken in dezelfde omgeving." },
+  { q: "Wat is de VINVARO Agent?", a: "Een AI-assistent in VINVARO die je vragen en opdrachten in gewone taal uitvoert, getypt of ingesproken. Hij kan alles wat jij mag: auto's aanmaken vanaf een kenteken, prijzen en fases wijzigen, publiceren, contracten en facturen, workflows en rapportages. Risicovolle acties vraagt hij eerst aan je, en elke actie staat in het auditlog." },
   { q: "Werkt VINVARO met de RDW?", a: "Ja. Voor Nederlandse kentekens haalt VINVARO merk, model, APK, keuringen met gebreken en het tellerstandoordeel op uit RDW Open Data." },
   { q: "Op welke marktplaatsen kan ik publiceren?", a: "Vandaag op mobile.de en AutoScout24 (met AutoTrack), plus je eigen website via de VINVARO-feed. Marktplaats, Gaspedaal, ViaBOVAG en AutoWereld staan op de roadmap." },
   { q: "Wat zijn het Handelsplein en de Marktplaats?", a: "Twee gratis VINVARO-netwerken. Op het Handelsplein handel je rechtstreeks met andere autobedrijven tegen handelsprijzen; de auto gaat na de deal vanzelf naar de voorraad van de koper. Op de Marktplaats zoeken consumenten in het aanbod van alle aangesloten autobedrijven, tegen vraagprijs en met je reputatie erbij." },

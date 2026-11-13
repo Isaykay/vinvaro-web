@@ -11,6 +11,7 @@ import { Reveal } from "@/components/reveal";
 import { IconTile } from "@/components/icons";
 import { CTASection, PageHero } from "@/components/sections";
 import { HeroWorkspace, VehicleJourney } from "@/components/product/hero";
+import { AgentMark } from "@/components/product/agent";
 
 const copy = defineCopy({
   nl: {
@@ -25,6 +26,12 @@ const copy = defineCopy({
     journeyEyebrow: "Hoe het samenkomt",
     journeyTitle: "Elke module schuift aan bij hetzelfde voertuig.",
     view: "Bekijk",
+    agent: {
+      eyebrow: "Nieuw · VINVARO Agent",
+      title: "Eén assistent voor alle modules.",
+      body: "Vraag of regel alles in gewone taal: auto's aanmaken, prijzen en fases wijzigen, publiceren, facturen versturen of een rapportage opvragen. Met jouw rechten, en akkoord bij risicovolle acties.",
+      cta: "Ontdek de agent",
+    },
   },
   en: {
     metaTitle: "Platform: one workspace for your automotive business",
@@ -38,6 +45,12 @@ const copy = defineCopy({
     journeyEyebrow: "How it comes together",
     journeyTitle: "Every module joins the same vehicle.",
     view: "View",
+    agent: {
+      eyebrow: "New · VINVARO Agent",
+      title: "One assistant across every module.",
+      body: "Ask or get anything done in plain language: create cars, change prices and stages, publish, send invoices or request a report. With your permissions, and approval before risky actions.",
+      cta: "Explore the agent",
+    },
   },
 });
 
@@ -79,6 +92,25 @@ export default async function PlatformIndex() {
             <div className="bg-stage rounded-[26px] p-3 sm:p-8">
               <HeroWorkspace />
             </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      <section className="pb-20 sm:pb-24">
+        <Container>
+          <Reveal>
+            <Link href="/agent" className="group bg-obsidian-glow relative flex flex-col gap-6 overflow-hidden rounded-[22px] p-7 text-white shadow-float sm:flex-row sm:items-center sm:p-9">
+              <span className="bg-grid-dark mask-fade-radial pointer-events-none absolute inset-0" />
+              <AgentMark size="lg" ring="ring-obsidian" />
+              <span className="relative min-w-0 flex-1">
+                <span className="block font-mono text-[11px] tracking-[0.12em] text-brand-300 uppercase">{t.agent.eyebrow}</span>
+                <span className="mt-2 block text-[22px] leading-tight font-semibold tracking-[-0.03em] sm:text-[26px]">{t.agent.title}</span>
+                <span className="mt-2 block max-w-[640px] text-[14.5px] leading-relaxed text-white/60">{t.agent.body}</span>
+              </span>
+              <span className="relative inline-flex shrink-0 items-center gap-1.5 text-[14px] font-semibold text-brand-300">
+                {t.agent.cta} <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
           </Reveal>
         </Container>
       </section>

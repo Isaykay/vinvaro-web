@@ -125,6 +125,10 @@ function FeaturedCard({ featured }: { featured: NavFeatured }) {
   );
 }
 
+function NavBadge({ children }: { children: React.ReactNode }) {
+  return <span className="rounded-full bg-gradient-to-r from-brand to-ask-400 px-1.5 py-px font-mono text-[9.5px] font-semibold tracking-[0.06em] text-white uppercase">{children}</span>;
+}
+
 function MenuLink({ link }: { link: NavLink }) {
   const external = link.href.startsWith("http");
   return (
@@ -294,7 +298,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
                 }}
                 aria-expanded={open === item.label}
                 className={clsx(
-                  "flex h-9 items-center gap-1 rounded-full px-3.5 text-[14px] font-medium tracking-[-0.01em] transition-colors",
+                  "flex h-9 items-center gap-1 rounded-full px-2.5 text-[14px] font-medium tracking-[-0.01em] whitespace-nowrap transition-colors xl:px-3.5",
                   open === item.label ? "text-ink" : "text-muted hover:text-ink",
                 )}
               >
@@ -310,11 +314,12 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
                   closeTimer.current = setTimeout(() => setOpen(null), 120);
                 }}
                 className={clsx(
-                  "flex h-9 items-center rounded-full px-3.5 text-[14px] font-medium tracking-[-0.01em] transition-colors",
+                  "flex h-9 items-center gap-1.5 rounded-full px-2.5 text-[14px] font-medium tracking-[-0.01em] whitespace-nowrap transition-colors xl:px-3.5",
                   internalPath.startsWith(item.href!) ? "text-ink" : "text-muted hover:text-ink",
                 )}
               >
                 {item.label}
+                {item.badge && <NavBadge>{item.badge}</NavBadge>}
               </Link>
             ),
           )}
@@ -440,8 +445,9 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
                     </AnimatePresence>
                   </div>
                 ) : (
-                  <Link key={item.label} href={item.href!} className="flex h-14 items-center border-b border-line text-[17px] font-medium tracking-[-0.01em] text-ink">
+                  <Link key={item.label} href={item.href!} className="flex h-14 items-center gap-2 border-b border-line text-[17px] font-medium tracking-[-0.01em] text-ink">
                     {item.label}
+                    {item.badge && <NavBadge>{item.badge}</NavBadge>}
                   </Link>
                 ),
               )}

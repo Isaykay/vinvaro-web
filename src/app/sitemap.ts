@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getContent } from "@/lib/content";
 import { locales, localize } from "@/lib/i18n";
 
-const SITE_UPDATED = "2026-11-05";
+const SITE_UPDATED = "2026-11-13";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const { site, platform, segments } = getContent("nl");
@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages: { path: string; priority: number }[] = [
     { path: "/", priority: 1 },
     { path: "/platform", priority: 0.9 },
+    { path: "/agent", priority: 0.9 },
     ...platform.map((p) => ({ path: `/platform/${p.slug}`, priority: 0.8 })),
     ...segments.map((s) => ({ path: `/voor-autobedrijven/${s.slug}`, priority: 0.7 })),
     { path: "/integraties", priority: 0.7 },

@@ -16,6 +16,7 @@ type PageMetadataInput = {
 
 const SECTIONS: Record<string, Record<Lang, string>> = {
   platform: { nl: "Platform", en: "Platform" },
+  agent: { nl: "VINVARO Agent", en: "VINVARO Agent" },
   "voor-autobedrijven": { nl: "Voor autobedrijven", en: "For dealers" },
   integraties: { nl: "Integraties", en: "Integrations" },
   prijzen: { nl: "Prijzen", en: "Pricing" },

@@ -19,6 +19,7 @@ import { IntegrationLogo } from "@/components/product/kit";
 import { IntelligenceScan, VehicleDossier, WorkflowRun } from "@/components/product/ops";
 import { InboxView, PublishFlow } from "@/components/product/sales";
 import { PhotoStudio } from "@/components/product/studio";
+import { AgentChat, AgentMark } from "@/components/product/agent";
 import { StoreBadges } from "@/components/store-badges";
 
 const copy = defineCopy({
@@ -31,6 +32,15 @@ const copy = defineCopy({
     bookDemo: "Plan een demo",
     seeHow: "Bekijk hoe het werkt",
     worksWith: "Werkt met",
+    agent: {
+      eyebrow: "Nieuw · VINVARO Agent",
+      title: "Zeg het in gewone taal.",
+      accent: "De agent regelt de rest.",
+      lead: "Vraag welke auto's te lang op voorraad staan, maak een auto aan vanaf een kenteken of laat verlopen facturen herinneren. De agent werkt in heel VINVARO, met jouw rechten, en vraagt akkoord voordat hij iets onomkeerbaars doet.",
+      points: ["Auto's, facturen, contracten, workflows en rapportages", "Een akkoordkaart bij risicovolle acties", "Inspreken en tot 60 bijlagen per bericht", "Elke actie in het auditlog"],
+      prompts: ["Welke auto's staan langer dan 60 dagen op voorraad?", "Zet alle auto's in fase Werkplaats op de marktplaats", "Welke facturen zijn verlopen? Stuur een herinnering"],
+      cta: "Ontdek de agent",
+    },
     contrast: {
       eyebrow: "Van losse systemen naar één werkplek",
       title: "Je hebt geen extra spreadsheet nodig.",
@@ -95,6 +105,15 @@ const copy = defineCopy({
     bookDemo: "Book a demo",
     seeHow: "See how it works",
     worksWith: "Works with",
+    agent: {
+      eyebrow: "New · VINVARO Agent",
+      title: "Say it in plain language.",
+      accent: "The agent does the rest.",
+      lead: "Ask which cars have been in stock too long, create a car from a registration or have overdue invoices reminded. The agent works across VINVARO, with your permissions, and asks for approval before it does anything irreversible.",
+      points: ["Cars, invoices, contracts, workflows and reports", "An approval card before risky actions", "Dictation and up to 60 attachments per message", "Every action in the audit log"],
+      prompts: ["Which cars have been in stock for more than 60 days?", "Put all cars in the workshop stage on the marketplace", "Which invoices are overdue? Send a reminder"],
+      cta: "Explore the agent",
+    },
     contrast: {
       eyebrow: "From scattered tools to one workspace",
       title: "You don't need another spreadsheet.",
@@ -225,6 +244,47 @@ export default async function Home() {
           <Reveal>
             <BrandMarquee />
           </Reveal>
+        </Container>
+      </section>
+
+      <section id="agent" className="bg-obsidian-glow relative mt-28 scroll-mt-20 overflow-hidden py-28 text-white sm:mt-36 sm:py-36">
+        <div className="bg-grid-dark mask-fade-b pointer-events-none absolute inset-0" />
+        <div className="pointer-events-none absolute top-1/2 right-[-10%] h-[520px] w-[720px] -translate-y-1/2 rounded-full bg-ask-400/[0.12] blur-3xl" />
+        <Container className="relative">
+          <div className="grid items-center gap-16 lg:grid-cols-[0.82fr_1.18fr]">
+            <Reveal>
+              <div className="mb-6 flex items-center gap-3">
+                <AgentMark size="md" ring="ring-obsidian" />
+                <Eyebrow tone="light">{t.agent.eyebrow}</Eyebrow>
+              </div>
+              <h2 className="text-h2 text-balance text-white">
+                {t.agent.title}
+                <br />
+                <span className="bg-gradient-to-r from-brand-300 via-brand-400 to-ask-400 bg-clip-text text-transparent">{t.agent.accent}</span>
+              </h2>
+              <p className="text-lead mt-5 max-w-[540px] text-white/65 text-pretty">{t.agent.lead}</p>
+              <ul className="mt-8 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                {t.agent.points.map((p) => (
+                  <CheckItem key={p} tone="dark" className="text-[14px] text-white/85">
+                    {p}
+                  </CheckItem>
+                ))}
+              </ul>
+              <ul className="mt-8 flex flex-col items-start gap-2">
+                {t.agent.prompts.map((p) => (
+                  <li key={p} className="rounded-full bg-white/[0.06] px-3.5 py-1.5 text-[13px] text-white/75 ring-1 ring-white/10">
+                    “{p}”
+                  </li>
+                ))}
+              </ul>
+              <Button href="/agent" variant="light" arrow className="mt-9">
+                {t.agent.cta}
+              </Button>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <AgentChat decor />
+            </Reveal>
+          </div>
         </Container>
       </section>
 

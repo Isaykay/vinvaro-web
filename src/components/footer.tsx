@@ -18,6 +18,7 @@ const copy = defineCopy({
     forDealers: "Voor autobedrijven",
     company: "VINVARO",
     allPlatform: "Platformoverzicht",
+    agent: "VINVARO Agent",
     integrations: "Integraties",
     pricing: "Prijzen",
     demo: "Plan een demo",
@@ -35,6 +36,7 @@ const copy = defineCopy({
     forDealers: "For dealers",
     company: "VINVARO",
     allPlatform: "Platform overview",
+    agent: "VINVARO Agent",
     integrations: "Integrations",
     pricing: "Pricing",
     demo: "Book a demo",
@@ -63,6 +65,7 @@ export async function Footer() {
       title: t.company,
       links: [
         { label: t.allPlatform, href: "/platform" },
+        { label: t.agent, href: "/agent" },
         { label: t.integrations, href: "/integraties" },
         { label: t.pricing, href: "/prijzen" },
         { label: "Contact", href: "/contact" },
