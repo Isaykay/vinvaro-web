@@ -108,7 +108,7 @@ export async function Footer() {
               <StoreBadges lang={lang} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:grid-cols-[repeat(4,max-content)] lg:justify-between lg:gap-x-10">
             {columns.map((col) => (
               <div key={col.title}>
                 <p className="mb-4 text-[12px] font-medium tracking-[0.06em] text-subtle uppercase">{col.title}</p>

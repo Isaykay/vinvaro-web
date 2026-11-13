@@ -359,7 +359,7 @@ export function Header({ nav, appUrl }: { nav: Content["nav"]; appUrl: string })
           >
             <div className="mx-auto max-w-[1320px] px-8">
               {/* Only the card itself is interactive, so hovering or clicking beside it counts as "outside". */}
-              <div data-megamenu onMouseEnter={cancelClose} className="pointer-events-auto mx-auto flex w-full max-w-[1136px] gap-2 rounded-2xl bg-surface p-2 shadow-float">
+              <div data-megamenu onMouseEnter={cancelClose} className="pointer-events-auto mx-auto flex w-full max-w-[1256px] gap-2 rounded-2xl bg-surface p-2 shadow-float">
                 <div className="flex flex-1 flex-col">
                   <div className={clsx("grid gap-2", openItem.groups.length > 1 ? "grid-cols-2" : "grid-cols-1")}>
                     {openItem.groups.map((group) => (

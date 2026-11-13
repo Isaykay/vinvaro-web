@@ -149,7 +149,8 @@ export function IntegrationLogo({
   className?: string;
   size?: number;
 }) {
-  const box = clsx("grid shrink-0 place-items-center overflow-hidden rounded-[10px] border border-line bg-white", className ?? "size-10");
+  const shape = clsx("grid shrink-0 place-items-center overflow-hidden rounded-[10px] border", className ?? "size-10");
+  const box = clsx(shape, "border-line bg-white");
   if (channel) {
     return (
       <span className={box}>
@@ -159,14 +160,14 @@ export function IntegrationLogo({
   }
   if (slug === "vinvaro") {
     return (
-      <span className={clsx(box, "bg-ink text-white")}>
+      <span className={clsx(shape, "border-ink bg-ink text-white")}>
         <Mark className="h-auto" width={size} />
       </span>
     );
   }
   if (!slug || slug === "site") {
     return (
-      <span className={clsx(box, "bg-brand-50 text-brand")}>
+      <span className={clsx(shape, "border-line bg-brand-50 text-brand")}>
         <Globe style={{ width: size * 0.85, height: size * 0.85 }} strokeWidth={1.8} />
       </span>
     );
