@@ -4,7 +4,8 @@ import { useSyncExternalStore } from "react";
 import { CalendarDays, Check, Clock, Video } from "lucide-react";
 import { useLang } from "@/components/lang-provider";
 import { defineCopy } from "@/lib/i18n";
-import { DEMO_SLOT_KEY, formatSlot } from "@/components/demo-qualifier";
+import { formatSlot } from "@/components/demo-qualifier";
+import { DEMO_SLOT_KEY } from "@/lib/analytics";
 import { Mark } from "@/components/ui";
 
 type Stored = { date: string; time: string; name?: string; email?: string };

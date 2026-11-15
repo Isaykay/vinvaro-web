@@ -1,9 +1,10 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { getContent } from "@/lib/content";
 import { defineCopy, numberLocale } from "@/lib/i18n";
+import { track } from "@/lib/analytics";
 import { useLang } from "@/components/lang-provider";
 import { Icon } from "@/components/app-icons";
 import { Mark } from "@/components/ui";
@@ -100,8 +101,34 @@ export function PricingCalculator() {
   const [values, setValues] = useState<Record<string, number>>(Object.fromEntries(Object.entries(ranges).map(([k, r]) => [k, r.initial])));
   const [marketplaces, setMarketplaces] = useState<string[]>(["mobilede", "autoscout24"]);
   const [feed, setFeed] = useState(true);
+  const interacted = useRef(false);
   const marketItem = pricing.items.find((i) => i.key === "marketplaces")!;
-  const toggleMarketplace = (slug: string) => setMarketplaces((m) => (m.includes(slug) ? m.filter((s) => s !== slug) : [...m, slug]));
+  const touchPricing = (label?: string, value?: string | number | boolean) => {
+    if (!interacted.current) {
+      interacted.current = true;
+      track("pricing_start");
+    }
+    if (label) track("pricing_change", { label, value: value == null ? undefined : String(value) });
+  };
+  const toggleMarketplace = (slug: string) => {
+    setMarketplaces((m) => {
+      const next = m.includes(slug) ? m.filter((s) => s !== slug) : [...m, slug];
+      touchPricing("marketplace", slug);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    if (!interacted.current) return;
+    const timer = window.setTimeout(() => {
+      track("pricing_estimate", {
+        stock_vehicles: values.stock_vehicles,
+        marketplaces: marketplaces.length,
+        website_feed: feed,
+      });
+    }, 800);
+    return () => window.clearTimeout(timer);
+  }, [values, marketplaces, feed]);
 
   const money = (cents: number) =>
     new Intl.NumberFormat(numberLocale[lang], { style: "currency", currency: "EUR", minimumFractionDigits: cents % 100 ? 2 : 0, maximumFractionDigits: 2 }).format(cents / 100);
@@ -129,7 +156,11 @@ export function PricingCalculator() {
             const item = pricing.items.find((i) => i.key === key)!;
             const value = values[key];
             const fill = (toPos(value, r) / SLIDER_STEPS) * 100;
-            const setValue = (n: number) => setValues((v) => ({ ...v, [key]: Math.max(0, Math.round(n) || 0) }));
+            const setValue = (n: number) => {
+              const next = Math.max(0, Math.round(n) || 0);
+              setValues((v) => ({ ...v, [key]: next }));
+              touchPricing();
+            };
             return (
               <Fragment key={key}>
                 <div>
@@ -211,7 +242,11 @@ export function PricingCalculator() {
           })}
           <button
             type="button"
-            onClick={() => setFeed(!feed)}
+            onClick={() => {
+              const next = !feed;
+              setFeed(next);
+              touchPricing("website_feed", next);
+            }}
             aria-pressed={feed}
             className="flex w-full items-center justify-between rounded-xl border border-line bg-canvas px-3.5 py-3 text-left"
           >

@@ -5,6 +5,7 @@ import { Check, ChevronRight } from "lucide-react";
 import { Honeypot, honeypotValue } from "@/components/honeypot";
 import { getContent } from "@/lib/content";
 import { defineCopy } from "@/lib/i18n";
+import { track, trackLead } from "@/lib/analytics";
 import { useLang } from "@/components/lang-provider";
 
 const copy = defineCopy({
@@ -58,9 +59,17 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, website: honeypotValue(e.currentTarget), lang, page: window.location.pathname, referrer: document.referrer }),
       });
-      setState(res.ok ? "done" : "error");
+      if (res.ok) {
+        setState("done");
+        track("contact_submit", { subject: form.subject });
+        trackLead("contact", { method: "contact_form", subject: form.subject });
+      } else {
+        setState("error");
+        track("contact_submit_error", { subject: form.subject });
+      }
     } catch {
       setState("error");
+      track("contact_submit_error", { subject: form.subject });
     }
   }
 

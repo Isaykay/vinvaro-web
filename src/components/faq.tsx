@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import clsx from "clsx";
+import { track } from "@/lib/analytics";
 
 /** Answers stay in the HTML when collapsed so crawlers and answer engines can read them. */
 export function FAQ({ items, defaultOpen = 0 }: { items: { q: string; a: string }[]; defaultOpen?: number | null }) {
@@ -14,7 +15,15 @@ export function FAQ({ items, defaultOpen = 0 }: { items: { q: string; a: string 
         return (
           <div key={item.q}>
             <h3>
-              <button className="flex w-full items-center justify-between gap-6 py-5 text-left" onClick={() => setOpen(expanded ? null : i)} aria-expanded={expanded}>
+              <button
+                className="flex w-full items-center justify-between gap-6 py-5 text-left"
+                onClick={() => {
+                  const next = expanded ? null : i;
+                  setOpen(next);
+                  if (next !== null) track("faq_open", { question: item.q.slice(0, 120), index: i + 1 });
+                }}
+                aria-expanded={expanded}
+              >
                 <span className="text-[16px] font-medium tracking-[-0.015em]">{item.q}</span>
                 <Plus className={clsx("size-4 shrink-0 text-muted transition-transform duration-300", expanded && "rotate-45")} />
               </button>

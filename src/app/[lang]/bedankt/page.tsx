@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { defineCopy } from "@/lib/i18n";
 import { getLang } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
+import { DemoLeadBeacon } from "@/components/analytics";
 import { Button, Container, Eyebrow } from "@/components/ui";
 import { IconTile } from "@/components/icons";
 import { ThanksSlot } from "@/components/thanks-slot";
@@ -46,6 +47,7 @@ export default async function ThanksPage() {
   const t = copy[await getLang()];
   return (
     <section className="relative overflow-hidden pt-28 pb-28 sm:pt-36">
+      <DemoLeadBeacon />
       <div className="bg-grid mask-fade-b pointer-events-none absolute inset-x-0 top-0 h-[600px] opacity-70" />
       <Container className="relative">
         <div className="grid items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">

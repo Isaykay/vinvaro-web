@@ -9,6 +9,7 @@ import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { ArrowLeft, CalendarDays, Check, ChevronLeft, ChevronRight, Clock, Lock, PenLine, Video, X } from "lucide-react";
 import clsx from "clsx";
 import { defineCopy, numberLocale, type Lang } from "@/lib/i18n";
+import { DEMO_SLOT_KEY, track } from "@/lib/analytics";
 import { useLang, useLocalize } from "@/components/lang-provider";
 import { IconTile } from "@/components/icons";
 
@@ -17,7 +18,7 @@ type ChoiceQuestion = { kind: "choice"; key: string; title: string; hint?: strin
 type NumberQuestion = { kind: "number"; key: string; title: string; hint?: string; placeholder: string; unit: string; max: number };
 type Question = ChoiceQuestion | NumberQuestion;
 
-export const DEMO_SLOT_KEY = "vv_demo_slot";
+export { DEMO_SLOT_KEY };
 const STORAGE_KEY = "vv_demo_progress_v1";
 const SLOT_MINUTES = 30;
 const DAY_START = 9 * 60;
@@ -398,6 +399,7 @@ export function DemoQualifier() {
     if (expanded) return;
     setPlaceholderHeight(cardRef.current?.offsetHeight);
     setExpanded(true);
+    track("demo_start", { step: step + 1, step_name: steps[step] });
   }
 
   useEffect(() => {
@@ -417,7 +419,12 @@ export function DemoQualifier() {
   const consumer = answers.business?.[0] === "consumer";
   const otherSelected = q?.kind === "choice" && selected.some((v) => q.options.find((o) => o.value === v)?.other);
 
-  const goNext = () => setStep((s) => s + 1);
+  const goNext = () =>
+    setStep((s) => {
+      const next = s + 1;
+      track("demo_step", { step: next + 1, step_name: steps[next] ?? "done", from_step: s + 1 });
+      return next;
+    });
 
   function valid(question: Question | undefined) {
     if (!question) return true;
@@ -437,11 +444,14 @@ export function DemoQualifier() {
     if (q.multi) {
       setAnswers((a) => {
         const cur = a[q.key] ?? [];
-        return { ...a, [q.key]: cur.includes(option.value) ? cur.filter((o) => o !== option.value) : [...cur, option.value] };
+        const next = cur.includes(option.value) ? cur.filter((o) => o !== option.value) : [...cur, option.value];
+        track("demo_answer", { question: q.key, answer: option.value, multi: true, selected_count: next.length });
+        return { ...a, [q.key]: next };
       });
       return;
     }
     setAnswers((a) => ({ ...a, [q.key]: [option.value] }));
+    track("demo_answer", { question: q.key, answer: option.value, multi: false });
     if (option.other || option.value === "consumer") return;
     setTimeout(goNext, 160);
   }
@@ -474,6 +484,14 @@ export function DemoQualifier() {
         body: JSON.stringify({ ...contact, website: honeypotValue(e.currentTarget), slot, answers: summary(), lang, page: window.location.pathname, referrer: document.referrer }),
       });
       if (!res.ok) throw new Error();
+      const summaryAnswers = summary();
+      track("demo_submit", {
+        business: String(summaryAnswers.business ?? ""),
+        team: String(summaryAnswers.team ?? ""),
+        stock: typeof summaryAnswers.stock === "number" ? summaryAnswers.stock : undefined,
+        slot_date: slot.date,
+        slot_time: slot.time,
+      });
       try {
         localStorage.removeItem(STORAGE_KEY);
         sessionStorage.setItem(DEMO_SLOT_KEY, JSON.stringify({ ...slot, name: contact.name.split(" ")[0], email: contact.email }));
@@ -481,6 +499,7 @@ export function DemoQualifier() {
       router.push(localize("/bedankt"));
     } catch {
       setState("error");
+      track("demo_submit_error");
     }
   }
 
@@ -656,6 +675,7 @@ export function DemoQualifier() {
                       onChange={(s) => {
                         expand();
                         setSlot(s);
+                        track("demo_slot_selected", { slot_date: s.date, slot_time: s.time });
                       }}
                     />
                     <div className="mt-6">

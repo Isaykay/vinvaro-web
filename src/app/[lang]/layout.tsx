@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Geist_Mono, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AnalyticsListener, AnalyticsTags } from "@/components/analytics";
 import { AnnouncementBanner } from "@/components/announcement-banner";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -52,6 +54,7 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   return (
     <html lang={htmlLang[lang]} className={`${inter.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans">
+        <AnalyticsTags />
         <JsonLd data={organizationLd(lang)} />
         <LangProvider lang={lang}>
           <AnnouncementBanner />
@@ -59,6 +62,9 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
           <main className="flex-1">{children}</main>
           <Footer />
         </LangProvider>
+        <Suspense fallback={null}>
+          <AnalyticsListener />
+        </Suspense>
         <Analytics />
         <SpeedInsights />
       </body>

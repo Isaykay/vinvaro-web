@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { useLang } from "@/components/lang-provider";
 import { switchLang, type Lang } from "@/lib/i18n";
+import { track } from "@/lib/analytics";
 
 export function FlagNL() {
   return (
@@ -53,6 +54,9 @@ export function LangSwitch({ className, dark }: { className?: string; dark?: boo
             lang={lang}
             aria-current={active ? "true" : undefined}
             aria-label={name}
+            onClick={() => {
+              if (!active) track("lang_switch", { from: current, to: lang });
+            }}
             className={clsx(
               "flex h-8 items-center gap-1.5 rounded-full pr-2.5 pl-1.5 text-[12.5px] font-semibold tracking-[-0.01em] transition-colors",
               active

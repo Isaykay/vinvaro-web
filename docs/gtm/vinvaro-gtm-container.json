@@ -1,0 +1,551 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-11-15 11:52:00",
+  "containerVersion": {
+    "path": "accounts/0/containers/0/versions/0",
+    "accountId": "0",
+    "containerId": "0",
+    "containerVersionId": "0",
+    "name": "VINVARO analytics — variables + conversion tags",
+    "container": {
+      "path": "accounts/0/containers/0",
+      "accountId": "0",
+      "containerId": "0",
+      "name": "VINVARO",
+      "publicId": "GTM-NWSKQ88T",
+      "usageContext": ["WEB"],
+      "fingerprint": "1763205120000",
+      "tagIds": ["GTM-NWSKQ88T"]
+    },
+    "builtInVariable": [
+      { "accountId": "0", "containerId": "0", "type": "PAGE_URL", "name": "Page URL" },
+      { "accountId": "0", "containerId": "0", "type": "PAGE_HOSTNAME", "name": "Page Hostname" },
+      { "accountId": "0", "containerId": "0", "type": "PAGE_PATH", "name": "Page Path" },
+      { "accountId": "0", "containerId": "0", "type": "EVENT", "name": "Event" }
+    ],
+    "variable": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "1",
+        "name": "Const - GA Measurement ID",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "G-ETETEE4QB8" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "2",
+        "name": "Const - Meta Pixel ID",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1",
+        "notes": "Paste Meta Pixel ID when ready. Leave empty until then."
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "3",
+        "name": "Const - Google Ads ID",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1",
+        "notes": "Format AW-123456789"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "4",
+        "name": "Const - Google Ads Demo Label",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "5",
+        "name": "Const - Google Ads Signup Label",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "6",
+        "name": "Const - Google Ads Trial Label",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "7",
+        "name": "Const - Google Ads Subscribe Label",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "8",
+        "name": "Const - LinkedIn Partner ID",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "9",
+        "name": "Const - LinkedIn Demo Conversion ID",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "10",
+        "name": "Const - LinkedIn Signup Conversion ID",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "11",
+        "name": "Const - LinkedIn Trial Conversion ID",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "12",
+        "name": "Const - LinkedIn Subscribe Conversion ID",
+        "type": "c",
+        "parameter": [{ "type": "TEMPLATE", "key": "value", "value": "" }],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "13",
+        "name": "DLV - lead_type",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+          { "type": "TEMPLATE", "key": "name", "value": "lead_type" }
+        ],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "variableId": "14",
+        "name": "DLV - method",
+        "type": "v",
+        "parameter": [
+          { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+          { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" },
+          { "type": "TEMPLATE", "key": "name", "value": "method" }
+        ],
+        "fingerprint": "1"
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "1",
+        "name": "CE - schedule_demo",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "schedule_demo" }
+            ]
+          }
+        ],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "2",
+        "name": "CE - generate_lead",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "generate_lead" }
+            ]
+          }
+        ],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "3",
+        "name": "CE - sign_up",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "sign_up" }
+            ]
+          }
+        ],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "4",
+        "name": "CE - start_trial",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "start_trial" }
+            ]
+          }
+        ],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "5",
+        "name": "CE - add_payment_info",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "add_payment_info" }
+            ]
+          }
+        ],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "6",
+        "name": "CE - subscribe",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "subscribe" }
+            ]
+          }
+        ],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "7",
+        "name": "CE - onboarding_complete",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "onboarding_complete" }
+            ]
+          }
+        ],
+        "fingerprint": "1"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "8",
+        "name": "All Pages",
+        "type": "PAGEVIEW",
+        "fingerprint": "1"
+      }
+    ],
+    "tag": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "1",
+        "name": "Meta - Base Pixel (if ID set)",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var id = {{Const - Meta Pixel ID}};\n  if (!id) return;\n  if (window.fbq) { fbq('track','PageView'); return; }\n  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;\n  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;\n  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',\n  'https://connect.facebook.net/en_US/fbevents.js');\n  fbq('init', id);\n  fbq('track', 'PageView');\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["8"],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "notes": "Skipped while Const - Meta Pixel ID is empty. Do not also set NEXT_PUBLIC_META_PIXEL_ID on Vercel."
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "2",
+        "name": "Meta - Lead (demo / contact)",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var id = {{Const - Meta Pixel ID}};\n  if (!id || !window.fbq) return;\n  fbq('track', 'Lead', { content_name: {{Event}}, content_category: {{DLV - lead_type}} || 'lead' });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["1", "2"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "3",
+        "name": "Meta - CompleteRegistration (sign_up)",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  if (!{{Const - Meta Pixel ID}} || !window.fbq) return;\n  fbq('track', 'CompleteRegistration');\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["3"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "4",
+        "name": "Meta - StartTrial",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  if (!{{Const - Meta Pixel ID}} || !window.fbq) return;\n  fbq('track', 'StartTrial', { value: 0, currency: 'EUR' });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["4"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "5",
+        "name": "Meta - Subscribe",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  if (!{{Const - Meta Pixel ID}} || !window.fbq) return;\n  fbq('track', 'Subscribe', { value: 0, currency: 'EUR' });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["5", "6"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "6",
+        "name": "LinkedIn - Insight Tag (if Partner ID set)",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var id = {{Const - LinkedIn Partner ID}};\n  if (!id) return;\n  window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];\n  if (window._linkedin_data_partner_ids.indexOf(id) === -1) window._linkedin_data_partner_ids.push(id);\n  if (!window.lintrk) {\n    window.lintrk = function(a,b){window.lintrk.q.push([a,b]);}; window.lintrk.q=[];\n    var s = document.getElementsByTagName('script')[0];\n    var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;\n    b.src = 'https://snap.licdn.com/li.lms-analytics/insight.min.js';\n    s.parentNode.insertBefore(b, s);\n  }\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["8"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "7",
+        "name": "LinkedIn - Demo conversion",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var id = {{Const - LinkedIn Demo Conversion ID}};\n  if (!id || !window.lintrk) return;\n  window.lintrk('track', { conversion_id: id });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["1"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "8",
+        "name": "LinkedIn - Signup conversion",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var id = {{Const - LinkedIn Signup Conversion ID}};\n  if (!id || !window.lintrk) return;\n  window.lintrk('track', { conversion_id: id });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["3"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "9",
+        "name": "LinkedIn - Trial conversion",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var id = {{Const - LinkedIn Trial Conversion ID}};\n  if (!id || !window.lintrk) return;\n  window.lintrk('track', { conversion_id: id });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["4"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "10",
+        "name": "LinkedIn - Subscribe conversion",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var id = {{Const - LinkedIn Subscribe Conversion ID}};\n  if (!id || !window.lintrk) return;\n  window.lintrk('track', { conversion_id: id });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["5", "6"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "11",
+        "name": "Google Ads - Demo conversion",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var aw = {{Const - Google Ads ID}}, label = {{Const - Google Ads Demo Label}};\n  if (!aw || !label || !window.gtag) return;\n  gtag('event', 'conversion', { send_to: aw + '/' + label });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["1"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "12",
+        "name": "Google Ads - Signup conversion",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var aw = {{Const - Google Ads ID}}, label = {{Const - Google Ads Signup Label}};\n  if (!aw || !label || !window.gtag) return;\n  gtag('event', 'conversion', { send_to: aw + '/' + label });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["3"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "13",
+        "name": "Google Ads - Trial conversion",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var aw = {{Const - Google Ads ID}}, label = {{Const - Google Ads Trial Label}};\n  if (!aw || !label || !window.gtag) return;\n  gtag('event', 'conversion', { send_to: aw + '/' + label });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["4"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      },
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "14",
+        "name": "Google Ads - Subscribe conversion",
+        "type": "html",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "supportDocumentWrite", "value": "false" },
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  var aw = {{Const - Google Ads ID}}, label = {{Const - Google Ads Subscribe Label}};\n  if (!aw || !label || !window.gtag) return;\n  gtag('event', 'conversion', { send_to: aw + '/' + label });\n})();\n</script>"
+          }
+        ],
+        "fingerprint": "1",
+        "firingTriggerId": ["5", "6"],
+        "tagFiringOption": "ONCE_PER_EVENT"
+      }
+    ],
+    "fingerprint": "1763205120000",
+    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/0/containers/0/versions/0?apiLink=versions"
+  }
+}

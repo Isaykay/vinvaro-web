@@ -4,7 +4,7 @@ import { defineCopy } from "@/lib/i18n";
 import { getLang } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
 
-const UPDATED = { nl: "Laatst bijgewerkt: 31 oktober 2026", en: "Last updated: 31 October 2026" };
+const UPDATED = { nl: "Laatst bijgewerkt: 15 november 2026", en: "Last updated: 15 November 2026" };
 
 const copy = defineCopy({
   nl: {
@@ -96,7 +96,7 @@ const copy = defineCopy({
       {
         title: "Cookies en lokale opslag",
         body: [
-          "De website gebruikt geen tracking- of advertentiecookies. Bezoekstatistieken van Vercel zijn anoniem en werken zonder cookies. Het demoformulier bewaart je antwoorden tijdelijk in je eigen browser, zodat je later verder kunt.",
+          "Op de marketingwebsite gebruiken we Google Tag Manager (GTM-NWSKQ88T) en Google Analytics 4 (G-ETETEE4QB8) voor bezoekersstatistieken en conversiemeting. Via Tag Manager of gekoppelde pixels (zoals Meta of LinkedIn, als die actief zijn) kunnen cookies of vergelijkbare technieken worden geplaatst. Bezoekstatistieken van Vercel blijven anoniem en werken zonder cookies. Het demoformulier bewaart je antwoorden tijdelijk in je eigen browser, zodat je later verder kunt.",
           "De VINVARO-app gebruikt alleen noodzakelijke cookies: om je ingelogd te houden en je taal- en weergavekeuze te onthouden.",
         ],
       },
@@ -202,7 +202,7 @@ const copy = defineCopy({
       {
         title: "Cookies and local storage",
         body: [
-          "The website uses no tracking or advertising cookies. Vercel's visit statistics are anonymous and work without cookies. The demo form keeps your answers temporarily in your own browser, so you can continue later.",
+          "On the marketing website we use Google Tag Manager (GTM-NWSKQ88T) and Google Analytics 4 (G-ETETEE4QB8) for visitor statistics and conversion measurement. Through Tag Manager or connected pixels (such as Meta or LinkedIn, when enabled), cookies or similar technologies may be set. Vercel's visit statistics remain anonymous and work without cookies. The demo form keeps your answers temporarily in your own browser, so you can continue later.",
           "The VINVARO app only uses necessary cookies: to keep you signed in and remember your language and display choice.",
         ],
       },
