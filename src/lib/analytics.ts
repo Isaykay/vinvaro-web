@@ -3,13 +3,15 @@
 /** sessionStorage key set after a successful demo booking; thank-you page uses it for lead firing. */
 export const DEMO_SLOT_KEY = "vv_demo_slot";
 
-export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-NWSKQ88T";
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-ETETEE4QB8";
-export const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
-export const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "";
-export const GOOGLE_ADS_DEMO_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_DEMO_LABEL || "";
-export const LINKEDIN_PARTNER_ID = process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID || "";
-export const LINKEDIN_DEMO_CONVERSION_ID = process.env.NEXT_PUBLIC_LINKEDIN_DEMO_CONVERSION_ID || "";
+const env = (key: string, fallback = "") => (process.env[key] ?? fallback).trim();
+
+export const GTM_ID = env("NEXT_PUBLIC_GTM_ID", "GTM-NWSKQ88T");
+export const GA_MEASUREMENT_ID = env("NEXT_PUBLIC_GA_MEASUREMENT_ID", "G-ETETEE4QB8");
+export const META_PIXEL_ID = env("NEXT_PUBLIC_META_PIXEL_ID");
+export const GOOGLE_ADS_ID = env("NEXT_PUBLIC_GOOGLE_ADS_ID");
+export const GOOGLE_ADS_DEMO_LABEL = env("NEXT_PUBLIC_GOOGLE_ADS_DEMO_LABEL");
+export const LINKEDIN_PARTNER_ID = env("NEXT_PUBLIC_LINKEDIN_PARTNER_ID");
+export const LINKEDIN_DEMO_CONVERSION_ID = env("NEXT_PUBLIC_LINKEDIN_DEMO_CONVERSION_ID");
 
 export type AnalyticsValue = string | number | boolean | null | undefined;
 export type AnalyticsParams = Record<string, AnalyticsValue>;
