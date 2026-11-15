@@ -11,7 +11,7 @@ GA4 stream: **G-ETETEE4QB8**
 4. Workspace: **Existing** (or a new one named “VINVARO analytics”).
 5. Import option: **Merge** → **Rename conflicting tags, triggers and variables**.
 6. Review → **Confirm**.
-7. Fill the empty **Constant** variables (Meta / LinkedIn / Google Ads) when you have IDs.
+7. Replace `REPLACE_ME` on the **Constant** variables (Meta / LinkedIn / Google Ads) when you have IDs. GTM does not allow empty constants.
 8. **Submit** → **Publish**.
 
 ## Variables (fill later)
@@ -31,7 +31,7 @@ GA4 stream: **G-ETETEE4QB8**
 | `Const - LinkedIn Trial Conversion ID` | LinkedIn conversion ID (trial) |
 | `Const - LinkedIn Subscribe Conversion ID` | LinkedIn conversion ID (subscribe) |
 
-Leave a value blank until you have it. Custom HTML tags only load / fire when the ID is non-empty.
+Leave unset IDs as `REPLACE_ME`. Custom HTML tags skip firing while the value is still `REPLACE_ME`.
 
 ## dataLayer events (from the sites)
 
