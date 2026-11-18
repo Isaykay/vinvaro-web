@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { ArrowRight, Check } from "lucide-react";
 import { getContent } from "@/lib/content";
 import { defineCopy, numberLocale, type Lang } from "@/lib/i18n";
+import { EXAMPLE_STOCK, staffSavings } from "@/lib/savings";
 import { getLang } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
 import { JsonLd, absoluteUrl, breadcrumbLd, faqLd } from "@/components/json-ld";
@@ -17,7 +18,7 @@ import { PricingCalculator } from "@/components/pricing-calculator";
 const copy = defineCopy({
   nl: {
     metaTitle: "Prijzen: € 199 per maand, alle modules inbegrepen",
-    metaDescription: "Het VINVARO Dealer-plan: € 199 per maand plus € 4 per voertuig in voorraad, excl. btw. Alle modules, onbeperkt gebruikers en partners, 30 dagen gratis proberen.",
+    metaDescription: "Het VINVARO Dealer-plan: € 199 per maand plus € 5 per voertuig in voorraad, excl. btw. Alle modules, onbeperkt gebruikers en partners, 30 dagen gratis proberen.",
     eyebrow: "Prijzen",
     title: "Eén plan. Alle modules. Je betaalt voor wat er in voorraad staat.",
     lead: "Geen kosten per gebruiker en geen modules om bij te kopen. Een vast bedrag voor je bedrijf, plus een klein bedrag per auto in voorraad.",
@@ -27,6 +28,8 @@ const copy = defineCopy({
     exVat: "excl. btw",
     plus: "plus",
     perVehicle: "per voertuig in voorraad",
+    fteTitle: "Bespaard op personeel",
+    fteBody: (stock: number, v: string) => `± ${v} loonkosten per maand bij ${stock} auto’s in voorraad. Indicatie op basis van ± 3 uur per verkochte auto.`,
     unlimitedUsers: "Onbeperkt gebruikers",
     trial: "30 dagen gratis",
     includedTitle: "Inbegrepen",
@@ -61,7 +64,7 @@ const copy = defineCopy({
   },
   en: {
     metaTitle: "Pricing: €199 per month, every module included",
-    metaDescription: "The VINVARO Dealer plan: €199 per month plus €4 per vehicle in stock, excl. VAT. Every module, unlimited users and partners, 30-day free trial.",
+    metaDescription: "The VINVARO Dealer plan: €199 per month plus €5 per vehicle in stock, excl. VAT. Every module, unlimited users and partners, 30-day free trial.",
     eyebrow: "Pricing",
     title: "One plan. Every module. You pay for what's in stock.",
     lead: "No per-user fees and no modules to buy on top. A fixed amount for your business, plus a small amount per car in stock.",
@@ -71,6 +74,8 @@ const copy = defineCopy({
     exVat: "excl. VAT",
     plus: "plus",
     perVehicle: "per vehicle in stock",
+    fteTitle: "Saved on staff",
+    fteBody: (stock: number, v: string) => `± ${v} in payroll per month with ${stock} vehicles in stock. Estimate based on ± 3 hours per car sold.`,
     unlimitedUsers: "Unlimited users",
     trial: "30 days free",
     includedTitle: "Included",
@@ -121,6 +126,7 @@ export default async function PricingPage() {
   const m = (cents: number) => money(lang, cents);
   const num = (n: number) => new Intl.NumberFormat(numberLocale[lang]).format(n);
   const stock = pricing.items.find((i) => i.key === "stock_vehicles")!;
+  const savings = staffSavings(EXAMPLE_STOCK);
   const itemNote = (key: string) => {
     const i = pricing.items.find((x) => x.key === key)!;
     if (i.unitPriceCents === 0) return `${i.name}: ${t.unlimited.toLowerCase()}`;
@@ -176,6 +182,15 @@ export default async function PricingPage() {
                     <span className="text-[13px] text-white/55">{t.plus}</span>
                     <span className="text-[24px] font-semibold tracking-[-0.03em]">{m(stock.unitPriceCents)}</span>
                     <span className="text-[13px] leading-snug text-white/70">{t.perVehicle}</span>
+                  </div>
+                  <div className="mt-3 rounded-2xl bg-[#7ee2a8]/10 px-4 py-3.5 ring-1 ring-[#7ee2a8]/25">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="text-[13px] text-white/70">{t.fteTitle}</span>
+                      <span className="text-[24px] font-semibold tracking-[-0.03em] text-[#7ee2a8] tabular-nums">
+                        ≈ {new Intl.NumberFormat(numberLocale[lang], { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(savings.fte)} fte
+                      </span>
+                    </div>
+                    <p className="mt-1 text-[12.5px] leading-snug text-white/55">{t.fteBody(EXAMPLE_STOCK, m(Math.round(savings.cents / 10000) * 10000))}</p>
                   </div>
                   <div className="mt-6 flex flex-wrap gap-2.5">
                     <Button href={site.signupUrl} size="lg" arrow>

@@ -6,6 +6,7 @@ import { Check } from "lucide-react";
 import { getContent } from "@/lib/content";
 import { defineCopy, numberLocale } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
+import { staffSavings } from "@/lib/savings";
 import { useLang } from "@/components/lang-provider";
 import { Icon } from "@/components/app-icons";
 import { Mark } from "@/components/ui";
@@ -87,16 +88,6 @@ const ranges: Record<string, { max: number; step: number; initial: number }> = {
   stock_vehicles: { max: 5000, step: 1, initial: 45 },
 };
 
-/**
- * Time saved, as in the VINVARO value model: about half the stock sells per month, each sale saves
- * ± 190 minutes (intake, photos and publishing, contract, invoice, RDW, workflows) plus ± 39 hours of
- * fixed admin per month. 140 productive hours and € 4,000 employer cost per FTE.
- */
-const SAVED_MIN_PER_SALE = 190;
-const SAVED_FIXED_HOURS = 39;
-const FTE_HOURS = 140;
-const FTE_COST_CENTS = 400000;
-
 /** Sliders run on a quadratic curve so small dealers keep precision while large ones can reach the top. */
 const CURVE = 2;
 const SLIDER_STEPS = 1000;
@@ -145,8 +136,7 @@ export function PricingCalculator() {
   const subtotal = pricing.basePriceCents + lines.reduce((n, l) => n + l.amount, 0);
   const vat = Math.round((subtotal * pricing.vatRate) / 100);
   const vehicles = values.stock_vehicles || 0;
-  const fteSaved = vehicles > 0 ? ((vehicles / 2) * (SAVED_MIN_PER_SALE / 60) + SAVED_FIXED_HOURS) / FTE_HOURS : 0;
-  const savedCents = Math.round(fteSaved * FTE_COST_CENTS);
+  const { fte: fteSaved, cents: savedCents } = staffSavings(vehicles);
 
   return (
     <div className="grid gap-4 rounded-[22px] border border-line bg-surface p-4 shadow-float sm:p-6 lg:grid-cols-[1fr_0.95fr] lg:gap-8">
