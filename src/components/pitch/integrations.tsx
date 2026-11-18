@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { Globe } from "lucide-react";
 import { Mark } from "@/components/brand-mark";
 import { useLang } from "@/components/lang-provider";
+import { PortalCatalog } from "@/components/portal-catalog";
 import { IntegrationLogo } from "@/components/product/kit";
 import { getContent } from "@/lib/content";
 import { motion } from "./animation";
@@ -11,7 +12,7 @@ import { useT } from "./lang";
 import { Slide } from "./slide";
 import { Card, Check, Chip, Heading, Label, Lead, Logo, ease, logo, useOnScreen } from "./ui";
 
-type Column = { name: string; icon: ReactNode; status: "live" | "beta"; key: "mobilede" | "as24" | "autotrack" | "site" | "market" };
+type Column = { name: string; icon: ReactNode; status: "live" | "beta"; key: "marktplaats" | "autotrack" | "as24" | "site" | "market" };
 
 export function IntegrationsSlide() {
   const t = useT();
@@ -19,9 +20,9 @@ export function IntegrationsSlide() {
   const [ref, on] = useOnScreen<HTMLDivElement>();
 
   const columns: Column[] = [
-    { name: "mobile.de", icon: <Logo src={logo("mobilede")} size={30} />, status: "live", key: "mobilede" },
-    { name: "AutoScout24", icon: <Logo src={logo("autoscout24")} size={30} />, status: "beta", key: "as24" },
-    { name: "AutoTrack", icon: <Logo src={logo("autotrack")} size={30} />, status: "beta", key: "autotrack" },
+    { name: "Marktplaats", icon: <Logo src={logo("marktplaats")} size={30} />, status: "live", key: "marktplaats" },
+    { name: "AutoTrack", icon: <Logo src={logo("autotrack")} size={30} />, status: "live", key: "autotrack" },
+    { name: "AutoScout24", icon: <Logo src={logo("autoscout24")} size={30} />, status: "live", key: "as24" },
     {
       name: t("Je website", "Your website"),
       icon: (
@@ -56,6 +57,9 @@ export function IntegrationsSlide() {
     { name: t("Gratis, zonder kosten per lead", "Free, no cost per lead"), on: ["market"] },
   ];
 
+  const shown = ["marktplaats", "autotrack", "autoscout24", "vinvaro"];
+  const portals = integrations.filter((i) => i.category === integrations[0].category && i.slug && !shown.includes(i.slug));
+  const more = integrations.find((i) => i.category === integrations[0].category && !i.slug && !i.channel);
   const connected = integrations.filter((i) => i.status === "live" && i.category !== integrations[0].category && i.slug !== "site");
   const planned = integrations.filter((i) => i.status === "planned");
 
@@ -69,8 +73,8 @@ export function IntegrationsSlide() {
           </Heading>
           <Lead on={on} className="max-w-sm lg:mt-0 lg:pb-1.5 lg:text-right">
             {t(
-              "Online op mobile.de, AutoScout24 en je eigen website, met RDW, KVK, VIES, je mailbox en je agenda eronder.",
-              "Online on mobile.de, AutoScout24 and your own website, with RDW, KVK, VIES, your mailbox and calendar underneath.",
+              "Online op 185+ portals en je eigen website. Daaronder RDW-acties, JP.cars, je boekhouding, je mailbox en je agenda.",
+              "Online on 185+ portals and your own website. Underneath: RDW transactions, JP.cars, your bookkeeping, mailbox and calendar.",
             )}
           </Lead>
         </div>
@@ -116,7 +120,21 @@ export function IntegrationsSlide() {
           </Card>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={on ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.5, ease }} className="mt-4 flex flex-wrap items-center gap-2.5">
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={on ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.45, ease }} className="mt-4 flex flex-wrap items-center gap-2.5">
+          <Label className="mr-1">{t("Ook publiceren op", "Also publish to")}</Label>
+          {portals.map((i) => (
+            <span key={i.name} className="flex items-center gap-2 rounded-full bg-white py-1 pr-3 pl-1 shadow-card">
+              <IntegrationLogo slug={i.slug} className="size-6 rounded-full border-0" size={14} />
+              <span className="text-[12.5px] font-medium text-ink-2">{i.name}</span>
+            </span>
+          ))}
+          {more && (
+            <PortalCatalog className="flex items-center rounded-full bg-brand-50 px-3 py-1.5 text-[12.5px] font-medium text-brand ring-1 ring-brand/25 hover:ring-brand">
+              {more.name}
+            </PortalCatalog>
+          )}
+        </motion.div>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={on ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.5, ease }} className="mt-3 flex flex-wrap items-center gap-2.5">
           <Label className="mr-1">{t("Ook gekoppeld", "Also connected")}</Label>
           {connected.map((i) => (
             <span key={i.name} className="flex items-center gap-2 rounded-full bg-white py-1 pr-3 pl-1 shadow-card">

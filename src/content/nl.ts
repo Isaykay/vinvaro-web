@@ -586,6 +586,8 @@ export type PriceItem = {
   unitPriceCents: number;
   /** Included per month; null means unlimited. */
   included: number | null;
+  /** Extra included per vehicle in stock (fair use that grows with the dealer). */
+  perVehicle?: number;
 };
 
 export const pricing = {
@@ -602,7 +604,8 @@ export const pricing = {
     { key: "marketplaces", name: "Marktplaatsen", unit: "koppeling", description: "Gekoppelde marktplaatsen", kind: "recurring", module: "publiceren", unitPriceCents: 0, included: null },
     { key: "website_feed", name: "Websitefeed", unit: "feed", description: "Actieve voorraadfeeds", kind: "recurring", module: "publiceren", unitPriceCents: 0, included: null },
     { key: "ai_actions", name: "AI-acties", unit: "actie", description: "Labels, leadscores en conceptantwoorden", kind: "usage", module: "intelligence", unitPriceCents: 0, included: null },
-    { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de Fotostudio", kind: "usage", module: "fotostudio", unitPriceCents: 0, included: null },
+    { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de Fotostudio", kind: "usage", module: "fotostudio", unitPriceCents: 5, included: 100, perVehicle: 30 },
+    { key: "agent_messages", name: "AI-agent", unit: "bericht", description: "Berichten aan de VINVARO Agent", kind: "usage", module: "intelligence", unitPriceCents: 15, included: 100, perVehicle: 20 },
     { key: "sign_requests", name: "Digitale ondertekeningen", unit: "verzoek", description: "Contracten verstuurd om te tekenen", kind: "usage", module: "contracten-en-facturen", unitPriceCents: 0, included: null },
     { key: "kvk_lookups", name: "KVK-opvragingen", unit: "opvraging", description: "Bedrijfsgegevens uit het Handelsregister", kind: "usage", module: "crm-en-verkoop", unitPriceCents: 0, included: null },
     { key: "rdw_transactions", name: "RDW-acties", unit: "actie", description: "Vrijwaren, tenaamstellen, B2B-overdracht en kilometerstand", kind: "usage", module: "voorraad", unitPriceCents: 0, included: null },
@@ -617,8 +620,8 @@ export const pricing = {
     "VINVARO Marktplaats",
     "Handelsplein",
     "Inbox: mail en WhatsApp",
-    "AI-agent",
-    "Fotostudio",
+    "AI-agent: 100 + 20 berichten per auto",
+    "Fotostudio: 100 + 30 foto's per auto",
     "Digitaal ondertekenen",
     "Facturen naar boekhouding",
     "Bankkoppeling",
@@ -642,6 +645,7 @@ export const pricing = {
   ],
   faq: [
     { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 5 per voertuig dat in voorraad staat. Verder niets: RDW-acties, publiceren, websitefeed, AI, Fotostudio, digitaal ondertekenen en KVK zijn inbegrepen. Alle prijzen zijn exclusief btw." },
+    { q: "Is AI echt onbeperkt?", a: "Bij normaal gebruik wel. De AI-agent en de Fotostudio hebben een ruime maandgrens die meegroeit met je voorraad: 100 + 20 agentberichten en 100 + 30 foto-bewerkingen per auto in voorraad. Daarboven kost een agentbericht € 0,15 en een foto-bewerking € 0,05. Inbox-AI, scans, contracten, ondertekenen, KVK en RDW-acties zijn zonder grens." },
     { q: "Wat kosten RDW-acties?", a: "Niets extra. Vrijwaren, tijdelijk documentnummer, B2B-overdracht en kilometerstand melden vanuit VINVARO zitten in de prijs per auto. Je RDW-provider (A2SP of RDC) en de wettelijke RDW-leges, zoals € 3,85 bij vrijwaren, betaal je rechtstreeks." },
     { q: "Hoe wordt een voertuig in voorraad geteld?", a: "Elke open voorraadpositie telt. Verkoop of lever je een auto af en sluit je de voorraadperiode, dan telt hij niet meer mee in de volgende periode." },
     { q: "Betaal ik per gebruiker?", a: "Nee. Gebruikers en externe partners zijn onbeperkt en gratis. Je hele team, inclusief werkplaats en poetsers, werkt in VINVARO zonder extra kosten." },

@@ -216,7 +216,7 @@ export function CompetitionSlide() {
   const [ref, on] = useOnScreen<HTMLDivElement>();
   const columns: { name: string; example: string; head?: ReactNode }[] = [
     { name: t("Excel & WhatsApp", "Excel & WhatsApp"), example: t("de status quo", "the status quo") },
-    { name: t("Voorraadtools", "Stock tools"), example: t("bijv. Autotelex", "e.g. Autotelex") },
+    { name: t("Voorraadtools", "Stock tools"), example: t("bijv. VWE, Autotelex, Mobilox", "e.g. VWE, Autotelex, Mobilox") },
     { name: t("Werkplaatssoftware", "Workshop software"), example: t("bijv. Carsys", "e.g. Carsys") },
     { name: t("Merkdealer-DMS", "Franchise DMS"), example: t("bijv. Keyloop, incadea", "e.g. Keyloop, incadea") },
     {
@@ -231,10 +231,13 @@ export function CompetitionSlide() {
   ];
   const rows: [string, Level[]][] = [
     [t("Voorraad & RDW-gegevens", "Stock & RDW data"), ["partial", "yes", "partial", "yes", "yes"]],
-    [t("Publiceren naar marktplaatsen", "Publishing to marketplaces"), ["no", "yes", "no", "partial", "yes"]],
+    [t("Publiceren naar 185+ portals", "Publishing to 185+ portals"), ["no", "yes", "no", "partial", "yes"]],
+    [t("Vrijwaren & tenaamstellen (RDW)", "Indemnify & registration (RDW)"), ["no", "yes", "partial", "yes", "yes"]],
+    [t("Taxatie & marktprijzen", "Valuation & market prices"), ["no", "yes", "no", "partial", "yes"]],
     [t("Gedeelde inbox (WhatsApp, mail)", "Shared inbox (WhatsApp, email)"), ["partial", "no", "no", "partial", "yes"]],
     [t("Workflows intake & aflevering", "Intake & delivery workflows"), ["no", "no", "partial", "yes", "yes"]],
     [t("Contracten & digitaal tekenen", "Contracts & e-signing"), ["no", "partial", "partial", "yes", "yes"]],
+    [t("Facturen naar de boekhouding", "Invoices to bookkeeping"), ["no", "partial", "yes", "yes", "yes"]],
     [t("Team-app, ook offline", "Staff app, offline too"), ["no", "partial", "no", "partial", "yes"]],
     [t("AI: labels, documenten, foto's", "AI: labels, documents, photos"), ["no", "no", "no", "partial", "yes"]],
     [t("Eigen B2B-netwerk tussen dealers", "Own B2B network between dealers"), ["no", "no", "no", "no", "yes"]],

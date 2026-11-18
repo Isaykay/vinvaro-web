@@ -229,14 +229,28 @@ export function ComparisonSlide() {
 
   const modules = [
     t("Voorraad & RDW", "Stock & RDW"),
-    t("Publiceren", "Publishing"),
+    t("Publiceren naar 185+ portals", "Publishing to 185+ portals"),
+    t("Vrijwaren & tenaamstellen", "Indemnify & registration"),
+    t("Taxatie & marktprijzen", "Valuation & market prices"),
     t("CRM & pijplijn", "CRM & pipeline"),
     t("Gedeelde inbox", "Shared inbox"),
     t("Workflows & intake", "Workflows & intake"),
     t("Contracten & tekenen", "Contracts & signing"),
+    t("Facturen naar je boekhouding", "Invoices to your bookkeeping"),
     t("Team-app, ook offline", "Staff app, offline too"),
   ];
-  const other: { support: Support; note?: string }[] = [{ support: "yes" }, { support: "yes" }, { support: "partial", note: t("beperkt", "limited") }, { support: "no" }, { support: "no" }, { support: "no" }, { support: "no" }];
+  const other: { support: Support; note?: string }[] = [
+    { support: "yes" },
+    { support: "yes" },
+    { support: "yes" },
+    { support: "partial", note: t("losse module", "separate module") },
+    { support: "partial", note: t("beperkt", "limited") },
+    { support: "no" },
+    { support: "no" },
+    { support: "no" },
+    { support: "partial", note: t("export", "export") },
+    { support: "no" },
+  ];
 
   return (
     <Slide id="vergelijking" variant="subtle">

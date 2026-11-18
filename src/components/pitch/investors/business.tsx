@@ -24,7 +24,7 @@ export function RevenueSlide() {
     new Intl.NumberFormat(lang === "nl" ? "nl-NL" : "en-GB", { style: "currency", currency: "EUR", minimumFractionDigits: cents % 100 ? 2 : 0 }).format(cents / 100);
 
   const recurring = pricing.items.filter((i) => i.kind === "recurring" && i.unitPriceCents > 0);
-  const usage = pricing.items.filter((i) => i.kind === "usage");
+  const free = pricing.items.filter((i) => i.unitPriceCents === 0).map((i) => i.name);
 
   return (
     <Slide id="verdienmodel" variant="white">
@@ -62,17 +62,14 @@ export function RevenueSlide() {
                   </span>
                 </div>
               ))}
-              <p className="mt-4 mb-1 font-mono text-[10px] tracking-[0.08em] text-subtle uppercase">{t("Gebruik boven de bundel", "Usage above the bundle")}</p>
-              {usage.map((i) => (
-                <div key={i.key} className="flex items-center justify-between border-b border-line py-2 text-[13.5px] last:border-0">
-                  <span className="text-ink-2">
-                    {i.name} <span className="text-[11.5px] text-subtle">· {i.included} {t("inbegrepen", "included")}</span>
-                  </span>
-                  <span className="font-mono text-[13px] text-ink">
-                    {money(i.unitPriceCents)} <span className="text-[11px] text-subtle">/ {i.unit}</span>
-                  </span>
-                </div>
-              ))}
+              <p className="mt-4 mb-1 font-mono text-[10px] tracking-[0.08em] text-subtle uppercase">{t("Inbegrepen, geen losse posten", "Included, no add-ons")}</p>
+              <p className="py-2 text-[13.5px] leading-relaxed text-ink-2">{free.join(" · ")}</p>
+              <p className="mt-2 text-[12px] leading-relaxed text-muted">
+                {t(
+                  "Bewust één knop: de prijs per auto. De dealer bespaart ± 1 fte per 5 medewerkers (± 3 uur per verkochte auto), zo'n 7× wat VINVARO kost.",
+                  "Deliberately one dial: the price per car. The dealer saves ± 1 FTE per 5 staff (± 3 hours per car sold), about 7× what VINVARO costs.",
+                )}
+              </p>
             </Card>
           </motion.div>
 
@@ -93,8 +90,7 @@ export function RevenueSlide() {
                       <motion.div initial={{ width: 0 }} animate={on ? { width: `${(s.cents / max) * 100}%` } : {}} transition={{ duration: 0.9, delay: 0.4 + i * 0.12, ease }} className="h-full rounded-full bg-brand" />
                     </div>
                     <p className="mt-1.5 font-mono text-[11px] text-subtle">
-                      {s.vehicles} {t("auto's", "cars")} · {s.marketplaces} {t("marktplaats", "marketplace")}
-                      {s.marketplaces === 1 ? "" : t("en", "s")} · {t("websitefeed", "website feed")} · {euro(lang, s.cents)}
+                      {s.vehicles} {t("auto's in voorraad", "cars in stock")} · {t("alles inbegrepen", "everything included")} · {euro(lang, s.cents)}
                       {t("/mnd", "/mo")}
                     </p>
                   </div>
@@ -110,7 +106,7 @@ export function RevenueSlide() {
               <Card className="p-5">
                 <Label>{t("Groei binnen de klant", "Growth within the customer")}</Label>
                 <ul className="mt-2 space-y-1.5 text-[13px] text-ink-2">
-                  {[t("Meer voorraad = meer omzet", "More stock = more revenue"), t("Extra marktplaatsen en feeds", "Extra marketplaces and feeds"), t("AI-gebruik boven de bundel", "AI usage above the bundle")].map((x) => (
+                  {[t("Meer voorraad = meer omzet", "More stock = more revenue"), t("Extra vestigingen", "Extra branches"), t("Partnerinkomsten: portals, RDW, financiering", "Partner revenue: portals, RDW, financing")].map((x) => (
                     <li key={x} className="flex items-center gap-2">
                       <Tick size={16} />
                       {x}
@@ -149,7 +145,7 @@ export function PotentialSlide() {
     {
       icon: <Logo src={logo("autoboeker")} size={36} className="rounded-xl" />,
       title: t("Boekhouding", "Accounting"),
-      today: t("Live via Autoboeker: facturen en kosten naar Exact, Twinfield, SnelStart en e-Boekhouden.", "Live via Autoboeker: invoices and costs to Exact, Twinfield, SnelStart and e-Boekhouden."),
+      today: t("Live via Autoboeker: uitgegeven facturen gaan vanzelf naar Exact, Twinfield, SnelStart of e-Boekhouden, en de bank matcht betalingen.", "Live via Autoboeker: issued invoices flow to Exact, Twinfield, SnelStart or e-Boekhouden automatically, and the bank matches payments."),
       next: t("Bundel met Autoboeker: één pakket voor dealer en boekhouder.", "Bundle with Autoboeker: one package for dealer and accountant."),
     },
     {
@@ -161,8 +157,20 @@ export function PotentialSlide() {
     {
       icon: <Database className="h-[18px] w-[18px]" />,
       title: t("Data & taxatie", "Data & valuation"),
-      today: t("Elke intake, prijswijziging en verkoop staat gestructureerd in één dossier.", "Every intake, price change and sale is structured in one dossier."),
-      next: t("Inkoopadvies, taxatie en doorlooptijd-benchmarks per model.", "Purchase advice, valuation and lead-time benchmarks per model."),
+      today: t("Live: JP.cars-marktwaarde op de auto en een inruilwidget op de dealersite, van bod tot inkoop.", "Live: JP.cars market value on the car and a trade-in widget on the dealer site, from bid to purchase."),
+      next: t("Eigen inkoopadvies en doorlooptijd-benchmarks per model uit alle dossiers.", "Own purchase advice and lead-time benchmarks per model from every dossier."),
+    },
+    {
+      icon: <Logo src={logo("rdw")} size={36} className="rounded-xl" />,
+      title: t("RDW-diensten", "RDW services"),
+      today: t("Live via A2SP en RDC: vrijwaren, tenaamstellen, B2B-overdracht en kilometerstand vanuit de auto.", "Live via A2SP and RDC: indemnify, registration, B2B transfer and odometer straight from the car."),
+      next: t("Volume-afspraken met providers en marge per transactie.", "Volume deals with providers and a margin per transaction."),
+    },
+    {
+      icon: <Store className="h-[18px] w-[18px]" />,
+      title: t("Publiceren", "Publishing"),
+      today: t("Staat klaar voor 185+ portals, white-label: één knop per auto, prijs en status overal gelijk.", "Ready for 185+ portals, white-label: one switch per car, price and status the same everywhere."),
+      next: t("Revenue share op portalabonnementen en advertentie-upgrades.", "Revenue share on portal subscriptions and listing upgrades."),
     },
   ];
 
@@ -290,7 +298,7 @@ export function GrowthSlide() {
                   {t("/mnd", "/mo")}
                 </span>
               </p>
-              <p className="mt-1 text-[11.5px] text-subtle">{t("Uit de prijslijst en de segmentmix, zonder gebruik boven de bundel.", "From the price list and segment mix, without usage above the bundle.")}</p>
+              <p className="mt-1 text-[11.5px] text-subtle">{t("Uit de prijslijst (€ 199 + € 5 per auto) en de segmentmix.", "From the price list (€199 + €5 per car) and the segment mix.")}</p>
             </div>
           </Card>
 

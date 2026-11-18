@@ -537,6 +537,7 @@ const itemEn: Record<string, [string, string, string]> = {
   photo_edits: ["Photo edits", "edit", "AI edits in the Photo studio"],
   sign_requests: ["E-sign requests", "request", "Contracts sent for signing"],
   kvk_lookups: ["KVK lookups", "lookup", "Company details from the trade register"],
+  agent_messages: ["AI agent", "message", "Messages to the VINVARO Agent"],
   rdw_transactions: ["RDW transactions", "transaction", "Indemnify, registration codes, B2B transfer and odometer"],
 };
 
@@ -554,8 +555,8 @@ export const pricing: typeof nlPricing = {
     "VINVARO Marketplace",
     "Trade network",
     "Inbox: email and WhatsApp",
-    "AI agent",
-    "Photo studio",
+    "AI agent: 100 + 20 messages per car",
+    "Photo studio: 100 + 30 photos per car",
     "E-signing",
     "Invoices to bookkeeping",
     "Bank connection",
@@ -579,6 +580,7 @@ export const pricing: typeof nlPricing = {
   ],
   faq: [
     { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €5 per vehicle in stock. Nothing else: RDW transactions, publishing, website feed, AI, Photo studio, e-signing and KVK are included. All prices exclude VAT." },
+    { q: "Is AI really unlimited?", a: "With normal use, yes. The AI agent and Photo studio have a generous monthly allowance that grows with your stock: 100 + 20 agent messages and 100 + 30 photo edits per vehicle in stock. Above that an agent message costs €0.15 and a photo edit €0.05. Inbox AI, scans, contracts, e-signing, KVK and RDW transactions have no limit." },
     { q: "What do RDW transactions cost?", a: "Nothing extra. Indemnifying, temporary document numbers, B2B transfers and odometer reports from VINVARO are part of the price per vehicle. Your RDW provider (A2SP or RDC) and the statutory RDW fees, such as €3.85 for indemnifying, are paid directly." },
     { q: "How is a vehicle in stock counted?", a: "Every open stock entry counts. Sell or deliver a car and close its stock period, and it no longer counts in the next period." },
     { q: "Do I pay per user?", a: "No. Users and external partners are unlimited and free. Your whole team, including the workshop and detailers, works in VINVARO at no extra cost." },

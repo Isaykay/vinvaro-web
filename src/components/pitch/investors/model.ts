@@ -2,7 +2,7 @@ import { getContent } from "@/lib/content";
 import type { Lang } from "@/lib/i18n";
 import { segments } from "./data";
 
-/** Monthly subscription revenue for one dealer from the live price list, without usage above the bundles. */
+/** Monthly subscription revenue for one dealer from the live price list (base plus price per vehicle in stock). */
 export function monthlyRevenueCents(lang: Lang, vehicles: number, marketplaces: number, feed = true) {
   const { pricing } = getContent(lang);
   const unit = (key: string) => pricing.items.find((i) => i.key === key)?.unitPriceCents ?? 0;

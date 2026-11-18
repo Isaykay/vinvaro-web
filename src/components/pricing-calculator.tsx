@@ -127,7 +127,7 @@ export function PricingCalculator() {
 
   const quantity = (key: string) => values[key] ?? 0;
   const lines = pricing.items
-    .filter((i) => i.unitPriceCents > 0)
+    .filter((i) => i.unitPriceCents > 0 && i.kind === "recurring")
     .map((i) => {
       const qty = quantity(i.key);
       const billable = i.included === null ? 0 : Math.max(qty - i.included, 0);

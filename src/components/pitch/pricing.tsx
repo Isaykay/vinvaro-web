@@ -4,12 +4,13 @@ import { useState } from "react";
 import { useLang } from "@/components/lang-provider";
 import { getContent } from "@/lib/content";
 import { numberLocale } from "@/lib/i18n";
+import { staffSavings } from "@/lib/savings";
 import { motion } from "./animation";
 import { useT } from "./lang";
 import { Slide } from "./slide";
 import { Card, Check, Heading, Label, Lead, Tick, ease, useOnScreen } from "./ui";
 
-type Scenario = { label: string; vehicles: number; marketplaces: number; feed: boolean };
+type Scenario = { label: string; vehicles: number };
 
 export function PricingSlide() {
   const t = useT();
@@ -18,7 +19,7 @@ export function PricingSlide() {
   const [ref, on] = useOnScreen<HTMLDivElement>();
   const [tab, setTab] = useState<"pricing" | "example">("pricing");
   const [presetIdx, setPresetIdx] = useState(1);
-  const [custom, setCustom] = useState({ vehicles: 80, marketplaces: 2 });
+  const [custom, setCustom] = useState({ vehicles: 80 });
 
   const unit = (key: string) => pricing.items.find((i) => i.key === key)!.unitPriceCents;
   const money = (cents: number, decimals = cents % 100 !== 0) =>
@@ -29,29 +30,35 @@ export function PricingSlide() {
     t("Alle modules, geen losse add-ons", "Every module, no separate add-ons"),
     t("Onbeperkt gebruikers", "Unlimited users"),
     t("Onbeperkt partners", "Unlimited partners"),
+    t("Publiceren naar je website en 185+ portals", "Publishing to your website and 185+ portals"),
+    t("RDW-acties: vrijwaren, tenaamstellen, B2B, km-stand", "RDW: indemnify, registration, B2B, odometer"),
+    t("AI, Fotostudio, ondertekenen en KVK", "AI, Photo studio, e-signing and KVK"),
     t("Hulp bij de overstap en import", "Help with switching and import"),
-    t("500 AI-acties en 100 foto-bewerkingen per maand", "500 AI actions and 100 photo edits per month"),
   ];
 
   const presets: Scenario[] = [
-    { label: t("Klein autobedrijf", "Small dealership"), vehicles: 25, marketplaces: 1, feed: true },
-    { label: t("Middelgroot autobedrijf", "Mid-size dealership"), vehicles: 60, marketplaces: 2, feed: true },
-    { label: t("Meerdere vestigingen", "Multiple branches"), vehicles: 150, marketplaces: 3, feed: true },
+    { label: t("Klein autobedrijf", "Small dealership"), vehicles: 25 },
+    { label: t("Middelgroot autobedrijf", "Mid-size dealership"), vehicles: 60 },
+    { label: t("Meerdere vestigingen", "Multiple branches"), vehicles: 150 },
   ];
   const isCustom = presetIdx === -1;
-  const scenario: Scenario = isCustom ? { label: t("Aangepast", "Custom"), ...custom, feed: true } : presets[presetIdx];
-  const describe = (s: Scenario) => t(`${num(s.vehicles)} auto's · ${s.marketplaces} marktplaats${s.marketplaces === 1 ? "" : "en"}`, `${num(s.vehicles)} cars · ${s.marketplaces} marketplace${s.marketplaces === 1 ? "" : "s"}`);
+  const scenario: Scenario = isCustom ? { label: t("Aangepast", "Custom"), ...custom } : presets[presetIdx];
+  const describe = (s: Scenario) => t(`${num(s.vehicles)} auto's in voorraad`, `${num(s.vehicles)} cars in stock`);
+  const savings = staffSavings(scenario.vehicles);
+  const fte = (n: number) => n.toLocaleString(numberLocale[lang], { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
   const lines = [
     { name: t("Dealer-plan", "Dealer plan"), formula: t("Alle modules voor het hele bedrijf", "Every module for the whole business"), cents: pricing.basePriceCents, brand: true },
     { name: t("Voertuigen in voorraad", "Vehicles in stock"), formula: `${num(scenario.vehicles)} × ${money(unit("stock_vehicles"))}`, cents: scenario.vehicles * unit("stock_vehicles") },
     {
       name: t("Publiceren", "Publishing"),
-      formula: t(
-        `${scenario.marketplaces} × ${money(unit("marketplaces"))} marktplaats + 1 × ${money(unit("website_feed"))} websitefeed`,
-        `${scenario.marketplaces} × ${money(unit("marketplaces"))} marketplace + 1 × ${money(unit("website_feed"))} website feed`,
-      ),
-      cents: scenario.marketplaces * unit("marketplaces") + (scenario.feed ? unit("website_feed") : 0),
+      formula: t("Je website, VINVARO Marktplaats en Handelsplein, en 185+ portals zoals Marktplaats, AutoTrack en AutoScout24", "Your website, VINVARO Marketplace and Trade network, and 185+ portals such as Marktplaats, AutoTrack and AutoScout24"),
+      cents: 0,
+    },
+    {
+      name: t("RDW, AI en ondertekenen", "RDW, AI and e-signing"),
+      formula: t("Vrijwaren, tenaamstellen, B2B en km-stand · AI-agent en Fotostudio · digitaal ondertekenen · KVK en VIES", "Indemnify, registration, B2B and odometer · AI agent and Photo studio · e-signing · KVK and VIES"),
+      cents: 0,
     },
     {
       name: t("Gebruikers, partners en netwerken", "Users, partners and networks"),
@@ -139,16 +146,16 @@ export function PricingSlide() {
               <div className="grid gap-5 sm:grid-cols-2">
                 {[
                   {
-                    title: t("Marktplaatsen", "Marketplaces"),
-                    sub: t("Per koppeling, zoals mobile.de of AutoScout24. De VINVARO-netwerken zijn gratis.", "Per connection, such as mobile.de or AutoScout24. The VINVARO networks are free."),
-                    price: money(unit("marketplaces")),
-                    unit: t("per koppeling / mnd", "per connection / mo"),
+                    title: t("Publiceren", "Publishing"),
+                    sub: t("Je website, de VINVARO-netwerken en 185+ portals zoals Marktplaats, AutoTrack, AutoScout24 en mobile.de.", "Your website, the VINVARO networks and 185+ portals such as Marktplaats, AutoTrack, AutoScout24 and mobile.de."),
+                    price: t("Inbegrepen", "Included"),
+                    unit: t("geen kosten per kanaal", "no fee per channel"),
                   },
                   {
-                    title: t("Websitefeed", "Website feed"),
-                    sub: t("Je voorraad op je eigen website, met aanvraagformulieren die een deal worden in VINVARO.", "Your stock on your own website, with inquiry forms that become a deal in VINVARO."),
-                    price: money(unit("website_feed")),
-                    unit: t("per feed / mnd", "per feed / mo"),
+                    title: t("Bespaard op personeel", "Saved on staff"),
+                    sub: t("Bij 45 auto's in voorraad, op basis van ± 3 uur per verkochte auto en minder dubbel werk.", "With 45 cars in stock, based on ± 3 hours per car sold and less double work."),
+                    price: `≈ ${fte(staffSavings(45).fte)} fte`,
+                    unit: t(`± ${money(Math.round(staffSavings(45).cents / 10000) * 10000, false)} / mnd`, `± ${money(Math.round(staffSavings(45).cents / 10000) * 10000, false)} / mo`),
                   },
                 ].map((a) => (
                   <Card key={a.title} className="flex items-start justify-between gap-4 p-5">
@@ -157,7 +164,7 @@ export function PricingSlide() {
                       <p className="mt-1.5 text-[13px] leading-[1.5] text-muted">{a.sub}</p>
                     </div>
                     <div className="shrink-0 text-right">
-                      <p className="font-mono text-[17px] leading-none font-semibold text-brand">{a.price}</p>
+                      <p className="font-mono text-[17px] leading-none font-semibold text-ok">{a.price}</p>
                       <p className="mt-1.5 font-mono text-[10.5px] whitespace-nowrap text-subtle">{a.unit}</p>
                     </div>
                   </Card>
@@ -183,7 +190,6 @@ export function PricingSlide() {
                 <span className="text-[14px] font-semibold text-ink">{t("Aangepast", "Custom")}</span>
                 {[
                   { l: t("Auto's", "Cars"), v: custom.vehicles, set: (v: number) => setCustom((c) => ({ ...c, vehicles: v })), w: "w-20" },
-                  { l: t("Marktplaatsen", "Marketplaces"), v: custom.marketplaces, set: (v: number) => setCustom((c) => ({ ...c, marketplaces: Math.min(v, 9) })), w: "w-24" },
                 ].map((f) => (
                   <label key={f.l} className="flex flex-col font-mono text-[10px] tracking-[0.06em] text-subtle uppercase">
                     {f.l}
@@ -236,10 +242,21 @@ export function PricingSlide() {
                 {describe(scenario)}
               </p>
             </div>
+            {scenario.vehicles > 0 && (
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-[18px] bg-ink px-5 py-4 text-white">
+                <p className="text-[15px] text-white/85">
+                  {t("Bespaard op personeel", "Saved on staff")} <span className="font-mono text-[18px] font-semibold text-[#7ee2a8]">≈ {fte(savings.fte)} fte</span>
+                </p>
+                <p className="font-mono text-[11px] text-white/80">
+                  ± {money(Math.round(savings.cents / 10000) * 10000, false)} {t("loonkosten per maand", "payroll per month")}
+                  {savings.cents > total && ` · ${Math.round(savings.cents / total)}× ${t("terugverdiend", "return")}`}
+                </p>
+              </div>
+            )}
             <p className="mt-4 text-center text-[12px] text-subtle">
               {t(
-                "* Bedragen exclusief btw, op basis van de VINVARO-prijslijst. AI-acties, foto-bewerkingen, ondertekeningen en KVK-opvragingen hebben een ruime maandbundel.",
-                "* Amounts excluding VAT, based on the VINVARO price list. AI actions, photo edits, e-signatures and KVK lookups come with a generous monthly bundle.",
+                "* Bedragen exclusief btw, op basis van de VINVARO-prijslijst. Alles is inbegrepen; AI-agent en Fotostudio bij normaal gebruik (100 + 20 berichten en 100 + 30 foto’s per auto). Je RDW-provider, RDW-leges en eventuele portalabonnementen betaal je zelf. Besparing is een indicatie (± 3 uur per verkochte auto, € 4.000 per fte).",
+                "* Amounts excluding VAT, based on the VINVARO price list. Everything is included; AI agent and Photo studio with normal use (100 + 20 messages and 100 + 30 photos per car). Your RDW provider, statutory RDW fees and any portal subscriptions are paid by you. Savings are an estimate (± 3 hours per car sold, €4,000 per FTE).",
               )}
             </p>
           </motion.div>

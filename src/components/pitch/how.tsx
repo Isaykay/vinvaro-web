@@ -92,9 +92,9 @@ function ArtChannels({ t, on }: { t: T; on: boolean }) {
     {
       label: t("Online", "Online"),
       items: [
-        ["mobile.de", <Img key="m" src={logo("mobilede")} />],
-        ["AutoScout24", <Img key="a" src={logo("autoscout24")} />],
+        ["Marktplaats", <Img key="m" src={logo("marktplaats")} />],
         ["AutoTrack", <Img key="at" src={logo("autotrack")} />],
+        ["AutoScout24", <Img key="a" src={logo("autoscout24")} />],
         [
           t("Website", "Website"),
           <Glyph
@@ -243,8 +243,8 @@ export function HowSlide() {
     {
       title: t("Koppel je kanalen", "Connect your channels"),
       desc: t(
-        "WhatsApp, je mailbox en agenda koppel je zelf in een paar minuten. Daarna mobile.de, AutoScout24 en je eigen website.",
-        "Connect WhatsApp, your mailbox and calendar yourself in a few minutes. Then mobile.de, AutoScout24 and your own website.",
+        "WhatsApp, je mailbox en agenda koppel je zelf in een paar minuten. Daarna je RDW-provider, JP.cars, je boekhouding, je eigen website en 185+ portals.",
+        "Connect WhatsApp, your mailbox and calendar yourself in a few minutes. Then your RDW provider, JP.cars, your bookkeeping, your own website and 185+ portals.",
       ),
       art: <ArtChannels t={t} on={on} />,
     },

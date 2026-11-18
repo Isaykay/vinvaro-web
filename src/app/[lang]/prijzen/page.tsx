@@ -130,6 +130,10 @@ export default async function PricingPage() {
   const itemNote = (key: string) => {
     const i = pricing.items.find((x) => x.key === key)!;
     if (i.unitPriceCents === 0) return `${i.name}: ${t.unlimited.toLowerCase()}`;
+    if (i.included && i.perVehicle)
+      return lang === "nl"
+        ? `${i.name}: ${num(i.included)} + ${num(i.perVehicle)} per auto inbegrepen, daarna ${m(i.unitPriceCents)}`
+        : `${i.name}: ${num(i.included)} + ${num(i.perVehicle)} per car included, then ${m(i.unitPriceCents)}`;
     if (i.included) return `${num(i.included)} ${i.name.toLowerCase()} ${lang === "nl" ? "inbegrepen, daarna" : "included, then"} ${m(i.unitPriceCents)}`;
     return `${m(i.unitPriceCents)} ${t.perUnit(i.unit)}`;
   };
