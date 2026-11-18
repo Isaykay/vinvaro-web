@@ -40,7 +40,7 @@ const copy = defineCopy({
     trial: "Eerste 30 dagen gratis",
     inPlan: "Inbegrepen",
     publishTitle: "Publiceren",
-    publishHint: "Naar je eigen website, de VINVARO-netwerken en meer dan 185 portals. Klik op de laatste om alle sites te zien.",
+    publishHint: "Je eigen website, de VINVARO-netwerken en meer dan 185 portals.",
     includedAll: "Alles inbegrepen",
     freeTitle: "Gratis inbegrepen",
     soon: "binnenkort",
@@ -72,7 +72,7 @@ const copy = defineCopy({
     trial: "First 30 days free",
     inPlan: "Included",
     publishTitle: "Publishing",
-    publishHint: "To your own website, the VINVARO networks and more than 185 portals. Click the last one to see all sites.",
+    publishHint: "Your own website, the VINVARO networks and more than 185 portals.",
     includedAll: "Everything included",
     freeTitle: "Included for free",
     soon: "soon",
@@ -95,7 +95,6 @@ export function PricingCalculator() {
   const { pricing, integrations, integrationCategories } = getContent(lang);
   const channels = integrations.filter((i) => i.category === integrationCategories[0] && i.slug);
   const marketplaceOptions = channels.filter((i) => i.slug !== "vinvaro");
-  const networks = channels.filter((i) => i.slug === "vinvaro");
   const morePortals = integrations.find((i) => i.category === integrationCategories[0] && !i.slug);
   const [values, setValues] = useState<Record<string, number>>(Object.fromEntries(Object.entries(ranges).map(([k, r]) => [k, r.initial])));
   const interacted = useRef(false);
@@ -185,38 +184,41 @@ export function PricingCalculator() {
                   </span>
                 </div>
                 {key === "stock_vehicles" && (
-                  <div>
-                    <span className="flex items-baseline justify-between gap-3">
-                      <span className="text-[14px] font-medium">{t.publishTitle}</span>
-                      <span className="text-[12px] font-medium text-ok">{t.inPlan}</span>
-                    </span>
-                    <span className="mt-0.5 block max-w-[46ch] text-[12.5px] leading-snug text-muted">{t.publishHint}</span>
-                    <ul className="mt-2.5 flex flex-wrap gap-2">
-                      <li className="flex items-center gap-2 rounded-full border border-line bg-canvas py-1 pr-3 pl-1 text-[13px] font-medium">
-                        <IntegrationLogo slug="site" className="size-6 rounded-full border-0" size={14} />
-                        {t.feed}
-                      </li>
-                      {networks.map((n) => (
-                        <li key={n.name} className="flex items-center gap-2 rounded-full border border-ok/25 bg-ok-50 py-1 pr-3 pl-1 text-[13px] font-medium text-ink">
-                          <LogoTile slug="vinvaro" className="size-6 rounded-full border-0" size={14} />
-                          {n.name}
-                        </li>
-                      ))}
-                      {marketplaceOptions.map((m) => (
-                        <li key={m.slug} className="flex items-center gap-2 rounded-full border border-line bg-canvas py-1 pr-3 pl-1 text-[13px] font-medium">
-                          <LogoTile slug={m.slug!} className="size-6 rounded-full border-0" size={14} />
-                          {m.name}
-                        </li>
-                      ))}
-                      {morePortals && (
-                        <li>
-                          <PortalCatalog className="flex items-center gap-2 rounded-full border border-dashed border-brand/40 bg-brand-50 py-1 pr-3 pl-1 text-[13px] font-medium text-brand hover:border-brand">
-                            <IntegrationLogo className="size-6 rounded-full border-0" size={14} />
+                  <div className="space-y-6 border-t border-line pt-5">
+                    <div>
+                      <span className="flex items-baseline justify-between gap-3">
+                        <span className="text-[14px] font-medium">{t.publishTitle}</span>
+                        <span className="text-[12px] font-medium text-ok">{t.inPlan}</span>
+                      </span>
+                      <span className="mt-0.5 block text-[12.5px] leading-snug text-muted">{t.publishHint}</span>
+                      <div className="mt-3 flex flex-wrap items-center gap-3">
+                        <span className="flex -space-x-2">
+                          <IntegrationLogo slug="site" className="size-8 rounded-full ring-2 ring-surface" size={15} />
+                          <LogoTile slug="vinvaro" className="size-8 rounded-full ring-2 ring-surface" size={15} />
+                          {marketplaceOptions.map((m) => (
+                            <span key={m.slug} title={m.name}>
+                              <LogoTile slug={m.slug!} className="size-8 rounded-full border-line ring-2 ring-surface" size={16} />
+                            </span>
+                          ))}
+                        </span>
+                        {morePortals && (
+                          <PortalCatalog className="inline-flex h-8 items-center rounded-full border border-brand/30 bg-brand-50 px-3 text-[12.5px] font-medium text-brand hover:border-brand">
                             {morePortals.name}
                           </PortalCatalog>
-                        </li>
-                      )}
-                    </ul>
+                        )}
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-[14px] font-medium">{t.freeTitle}</span>
+                      <ul className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2 text-[13px]">
+                        {pricing.free.map((f) => (
+                          <li key={f} className="flex items-center gap-2">
+                            <Check className="size-3.5 shrink-0 text-ok" strokeWidth={2.5} />
+                            <span className="truncate">{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 )}
               </Fragment>
@@ -273,17 +275,6 @@ export function PricingCalculator() {
               <Icon name="vehicle" size={13} /> {t.perVehicle(money(Math.round(subtotal / vehicles)))}
             </p>
           )}
-        </div>
-        <div className="mt-5">
-          <p className="text-[12px] font-semibold tracking-[0.12em] text-ok uppercase">{t.freeTitle}</p>
-          <ul className="mt-2.5 grid gap-x-4 gap-y-1.5 text-[13px] sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-            {pricing.free.map((f) => (
-              <li key={f} className="flex items-start gap-2">
-                <Check className="mt-0.5 size-3.5 shrink-0 text-ok" strokeWidth={2.5} />
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </div>
