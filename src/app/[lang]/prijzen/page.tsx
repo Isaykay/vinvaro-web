@@ -55,7 +55,7 @@ const copy = defineCopy({
     billing: [
       ["Proefperiode", "De eerste 30 dagen zijn gratis, met alle modules."],
       ["Maandperiode", "Elke maand een factuur met het vaste bedrag en je verbruik."],
-      ["Factuurdrempel", "Loopt het verbruik op tot € 250, dan factureren we tussentijds."],
+      ["Factuurdrempel", "Loopt het verbruik op tot € 250, dan factureren we tussentijds. Na elke betaalde factuur gaat de drempel € 250 omhoog."],
       ["Inzicht in de app", "Live verbruik, logboek en printbare facturen onder Facturatie."],
     ],
     faqEyebrow: "Veelgestelde vragen",
@@ -101,7 +101,7 @@ const copy = defineCopy({
     billing: [
       ["Trial", "The first 30 days are free, with every module."],
       ["Monthly period", "One invoice a month with the fixed amount and your usage."],
-      ["Invoice threshold", "If usage reaches €250, we invoice it in between."],
+      ["Invoice threshold", "If usage reaches €250, we invoice it in between. After every paid invoice the threshold goes up €250."],
       ["Insight in the app", "Live usage, a log and printable invoices under Billing."],
     ],
     faqEyebrow: "FAQ",

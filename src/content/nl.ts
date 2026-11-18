@@ -650,7 +650,7 @@ export const pricing = {
     { q: "Hoe wordt een voertuig in voorraad geteld?", a: "Elke open voorraadpositie telt. Verkoop of lever je een auto af en sluit je de voorraadperiode, dan telt hij niet meer mee in de volgende periode." },
     { q: "Betaal ik per gebruiker?", a: "Nee. Gebruikers en externe partners zijn onbeperkt en gratis. Je hele team, inclusief werkplaats en poetsers, werkt in VINVARO zonder extra kosten." },
     { q: "Hoe werkt de proefperiode?", a: "Je probeert VINVARO 30 dagen met alle modules. De proefperiode is kosteloos; daarna start je eerste maandperiode." },
-    { q: "Wanneer factureren jullie?", a: "Aan het einde van elke maandperiode. Loopt het verbruik binnen een periode op tot de factuurdrempel (standaard € 250), dan factureren we dat verbruik tussentijds. Je ziet het verbruik live terug onder Instellingen › Facturatie." },
+    { q: "Wanneer factureren jullie?", a: "Aan het einde van elke maandperiode. Loopt het verbruik binnen een periode op tot de factuurdrempel (standaard € 250), dan factureren we dat verbruik tussentijds. Na elke betaalde factuur gaat de drempel automatisch € 250 omhoog, tot maximaal € 10.000. Je ziet het verbruik live terug onder Instellingen › Facturatie." },
     { q: "Kost het Handelsplein of de Marktplaats extra?", a: "Nee. Beide VINVARO-netwerken zijn gratis inbegrepen, zonder transactiekosten, commissie of kosten per lead." },
     { q: "Kan ik modules uitzetten?", a: "Alle modules zitten in het Dealer-plan. Ook publiceren naar marktplaatsen en de websitefeed: daar betaal je niets extra voor." },
   ],

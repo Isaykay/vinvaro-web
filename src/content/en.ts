@@ -585,7 +585,7 @@ export const pricing: typeof nlPricing = {
     { q: "How is a vehicle in stock counted?", a: "Every open stock entry counts. Sell or deliver a car and close its stock period, and it no longer counts in the next period." },
     { q: "Do I pay per user?", a: "No. Users and external partners are unlimited and free. Your whole team, including the workshop and detailers, works in VINVARO at no extra cost." },
     { q: "How does the trial work?", a: "You try VINVARO for 30 days with every module. The trial is free; your first monthly period starts afterwards." },
-    { q: "When do you invoice?", a: "At the end of each monthly period. If usage within a period reaches the invoice threshold (€250 by default), we invoice that usage in between. You see usage live under Settings › Billing." },
+    { q: "When do you invoice?", a: "At the end of each monthly period. If usage within a period reaches the invoice threshold (€250 by default), we invoice that usage in between. After every paid invoice the threshold goes up €250 automatically, up to €10,000. You see usage live under Settings › Billing." },
     { q: "Do the Trade network or Marketplace cost extra?", a: "No. Both VINVARO networks are included for free, without transaction fees, commission or fees per lead." },
     { q: "Can I switch modules off?", a: "Every module is part of the Dealer plan. Publishing to marketplaces and the website feed included: you pay nothing extra for them." },
   ],
