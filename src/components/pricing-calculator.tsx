@@ -42,6 +42,7 @@ const copy = defineCopy({
     total: "Totaal incl. btw",
     perVehicle: (v: string) => `≈ ${v} per voertuig in voorraad`,
     trial: "Eerste 30 dagen gratis",
+    inPlan: "Inbegrepen in het plan",
   },
   en: {
     title: "Work out your monthly amount",
@@ -74,6 +75,7 @@ const copy = defineCopy({
     total: "Total incl. VAT",
     perVehicle: (v: string) => `≈ ${v} per vehicle in stock`,
     trial: "First 30 days free",
+    inPlan: "Included in the plan",
   },
 });
 
@@ -233,7 +235,7 @@ export function PricingCalculator() {
                       ))}
                     </div>
                     <span className="mt-1.5 block text-[12px] text-muted">
-                      {money(marketItem.unitPriceCents)} / {marketItem.unit}
+                      {marketItem.unitPriceCents > 0 ? `${money(marketItem.unitPriceCents)} / ${marketItem.unit}` : t.inPlan}
                     </span>
                   </div>
                 )}
@@ -252,7 +254,9 @@ export function PricingCalculator() {
           >
             <span>
               <span className="block text-[14px] font-medium">{t.feed}</span>
-              <span className="block text-[12px] text-muted">{money(pricing.items.find((i) => i.key === "website_feed")!.unitPriceCents)} / feed</span>
+              <span className="block text-[12px] text-muted">
+                {(pricing.items.find((i) => i.key === "website_feed")?.unitPriceCents ?? 0) > 0 ? `${money(pricing.items.find((i) => i.key === "website_feed")!.unitPriceCents)} / feed` : t.inPlan}
+              </span>
             </span>
             <span className={clsx("relative h-6 w-10 rounded-full transition-colors", feed ? "bg-brand" : "bg-line-strong")}>
               <span className={clsx("absolute top-0.5 size-5 rounded-full bg-white shadow transition-all", feed ? "left-[18px]" : "left-0.5")} />

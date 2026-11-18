@@ -343,7 +343,7 @@ export const platform: PlatformModule[] = [
     faq: [
       { q: "What happens when a car is sold?", a: "As soon as you set a car to reserved or sold, VINVARO removes it from every connected channel automatically. A new asking price is also updated everywhere." },
       { q: "Can I choose which cars are online where?", a: "Yes. Per car you switch each channel on or off, and in the vehicle list you do it for several cars at once." },
-      { q: "What does publishing cost?", a: "€10 per month per connected marketplace and €15 per month per website feed, excluding VAT. The VINVARO Marketplace and Trade network are free." },
+      { q: "What does publishing cost?", a: "Nothing extra. Your website feed and publishing to marketplaces are part of the Dealer plan, as are the VINVARO Marketplace and Trade network. Costs of a portal itself, such as a Marktplaats subscription, are paid to that portal." },
     ],
   },
   {
@@ -546,12 +546,12 @@ export const pricing: typeof nlPricing = {
     "VINVARO Trade network and Marketplace, free and without transaction fees",
   ],
   faq: [
-    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €4 per vehicle in stock. Connected marketplaces and a website feed are added on top; AI actions, photo edits, e-sign requests and KVK lookups come with a generous monthly bundle. All prices exclude VAT." },
+    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €4 per vehicle in stock. Publishing to marketplaces and your website feed are included; AI actions, photo edits, e-sign requests and KVK lookups come with a generous monthly bundle. All prices exclude VAT." },
     { q: "How is a vehicle in stock counted?", a: "Every open stock entry counts. Sell or deliver a car and close its stock period, and it no longer counts in the next period." },
     { q: "Do I pay per user?", a: "No. Users and external partners are unlimited and free. Your whole team, including the workshop and detailers, works in VINVARO at no extra cost." },
     { q: "How does the trial work?", a: "You try VINVARO for 30 days with every module. The trial is free; your first monthly period starts afterwards." },
     { q: "When do you invoice?", a: "At the end of each monthly period. If usage within a period reaches the invoice threshold (€250 by default), we invoice that usage in between. You see usage live under Settings › Billing." },
     { q: "Do the Trade network or Marketplace cost extra?", a: "No. Both VINVARO networks are included for free, without transaction fees, commission or fees per lead." },
-    { q: "Can I switch modules off?", a: "Every module is part of the Dealer plan. If you don't use something, such as marketplaces or the website feed, you don't pay for it." },
+    { q: "Can I switch modules off?", a: "Every module is part of the Dealer plan. Publishing to marketplaces and the website feed included: you pay nothing extra for them." },
   ],
 };

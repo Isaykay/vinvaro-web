@@ -379,7 +379,7 @@ export const platform: PlatformModule[] = [
     faq: [
       { q: "Wat gebeurt er als een auto verkocht is?", a: "Zodra je een auto op gereserveerd of verkocht zet, haalt VINVARO hem automatisch van alle gekoppelde kanalen. Een nieuwe vraagprijs wordt ook overal doorgevoerd." },
       { q: "Kan ik kiezen welke auto's waar online staan?", a: "Ja. Per auto zet je elk kanaal apart aan of uit, en in de voertuiglijst doe je dat voor meerdere auto's tegelijk." },
-      { q: "Wat kost publiceren?", a: "€ 10 per maand per gekoppelde marktplaats en € 15 per maand per websitefeed, exclusief btw. De VINVARO Marktplaats en het Handelsplein zijn gratis." },
+      { q: "Wat kost publiceren?", a: "Niets extra. Je websitefeed en publiceren naar marktplaatsen zitten in het Dealer-plan, net als de VINVARO Marktplaats en het Handelsplein. Kosten van een portal zelf, zoals een abonnement bij Marktplaats, betaal je aan dat portal." },
     ],
   },
   {
@@ -592,8 +592,8 @@ export const pricing = {
     { key: "users", name: "Gebruikers", unit: "gebruiker", description: "Actieve teamleden", kind: "recurring", module: "team-app", unitPriceCents: 0, included: null },
     { key: "partners", name: "Partners", unit: "partner", description: "Transporteurs, poetsers en garages", kind: "recurring", module: "intake-en-aflevering", unitPriceCents: 0, included: null },
     { key: "stock_vehicles", name: "Voertuigen in voorraad", unit: "voertuig", description: "Open voorraadposities", kind: "recurring", module: "voorraad", unitPriceCents: 400, included: 0 },
-    { key: "marketplaces", name: "Marktplaatsen", unit: "koppeling", description: "Gekoppelde marktplaatsen", kind: "recurring", module: "publiceren", unitPriceCents: 1000, included: 0 },
-    { key: "website_feed", name: "Websitefeed", unit: "feed", description: "Actieve voorraadfeeds", kind: "recurring", module: "publiceren", unitPriceCents: 1500, included: 0 },
+    { key: "marketplaces", name: "Marktplaatsen", unit: "koppeling", description: "Gekoppelde marktplaatsen", kind: "recurring", module: "publiceren", unitPriceCents: 0, included: null },
+    { key: "website_feed", name: "Websitefeed", unit: "feed", description: "Actieve voorraadfeeds", kind: "recurring", module: "publiceren", unitPriceCents: 0, included: null },
     { key: "ai_actions", name: "AI-acties", unit: "actie", description: "Labels, leadscores en conceptantwoorden", kind: "usage", module: "intelligence", unitPriceCents: 2, included: 500 },
     { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de Fotostudio", kind: "usage", module: "fotostudio", unitPriceCents: 10, included: 100 },
     { key: "sign_requests", name: "Digitale ondertekeningen", unit: "verzoek", description: "Contracten verstuurd om te tekenen", kind: "usage", module: "contracten-en-facturen", unitPriceCents: 50, included: 10 },
@@ -611,12 +611,12 @@ export const pricing = {
     "VINVARO Handelsplein en Marktplaats, gratis en zonder transactiekosten",
   ],
   faq: [
-    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 4 per voertuig dat in voorraad staat. Gekoppelde marktplaatsen en een websitefeed tel je erbij op; AI-acties, foto-bewerkingen, ondertekeningen en KVK-opvragingen hebben een ruime maandbundel. Alle prijzen zijn exclusief btw." },
+    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 4 per voertuig dat in voorraad staat. Publiceren naar marktplaatsen en je websitefeed zijn inbegrepen; AI-acties, foto-bewerkingen, ondertekeningen en KVK-opvragingen hebben een ruime maandbundel. Alle prijzen zijn exclusief btw." },
     { q: "Hoe wordt een voertuig in voorraad geteld?", a: "Elke open voorraadpositie telt. Verkoop of lever je een auto af en sluit je de voorraadperiode, dan telt hij niet meer mee in de volgende periode." },
     { q: "Betaal ik per gebruiker?", a: "Nee. Gebruikers en externe partners zijn onbeperkt en gratis. Je hele team, inclusief werkplaats en poetsers, werkt in VINVARO zonder extra kosten." },
     { q: "Hoe werkt de proefperiode?", a: "Je probeert VINVARO 30 dagen met alle modules. De proefperiode is kosteloos; daarna start je eerste maandperiode." },
     { q: "Wanneer factureren jullie?", a: "Aan het einde van elke maandperiode. Loopt het verbruik binnen een periode op tot de factuurdrempel (standaard € 250), dan factureren we dat verbruik tussentijds. Je ziet het verbruik live terug onder Instellingen › Facturatie." },
     { q: "Kost het Handelsplein of de Marktplaats extra?", a: "Nee. Beide VINVARO-netwerken zijn gratis inbegrepen, zonder transactiekosten, commissie of kosten per lead." },
-    { q: "Kan ik modules uitzetten?", a: "Alle modules zitten in het Dealer-plan. Gebruik je een onderdeel niet, zoals marktplaatsen of de websitefeed, dan betaal je er ook niets voor." },
+    { q: "Kan ik modules uitzetten?", a: "Alle modules zitten in het Dealer-plan. Ook publiceren naar marktplaatsen en de websitefeed: daar betaal je niets extra voor." },
   ],
 };
