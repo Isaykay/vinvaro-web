@@ -441,6 +441,7 @@ export const segments: Segment[] = [
 
 const categoryNames: Record<string, string> = {
   Voertuiggegevens: "Vehicle data",
+  "RDW-diensten": "RDW services",
   Marktplaatsen: "Marketplaces",
   Berichten: "Messaging",
   Agenda: "Calendar",
@@ -449,32 +450,39 @@ const categoryNames: Record<string, string> = {
   Website: "Website",
 };
 
-export const integrationCategories = ["Marketplaces", "Messaging", "Vehicle data", "Calendar", "Contact checks", "Accounting & financing", "Website"] as const;
+export const integrationCategories = ["Marketplaces", "RDW services", "Vehicle data", "Messaging", "Calendar", "Contact checks", "Accounting & financing", "Website"] as const;
 
 const integrationBodies: Record<string, string> = {
   "VINVARO Marktplaats": "Your stock for free on the public VINVARO Marketplace, with your reputation.",
   "VINVARO Handelsplein": "Buy and sell with other dealers at trade prices, for free.",
-  "mobile.de": "Publish via the Seller API, with price and status updated automatically.",
-  AutoScout24: "Publish as a data provider, linked to your customer number.",
-  AutoTrack: "Online together with AutoScout24, with one tick.",
-  "Marktplaats Admarkt": "Listings on Marktplaats.",
+  Marktplaats: "Listings on Marktplaats, with price and status updated automatically.",
+  AutoTrack: "Stock on AutoTrack.nl.",
+  AutoScout24: "Stock on AutoScout24 in the Netherlands, Belgium and Austria.",
+  "mobile.de": "Stock on mobile.de for buyers in Germany.",
   Gaspedaal: "Stock on Gaspedaal.nl.",
-  ViaBOVAG: "Stock on ViaBOVAG.nl.",
+  ViaBOVAG: "Stock on ViaBOVAG.nl for BOVAG members.",
   AutoWereld: "Stock on AutoWereld.nl.",
+  Wheeler: "Free listings on Wheeler.nl.",
+  "2dehands": "Stock on 2dehands.be and 2ememain.be.",
+  "+ 176 andere sites": "Including OTOMOTO, Autovit, Autobazar.EU, lease portals, Google Vehicle Ads and Meta. You choose per car where it goes.",
+  "A2SP (RDW)": "Indemnify, temporary document number, B2B transfer and odometer with your own A2SP account. Proofs straight into the file.",
+  "RDC (RDW)": "Indemnify, B2B transfer and odometer with your own RDC account and RDW certificate.",
+  "VWE (RDW)": "Indemnify and odometer through your VWE account.",
+  "JP.cars": "Market value, maximum purchase price and demand on the car, with your own JP.cars account.",
   "WhatsApp Business": "Customer conversations in the shared inbox, with media and quick replies.",
   Gmail: "Receive and send email from VINVARO.",
   "Outlook / Microsoft 365": "Receive and send email from VINVARO.",
   "E-mail (IMAP/SMTP)": "Through your own domain's mail server.",
   "RDW Open Data": "Registration data, MOT, inspections and odometer verdict.",
-  carVertical: "International vehicle history.",
+  carVertical: "International vehicle history, damage and odometer readings.",
   CARFAX: "History reports by VIN.",
   "Google Agenda": "Appointments in the calendar of whoever runs them.",
   "Outlook-agenda": "Appointments in the calendar of whoever runs them.",
   "KVK Handelsregister": "Type a company name; KVK number and address are filled in.",
   VIES: "Verify VAT numbers, with the result kept as evidence.",
-  Autoboeker: "Invoices and costs to your bookkeeping automatically.",
+  Autoboeker: "Issued invoices go to your bookkeeping automatically, and payments are matched with your bank.",
   "Autus Finance": "Request financing for your customer, from the deal.",
-  Websitefeed: "Your stock on your own website, with inquiry forms.",
+  Websitefeed: "Your stock on your own website with widget, trade-in module and inquiry forms.",
 };
 
 const integrationNames: Record<string, string> = {
@@ -485,6 +493,7 @@ const integrationNames: Record<string, string> = {
   "E-mail (IMAP/SMTP)": "Email (IMAP/SMTP)",
   "KVK Handelsregister": "KVK (Dutch Chamber of Commerce)",
   Websitefeed: "Website feed",
+  "+ 176 andere sites": "+ 176 other sites",
 };
 
 export const integrations: Integration[] = nlIntegrations.map((i) => ({
@@ -507,15 +516,15 @@ export const faq = [
   { q: "What is VINVARO?", a: "VINVARO is the operating system for automotive businesses: one workspace for vehicles, customers and operations. Inventory and vehicle dossier, intake and delivery workflows, a shared inbox, CRM, calendar, contracts, invoices and publishing to marketplaces and your own website." },
   { q: "Who is VINVARO for?", a: "Independent automotive businesses: independent dealers, specialists and businesses with multiple sites. Owners, sales, the workshop floor and administration work in the same environment." },
   { q: "What is the VINVARO Agent?", a: "An AI assistant in VINVARO that carries out your questions and instructions in plain language, typed or dictated. It can do everything you may do: create cars from a registration, change prices and stages, publish, contracts and invoices, workflows and reports. It asks you first before risky actions, and every action is in the audit log." },
-  { q: "Does VINVARO work with the RDW?", a: "Yes. For Dutch registrations, VINVARO pulls make, model, MOT, inspections with defects and the odometer verdict from RDW Open Data." },
-  { q: "Which marketplaces can I publish to?", a: "Today, mobile.de and AutoScout24 (with AutoTrack), plus your own website via the VINVARO feed. Marktplaats, Gaspedaal, ViaBOVAG and AutoWereld are on the roadmap." },
+  { q: "Does VINVARO work with the RDW?", a: "Yes. For Dutch registrations, VINVARO pulls make, model, MOT, inspections with defects and the odometer verdict from RDW Open Data. With your own A2SP or RDC account you indemnify, request a temporary document number, transfer to another dealer and report odometer readings, straight from the car." },
+  { q: "Which marketplaces can I publish to?", a: "Today, the VINVARO Marketplace, the Trade network and your own website via the VINVARO feed. Soon more than 185 sites, including Marktplaats, AutoTrack, AutoScout24, mobile.de, Gaspedaal, ViaBOVAG, AutoWereld, Wheeler and 2dehands. You choose per car where it goes." },
   { q: "What are the Trade network and the Marketplace?", a: "Two free VINVARO networks. On the Trade network you trade directly with other dealers at trade prices; after the deal the car moves into the buyer's stock automatically. On the Marketplace, consumers search the stock of every participating dealer, at asking price and with your reputation." },
   { q: "Which channels come into the inbox?", a: "WhatsApp Business, Gmail, Outlook / Microsoft 365 and email through your own mail server (IMAP/SMTP)." },
   { q: "Is there an app for my team?", a: "Yes. The VINVARO app for iOS and Android works offline too: photos and workflow answers are sent once there's signal again." },
   { q: "Can I edit listing photos in VINVARO?", a: "Yes. In the Photo studio you remove the background, place the car in a studio, retouch with AI and cover the licence plate with a blank plate or your logo. Cropping, rotating and colour adjustments work too. The original is always kept." },
   { q: "How do I get help when I'm stuck?", a: "Click Support in VINVARO. Linda, our AI assistant, answers questions straight away, day and night. During office hours (Mon–Fri 09:00–17:00) a colleague takes over the conversation, and tickets let you follow progress. The help center is full of guides." },
   { q: "How quickly can I switch?", a: "Import your stock and contacts from Excel or CSV; connect channels and calendars yourself in a few minutes. We plan the switch together in the demo." },
-  { q: "What does VINVARO cost?", a: "The Dealer plan costs €199 per month plus €4 per vehicle in stock, excluding VAT. All modules, users and partners are included. You start with a 30-day trial." },
+  { q: "What does VINVARO cost?", a: "The Dealer plan costs €199 per month plus €6 per vehicle in stock, excluding VAT. All modules, users and partners are included; only RDW transactions cost €0.50 each. You start with a 30-day trial." },
 ];
 
 const itemEn: Record<string, [string, string, string]> = {
@@ -528,6 +537,7 @@ const itemEn: Record<string, [string, string, string]> = {
   photo_edits: ["Photo edits", "edit", "AI edits in the Photo studio"],
   sign_requests: ["E-sign requests", "request", "Contracts sent for signing"],
   kvk_lookups: ["KVK lookups", "lookup", "Company details from the trade register"],
+  rdw_transactions: ["RDW transactions", "transaction", "Indemnify, registration codes, B2B transfer and odometer"],
 };
 
 export const pricing: typeof nlPricing = {
@@ -536,7 +546,8 @@ export const pricing: typeof nlPricing = {
   items: nlPricing.items.map((i) => ({ ...i, name: itemEn[i.key][0], unit: itemEn[i.key][1], description: itemEn[i.key][2] })),
   included: [
     "Every module: inventory, workflows, inbox, CRM, calendar, contracts, invoices, publishing, AI and the Photo studio",
-    "100 AI photo edits and 500 AI actions per month",
+    "AI actions, Photo studio, e-signing and KVK lookups with normal use",
+    "Publishing to your website and marketplaces",
     "Support via Linda (AI, day and night), tickets and the help center",
     "Unlimited users and partners",
     "Staff app for iOS and Android",
@@ -546,7 +557,8 @@ export const pricing: typeof nlPricing = {
     "VINVARO Trade network and Marketplace, free and without transaction fees",
   ],
   faq: [
-    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €4 per vehicle in stock. Publishing to marketplaces and your website feed are included; AI actions, photo edits, e-sign requests and KVK lookups come with a generous monthly bundle. All prices exclude VAT." },
+    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €6 per vehicle in stock. The only extra is €0.50 per RDW transaction you do from VINVARO. Everything else is included: publishing, website feed, AI, Photo studio, e-signing and KVK. All prices exclude VAT." },
+    { q: "What do RDW transactions cost?", a: "€0.50 per successful transaction from VINVARO: indemnifying, a temporary document number, a B2B transfer or reporting the odometer. On top of that you pay your RDW provider (A2SP or RDC) and the statutory RDW fees, such as €3.85 for indemnifying, directly." },
     { q: "How is a vehicle in stock counted?", a: "Every open stock entry counts. Sell or deliver a car and close its stock period, and it no longer counts in the next period." },
     { q: "Do I pay per user?", a: "No. Users and external partners are unlimited and free. Your whole team, including the workshop and detailers, works in VINVARO at no extra cost." },
     { q: "How does the trial work?", a: "You try VINVARO for 30 days with every module. The trial is free; your first monthly period starts afterwards." },

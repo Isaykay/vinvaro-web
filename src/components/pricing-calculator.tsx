@@ -8,7 +8,8 @@ import { track } from "@/lib/analytics";
 import { useLang } from "@/components/lang-provider";
 import { Icon } from "@/components/app-icons";
 import { Mark } from "@/components/ui";
-import { LogoTile } from "@/components/product/kit";
+import { IntegrationLogo, LogoTile } from "@/components/product/kit";
+import { PortalCatalog } from "@/components/portal-catalog";
 
 const copy = defineCopy({
   nl: {
@@ -17,18 +18,12 @@ const copy = defineCopy({
     sliders: {
       stock_vehicles: "Voertuigen in voorraad",
       marketplaces: "Gekoppelde marktplaatsen",
-      ai_actions: "AI-acties per maand",
-      photo_edits: "Foto-bewerkingen per maand",
-      sign_requests: "Digitale ondertekeningen per maand",
-      kvk_lookups: "KVK-opvragingen per maand",
+      rdw_transactions: "RDW-acties per maand",
     } as Record<string, string>,
     hints: {
       stock_vehicles: "Elke auto die open in je voorraad staat. Verkocht en afgesloten telt niet meer mee.",
       marketplaces: "Elke marktplaats die je koppelt om advertenties op te publiceren.",
-      ai_actions: "Elke keer dat AI iets voor je doet: een bericht labelen, een lead scoren of een conceptantwoord schrijven.",
-      photo_edits: "Een AI-bewerking in de foto-editor, zoals achtergrond weg, studio-achtergrond, auto-retouche of kenteken afdekken.",
-      sign_requests: "Een koopovereenkomst of ander contract dat je digitaal laat ondertekenen.",
-      kvk_lookups: "Bedrijfsgegevens ophalen uit het Handelsregister door een bedrijfsnaam of KVK-nummer in te typen.",
+      rdw_transactions: "Vrijwaren, tijdelijk documentnummer, B2B-overdracht of kilometerstand melden vanuit VINVARO. Leges en je RDW-provider betaal je apart.",
     } as Record<string, string>,
     planned: "gepland",
     free: "gratis",
@@ -42,7 +37,11 @@ const copy = defineCopy({
     total: "Totaal incl. btw",
     perVehicle: (v: string) => `≈ ${v} per voertuig in voorraad`,
     trial: "Eerste 30 dagen gratis",
-    inPlan: "Inbegrepen in het plan",
+    inPlan: "Inbegrepen",
+    publishTitle: "Publiceren",
+    publishHint: "Naar je eigen website, de VINVARO-netwerken en alle portals. Klik op de laatste om alle sites te zien.",
+    includedAll: "Alles inbegrepen",
+    soon: "binnenkort",
   },
   en: {
     title: "Work out your monthly amount",
@@ -50,18 +49,12 @@ const copy = defineCopy({
     sliders: {
       stock_vehicles: "Vehicles in stock",
       marketplaces: "Connected marketplaces",
-      ai_actions: "AI actions per month",
-      photo_edits: "Photo edits per month",
-      sign_requests: "E-sign requests per month",
-      kvk_lookups: "KVK lookups per month",
+      rdw_transactions: "RDW transactions per month",
     } as Record<string, string>,
     hints: {
       stock_vehicles: "Every car that's open in your stock. Sold and closed cars no longer count.",
       marketplaces: "Every marketplace you connect to publish listings to.",
-      ai_actions: "Every time AI does something for you: labelling a message, scoring a lead or writing a reply draft.",
-      photo_edits: "One AI edit in the photo editor, such as removing the background, a studio background, auto-retouch or covering the plate.",
-      sign_requests: "A purchase agreement or other contract you send out to be signed digitally.",
-      kvk_lookups: "Fetching company details from the trade register by typing a company name or KVK number.",
+      rdw_transactions: "Indemnifying, a temporary document number, a B2B transfer or reporting the odometer from VINVARO. Statutory fees and your RDW provider are billed separately.",
     } as Record<string, string>,
     planned: "planned",
     free: "free",
@@ -75,16 +68,17 @@ const copy = defineCopy({
     total: "Total incl. VAT",
     perVehicle: (v: string) => `≈ ${v} per vehicle in stock`,
     trial: "First 30 days free",
-    inPlan: "Included in the plan",
+    inPlan: "Included",
+    publishTitle: "Publishing",
+    publishHint: "To your own website, the VINVARO networks and every portal. Click the last one to see all sites.",
+    includedAll: "Everything included",
+    soon: "soon",
   },
 });
 
 const ranges: Record<string, { max: number; step: number; initial: number }> = {
   stock_vehicles: { max: 5000, step: 1, initial: 45 },
-  ai_actions: { max: 100000, step: 50, initial: 800 },
-  photo_edits: { max: 25000, step: 10, initial: 300 },
-  sign_requests: { max: 2000, step: 1, initial: 20 },
-  kvk_lookups: { max: 5000, step: 5, initial: 30 },
+  rdw_transactions: { max: 2000, step: 1, initial: 40 },
 };
 
 /** Sliders run on a quadratic curve so small dealers keep precision while large ones can reach the top. */
@@ -100,11 +94,9 @@ export function PricingCalculator() {
   const channels = integrations.filter((i) => i.category === integrationCategories[0] && i.slug);
   const marketplaceOptions = channels.filter((i) => i.slug !== "vinvaro");
   const networks = channels.filter((i) => i.slug === "vinvaro");
+  const morePortals = integrations.find((i) => i.category === integrationCategories[0] && !i.slug);
   const [values, setValues] = useState<Record<string, number>>(Object.fromEntries(Object.entries(ranges).map(([k, r]) => [k, r.initial])));
-  const [marketplaces, setMarketplaces] = useState<string[]>(["mobilede", "autoscout24"]);
-  const [feed, setFeed] = useState(true);
   const interacted = useRef(false);
-  const marketItem = pricing.items.find((i) => i.key === "marketplaces")!;
   const touchPricing = (label?: string, value?: string | number | boolean) => {
     if (!interacted.current) {
       interacted.current = true;
@@ -112,31 +104,23 @@ export function PricingCalculator() {
     }
     if (label) track("pricing_change", { label, value: value == null ? undefined : String(value) });
   };
-  const toggleMarketplace = (slug: string) => {
-    setMarketplaces((m) => {
-      const next = m.includes(slug) ? m.filter((s) => s !== slug) : [...m, slug];
-      touchPricing("marketplace", slug);
-      return next;
-    });
-  };
 
   useEffect(() => {
     if (!interacted.current) return;
     const timer = window.setTimeout(() => {
       track("pricing_estimate", {
         stock_vehicles: values.stock_vehicles,
-        marketplaces: marketplaces.length,
-        website_feed: feed,
+        rdw_transactions: values.rdw_transactions,
       });
     }, 800);
     return () => window.clearTimeout(timer);
-  }, [values, marketplaces, feed]);
+  }, [values]);
 
   const money = (cents: number) =>
     new Intl.NumberFormat(numberLocale[lang], { style: "currency", currency: "EUR", minimumFractionDigits: cents % 100 ? 2 : 0, maximumFractionDigits: 2 }).format(cents / 100);
   const num = (n: number) => new Intl.NumberFormat(numberLocale[lang]).format(n);
 
-  const quantity = (key: string) => (key === "website_feed" ? (feed ? 1 : 0) : key === "marketplaces" ? marketplaces.length : (values[key] ?? 0));
+  const quantity = (key: string) => values[key] ?? 0;
   const lines = pricing.items
     .filter((i) => i.unitPriceCents > 0)
     .map((i) => {
@@ -202,66 +186,43 @@ export function PricingCalculator() {
                 {key === "stock_vehicles" && (
                   <div>
                     <span className="flex items-baseline justify-between gap-3">
-                      <span className="text-[14px] font-medium">{t.sliders.marketplaces}</span>
-                      <span className="text-[15px] font-semibold tabular-nums">{num(marketplaces.length)}</span>
+                      <span className="text-[14px] font-medium">{t.publishTitle}</span>
+                      <span className="text-[12px] font-medium text-ok">{t.inPlan}</span>
                     </span>
-                    <span className="mt-0.5 block max-w-[46ch] text-[12.5px] leading-snug text-muted">{t.hints.marketplaces}</span>
-                    <div className="mt-2.5 flex flex-wrap gap-2">
-                      {marketplaceOptions.map((m) => {
-                        const on = marketplaces.includes(m.slug!);
-                        return (
-                          <button
-                            key={m.slug}
-                            type="button"
-                            onClick={() => toggleMarketplace(m.slug!)}
-                            aria-pressed={on}
-                            className={clsx(
-                              "flex items-center gap-2 rounded-full border py-1 pr-3 pl-1 text-[13px] font-medium transition-colors",
-                              on ? "border-brand bg-brand-50 text-ink" : "border-line bg-canvas text-muted hover:border-line-strong",
-                            )}
-                          >
-                            <LogoTile slug={m.slug!} className={clsx("size-6 rounded-full border-0", !on && "opacity-60 grayscale")} size={14} />
-                            {m.name}
-                            {m.status === "planned" && <span className="text-[11px] font-normal text-subtle">· {t.planned}</span>}
-                          </button>
-                        );
-                      })}
+                    <span className="mt-0.5 block max-w-[46ch] text-[12.5px] leading-snug text-muted">{t.publishHint}</span>
+                    <ul className="mt-2.5 flex flex-wrap gap-2">
+                      <li className="flex items-center gap-2 rounded-full border border-line bg-canvas py-1 pr-3 pl-1 text-[13px] font-medium">
+                        <IntegrationLogo slug="site" className="size-6 rounded-full border-0" size={14} />
+                        {t.feed}
+                      </li>
                       {networks.map((n) => (
-                        <span key={n.name} className="flex items-center gap-2 rounded-full border border-ok/25 bg-ok-50 py-1 pr-3 pl-1 text-[13px] font-medium text-ink">
+                        <li key={n.name} className="flex items-center gap-2 rounded-full border border-ok/25 bg-ok-50 py-1 pr-3 pl-1 text-[13px] font-medium text-ink">
                           <LogoTile slug="vinvaro" className="size-6 rounded-full border-0" size={14} />
                           {n.name}
-                          <span className="text-[11px] font-normal text-ok">· {t.free}</span>
-                        </span>
+                        </li>
                       ))}
-                    </div>
-                    <span className="mt-1.5 block text-[12px] text-muted">
-                      {marketItem.unitPriceCents > 0 ? `${money(marketItem.unitPriceCents)} / ${marketItem.unit}` : t.inPlan}
-                    </span>
+                      {marketplaceOptions.map((m) => (
+                        <li key={m.slug} className="flex items-center gap-2 rounded-full border border-line bg-canvas py-1 pr-3 pl-1 text-[13px] font-medium">
+                          <LogoTile slug={m.slug!} className="size-6 rounded-full border-0" size={14} />
+                          {m.name}
+                          {m.status === "planned" && <span className="text-[11px] font-normal text-subtle">· {t.soon}</span>}
+                        </li>
+                      ))}
+                      {morePortals && (
+                        <li>
+                          <PortalCatalog className="flex items-center gap-2 rounded-full border border-dashed border-brand/40 bg-brand-50 py-1 pr-3 pl-1 text-[13px] font-medium text-brand hover:border-brand">
+                            <IntegrationLogo className="size-6 rounded-full border-0" size={14} />
+                            {morePortals.name}
+                          </PortalCatalog>
+                        </li>
+                      )}
+                    </ul>
                   </div>
                 )}
               </Fragment>
             );
           })}
-          <button
-            type="button"
-            onClick={() => {
-              const next = !feed;
-              setFeed(next);
-              touchPricing("website_feed", next);
-            }}
-            aria-pressed={feed}
-            className="flex w-full items-center justify-between rounded-xl border border-line bg-canvas px-3.5 py-3 text-left"
-          >
-            <span>
-              <span className="block text-[14px] font-medium">{t.feed}</span>
-              <span className="block text-[12px] text-muted">
-                {(pricing.items.find((i) => i.key === "website_feed")?.unitPriceCents ?? 0) > 0 ? `${money(pricing.items.find((i) => i.key === "website_feed")!.unitPriceCents)} / feed` : t.inPlan}
-              </span>
-            </span>
-            <span className={clsx("relative h-6 w-10 rounded-full transition-colors", feed ? "bg-brand" : "bg-line-strong")}>
-              <span className={clsx("absolute top-0.5 size-5 rounded-full bg-white shadow transition-all", feed ? "left-[18px]" : "left-0.5")} />
-            </span>
-          </button>
+
         </div>
       </div>
 
@@ -277,16 +238,18 @@ export function PricingCalculator() {
             <span className="font-medium">{t.plan}</span>
             <span className="tabular-nums">{money(pricing.basePriceCents)}</span>
           </li>
-          {pricing.items
-            .filter((i) => i.unitPriceCents === 0)
-            .map((i) => (
-              <li key={i.key} className="flex items-center justify-between py-2.5 text-muted">
-                <span>
-                  {i.name} <span className="text-subtle">· {t.unlimited}</span>
-                </span>
-                <span className="tabular-nums">{money(0)}</span>
-              </li>
-            ))}
+          <li className="flex items-start justify-between gap-3 py-2.5 text-muted">
+            <span className="min-w-0">
+              <span className="block">{t.includedAll}</span>
+              <span className="block text-[11.5px] text-subtle">
+                {pricing.items
+                  .filter((i) => i.unitPriceCents === 0)
+                  .map((i) => i.name)
+                  .join(", ")}
+              </span>
+            </span>
+            <span className="shrink-0 tabular-nums">{money(0)}</span>
+          </li>
           {lines.map(({ item, qty, billable, amount }) => (
             <li key={item.key} className={clsx("flex items-center justify-between gap-3 py-2.5", amount === 0 && "text-muted")}>
               <span className="min-w-0">

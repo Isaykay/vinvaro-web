@@ -10,6 +10,7 @@ import { Reveal } from "@/components/reveal";
 import { IconTile } from "@/components/icons";
 import { OfficeHours } from "@/components/office-hours";
 import { Car, IntegrationLogo } from "@/components/product/kit";
+import { PortalCatalog } from "@/components/portal-catalog";
 
 const copy = defineCopy({
   nl: {
@@ -162,6 +163,11 @@ function StatusBadge({ status, lang }: { status: IntegrationStatus; lang: Lang }
   );
 }
 
+/** The "+ N other sites" entry opens the full list of portals. */
+function MaybeCatalog({ open, className, children }: { open: boolean; className?: string; children: React.ReactNode }) {
+  return open ? <PortalCatalog className={className}>{children}</PortalCatalog> : <>{children}</>;
+}
+
 export async function IntegrationGrid({ only }: { only?: IntegrationStatus[] }) {
   const lang = await getLang();
   const { integrations, integrationCategories } = getContent(lang);
@@ -192,13 +198,14 @@ export async function IntegrationGrid({ only }: { only?: IntegrationStatus[] }) 
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((i) => (
-                <div
-                  key={i.name}
-                  className={clsx(
-                    "group flex flex-col rounded-[14px] border border-line bg-surface p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-float",
-                    i.status === "planned" && "bg-surface/70",
-                  )}
-                >
+                <MaybeCatalog key={i.name} open={!i.slug && !i.channel} className="block h-full w-full">
+                  <div
+                    className={clsx(
+                      "group flex h-full flex-col rounded-[14px] border border-line bg-surface p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-float",
+                      i.status === "planned" && "bg-surface/70",
+                      !i.slug && !i.channel && "border-dashed border-brand/40",
+                    )}
+                  >
                   <div className="flex items-center gap-3.5">
                     <IntegrationLogo slug={i.slug} channel={i.channel} className={clsx("size-12 rounded-[12px]", i.status === "planned" && "grayscale-[35%]")} size={28} />
                     <span className="min-w-0 flex-1">
@@ -224,7 +231,8 @@ export async function IntegrationGrid({ only }: { only?: IntegrationStatus[] }) 
                       </ul>
                     </div>
                   )}
-                </div>
+                  </div>
+                </MaybeCatalog>
               ))}
             </div>
           </div>
@@ -255,8 +263,10 @@ export async function IntegrationWall() {
                     i.status === "planned" && "text-muted",
                   )}
                 >
-                  <IntegrationLogo slug={i.slug} channel={i.channel} className={clsx("size-7 rounded-full border-0", i.status === "planned" && "opacity-70 grayscale-[40%]")} size={17} />
-                  {i.name}
+                  <MaybeCatalog open={!i.slug && !i.channel} className="inline-flex items-center gap-2 text-brand">
+                    <IntegrationLogo slug={i.slug} channel={i.channel} className={clsx("size-7 rounded-full border-0", i.status === "planned" && "opacity-70 grayscale-[40%]")} size={17} />
+                    {i.name}
+                  </MaybeCatalog>
                   {i.connectsTo && (
                     <span className="ml-0.5 flex items-center -space-x-1.5" title={i.connectsTo.map((p) => p.name).join(", ")}>
                       {i.connectsTo.map((pkg) => (

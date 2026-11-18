@@ -499,25 +499,32 @@ export type Integration = {
   connectsTo?: { name: string; slug: string; soon?: boolean }[];
 };
 
-export const integrationCategories = ["Marktplaatsen", "Berichten", "Voertuiggegevens", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Website"] as const;
+export const integrationCategories = ["Marktplaatsen", "RDW-diensten", "Voertuiggegevens", "Berichten", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Website"] as const;
 
 export const integrations: Integration[] = [
   { name: "VINVARO Marktplaats", category: "Marktplaatsen", status: "live", body: "Je voorraad gratis op de openbare VINVARO Marktplaats, met je reputatie erbij.", slug: "vinvaro" },
   { name: "VINVARO Handelsplein", category: "Marktplaatsen", status: "live", body: "Gratis kopen en verkopen met andere autobedrijven tegen handelsprijzen.", slug: "vinvaro" },
-  { name: "mobile.de", category: "Marktplaatsen", status: "live", body: "Publiceren via de Seller-API, met prijs en status automatisch bijgewerkt.", slug: "mobilede" },
-  { name: "AutoScout24", category: "Marktplaatsen", status: "beta", body: "Publiceren als dataleverancier, gekoppeld aan je klantnummer.", slug: "autoscout24" },
-  { name: "AutoTrack", category: "Marktplaatsen", status: "beta", body: "Tegelijk met AutoScout24 online, met één vinkje.", slug: "autotrack" },
-  { name: "Marktplaats Admarkt", category: "Marktplaatsen", status: "planned", body: "Advertenties op Marktplaats.", slug: "marktplaats" },
+  { name: "Marktplaats", category: "Marktplaatsen", status: "planned", body: "Advertenties op Marktplaats, met prijs en status automatisch bijgewerkt.", slug: "marktplaats" },
+  { name: "AutoTrack", category: "Marktplaatsen", status: "planned", body: "Voorraad op AutoTrack.nl.", slug: "autotrack" },
+  { name: "AutoScout24", category: "Marktplaatsen", status: "planned", body: "Voorraad op AutoScout24 in Nederland, België en Oostenrijk.", slug: "autoscout24" },
+  { name: "mobile.de", category: "Marktplaatsen", status: "planned", body: "Voorraad op mobile.de voor kopers in Duitsland.", slug: "mobilede" },
   { name: "Gaspedaal", category: "Marktplaatsen", status: "planned", body: "Voorraad op Gaspedaal.nl.", slug: "gaspedaal" },
-  { name: "ViaBOVAG", category: "Marktplaatsen", status: "planned", body: "Voorraad op ViaBOVAG.nl.", slug: "viabovag" },
+  { name: "ViaBOVAG", category: "Marktplaatsen", status: "planned", body: "Voorraad op ViaBOVAG.nl voor BOVAG-leden.", slug: "viabovag" },
   { name: "AutoWereld", category: "Marktplaatsen", status: "planned", body: "Voorraad op AutoWereld.nl.", slug: "autowereld" },
-  { name: "WhatsApp Business", category: "Berichten", status: "live", body: "Klantgesprekken in de gedeelde inbox, met media en snelle antwoorden.", channel: "whatsapp" },
+  { name: "Wheeler", category: "Marktplaatsen", status: "planned", body: "Gratis adverteren op Wheeler.nl.", slug: "wheeler" },
+  { name: "2dehands", category: "Marktplaatsen", status: "planned", body: "Voorraad op 2dehands.be en 2ememain.be.", slug: "2dehands" },
+  { name: "+ 176 andere sites", category: "Marktplaatsen", status: "planned", body: "Waaronder OTOMOTO, Autovit, Autobazar.EU, leaseportalen, Google Vehicle Ads en Meta. Per auto kies je waar hij komt." },
+  { name: "A2SP (RDW)", category: "RDW-diensten", status: "live", body: "Vrijwaren, tijdelijk documentnummer, B2B-overdracht en kilometerstand met je eigen A2SP-account. Bewijzen direct in het dossier.", slug: "a2sp" },
+  { name: "RDC (RDW)", category: "RDW-diensten", status: "live", body: "Vrijwaren, B2B-overdracht en kilometerstand met je eigen RDC-account en RDW-certificaat.", slug: "rdc" },
+  { name: "VWE (RDW)", category: "RDW-diensten", status: "planned", body: "Vrijwaren en kilometerstand via je VWE-account.", slug: "vwe" },
+  { name: "RDW Open Data", category: "Voertuiggegevens", status: "live", body: "Kentekengegevens, APK, keuringen en tellerstandoordeel.", slug: "rdw" },
+  { name: "JP.cars", category: "Voertuiggegevens", status: "live", body: "Marktwaarde, maximale inkoopprijs en courantheid op de auto, met je eigen JP.cars-account.", slug: "jpcars" },
+  { name: "carVertical", category: "Voertuiggegevens", status: "planned", body: "Internationale voertuighistorie, schade en kilometerstanden.", slug: "carvertical" },
+  { name: "CARFAX", category: "Voertuiggegevens", status: "planned", body: "Historierapporten op VIN.", slug: "carfax" },
+  { name: "WhatsApp Business", category: "Berichten", status: "beta", body: "Klantgesprekken in de gedeelde inbox, met media en snelle antwoorden.", channel: "whatsapp" },
   { name: "Gmail", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", channel: "gmail" },
   { name: "Outlook / Microsoft 365", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", channel: "outlook" },
   { name: "E-mail (IMAP/SMTP)", category: "Berichten", status: "live", body: "Via de mailserver van je eigen domein.", channel: "imap" },
-  { name: "RDW Open Data", category: "Voertuiggegevens", status: "live", body: "Kentekengegevens, APK, keuringen en tellerstandoordeel.", slug: "rdw" },
-  { name: "carVertical", category: "Voertuiggegevens", status: "planned", body: "Internationale voertuighistorie.", slug: "carvertical" },
-  { name: "CARFAX", category: "Voertuiggegevens", status: "planned", body: "Historierapporten op VIN.", slug: "carfax" },
   { name: "Google Agenda", category: "Agenda", status: "live", body: "Afspraken in de agenda van wie ze uitvoert.", slug: "gcal" },
   { name: "Outlook-agenda", category: "Agenda", status: "live", body: "Afspraken in de agenda van wie ze uitvoert.", slug: "outlook" },
   { name: "KVK Handelsregister", category: "Relatiecontroles", status: "live", body: "Bedrijfsnaam typen, KVK-nummer en adres ingevuld.", slug: "kvk" },
@@ -526,7 +533,7 @@ export const integrations: Integration[] = [
     name: "Autoboeker",
     category: "Boekhouding & financiering",
     status: "live",
-    body: "Facturen en kosten automatisch naar je boekhouding.",
+    body: "Uitgegeven facturen gaan automatisch naar je boekhouding, en betalingen worden afgeletterd met je bank.",
     slug: "autoboeker",
     connectsTo: [
       { name: "Exact Online", slug: "exact" },
@@ -537,7 +544,7 @@ export const integrations: Integration[] = [
     ],
   },
   { name: "Autus Finance", category: "Boekhouding & financiering", status: "live", body: "Financiering aanvragen voor je klant, vanuit de deal.", slug: "autus" },
-  { name: "Websitefeed", category: "Website", status: "live", body: "Je voorraad op je eigen website, met aanvraagformulieren.", slug: "site" },
+  { name: "Websitefeed", category: "Website", status: "live", body: "Je voorraad op je eigen website met widget, inruilmodule en aanvraagformulieren.", slug: "site" },
 ];
 
 export const securityControls = [
@@ -553,15 +560,15 @@ export const faq = [
   { q: "Wat is VINVARO?", a: "VINVARO is het besturingssysteem voor autobedrijven: één werkplek voor voertuigen, klanten en processen. Voorraad en voertuigdossier, workflows voor intake en aflevering, een gedeelde inbox, CRM, agenda, contracten, facturen en publiceren naar marktplaatsen en je eigen website." },
   { q: "Voor wie is VINVARO bedoeld?", a: "Voor zelfstandige autobedrijven: merkonafhankelijke dealers, specialisten en bedrijven met meerdere vestigingen. Eigenaren, verkopers, de werkvloer en de administratie werken in dezelfde omgeving." },
   { q: "Wat is de VINVARO Agent?", a: "Een AI-assistent in VINVARO die je vragen en opdrachten in gewone taal uitvoert, getypt of ingesproken. Hij kan alles wat jij mag: auto's aanmaken vanaf een kenteken, prijzen en fases wijzigen, publiceren, contracten en facturen, workflows en rapportages. Risicovolle acties vraagt hij eerst aan je, en elke actie staat in het auditlog." },
-  { q: "Werkt VINVARO met de RDW?", a: "Ja. Voor Nederlandse kentekens haalt VINVARO merk, model, APK, keuringen met gebreken en het tellerstandoordeel op uit RDW Open Data." },
-  { q: "Op welke marktplaatsen kan ik publiceren?", a: "Vandaag op mobile.de en AutoScout24 (met AutoTrack), plus je eigen website via de VINVARO-feed. Marktplaats, Gaspedaal, ViaBOVAG en AutoWereld staan op de roadmap." },
+  { q: "Werkt VINVARO met de RDW?", a: "Ja. Voor Nederlandse kentekens haalt VINVARO merk, model, APK, keuringen met gebreken en het tellerstandoordeel op uit RDW Open Data. Met je eigen A2SP- of RDC-account vrijwaar je, vraag je een tijdelijk documentnummer aan, draag je over aan een ander bedrijf en meld je kilometerstanden, direct vanuit de auto." },
+  { q: "Op welke marktplaatsen kan ik publiceren?", a: "Vandaag op de VINVARO Marktplaats, het Handelsplein en je eigen website via de VINVARO-feed. Binnenkort op meer dan 185 sites, waaronder Marktplaats, AutoTrack, AutoScout24, mobile.de, Gaspedaal, ViaBOVAG, AutoWereld, Wheeler en 2dehands. Per auto kies je waar hij komt." },
   { q: "Wat zijn het Handelsplein en de Marktplaats?", a: "Twee gratis VINVARO-netwerken. Op het Handelsplein handel je rechtstreeks met andere autobedrijven tegen handelsprijzen; de auto gaat na de deal vanzelf naar de voorraad van de koper. Op de Marktplaats zoeken consumenten in het aanbod van alle aangesloten autobedrijven, tegen vraagprijs en met je reputatie erbij." },
   { q: "Welke kanalen komen in de inbox?", a: "WhatsApp Business, Gmail, Outlook / Microsoft 365 en e-mail via je eigen mailserver (IMAP/SMTP)." },
   { q: "Is er een app voor mijn team?", a: "Ja. De VINVARO-app voor iOS en Android werkt ook offline: foto's en workflowantwoorden worden verstuurd zodra er weer bereik is." },
   { q: "Kan ik advertentiefoto's bewerken in VINVARO?", a: "Ja. In de Fotostudio haal je de achtergrond weg, zet je de auto in een studio, retoucheer je met AI en dek je het kenteken af met een blanco plaat of je logo. Bijsnijden, draaien en kleur aanpassen kan ook. Het origineel blijft altijd bewaard." },
   { q: "Hoe krijg ik hulp als ik vastloop?", a: "Klik in VINVARO op Support. Linda, onze AI-assistent, beantwoordt vragen direct, dag en nacht. Tijdens kantooruren (ma–vr 09:00–17:00) neemt een collega het gesprek over, en via tickets volg je de voortgang. Het helpcentrum staat vol handleidingen." },
   { q: "Hoe snel kan ik overstappen?", a: "Je voorraad en relaties importeer je uit Excel of csv; kanalen en agenda's koppel je zelf in een paar minuten. We plannen de overstap samen in de demo." },
-  { q: "Wat kost VINVARO?", a: "Het Dealer-plan kost € 199 per maand plus € 4 per voertuig in voorraad, exclusief btw. Alle modules, gebruikers en partners zijn inbegrepen. Je start met 30 dagen proefperiode." },
+  { q: "Wat kost VINVARO?", a: "Het Dealer-plan kost € 199 per maand plus € 6 per voertuig in voorraad, exclusief btw. Alle modules, gebruikers en partners zijn inbegrepen; alleen RDW-acties kosten € 0,50 per stuk. Je start met 30 dagen proefperiode." },
 ];
 
 /**
@@ -591,17 +598,19 @@ export const pricing = {
   items: [
     { key: "users", name: "Gebruikers", unit: "gebruiker", description: "Actieve teamleden", kind: "recurring", module: "team-app", unitPriceCents: 0, included: null },
     { key: "partners", name: "Partners", unit: "partner", description: "Transporteurs, poetsers en garages", kind: "recurring", module: "intake-en-aflevering", unitPriceCents: 0, included: null },
-    { key: "stock_vehicles", name: "Voertuigen in voorraad", unit: "voertuig", description: "Open voorraadposities", kind: "recurring", module: "voorraad", unitPriceCents: 400, included: 0 },
+    { key: "stock_vehicles", name: "Voertuigen in voorraad", unit: "voertuig", description: "Open voorraadposities", kind: "recurring", module: "voorraad", unitPriceCents: 600, included: 0 },
     { key: "marketplaces", name: "Marktplaatsen", unit: "koppeling", description: "Gekoppelde marktplaatsen", kind: "recurring", module: "publiceren", unitPriceCents: 0, included: null },
     { key: "website_feed", name: "Websitefeed", unit: "feed", description: "Actieve voorraadfeeds", kind: "recurring", module: "publiceren", unitPriceCents: 0, included: null },
-    { key: "ai_actions", name: "AI-acties", unit: "actie", description: "Labels, leadscores en conceptantwoorden", kind: "usage", module: "intelligence", unitPriceCents: 2, included: 500 },
-    { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de Fotostudio", kind: "usage", module: "fotostudio", unitPriceCents: 10, included: 100 },
-    { key: "sign_requests", name: "Digitale ondertekeningen", unit: "verzoek", description: "Contracten verstuurd om te tekenen", kind: "usage", module: "contracten-en-facturen", unitPriceCents: 50, included: 10 },
-    { key: "kvk_lookups", name: "KVK-opvragingen", unit: "opvraging", description: "Bedrijfsgegevens uit het Handelsregister", kind: "usage", module: "crm-en-verkoop", unitPriceCents: 10, included: 50 },
+    { key: "ai_actions", name: "AI-acties", unit: "actie", description: "Labels, leadscores en conceptantwoorden", kind: "usage", module: "intelligence", unitPriceCents: 0, included: null },
+    { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de Fotostudio", kind: "usage", module: "fotostudio", unitPriceCents: 0, included: null },
+    { key: "sign_requests", name: "Digitale ondertekeningen", unit: "verzoek", description: "Contracten verstuurd om te tekenen", kind: "usage", module: "contracten-en-facturen", unitPriceCents: 0, included: null },
+    { key: "kvk_lookups", name: "KVK-opvragingen", unit: "opvraging", description: "Bedrijfsgegevens uit het Handelsregister", kind: "usage", module: "crm-en-verkoop", unitPriceCents: 0, included: null },
+    { key: "rdw_transactions", name: "RDW-acties", unit: "actie", description: "Vrijwaren, tenaamstellen, B2B-overdracht en kilometerstand", kind: "usage", module: "voorraad", unitPriceCents: 50, included: 0 },
   ] as PriceItem[],
   included: [
     "Alle modules: voorraad, workflows, inbox, CRM, agenda, contracten, facturen, publiceren, AI en de Fotostudio",
-    "100 AI-foto-bewerkingen en 500 AI-acties per maand",
+    "AI-acties, Fotostudio, digitaal ondertekenen en KVK-opvragingen bij normaal gebruik",
+    "Publiceren naar je website en marktplaatsen",
     "Support via Linda (AI, dag en nacht), tickets en het helpcentrum",
     "Onbeperkt gebruikers en partners",
     "Team-app voor iOS en Android",
@@ -611,7 +620,8 @@ export const pricing = {
     "VINVARO Handelsplein en Marktplaats, gratis en zonder transactiekosten",
   ],
   faq: [
-    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 4 per voertuig dat in voorraad staat. Publiceren naar marktplaatsen en je websitefeed zijn inbegrepen; AI-acties, foto-bewerkingen, ondertekeningen en KVK-opvragingen hebben een ruime maandbundel. Alle prijzen zijn exclusief btw." },
+    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 6 per voertuig dat in voorraad staat. De enige extra is € 0,50 per RDW-actie die je vanuit VINVARO doet. Al het andere is inbegrepen: publiceren, websitefeed, AI, Fotostudio, digitaal ondertekenen en KVK. Alle prijzen zijn exclusief btw." },
+    { q: "Wat kosten RDW-acties?", a: "€ 0,50 per geslaagde actie vanuit VINVARO: vrijwaren, tijdelijk documentnummer, B2B-overdracht of kilometerstand melden. Daarnaast betaal je je RDW-provider (A2SP of RDC) en de wettelijke RDW-leges, zoals € 3,85 bij vrijwaren, rechtstreeks." },
     { q: "Hoe wordt een voertuig in voorraad geteld?", a: "Elke open voorraadpositie telt. Verkoop of lever je een auto af en sluit je de voorraadperiode, dan telt hij niet meer mee in de volgende periode." },
     { q: "Betaal ik per gebruiker?", a: "Nee. Gebruikers en externe partners zijn onbeperkt en gratis. Je hele team, inclusief werkplaats en poetsers, werkt in VINVARO zonder extra kosten." },
     { q: "Hoe werkt de proefperiode?", a: "Je probeert VINVARO 30 dagen met alle modules. De proefperiode is kosteloos; daarna start je eerste maandperiode." },
