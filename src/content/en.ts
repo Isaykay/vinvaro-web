@@ -524,7 +524,7 @@ export const faq = [
   { q: "Can I edit listing photos in VINVARO?", a: "Yes. In the Photo studio you remove the background, place the car in a studio, retouch with AI and cover the licence plate with a blank plate or your logo. Cropping, rotating and colour adjustments work too. The original is always kept." },
   { q: "How do I get help when I'm stuck?", a: "Click Support in VINVARO. Linda, our AI assistant, answers questions straight away, day and night. During office hours (Mon–Fri 09:00–17:00) a colleague takes over the conversation, and tickets let you follow progress. The help center is full of guides." },
   { q: "How quickly can I switch?", a: "Import your stock and contacts from Excel or CSV; connect channels and calendars yourself in a few minutes. We plan the switch together in the demo." },
-  { q: "What does VINVARO cost?", a: "The Dealer plan costs €199 per month plus €6 per vehicle in stock, excluding VAT. All modules, users and partners are included; only RDW transactions cost €0.50 each. You start with a 30-day trial." },
+  { q: "What does VINVARO cost?", a: "The Dealer plan costs €199 per month plus €6.50 per vehicle in stock, excluding VAT. All modules, users, partners and RDW transactions are included. You start with a 30-day trial." },
 ];
 
 const itemEn: Record<string, [string, string, string]> = {
@@ -557,8 +557,8 @@ export const pricing: typeof nlPricing = {
     "VINVARO Trade network and Marketplace, free and without transaction fees",
   ],
   faq: [
-    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €6 per vehicle in stock. The only extra is €0.50 per RDW transaction you do from VINVARO. Everything else is included: publishing, website feed, AI, Photo studio, e-signing and KVK. All prices exclude VAT." },
-    { q: "What do RDW transactions cost?", a: "€0.50 per successful transaction from VINVARO: indemnifying, a temporary document number, a B2B transfer or reporting the odometer. On top of that you pay your RDW provider (A2SP or RDC) and the statutory RDW fees, such as €3.85 for indemnifying, directly." },
+    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €6.50 per vehicle in stock. Nothing else: RDW transactions, publishing, website feed, AI, Photo studio, e-signing and KVK are included. All prices exclude VAT." },
+    { q: "What do RDW transactions cost?", a: "Nothing extra. Indemnifying, temporary document numbers, B2B transfers and odometer reports from VINVARO are part of the price per vehicle. Your RDW provider (A2SP or RDC) and the statutory RDW fees, such as €3.85 for indemnifying, are paid directly." },
     { q: "How is a vehicle in stock counted?", a: "Every open stock entry counts. Sell or deliver a car and close its stock period, and it no longer counts in the next period." },
     { q: "Do I pay per user?", a: "No. Users and external partners are unlimited and free. Your whole team, including the workshop and detailers, works in VINVARO at no extra cost." },
     { q: "How does the trial work?", a: "You try VINVARO for 30 days with every module. The trial is free; your first monthly period starts afterwards." },

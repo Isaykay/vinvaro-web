@@ -80,9 +80,6 @@ const ranges: Record<string, { max: number; step: number; initial: number }> = {
   stock_vehicles: { max: 5000, step: 1, initial: 45 },
 };
 
-/** RDW actions per vehicle in stock per month: about half the stock sells monthly, each sale takes about two actions. */
-const RDW_PER_VEHICLE = 1;
-
 /** Sliders run on a quadratic curve so small dealers keep precision while large ones can reach the top. */
 const CURVE = 2;
 const SLIDER_STEPS = 1000;
@@ -96,7 +93,6 @@ export function PricingCalculator() {
   const channels = integrations.filter((i) => i.category === integrationCategories[0] && i.slug);
   const marketplaceOptions = channels.filter((i) => i.slug !== "vinvaro");
   const networks = channels.filter((i) => i.slug === "vinvaro");
-  const rdwItem = pricing.items.find((i) => i.key === "rdw_transactions");
   const morePortals = integrations.find((i) => i.category === integrationCategories[0] && !i.slug);
   const [values, setValues] = useState<Record<string, number>>(Object.fromEntries(Object.entries(ranges).map(([k, r]) => [k, r.initial])));
   const interacted = useRef(false);
@@ -113,7 +109,6 @@ export function PricingCalculator() {
     const timer = window.setTimeout(() => {
       track("pricing_estimate", {
         stock_vehicles: values.stock_vehicles,
-        rdw_transactions: Math.round(values.stock_vehicles * RDW_PER_VEHICLE),
       });
     }, 800);
     return () => window.clearTimeout(timer);
@@ -123,7 +118,7 @@ export function PricingCalculator() {
     new Intl.NumberFormat(numberLocale[lang], { style: "currency", currency: "EUR", minimumFractionDigits: cents % 100 ? 2 : 0, maximumFractionDigits: 2 }).format(cents / 100);
   const num = (n: number) => new Intl.NumberFormat(numberLocale[lang]).format(n);
 
-  const quantity = (key: string) => (key === "rdw_transactions" ? Math.round((values.stock_vehicles ?? 0) * RDW_PER_VEHICLE) : (values[key] ?? 0));
+  const quantity = (key: string) => values[key] ?? 0;
   const lines = pricing.items
     .filter((i) => i.unitPriceCents > 0)
     .map((i) => {
@@ -186,18 +181,6 @@ export function PricingCalculator() {
                     {item.included ? ` · ${t.included(num(item.included))}` : ""}
                   </span>
                 </div>
-                {key === "stock_vehicles" && rdwItem && (
-                  <div>
-                    <span className="flex items-baseline justify-between gap-3">
-                      <span className="text-[14px] font-medium">{t.sliders.rdw_transactions}</span>
-                      <span className="text-[15px] font-semibold tabular-nums">≈ {num(quantity("rdw_transactions"))}</span>
-                    </span>
-                    <span className="mt-0.5 block max-w-[46ch] text-[12.5px] leading-snug text-muted">{t.hints.rdw_transactions}</span>
-                    <span className="mt-1 block text-[12px] text-subtle">
-                      {money(rdwItem.unitPriceCents)} / {rdwItem.unit}
-                    </span>
-                  </div>
-                )}
                 {key === "stock_vehicles" && (
                   <div>
                     <span className="flex items-baseline justify-between gap-3">

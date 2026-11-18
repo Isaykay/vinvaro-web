@@ -568,7 +568,7 @@ export const faq = [
   { q: "Kan ik advertentiefoto's bewerken in VINVARO?", a: "Ja. In de Fotostudio haal je de achtergrond weg, zet je de auto in een studio, retoucheer je met AI en dek je het kenteken af met een blanco plaat of je logo. Bijsnijden, draaien en kleur aanpassen kan ook. Het origineel blijft altijd bewaard." },
   { q: "Hoe krijg ik hulp als ik vastloop?", a: "Klik in VINVARO op Support. Linda, onze AI-assistent, beantwoordt vragen direct, dag en nacht. Tijdens kantooruren (ma–vr 09:00–17:00) neemt een collega het gesprek over, en via tickets volg je de voortgang. Het helpcentrum staat vol handleidingen." },
   { q: "Hoe snel kan ik overstappen?", a: "Je voorraad en relaties importeer je uit Excel of csv; kanalen en agenda's koppel je zelf in een paar minuten. We plannen de overstap samen in de demo." },
-  { q: "Wat kost VINVARO?", a: "Het Dealer-plan kost € 199 per maand plus € 6 per voertuig in voorraad, exclusief btw. Alle modules, gebruikers en partners zijn inbegrepen; alleen RDW-acties kosten € 0,50 per stuk. Je start met 30 dagen proefperiode." },
+  { q: "Wat kost VINVARO?", a: "Het Dealer-plan kost € 199 per maand plus € 6,50 per voertuig in voorraad, exclusief btw. Alle modules, gebruikers, partners en RDW-acties zijn inbegrepen. Je start met 30 dagen proefperiode." },
 ];
 
 /**
@@ -598,14 +598,14 @@ export const pricing = {
   items: [
     { key: "users", name: "Gebruikers", unit: "gebruiker", description: "Actieve teamleden", kind: "recurring", module: "team-app", unitPriceCents: 0, included: null },
     { key: "partners", name: "Partners", unit: "partner", description: "Transporteurs, poetsers en garages", kind: "recurring", module: "intake-en-aflevering", unitPriceCents: 0, included: null },
-    { key: "stock_vehicles", name: "Voertuigen in voorraad", unit: "voertuig", description: "Open voorraadposities", kind: "recurring", module: "voorraad", unitPriceCents: 600, included: 0 },
+    { key: "stock_vehicles", name: "Voertuigen in voorraad", unit: "voertuig", description: "Open voorraadposities", kind: "recurring", module: "voorraad", unitPriceCents: 650, included: 0 },
     { key: "marketplaces", name: "Marktplaatsen", unit: "koppeling", description: "Gekoppelde marktplaatsen", kind: "recurring", module: "publiceren", unitPriceCents: 0, included: null },
     { key: "website_feed", name: "Websitefeed", unit: "feed", description: "Actieve voorraadfeeds", kind: "recurring", module: "publiceren", unitPriceCents: 0, included: null },
     { key: "ai_actions", name: "AI-acties", unit: "actie", description: "Labels, leadscores en conceptantwoorden", kind: "usage", module: "intelligence", unitPriceCents: 0, included: null },
     { key: "photo_edits", name: "Foto-bewerkingen", unit: "bewerking", description: "AI-bewerkingen in de Fotostudio", kind: "usage", module: "fotostudio", unitPriceCents: 0, included: null },
     { key: "sign_requests", name: "Digitale ondertekeningen", unit: "verzoek", description: "Contracten verstuurd om te tekenen", kind: "usage", module: "contracten-en-facturen", unitPriceCents: 0, included: null },
     { key: "kvk_lookups", name: "KVK-opvragingen", unit: "opvraging", description: "Bedrijfsgegevens uit het Handelsregister", kind: "usage", module: "crm-en-verkoop", unitPriceCents: 0, included: null },
-    { key: "rdw_transactions", name: "RDW-acties", unit: "actie", description: "Vrijwaren, tenaamstellen, B2B-overdracht en kilometerstand", kind: "usage", module: "voorraad", unitPriceCents: 50, included: 0 },
+    { key: "rdw_transactions", name: "RDW-acties", unit: "actie", description: "Vrijwaren, tenaamstellen, B2B-overdracht en kilometerstand", kind: "usage", module: "voorraad", unitPriceCents: 0, included: null },
   ] as PriceItem[],
   included: [
     "Alle modules: voorraad, workflows, inbox, CRM, agenda, contracten, facturen, publiceren, AI en de Fotostudio",
@@ -620,8 +620,8 @@ export const pricing = {
     "VINVARO Handelsplein en Marktplaats, gratis en zonder transactiekosten",
   ],
   faq: [
-    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 6 per voertuig dat in voorraad staat. De enige extra is € 0,50 per RDW-actie die je vanuit VINVARO doet. Al het andere is inbegrepen: publiceren, websitefeed, AI, Fotostudio, digitaal ondertekenen en KVK. Alle prijzen zijn exclusief btw." },
-    { q: "Wat kosten RDW-acties?", a: "€ 0,50 per geslaagde actie vanuit VINVARO: vrijwaren, tijdelijk documentnummer, B2B-overdracht of kilometerstand melden. Daarnaast betaal je je RDW-provider (A2SP of RDC) en de wettelijke RDW-leges, zoals € 3,85 bij vrijwaren, rechtstreeks." },
+    { q: "Wat betaal ik precies?", a: "€ 199 per maand voor het hele bedrijf, plus € 6,50 per voertuig dat in voorraad staat. Verder niets: RDW-acties, publiceren, websitefeed, AI, Fotostudio, digitaal ondertekenen en KVK zijn inbegrepen. Alle prijzen zijn exclusief btw." },
+    { q: "Wat kosten RDW-acties?", a: "Niets extra. Vrijwaren, tijdelijk documentnummer, B2B-overdracht en kilometerstand melden vanuit VINVARO zitten in de prijs per auto. Je RDW-provider (A2SP of RDC) en de wettelijke RDW-leges, zoals € 3,85 bij vrijwaren, betaal je rechtstreeks." },
     { q: "Hoe wordt een voertuig in voorraad geteld?", a: "Elke open voorraadpositie telt. Verkoop of lever je een auto af en sluit je de voorraadperiode, dan telt hij niet meer mee in de volgende periode." },
     { q: "Betaal ik per gebruiker?", a: "Nee. Gebruikers en externe partners zijn onbeperkt en gratis. Je hele team, inclusief werkplaats en poetsers, werkt in VINVARO zonder extra kosten." },
     { q: "Hoe werkt de proefperiode?", a: "Je probeert VINVARO 30 dagen met alle modules. De proefperiode is kosteloos; daarna start je eerste maandperiode." },
