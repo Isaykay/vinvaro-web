@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
+import { Check } from "lucide-react";
 import { getContent } from "@/lib/content";
 import { defineCopy, numberLocale } from "@/lib/i18n";
 import { track } from "@/lib/analytics";
@@ -41,6 +42,7 @@ const copy = defineCopy({
     publishTitle: "Publiceren",
     publishHint: "Naar je eigen website, de VINVARO-netwerken en meer dan 185 portals. Klik op de laatste om alle sites te zien.",
     includedAll: "Alles inbegrepen",
+    freeTitle: "Gratis inbegrepen",
     soon: "binnenkort",
   },
   en: {
@@ -72,6 +74,7 @@ const copy = defineCopy({
     publishTitle: "Publishing",
     publishHint: "To your own website, the VINVARO networks and more than 185 portals. Click the last one to see all sites.",
     includedAll: "Everything included",
+    freeTitle: "Included for free",
     soon: "soon",
   },
 });
@@ -235,18 +238,7 @@ export function PricingCalculator() {
             <span className="font-medium">{t.plan}</span>
             <span className="tabular-nums">{money(pricing.basePriceCents)}</span>
           </li>
-          <li className="flex items-start justify-between gap-3 py-2.5 text-muted">
-            <span className="min-w-0">
-              <span className="block">{t.includedAll}</span>
-              <span className="block text-[11.5px] text-subtle">
-                {pricing.items
-                  .filter((i) => i.unitPriceCents === 0)
-                  .map((i) => i.name)
-                  .join(", ")}
-              </span>
-            </span>
-            <span className="shrink-0 tabular-nums">{money(0)}</span>
-          </li>
+
           {lines.map(({ item, qty, billable, amount }) => (
             <li key={item.key} className={clsx("flex items-center justify-between gap-3 py-2.5", amount === 0 && "text-muted")}>
               <span className="min-w-0">
@@ -281,6 +273,17 @@ export function PricingCalculator() {
               <Icon name="vehicle" size={13} /> {t.perVehicle(money(Math.round(subtotal / vehicles)))}
             </p>
           )}
+        </div>
+        <div className="mt-5">
+          <p className="text-[12px] font-semibold tracking-[0.12em] text-ok uppercase">{t.freeTitle}</p>
+          <ul className="mt-2.5 grid gap-x-4 gap-y-1.5 text-[13px] sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            {pricing.free.map((f) => (
+              <li key={f} className="flex items-start gap-2">
+                <Check className="mt-0.5 size-3.5 shrink-0 text-ok" strokeWidth={2.5} />
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

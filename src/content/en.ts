@@ -524,7 +524,7 @@ export const faq = [
   { q: "Can I edit listing photos in VINVARO?", a: "Yes. In the Photo studio you remove the background, place the car in a studio, retouch with AI and cover the licence plate with a blank plate or your logo. Cropping, rotating and colour adjustments work too. The original is always kept." },
   { q: "How do I get help when I'm stuck?", a: "Click Support in VINVARO. Linda, our AI assistant, answers questions straight away, day and night. During office hours (Mon–Fri 09:00–17:00) a colleague takes over the conversation, and tickets let you follow progress. The help center is full of guides." },
   { q: "How quickly can I switch?", a: "Import your stock and contacts from Excel or CSV; connect channels and calendars yourself in a few minutes. We plan the switch together in the demo." },
-  { q: "What does VINVARO cost?", a: "The Dealer plan costs €199 per month plus €6.50 per vehicle in stock, excluding VAT. All modules, users, partners and RDW transactions are included. You start with a 30-day trial." },
+  { q: "What does VINVARO cost?", a: "The Dealer plan costs €199 per month plus €5 per vehicle in stock, excluding VAT. All modules, users, partners and RDW transactions are included. You start with a 30-day trial." },
 ];
 
 const itemEn: Record<string, [string, string, string]> = {
@@ -544,10 +544,27 @@ export const pricing: typeof nlPricing = {
   ...nlPricing,
   planBody: "Everything for one dealership.",
   items: nlPricing.items.map((i) => ({ ...i, name: itemEn[i.key][0], unit: itemEn[i.key][1], description: itemEn[i.key][2] })),
+  free: [
+    "Unlimited users and partners",
+    "Every module: inventory, workflows, CRM, calendar, contracts and invoices",
+    "RDW transactions: indemnify, registration, B2B and odometer",
+    "Publishing to your website and 185+ portals",
+    "VINVARO Marketplace and Trade network",
+    "Website feed with trade-in module and inquiry forms",
+    "Shared inbox with Gmail, Outlook and WhatsApp",
+    "AI agent and AI actions",
+    "Photo studio with AI edits",
+    "E-signing",
+    "Invoices to your bookkeeping and bank connection",
+    "RDW data, KVK and VIES",
+    "Staff app for iOS and Android",
+    "Support and help with switching",
+  ],
   included: [
     "Every module: inventory, workflows, inbox, CRM, calendar, contracts, invoices, publishing, AI and the Photo studio",
     "AI actions, Photo studio, e-signing and KVK lookups with normal use",
     "Publishing to your website and marketplaces",
+    "RDW transactions: indemnify, registration codes, B2B transfer and odometer",
     "Support via Linda (AI, day and night), tickets and the help center",
     "Unlimited users and partners",
     "Staff app for iOS and Android",
@@ -557,7 +574,7 @@ export const pricing: typeof nlPricing = {
     "VINVARO Trade network and Marketplace, free and without transaction fees",
   ],
   faq: [
-    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €6.50 per vehicle in stock. Nothing else: RDW transactions, publishing, website feed, AI, Photo studio, e-signing and KVK are included. All prices exclude VAT." },
+    { q: "What exactly do I pay?", a: "€199 per month for the whole business, plus €5 per vehicle in stock. Nothing else: RDW transactions, publishing, website feed, AI, Photo studio, e-signing and KVK are included. All prices exclude VAT." },
     { q: "What do RDW transactions cost?", a: "Nothing extra. Indemnifying, temporary document numbers, B2B transfers and odometer reports from VINVARO are part of the price per vehicle. Your RDW provider (A2SP or RDC) and the statutory RDW fees, such as €3.85 for indemnifying, are paid directly." },
     { q: "How is a vehicle in stock counted?", a: "Every open stock entry counts. Sell or deliver a car and close its stock period, and it no longer counts in the next period." },
     { q: "Do I pay per user?", a: "No. Users and external partners are unlimited and free. Your whole team, including the workshop and detailers, works in VINVARO at no extra cost." },
