@@ -185,12 +185,12 @@ export default async function PricingPage() {
                   </div>
                   <div className="mt-3 rounded-2xl bg-[#7ee2a8]/10 px-4 py-3.5 ring-1 ring-[#7ee2a8]/25">
                     <div className="flex items-baseline justify-between gap-3">
-                      <span className="text-[13px] text-white/70">{t.fteTitle}</span>
+                      <span className="text-[13px] text-white/85">{t.fteTitle}</span>
                       <span className="text-[24px] font-semibold tracking-[-0.03em] text-[#7ee2a8] tabular-nums">
                         ≈ {new Intl.NumberFormat(numberLocale[lang], { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(savings.fte)} fte
                       </span>
                     </div>
-                    <p className="mt-1 text-[12.5px] leading-snug text-white/55">{t.fteBody(EXAMPLE_STOCK, m(Math.round(savings.cents / 10000) * 10000))}</p>
+                    <p className="mt-1 text-[12.5px] leading-snug text-white/80">{t.fteBody(EXAMPLE_STOCK, m(Math.round(savings.cents / 10000) * 10000))}</p>
                   </div>
                   <div className="mt-6 flex flex-wrap gap-2.5">
                     <Button href={site.signupUrl} size="lg" arrow>

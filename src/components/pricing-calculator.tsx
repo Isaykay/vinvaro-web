@@ -271,25 +271,25 @@ export function PricingCalculator() {
         </div>
         <div className="mt-4 rounded-xl bg-ink px-4 py-3.5 text-white">
           <div className="flex items-baseline justify-between">
-            <span className="text-[13px] text-white/65">{t.total}</span>
+            <span className="text-[13px] text-white/85">{t.total}</span>
             <span key={subtotal} className="animate-row-in text-[26px] font-semibold tracking-[-0.03em] tabular-nums">
               {money(subtotal + vat)}
             </span>
           </div>
           {vehicles > 0 && (
-            <p className="mt-1 flex items-center gap-1.5 text-[12px] text-white/55">
+            <p className="mt-1 flex items-center gap-1.5 text-[12px] text-white/80">
               <Icon name="vehicle" size={13} /> {t.perVehicle(money(Math.round(subtotal / vehicles)))}
             </p>
           )}
           {vehicles > 0 && (
-            <div className="mt-3.5 border-t border-white/15 pt-3">
+            <div className="mt-3.5 border-t border-white/20 pt-3">
               <div className="flex items-baseline justify-between gap-3">
-                <span className="text-[13px] text-white/65">{t.fteTitle}</span>
+                <span className="text-[13px] text-white/85">{t.fteTitle}</span>
                 <span className="text-[20px] font-semibold tracking-[-0.02em] text-[#7ee2a8] tabular-nums">
                   ≈ {new Intl.NumberFormat(numberLocale[lang], { maximumFractionDigits: 1, minimumFractionDigits: 1 }).format(fteSaved)} fte
                 </span>
               </div>
-              <p className="mt-1 text-[12px] text-white/55">{t.fteValue(money(Math.round(savedCents / 10000) * 10000), savedCents > subtotal ? Math.round(savedCents / subtotal) : 0)}</p>
+              <p className="mt-1 text-[12px] text-white/80">{t.fteValue(money(Math.round(savedCents / 10000) * 10000), savedCents > subtotal ? Math.round(savedCents / subtotal) : 0)}</p>
             </div>
           )}
         </div>
