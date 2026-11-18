@@ -43,6 +43,8 @@ const copy = defineCopy({
     publishHint: "Je eigen website, de VINVARO-netwerken en meer dan 185 portals.",
     includedAll: "Alles inbegrepen",
     freeTitle: "Gratis inbegrepen",
+    fteTitle: "Bespaard op personeel",
+    fteValue: (v: string, x: number) => `± ${v} loonkosten per maand${x > 1 ? ` · ${x}× terugverdiend` : ""}. Indicatie op basis van ± 3 uur per verkochte auto.`,
     soon: "binnenkort",
   },
   en: {
@@ -75,6 +77,8 @@ const copy = defineCopy({
     publishHint: "Your own website, the VINVARO networks and more than 185 portals.",
     includedAll: "Everything included",
     freeTitle: "Included for free",
+    fteTitle: "Saved on staff",
+    fteValue: (v: string, x: number) => `± ${v} in payroll per month${x > 1 ? ` · ${x}× return` : ""}. Estimate based on ± 3 hours per car sold.`,
     soon: "soon",
   },
 });
@@ -82,6 +86,16 @@ const copy = defineCopy({
 const ranges: Record<string, { max: number; step: number; initial: number }> = {
   stock_vehicles: { max: 5000, step: 1, initial: 45 },
 };
+
+/**
+ * Time saved, as in the VINVARO value model: about half the stock sells per month, each sale saves
+ * ± 190 minutes (intake, photos and publishing, contract, invoice, RDW, workflows) plus ± 39 hours of
+ * fixed admin per month. 140 productive hours and € 4,000 employer cost per FTE.
+ */
+const SAVED_MIN_PER_SALE = 190;
+const SAVED_FIXED_HOURS = 39;
+const FTE_HOURS = 140;
+const FTE_COST_CENTS = 400000;
 
 /** Sliders run on a quadratic curve so small dealers keep precision while large ones can reach the top. */
 const CURVE = 2;
@@ -131,6 +145,8 @@ export function PricingCalculator() {
   const subtotal = pricing.basePriceCents + lines.reduce((n, l) => n + l.amount, 0);
   const vat = Math.round((subtotal * pricing.vatRate) / 100);
   const vehicles = values.stock_vehicles || 0;
+  const fteSaved = vehicles > 0 ? ((vehicles / 2) * (SAVED_MIN_PER_SALE / 60) + SAVED_FIXED_HOURS) / FTE_HOURS : 0;
+  const savedCents = Math.round(fteSaved * FTE_COST_CENTS);
 
   return (
     <div className="grid gap-4 rounded-[22px] border border-line bg-surface p-4 shadow-float sm:p-6 lg:grid-cols-[1fr_0.95fr] lg:gap-8">
@@ -274,6 +290,17 @@ export function PricingCalculator() {
             <p className="mt-1 flex items-center gap-1.5 text-[12px] text-white/55">
               <Icon name="vehicle" size={13} /> {t.perVehicle(money(Math.round(subtotal / vehicles)))}
             </p>
+          )}
+          {vehicles > 0 && (
+            <div className="mt-3.5 border-t border-white/15 pt-3">
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="text-[13px] text-white/65">{t.fteTitle}</span>
+                <span className="text-[20px] font-semibold tracking-[-0.02em] text-[#7ee2a8] tabular-nums">
+                  ≈ {new Intl.NumberFormat(numberLocale[lang], { maximumFractionDigits: 1, minimumFractionDigits: 1 }).format(fteSaved)} fte
+                </span>
+              </div>
+              <p className="mt-1 text-[12px] text-white/55">{t.fteValue(money(Math.round(savedCents / 10000) * 10000), savedCents > subtotal ? Math.round(savedCents / subtotal) : 0)}</p>
+            </div>
           )}
         </div>
       </div>
