@@ -8,7 +8,7 @@ export const site = {
   tagline: "Every vehicle. Every detail. Under control.",
   description:
     "VINVARO brings vehicles, customers and operations together in one workspace. From registration and intake to test drive, contract, listing and delivery, for automotive businesses that want control without scattered systems.",
-  news: { label: "New: Check, AI follow-up and the digital glovebox", href: "/platform/check" },
+  news: { label: "New: the VINVARO Agent", href: "/agent" },
 };
 
 export const nav: {

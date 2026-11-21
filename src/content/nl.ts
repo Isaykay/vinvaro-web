@@ -18,7 +18,7 @@ export const site = {
   tagline: "Elk voertuig. Elk detail. Onder controle.",
   description:
     "VINVARO brengt voertuigen, klanten en processen samen in één werkplek. Van kenteken en intake tot proefrit, contract, publicatie en aflevering, voor autobedrijven die overzicht willen zonder losse systemen.",
-  news: { label: "Nieuw: Check, AI-opvolging en het digitale dashboardkastje", href: "/platform/check" },
+  news: { label: "Nieuw: de VINVARO Agent", href: "/agent" },
 };
 
 export type NavLink = { label: string; href: string; description?: string; logo?: string };

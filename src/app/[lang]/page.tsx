@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { ArrowRight, Minus } from "lucide-react";
 import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
+import { integrations as nlIntegrations } from "@/content/nl";
 import { defineCopy } from "@/lib/i18n";
 import { getLang } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
@@ -32,6 +33,7 @@ const copy = defineCopy({
     bookDemo: "Plan een demo",
     seeHow: "Bekijk hoe het werkt",
     worksWith: "Werkt met",
+    moreIntegrations: "+ {n} meer",
     agent: {
       eyebrow: "Nieuw · VINVARO Agent",
       title: "Zeg het in gewone taal.",
@@ -105,6 +107,7 @@ const copy = defineCopy({
     bookDemo: "Book a demo",
     seeHow: "See how it works",
     worksWith: "Works with",
+    moreIntegrations: "+ {n} more",
     agent: {
       eyebrow: "New · VINVARO Agent",
       title: "Say it in plain language.",
@@ -177,16 +180,26 @@ export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata({ lang, path: "/", title: copy[lang].metaTitle, description: site.description });
 }
 
-const worksWith: { name: string; slug?: string; channel?: "whatsapp" | "gmail" | "outlook" }[] = [
-  { name: "RDW", slug: "rdw" },
-  { name: "mobile.de", slug: "mobilede" },
-  { name: "AutoScout24", slug: "autoscout24" },
-  { name: "WhatsApp", channel: "whatsapp" },
-  { name: "Gmail", channel: "gmail" },
-  { name: "Outlook", channel: "outlook" },
-  { name: "Google Agenda", slug: "gcal" },
-  { name: "KVK", slug: "kvk" },
-]
+/** `integration` is the name in the integration catalogue, so the "+ more" count stays right. */
+const worksWith: { name: string; integration: string; slug?: string; channel?: "whatsapp" | "gmail" | "outlook" }[] = [
+  { name: "RDW", integration: "RDW Open Data", slug: "rdw" },
+  { name: "Marktplaats", integration: "Marktplaats", slug: "marktplaats" },
+  { name: "mobile.de", integration: "mobile.de", slug: "mobilede" },
+  { name: "AutoScout24", integration: "AutoScout24", slug: "autoscout24" },
+  { name: "AutoTrack", integration: "AutoTrack", slug: "autotrack" },
+  { name: "Gaspedaal", integration: "Gaspedaal", slug: "gaspedaal" },
+  { name: "ViaBOVAG", integration: "ViaBOVAG", slug: "viabovag" },
+  { name: "WhatsApp", integration: "WhatsApp Business", channel: "whatsapp" },
+  { name: "Gmail", integration: "Gmail", channel: "gmail" },
+  { name: "Outlook", integration: "Outlook / Microsoft 365", channel: "outlook" },
+  { name: "KVK", integration: "KVK Handelsregister", slug: "kvk" },
+];
+
+/** Live integrations not shown in the hero row, counting the "+ 176 andere sites" entry as its number. */
+function moreIntegrations() {
+  const shown = new Set(worksWith.map((w) => w.integration));
+  return nlIntegrations.filter((i) => i.status === "live" && !shown.has(i.name)).reduce((n, i) => n + (Number(/^\+ (\d+)/.exec(i.name)?.[1]) || 1), 0);
+}
 
 export default async function Home() {
   const lang = await getLang();
@@ -233,6 +246,9 @@ export default async function Home() {
                   {w.name}
                 </span>
               ))}
+              <Link href="/integraties" className="inline-flex h-6 items-center rounded-full bg-surface px-2.5 font-medium text-ink-2 ring-1 ring-line transition-colors hover:text-brand">
+                {t.moreIntegrations.replace("{n}", String(moreIntegrations()))}
+              </Link>
             </div>
           </div>
 
