@@ -13,7 +13,10 @@ export const site = {
   /** Office hours in Europe/Amsterdam; days use getDay() numbering (0 = zondag). */
   hours: { days: [1, 2, 3, 4, 5], open: "09:00", close: "17:00", label: "ma–vr 09:00–17:00" },
   legalName: "VINVARO",
-  socials: [{ label: "LinkedIn", href: "https://www.linkedin.com/company/vinvaro/" }],
+  socials: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/vinvaro/", icon: "linkedin" },
+    { label: "Instagram", href: "https://www.instagram.com/vinvaro.nl", icon: "instagram" },
+  ] as { label: string; href: string; icon: "linkedin" | "instagram" }[],
   category: "Het besturingssysteem voor autobedrijven",
   tagline: "Elk voertuig. Elk detail. Onder controle.",
   description:

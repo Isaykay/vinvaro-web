@@ -10,6 +10,11 @@ import { StoreBadges } from "@/components/store-badges";
 
 type FooterLink = { label: string; href: string };
 
+const SOCIAL_ICONS = {
+  linkedin: "M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.13V21h-4v-4.98c0-1.19-.02-2.72-1.66-2.72-1.66 0-1.92 1.3-1.92 2.63V21h-4V9.75Z",
+  instagram: "M12 2.2c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12c0-3.2.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16Zm0 4.86a4.94 4.94 0 1 0 0 9.88 4.94 4.94 0 0 0 0-9.88Zm0 8.15a3.21 3.21 0 1 1 0-6.42 3.21 3.21 0 0 1 0 6.42Zm5.14-9.5a1.15 1.15 0 1 0 0 2.3 1.15 1.15 0 0 0 0-2.3Z",
+} as const;
+
 const copy = defineCopy({
   nl: {
     tagline: "Het besturingssysteem voor autobedrijven. Voertuigen, klanten en processen samen in één werkplek, van intake tot aflevering.",
@@ -94,7 +99,7 @@ export async function Footer() {
                     className="flex size-9 items-center justify-center rounded-lg bg-sunken text-ink-2 ring-1 ring-line transition-colors hover:bg-brand hover:text-white hover:ring-brand"
                   >
                     <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden>
-                      <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.83v1.54h.06c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.13V21h-4v-4.98c0-1.19-.02-2.72-1.66-2.72-1.66 0-1.92 1.3-1.92 2.63V21h-4V9.75Z" />
+                      <path d={SOCIAL_ICONS[s.icon]} />
                     </svg>
                   </a>
                 </li>

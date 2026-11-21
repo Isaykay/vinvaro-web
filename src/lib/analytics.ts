@@ -126,6 +126,7 @@ export function classifyLink(href: string, host = typeof window !== "undefined" 
       if (/apps\.apple\.com/.test(url.host)) return { type: "outbound" as const, label: "app_store", path };
       if (/play\.google\.com/.test(url.host)) return { type: "outbound" as const, label: "google_play", path };
       if (/linkedin\.com/.test(url.host)) return { type: "outbound" as const, label: "linkedin", path };
+      if (/instagram\.com/.test(url.host)) return { type: "outbound" as const, label: "instagram", path };
       if (/app\.vinvaro\.com/.test(url.host)) {
         if (path.includes("signup")) return { type: "cta" as const, label: "signup", path };
         return { type: "cta" as const, label: "login", path };
