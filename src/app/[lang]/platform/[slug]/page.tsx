@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "@/components/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { getContent } from "@/lib/content";
+import { getContent, type ModuleVisualKey } from "@/lib/content";
 import { defaultLang, defineCopy } from "@/lib/i18n";
 import { getLang } from "@/lib/i18n-server";
 import { pageMetadata } from "@/lib/seo";
@@ -30,6 +30,8 @@ const copy = defineCopy({
     appPoints: ["Synced in real time with the web workspace", "Capture offline, sent automatically later", "Push notifications for tasks and messages"],
     demo: "Book a demo", platform: "Explore the platform", more: "More of the platform", view: "View", faqEyebrow: "FAQ", faqTitle: (name: string) => `Questions about ${name}` },
 });
+
+const WEB_ONLY = new Set<ModuleVisualKey>(["check", "responder", "glovebox"]);
 
 export function generateStaticParams() {
   return getContent(defaultLang).platform.map((p) => ({ slug: p.slug }));
@@ -109,9 +111,10 @@ export default async function PlatformModulePage({ params }: PageProps<"/[lang]/
         </Container>
       </section>
 
-      <section className="border-t border-line bg-surface py-20 sm:py-28">
-        <Container>
-          <div className="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+      {!WEB_ONLY.has(mod.visual) && (
+        <section className="border-t border-line bg-surface py-20 sm:py-28">
+          <Container>
+            <div className="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
             <Reveal>
               <SectionHeader eyebrow={t.appEyebrow} title={t.appTitle} lead={t.appLead} />
               <ul className="mt-8 space-y-3">
@@ -124,9 +127,10 @@ export default async function PlatformModulePage({ params }: PageProps<"/[lang]/
             <Reveal delay={0.1}>
               <AppPhones visual={mod.visual} />
             </Reveal>
-          </div>
-        </Container>
-      </section>
+            </div>
+          </Container>
+        </section>
+      )}
 
       {mod.faq && (
         <section className="border-t border-line py-20 sm:py-24">

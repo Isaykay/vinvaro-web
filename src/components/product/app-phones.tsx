@@ -5,7 +5,9 @@ import { moduleScreens } from "@/components/product/mobile";
 
 /** Two app screens for a platform module, fanned over a soft stage. */
 export function AppPhones({ visual }: { visual: ModuleVisualKey }) {
-  const [Front, Back] = moduleScreens(visual);
+  const screens = moduleScreens(visual);
+  if (!screens) return null;
+  const [Front, Back] = screens;
   return (
     <div className="bg-stage relative flex h-[560px] items-end justify-center overflow-hidden rounded-[28px]">
       <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[520px] -translate-x-1/2 rounded-full bg-white/60 blur-3xl" />

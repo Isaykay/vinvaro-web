@@ -679,7 +679,7 @@ export function MobilePublish() {
 }
 
 /** The app screen that belongs to a platform module, for the "also in the app" section. */
-export function moduleScreens(visual: ModuleVisualKey): [() => React.JSX.Element, () => React.JSX.Element] {
+export function moduleScreens(visual: ModuleVisualKey): [() => React.JSX.Element, () => React.JSX.Element] | null {
   switch (visual) {
     case "inventory":
       return [MobileVehicle, MobileCapture];
@@ -704,5 +704,9 @@ export function moduleScreens(visual: ModuleVisualKey): [() => React.JSX.Element
       return [MobilePublish, MobileVehicle];
     case "trade":
       return [MobileDeals, MobileVehicle];
+    case "check":
+    case "responder":
+    case "glovebox":
+      return null;
   }
 }

@@ -6,6 +6,7 @@ import { PipelineBoard } from "@/components/product/hero";
 import { AgendaWeek, ContractSign, InboxView, PublishFlow, SalesPipeline } from "@/components/product/sales";
 import { MarketGrid, TradeFlow } from "@/components/product/network";
 import { PhotoStudio } from "@/components/product/studio";
+import { Glovebox, LeadResponder, TrustCheck } from "@/components/product/growth";
 
 export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
   switch (visual) {
@@ -33,5 +34,11 @@ export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
       return <TradeFlow />;
     case "market":
       return <MarketGrid />;
+    case "check":
+      return <TrustCheck />;
+    case "responder":
+      return <LeadResponder />;
+    case "glovebox":
+      return <Glovebox />;
   }
 }

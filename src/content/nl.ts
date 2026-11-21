@@ -18,7 +18,7 @@ export const site = {
   tagline: "Elk voertuig. Elk detail. Onder controle.",
   description:
     "VINVARO brengt voertuigen, klanten en processen samen in één werkplek. Van kenteken en intake tot proefrit, contract, publicatie en aflevering, voor autobedrijven die overzicht willen zonder losse systemen.",
-  news: { label: "De VINVARO Agent: vraag het in gewone taal", href: "/agent" },
+  news: { label: "Nieuw: Check, AI-opvolging en het digitale dashboardkastje", href: "/platform/check" },
 };
 
 export type NavLink = { label: string; href: string; description?: string; logo?: string };
@@ -78,6 +78,14 @@ export const nav: {
           { label: "Marktplaats", href: "/platform/marktplaats", description: "Je voorraad voor consumenten, met je reputatie" },
         ],
       },
+      {
+        title: "Nieuw",
+        links: [
+          { label: "Check", href: "/platform/check", description: "Is dit bedrijf of deze advertentie te vertrouwen?" },
+          { label: "AI-opvolging", href: "/platform/ai-opvolging", description: "Elke lead binnen een minuut een goed antwoord" },
+          { label: "Aftersales", href: "/platform/aftersales", description: "Een digitaal dashboardkastje voor je klant" },
+        ],
+      },
     ],
   },
   {
@@ -119,7 +127,7 @@ export const nav: {
   { label: "Contact", href: "/contact" },
 ];
 
-export type ModuleVisualKey = "inventory" | "intake" | "intelligence" | "studio" | "app" | "inbox" | "crm" | "agenda" | "contracts" | "publish" | "trade" | "market";
+export type ModuleVisualKey = "inventory" | "intake" | "intelligence" | "studio" | "app" | "inbox" | "crm" | "agenda" | "contracts" | "publish" | "trade" | "market" | "check" | "responder" | "glovebox";
 
 export type ModuleGroup = "vehicles" | "sales" | "network";
 
@@ -162,6 +170,8 @@ export const platform: PlatformModule[] = [
       { title: "Tenaamstelling en vrijwaring", body: "Na de verkoop zie je per auto of de tenaamstelling en vrijwaring rond zijn. Een filter toont alle auto's waar de vrijwaring nog openstaat." },
       { title: "Marge, btw en BPM per auto", body: "Inkoop, kosten, vraagprijs en marge per auto, met btw- of margeregeling en BPM. Aanbetalingen en betalingen staan op het tabblad Betalingen." },
       { title: "Meerdere auto's tegelijk", body: "Selecteer auto's in de lijst en wijzig in één keer de verkoopstatus, fase, vestiging of prijs op aanvraag, haal APK-gegevens op of zet kanalen aan en uit." },
+      { title: "Stadagen en prijsadvies", body: "Per auto zie je hoe lang hij staat en wat dat kost. Stel je eigen voorraadbeleid in; staat een auto te lang, dan krijg je een prijsvoorstel dat je met één klik doorvoert op al je kanalen." },
+      { title: "Wekelijks voorraadoverzicht", body: "Een overzicht van de auto's die over je grens gaan, in je mailbox. Met een gekoppelde waardebepaling worden ze automatisch opnieuw gewaardeerd." },
     ],
     faq: [
       { q: "Kan ik meerdere auto's tegelijk bewerken?", a: "Ja. In de voertuiglijst selecteer je auto's en wijzig je in één keer de status, fase, vestiging of prijsweergave, ververs je de APK-gegevens of zet je publicatiekanalen aan en uit." },
@@ -315,6 +325,7 @@ export const platform: PlatformModule[] = [
       { title: "Aanvragen op één plek", body: "Proefritten, informatievragen en terugbelverzoeken van je website en de VINVARO Marktplaats in één lijst, met de auto erbij en de status van de opvolging." },
       { title: "Reviews vragen", body: "Vraag na een aflevering met één klik om een review, of laat VINVARO dat automatisch doen. Beoordelingen staan op je openbare profiel en bij je auto's." },
       { title: "Adres zoeken", body: "Typ een straat of bedrijf en kies het juiste adres. Voor relaties, vestigingen, partners en ophaallocaties." },
+      { title: "Vraag en aanbod", body: "Zoekt een klant een auto die je nu niet hebt? Leg een zoekprofiel vast, of laat de AI het uit het gesprek halen. Komt er een passende auto binnen, dan zie je meteen welke klanten interesse hebben." },
     ],
   },
   {
@@ -350,7 +361,7 @@ export const platform: PlatformModule[] = [
       { title: "Facturen en creditnota's", body: "Met een productcatalogus voor afleverpakketten, accessoires en garantie. De klant bekijkt de factuur online." },
       { title: "Btw- en margeregeling", body: "Btw-auto of marge-auto, vastgelegd per voertuig en zichtbaar op factuur en feed." },
       { title: "Export naar de boekhouding", body: "Financieel overzicht en export, via Autoboeker direct in Exact Online, Twinfield, SnelStart of e-Boekhouden.nl. Moneybird volgt binnenkort." },
-      { title: "Financiering aanvragen", body: "Via Autus Finance vraag je financiering aan voor je klant, vanuit de deal." },
+      { title: "Financiering aanvragen", body: "Via Financieringsvriend vraag je financiering aan voor je klant, zakelijk of particulier. Aanvragen uit je website komen als lead binnen." },
       { title: "Documenten in je huisstijl", body: "Kies layout, kleur, lettertype en logo voor facturen en contracten, met teksten per taal. Klanten krijgen documenten die er professioneel uitzien." },
       { title: "Meerdere rechtspersonen", body: "Werk je met meerdere bv's? Per vestiging of auto bepaal je welke rechtspersoon op contract en factuur staat." },
       { title: "Betalingen per auto", body: "Registreer wat je hebt betaald en ontvangen, ook aanbetalingen en deelbetalingen. Je ziet per auto wat er nog openstaat." },
@@ -374,7 +385,8 @@ export const platform: PlatformModule[] = [
       { title: "Alle kanalen in één kaart", body: "Op het overzicht van een auto zie je per kanaal of hij online staat, wordt geplaatst of een fout heeft. Met één schakelaar zet je een kanaal aan of uit." },
       { title: "Publiceren in bulk", body: "Selecteer auto's in de voertuiglijst en zet ze in één keer online of offline, op alle kanalen of op één kanaal." },
       { title: "VINVARO Marktplaats erbij", body: "Naast mobile.de, AutoScout24 en je website staat de gratis VINVARO Marktplaats als kanaal klaar, met je reputatie bij elke auto." },
-      { title: "Meer marktplaatsen op de planning", body: "Marktplaats, Gaspedaal, ViaBOVAG en AutoWereld staan op de roadmap." },
+      { title: "Maandbedrag bij elke auto", body: "Een financieringscalculator in je websitefeed en op de marktplaats, met aparte tabbladen voor zakelijk en particulier. Je kiest zelf looptijden, aanbetaling en rente." },
+      { title: "Geen eigen website?", body: "Vraag vanuit de websitefeed een website aan die wij voor je bouwen, met je voorraad er direct in." },
     ],
     faq: [
       { q: "Wat gebeurt er als een auto verkocht is?", a: "Zodra je een auto op gereserveerd of verkocht zet, haalt VINVARO hem automatisch van alle gekoppelde kanalen. Een nieuwe vraagprijs wordt ook overal doorgevoerd." },
@@ -426,6 +438,78 @@ export const platform: PlatformModule[] = [
     faq: [
       { q: "Wat kost de Marktplaats?", a: "Niets. De VINVARO Marktplaats zit gratis in elk plan, zonder kosten per lead." },
       { q: "Kan ik niet meedoen?", a: "Ja. Je zet de marktplaats uit onder Instellingen › Integraties of Modules. Per auto bepaal je bovendien zelf of hij online staat." },
+    ],
+  },
+  {
+    slug: "check",
+    group: "sales",
+    name: "Check",
+    module: "VINVARO Check",
+    eyebrow: "Nieuw · VINVARO Check",
+    title: "Is dit bedrijf te vertrouwen? Weet het binnen seconden.",
+    lead: "Plak een website, KvK-nummer, btw-nummer, telefoonnummer of advertentielink. VINVARO controleert openbare bronnen tegelijk en geeft een score met per bron wat er klopt en wat opvalt. Handig voor inkoop bij een onbekende partij, een inruil of een zakelijke klant.",
+    visual: "check",
+    steps: ["Link of nummer", "Bronnen controleren", "Score en bevindingen", "Bewaard bij de relatie"],
+    points: [
+      { title: "Registers en btw", body: "Inschrijving en leeftijd bij de KvK en het btw-nummer bij VIES. Voor websites uit België, Duitsland en Zwitserland herkent VINVARO ook KBO-, HRB- en CHE-nummers." },
+      { title: "Google-reviews met sentiment", body: "Gemiddelde score, aantal reviews en het algemene sentiment, met de negatieve reviews apart zodat je ziet waar klanten over klagen." },
+      { title: "Website en domein", body: "Hoe lang het domein bestaat, wat het webarchief laat zien en of contactgegevens, adres en bedrijfsnaam overeenkomen met de registers." },
+      { title: "Social media", body: "Of het bedrijf op Facebook, Instagram, LinkedIn, YouTube of TikTok te vinden is, en of daar recent nog iets is geplaatst." },
+      { title: "Advertenties controleren", body: "Plak een advertentielink en VINVARO vergelijkt kenteken, RDW-gegevens en de vraagprijs met de markt. Een prijs die te mooi is om waar te zijn valt op." },
+      { title: "Live en op de achtergrond", body: "Je ziet per bron hoe de controle verloopt en hoe lang het nog duurt. Sluit je het scherm, dan loopt de check gewoon door." },
+      { title: "Bij relaties en taxaties", body: "Start een check vanaf een relatie of inruiltaxatie. Het resultaat blijft bewaard als bewijs, en oude checks verwijder je zelf." },
+      { title: "Laat zien dat jij te vertrouwen bent", body: "Check je eigen bedrijf en toon het keurmerk Geverifieerd op je openbare profiel en bij je auto's op de marktplaats." },
+    ],
+    faq: [
+      { q: "Welke bronnen gebruikt Check?", a: "Openbare bronnen: het KvK-register, VIES, Google, domeinregistratie en het webarchief, de website zelf, social media en RDW Open Data. Bronnen die niet bereikbaar zijn tellen niet negatief mee." },
+      { q: "Is een lage score een oordeel?", a: "Nee. Check laat zien wat openbaar te vinden is en wat opvalt. Een nieuw bedrijf heeft bijvoorbeeld een korte historie. Jij beslist wat je ermee doet." },
+      { q: "Werkt het voor buitenlandse bedrijven?", a: "Ja, voor de bronnen die internationaal werken: VIES, Google, domein, website en social media. Belgische, Duitse en Zwitserse registratienummers op een website worden herkend en getoond." },
+    ],
+  },
+  {
+    slug: "ai-opvolging",
+    group: "sales",
+    name: "AI-opvolging",
+    module: "VINVARO Intelligence",
+    eyebrow: "Nieuw · AI-leadopvolging",
+    title: "Elke lead binnen een minuut een goed antwoord.",
+    lead: "Een nieuwe vraag via je website, de marktplaats of de inbox? De AI stelt een antwoord op met de gegevens van de auto, je vrije tijden in de agenda en jouw toon. Jij bepaalt wat het doel is, wanneer hij werkt en wanneer hij doorgeeft aan een collega.",
+    visual: "responder",
+    steps: ["Nieuwe lead", "Concept met de auto erbij", "Jij keurt goed", "Afspraak of collega"],
+    points: [
+      { title: "Jij kiest het doel", body: "Proefrit of bezichtiging inplannen, de klant kwalificeren, een terugbelafspraak of alleen de vraag beantwoorden. Geen proefritten bij jou? Dan zet je dat doel gewoon uit." },
+      { title: "Eerst als concept", body: "Standaard maakt de AI een concept dat jij in de inbox goedkeurt of aanpast. Pas als je erop vertrouwt, laat je hem zelf versturen." },
+      { title: "Vrije tijden uit je agenda", body: "De AI stelt alleen tijden voor die echt vrij zijn, binnen je openingstijden en met de afspraakduur die jij instelt." },
+      { title: "Op tijd doorgeven", body: "Bij prijsonderhandeling, inruil, financiering of een klacht geeft de AI het gesprek door aan de collega's die jij kiest, met een taak erbij." },
+      { title: "Wanneer en hoe", body: "Altijd, alleen buiten openingstijden of op eigen tijden. Met jouw toon en ondertekening, een wachttijd voor het antwoord en een maximum aantal berichten per gesprek." },
+      { title: "Zoekprofiel uit het gesprek", body: "Noemt de klant wat hij zoekt, dan legt de AI een zoekprofiel vast. Komt er een passende auto binnen, dan zie je het meteen." },
+    ],
+    faq: [
+      { q: "Verstuurt de AI zelf berichten?", a: "Alleen als jij dat aanzet. AI-opvolging staat standaard uit en begint in conceptmodus: elk antwoord wacht op jouw goedkeuring." },
+      { q: "Wat als de AI het antwoord niet weet?", a: "Dan belooft hij niets en geeft hij het gesprek door aan een collega. Prijzen, kortingen en toezeggingen laat hij altijd aan je team." },
+    ],
+  },
+  {
+    slug: "aftersales",
+    group: "sales",
+    name: "Aftersales",
+    module: "VINVARO CRM",
+    eyebrow: "Nieuw · Digitaal dashboardkastje",
+    title: "Na de verkoop begint de klantrelatie pas.",
+    lead: "Elke koper krijgt een eigen digitaal dashboardkastje: één link met de documenten van zijn auto, de APK-datum, een knop voor een review en een inruilvoorstel. In jouw huisstijl, en met automatische berichten op de momenten die ertoe doen.",
+    visual: "glovebox",
+    steps: ["Aflevering", "Dashboardkastje per mail", "Review en APK", "Inruil of volgende auto"],
+    points: [
+      { title: "Alle papieren op één plek", body: "Factuur, koopcontract, afleverprotocol en andere documenten die jij kiest, altijd terug te vinden voor de klant. Zonder account, via een persoonlijke link." },
+      { title: "In jouw huisstijl", body: "Logo, kleuren en lettertype komen uit je documentinstellingen. Bekijk vooraf een voorbeeld van wat je klant ziet." },
+      { title: "Automatische momenten", body: "Het dashboardkastje bij de aflevering, een reviewverzoek, een APK-herinnering voor de vervaldatum en een check-in na een paar maanden. Per moment zet je het aan en kies je de timing." },
+      { title: "Reviews op het juiste moment", body: "De klant schrijft met één tik een review, die op je openbare profiel en bij je auto's verschijnt." },
+      { title: "Inruil van je eigen klanten", body: "Wat is mijn auto nu waard? De klant vraagt een inruilvoorstel aan en jij krijgt een lead met de auto erbij." },
+      { title: "Snel contact", body: "Bellen, WhatsApp, mailen of de route naar je vestiging, met één tik vanuit het dashboardkastje. Je garantietekst staat er ook in." },
+    ],
+    faq: [
+      { q: "Heeft mijn klant een account nodig?", a: "Nee. De klant opent het dashboardkastje via een persoonlijke, beveiligde link. Je kunt een link altijd intrekken." },
+      { q: "Kan ik zelf kiezen welke berichten er gaan?", a: "Ja. Elk moment, zoals het reviewverzoek of de APK-herinnering, zet je apart aan of uit, met je eigen timing." },
     ],
   },
 ];
@@ -542,7 +626,8 @@ export const integrations: Integration[] = [
       { name: "Moneybird", slug: "moneybird", soon: true },
     ],
   },
-  { name: "Autus Finance", category: "Boekhouding & financiering", status: "live", body: "Financiering aanvragen voor je klant, vanuit de deal.", slug: "autus" },
+  { name: "Financieringsvriend", category: "Boekhouding & financiering", status: "live", body: "Maandbedragen en financieringsaanvragen voor zakelijke en particuliere klanten, in je websitefeed en op de marktplaats." },
+  { name: "Verzekeringsvriend", category: "Boekhouding & financiering", status: "planned", body: "Autoverzekering voor je klant direct bij de aankoop, vanuit de deal en het digitale dashboardkastje." },
   { name: "Websitefeed", category: "Website", status: "live", body: "Je voorraad op je eigen website met widget, inruilmodule en aanvraagformulieren.", slug: "site" },
 ];
 
@@ -565,6 +650,9 @@ export const faq = [
   { q: "Welke kanalen komen in de inbox?", a: "WhatsApp Business, Gmail, Outlook / Microsoft 365 en e-mail via je eigen mailserver (IMAP/SMTP)." },
   { q: "Is er een app voor mijn team?", a: "Ja. De VINVARO-app voor iOS en Android werkt ook offline: foto's en workflowantwoorden worden verstuurd zodra er weer bereik is." },
   { q: "Kan ik advertentiefoto's bewerken in VINVARO?", a: "Ja. In de Fotostudio haal je de achtergrond weg, zet je de auto in een studio, retoucheer je met AI en dek je het kenteken af met een blanco plaat of je logo. Bijsnijden, draaien en kleur aanpassen kan ook. Het origineel blijft altijd bewaard." },
+  { q: "Wat is VINVARO Check?", a: "Een controle van een bedrijf of advertentie op basis van openbare bronnen: KvK, btw, Google-reviews, domein, website en social media. Je krijgt binnen seconden een score met per bron wat klopt en wat opvalt." },
+  { q: "Kan VINVARO leads automatisch opvolgen?", a: "Ja, met AI-opvolging. De AI stelt een antwoord op met de gegevens van de auto en je vrije tijden, gericht op het doel dat jij kiest. Het staat standaard uit en begint met concepten die jij goedkeurt." },
+  { q: "Wat is het digitale dashboardkastje?", a: "Een persoonlijke pagina voor je koper met de documenten van zijn auto, de APK-datum, een reviewknop en een inruilvoorstel. In je eigen huisstijl, met automatische berichten na de verkoop." },
   { q: "Hoe krijg ik hulp als ik vastloop?", a: "Klik in VINVARO op Support. Linda, onze AI-assistent, beantwoordt vragen direct, dag en nacht. Tijdens kantooruren (ma–vr 09:00–17:00) neemt een collega het gesprek over, en via tickets volg je de voortgang. Het helpcentrum staat vol handleidingen." },
   { q: "Hoe snel kan ik overstappen?", a: "Je voorraad en relaties importeer je uit Excel of csv; kanalen en agenda's koppel je zelf in een paar minuten. We plannen de overstap samen in de demo." },
   { q: "Wat kost VINVARO?", a: "Het Dealer-plan kost € 199 per maand plus € 5 per voertuig in voorraad, exclusief btw. Alle modules, gebruikers, partners en RDW-acties zijn inbegrepen. Je start met 30 dagen proefperiode." },
@@ -625,6 +713,10 @@ export const pricing = {
     "Facturen naar boekhouding",
     "Bankkoppeling",
     "KVK, VIES en RDW-data",
+    "VINVARO Check",
+    "AI-opvolging van leads",
+    "Digitaal dashboardkastje",
+    "Financieringscalculator",
     "Team-app iOS en Android",
     "Support en overstaphulp",
     "30 dagen gratis proberen",
