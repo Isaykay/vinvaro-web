@@ -20,7 +20,7 @@ export const site = {
   category: "Het besturingssysteem voor autobedrijven",
   tagline: "Elk voertuig. Elk detail. Onder controle.",
   description:
-    "VINVARO brengt voertuigen, klanten en processen samen in één werkplek. Van kenteken en intake tot proefrit, contract, publicatie en aflevering, voor autobedrijven die overzicht willen zonder losse systemen.",
+    "VINVARO brengt voertuigen, klanten en processen samen in één werkplek. Van kenteken en intake tot werkplaats, proefrit, contract, publicatie, aflevering en aftersales, voor autobedrijven die overzicht willen zonder losse systemen.",
   news: { label: "Nieuw: de Werkplaats, met werkorders, planbord en onderdelen", href: "/platform/werkplaats" },
 };
 
@@ -55,11 +55,11 @@ export const nav: {
     },
     groups: [
       {
-        title: "Voertuigen",
+        title: "Voertuigen & werkplaats",
         links: [
           { label: "Voorraad & dossier", href: "/platform/voorraad", description: "Eén voertuig, één complete geschiedenis" },
           { label: "Intake & aflevering", href: "/platform/intake-en-aflevering", description: "Vaste workflows met foto's en handtekening" },
-          { label: "AI & bevindingen", href: "/platform/intelligence", description: "Afwijkingen, documenten en leads met AI" },
+          { label: "Werkplaats", href: "/platform/werkplaats", description: "Werkorders, planbord, onderdelen en inkoopfacturen" },
           { label: "Fotostudio", href: "/platform/fotostudio", description: "Studiofoto's en kenteken afdekken met AI" },
           { label: "Team-app", href: "/platform/team-app", description: "Vastleggen op de werkvloer, ook offline" },
         ],
@@ -68,25 +68,25 @@ export const nav: {
         title: "Klanten & verkoop",
         links: [
           { label: "Inbox", href: "/platform/inbox", description: "WhatsApp, Gmail en Outlook in één inbox" },
-          { label: "CRM & verkoop", href: "/platform/crm-en-verkoop", description: "Relaties, aanvragen, deals en pipeline" },
-          { label: "Agenda & proefritten", href: "/platform/agenda", description: "Afspraken in de agenda van wie ze uitvoert" },
-          { label: "Contracten & facturen", href: "/platform/contracten-en-facturen", description: "Digitaal tekenen en factureren" },
-          { label: "Publiceren", href: "/platform/publiceren", description: "mobile.de, AutoScout24 en je eigen website" },
-        ],
-      },
-      {
-        title: "VINVARO-netwerk",
-        links: [
-          { label: "Handelsplein", href: "/platform/handelsplein", description: "Kopen en verkopen met andere autobedrijven, gratis" },
-          { label: "Marktplaats", href: "/platform/marktplaats", description: "Je voorraad voor consumenten, met je reputatie" },
-        ],
-      },
-      {
-        title: "Nieuw",
-        links: [
-          { label: "Werkplaats", href: "/platform/werkplaats", description: "Werkorders, planbord, onderdelen en inkoopfacturen" },
-          { label: "Check", href: "/platform/check", description: "Is dit bedrijf of deze advertentie te vertrouwen?" },
           { label: "AI-opvolging", href: "/platform/ai-opvolging", description: "Elke lead binnen een minuut een goed antwoord" },
+          { label: "CRM & verkoop", href: "/platform/crm-en-verkoop", description: "Relaties, aanvragen, deals en pipeline" },
+          { label: "Agenda & proefritten", href: "/platform/agenda", description: "Dag-, week- en maandagenda per medewerker" },
+          { label: "Contracten & facturen", href: "/platform/contracten-en-facturen", description: "Digitaal tekenen en factureren" },
+        ],
+      },
+      {
+        title: "Online & netwerk",
+        links: [
+          { label: "Publiceren", href: "/platform/publiceren", description: "185+ portals en je eigen website" },
+          { label: "Marktplaats", href: "/platform/marktplaats", description: "Je voorraad voor consumenten, met je reputatie" },
+          { label: "Handelsplein", href: "/platform/handelsplein", description: "Kopen en verkopen met andere autobedrijven, gratis" },
+        ],
+      },
+      {
+        title: "AI & na de verkoop",
+        links: [
+          { label: "AI & bevindingen", href: "/platform/intelligence", description: "Afwijkingen, documenten en leads met AI" },
+          { label: "Check", href: "/platform/check", description: "Is dit bedrijf of deze advertentie te vertrouwen?" },
           { label: "Aftersales", href: "/platform/aftersales", description: "Een digitaal dashboardkastje voor je klant" },
         ],
       },
@@ -111,6 +111,8 @@ export const nav: {
           { label: "Merkonafhankelijke dealers", href: "/voor-autobedrijven/merkonafhankelijke-dealers", description: "Inkoop, voorbereiding en verkoop in één flow" },
           { label: "Specialisten", href: "/voor-autobedrijven/specialisten", description: "Premium, klassiek, EV en import" },
           { label: "Meerdere vestigingen", href: "/voor-autobedrijven/meerdere-vestigingen", description: "Eén werkwijze, per vestiging inzicht" },
+          { label: "Autobedrijven met werkplaats", href: "/voor-autobedrijven/autobedrijven-met-werkplaats", description: "Verkoop en werkplaats op één dossier" },
+          { label: "Handelaren & export", href: "/voor-autobedrijven/handelaren", description: "Snel inkopen, doorverkopen en vrijwaren" },
         ],
       },
       {
@@ -118,7 +120,8 @@ export const nav: {
         links: [
           { label: "Platformoverzicht", href: "/platform", description: "Alle modules op een rij" },
           { label: "VINVARO Agent", href: "/agent", description: "Vraag en regel alles in gewone taal" },
-          { label: "Integraties", href: "/integraties", description: "RDW, marktplaatsen, inbox en agenda" },
+          { label: "Integraties", href: "/integraties", description: "RDW, marktplaatsen, grossiers, inbox en agenda" },
+          { label: "Prijzen", href: "/prijzen", description: "€ 199 per maand, alle modules inbegrepen" },
           { label: "Plan een demo", href: "/demo", description: "30 minuten, op jouw voorraad en werkwijze" },
           { label: "Contact", href: "/contact", description: "Stel je vraag aan ons team" },
         ],
@@ -343,6 +346,7 @@ export const platform: PlatformModule[] = [
     lead: "Plan afspraken met klant en auto erbij. Ieder teamlid koppelt zijn eigen Google- of Outlook-agenda, en de afspraak verschijnt bij wie hem uitvoert.",
     visual: "agenda",
     points: [
+      { title: "Dag, week en maand", body: "Bekijk je agenda per dag met een kolom per medewerker, per week of per maand. Klik op een vrij moment en de afspraak staat al voor die persoon en dat tijdstip klaar." },
       { title: "Soorten afspraken", body: "Proefrit, aflevering, bezichtiging en gesprek, met klant, auto, locatie en notities." },
       { title: "Google en Outlook", body: "Afspraken komen automatisch in de agenda van wie ze uitvoert. Wijzig of annuleer in VINVARO en de agenda volgt." },
       { title: "Klant uitnodigen", body: "De klant krijgt een agenda-uitnodiging, en later ook wijzigingen of een annulering." },
@@ -601,6 +605,34 @@ export const segments: Segment[] = [
     ],
     modules: ["intake-en-aflevering", "team-app", "agenda", "crm-en-verkoop"],
   },
+  {
+    slug: "autobedrijven-met-werkplaats",
+    name: "Autobedrijven met werkplaats",
+    eyebrow: "Voor autobedrijven met een eigen werkplaats",
+    title: "Verkoop en werkplaats op één dossier.",
+    lead: "Voorraadauto's verkoopklaar maken en klantauto's onderhouden in dezelfde werkplek. Werkorders, planbord, onderdelen en inkoopfacturen hangen aan de auto, zodat je per auto ziet wat hij echt kost.",
+    pains: ["Werkorders op briefjes en whiteboards", "Kosten komen nooit bij de juiste auto", "Onderdelen bestellen per telefoon", "Facturen van leveranciers overtypen"],
+    outcomes: [
+      { title: "Marge per auto klopt", body: "Arbeid, onderdelen en uitbesteed werk op een voorraadauto komen als kosten in het dossier en tellen mee in de marge." },
+      { title: "Planbord en tijdregistratie", body: "Monteurs per dag en week ingepland, met een timer op het web en in de app." },
+      { title: "Inkoop zonder overtypen", body: "Bestellen bij Fource of Grossier.nu en inkoopfacturen die AI leest en aan de auto koppelt." },
+    ],
+    modules: ["werkplaats", "voorraad", "aftersales", "team-app"],
+  },
+  {
+    slug: "handelaren",
+    name: "Handelaren & export",
+    eyebrow: "Voor handelaren en exporteurs",
+    title: "Snel inkopen. Snel door. Alles vastgelegd.",
+    lead: "Voor bedrijven die veel auto's kopen en zakelijk doorverkopen, ook over de grens. Taxeren, inkopen, vrijwaren en overdragen gaat vanuit één dossier, met elke partij gecontroleerd.",
+    pains: ["Onbekende partijen bij inkoop", "Vrijwaren en overdragen via losse portals", "Btw-nummers handmatig controleren", "Geen zicht op wat een auto heeft gekost"],
+    outcomes: [
+      { title: "Elke partij gecheckt", body: "KvK, btw via VIES, Google-reviews en website in seconden, met het resultaat bewaard bij de relatie." },
+      { title: "RDW vanuit het dossier", body: "Vrijwaren, B2B-overdracht en kilometerstand met je eigen A2SP- of RDC-account." },
+      { title: "Handelsplein en 185+ portals", body: "Verkoop aan andere autobedrijven tegen handelsprijzen, of publiceer in heel Europa." },
+    ],
+    modules: ["check", "handelsplein", "voorraad", "contracten-en-facturen"],
+  },
 ];
 
 export type IntegrationStatus = "live" | "beta" | "planned";
@@ -676,7 +708,7 @@ export const securityControls = [
 ];
 
 export const faq = [
-  { q: "Wat is VINVARO?", a: "VINVARO is het besturingssysteem voor autobedrijven: één werkplek voor voertuigen, klanten en processen. Voorraad en voertuigdossier, workflows voor intake en aflevering, een gedeelde inbox, CRM, agenda, contracten, facturen en publiceren naar marktplaatsen en je eigen website." },
+  { q: "Wat is VINVARO?", a: "VINVARO is het besturingssysteem voor autobedrijven: één werkplek voor voertuigen, klanten en processen. Voorraad en voertuigdossier, workflows voor intake en aflevering, de werkplaats, een gedeelde inbox met AI-opvolging, CRM, agenda, contracten, facturen, publiceren naar marktplaatsen en je eigen website en aftersales." },
   { q: "Voor wie is VINVARO bedoeld?", a: "Voor zelfstandige autobedrijven: merkonafhankelijke dealers, specialisten en bedrijven met meerdere vestigingen. Eigenaren, verkopers, de werkvloer en de administratie werken in dezelfde omgeving." },
   { q: "Wat is de VINVARO Agent?", a: "Een AI-assistent in VINVARO die je vragen en opdrachten in gewone taal uitvoert, getypt of ingesproken. Hij kan alles wat jij mag: auto's aanmaken vanaf een kenteken, prijzen en fases wijzigen, publiceren, contracten en facturen, workflows en rapportages. Risicovolle acties vraagt hij eerst aan je, en elke actie staat in het auditlog." },
   { q: "Werkt VINVARO met de RDW?", a: "Ja. Voor Nederlandse kentekens haalt VINVARO merk, model, APK, keuringen met gebreken en het tellerstandoordeel op uit RDW Open Data. Met je eigen A2SP- of RDC-account vrijwaar je, vraag je een tijdelijk documentnummer aan, draag je over aan een ander bedrijf en meld je kilometerstanden, direct vanuit de auto." },
@@ -753,12 +785,13 @@ export const pricing = {
     "AI-opvolging van leads",
     "Digitaal dashboardkastje",
     "Financieringscalculator",
+    "Werkplaats: werkorders, planbord en onderdelen",
     "Team-app iOS en Android",
     "Support en overstaphulp",
     "30 dagen gratis proberen",
   ],
   included: [
-    "Alle modules: voorraad, workflows, inbox, CRM, agenda, contracten, facturen, publiceren, AI en de Fotostudio",
+    "Alle modules: voorraad, workflows, werkplaats, inbox, CRM, agenda, contracten, facturen, publiceren, aftersales, AI en de Fotostudio",
     "AI-acties, Fotostudio, digitaal ondertekenen en KVK-opvragingen bij normaal gebruik",
     "Publiceren naar je website en marktplaatsen",
     "RDW-acties: vrijwaren, tenaamstellen, B2B-overdracht en kilometerstand",

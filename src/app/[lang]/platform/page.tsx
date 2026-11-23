@@ -63,8 +63,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PlatformIndex() {
   const lang = await getLang();
   const t = copy[lang];
-  const { platform } = getContent(lang);
-  const groups = (["vehicles", "sales", "network"] as const).map((g) => platform.filter((p) => p.group === g));
+  const { platform, nav } = getContent(lang);
+  const menu = nav.find((n) => n.groups)?.groups ?? [];
+  const sections = menu.map((g) => ({ title: g.title, modules: g.links.map((l) => platform.find((p) => l.href === `/platform/${p.slug}`)).filter((p) => p !== undefined) }));
+  const groups = sections.map((x) => x.modules);
   return (
     <>
       <JsonLd
@@ -116,10 +118,10 @@ export default async function PlatformIndex() {
       </section>
 
       {groups.map((group, gi) => (
-        <section key={gi} className={gi === 1 ? "py-20 sm:py-24" : "border-t border-line bg-surface py-20 sm:py-24"}>
+        <section key={gi} className={gi % 2 === 1 ? "py-20 sm:py-24" : "border-t border-line bg-surface py-20 sm:py-24"}>
           <Container>
-            <p className="mb-6 font-mono text-[11.5px] tracking-[0.12em] text-brand uppercase">{t.groups[gi]}</p>
-            <div className={`grid gap-px overflow-hidden rounded-2xl bg-line shadow-card sm:grid-cols-2 ${group.length >= 5 ? "lg:grid-cols-5" : group.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-2"}`}>
+            <p className="mb-6 font-mono text-[11.5px] tracking-[0.12em] text-brand uppercase">{sections[gi].title}</p>
+            <div className={`grid gap-px overflow-hidden rounded-2xl bg-line shadow-card sm:grid-cols-2 ${group.length >= 5 ? "lg:grid-cols-5" : group.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
               {group.map((p) => (
                 <Link key={p.slug} href={`/platform/${p.slug}`} className="group flex flex-col bg-surface p-7 transition-colors hover:bg-canvas">
                   <IconTile text={p.name} hint={p.title} size="lg" />

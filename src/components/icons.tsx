@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import {
+  ArrowLeftRight,
   BadgeCheck,
   BarChart3,
   Bell,
@@ -14,7 +15,9 @@ import {
   FileSignature,
   FileText,
   Gauge,
+  Gem,
   Globe,
+  HeartHandshake,
   History,
   Inbox,
   KeyRound,
@@ -33,6 +36,8 @@ import {
   ShieldCheck,
   Smartphone,
   Sparkles,
+  Store,
+  Tag,
   Tags,
   Timer,
   Upload,
@@ -40,6 +45,7 @@ import {
   Wallet,
   WifiOff,
   Workflow,
+  Wrench,
   type LucideIcon,
 } from "lucide-react";
 import { Mark } from "@/components/brand-mark";
@@ -48,6 +54,13 @@ import { Mark } from "@/components/brand-mark";
 const network = /^(vinvaro )?(handelsplein|marktplaats|trade network|marketplace)$/i;
 
 const rules: [RegExp, LucideIcon][] = [
+  [/merkonafhankelijk|independent dealer/i, Store],
+  [/specialist/i, Gem],
+  [/handelaren|traders/i, ArrowLeftRight],
+  [/^(prijzen|pricing)$/i, Tag],
+  [/werkplaats|workshop|werkorder|work order|monteur|mechanic|onderdel|\bparts?\b/i, Wrench],
+  [/opvolging|follow-up/i, Sparkles],
+  [/aftersales|dashboardkastje|glovebox/i, HeartHandshake],
   [/offline|bereik|signal|verbinding|connection/i, WifiOff],
   [/camera|foto|photo/i, Camera],
   [/\bai\b|intelligence|leest|lezen|\bread\b|document/i, ScanLine],

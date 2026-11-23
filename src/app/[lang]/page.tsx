@@ -20,6 +20,8 @@ import { IntegrationLogo } from "@/components/product/kit";
 import { IntelligenceScan, VehicleDossier, WorkflowRun } from "@/components/product/ops";
 import { InboxView, PublishFlow } from "@/components/product/sales";
 import { PhotoStudio } from "@/components/product/studio";
+import { Glovebox } from "@/components/product/growth";
+import { WorkshopOrder } from "@/components/product/workshop";
 import { AgentChat, AgentMark } from "@/components/product/agent";
 import { StoreBadges } from "@/components/store-badges";
 
@@ -29,7 +31,7 @@ const copy = defineCopy({
     news: "Nieuw",
     heroTitle: "Elk voertuig. Elk detail.",
     heroAccent: "Onder controle.",
-    heroLead: "VINVARO brengt voorraad, klanten en processen samen in één werkplek. Van kenteken en intake tot proefrit, contract, publicatie en aflevering.",
+    heroLead: "VINVARO brengt voorraad, werkplaats, klanten en processen samen in één werkplek. Van kenteken en intake tot proefrit, contract, publicatie, aflevering en aftersales.",
     bookDemo: "Plan een demo",
     seeHow: "Bekijk hoe het werkt",
     worksWith: "Werkt met",
@@ -48,8 +50,8 @@ const copy = defineCopy({
       title: "Je hebt geen extra spreadsheet nodig.",
       accent: "Je hebt overzicht nodig.",
       beforeTitle: "Zonder VINVARO",
-      before: ["Voorraad in Excel", "Klantvragen in vijf WhatsApp-telefoons", "Intake op papier, foto's in een galerij", "Advertenties per site handmatig bijwerken", "Contracten printen en scannen", "Niemand weet wie de volgende stap heeft"],
-      after: ["Eén dossier per voertuig, RDW-gegevens erbij", "Eén gedeelde inbox met AI-labels", "Vaste workflows met foto's en bevindingen", "Publiceren vanuit het dossier", "Digitaal ondertekenen via een link", "Taken en fases die bewaken"],
+      before: ["Voorraad in Excel", "Klantvragen in vijf WhatsApp-telefoons", "Leads die 's avonds blijven liggen", "Intake op papier, foto's in een galerij", "Werkorders op briefjes, kosten nergens bij de auto", "Advertenties per site handmatig bijwerken", "Contracten printen en scannen", "Na de aflevering hoor je de klant nooit meer"],
+      after: ["Eén dossier per voertuig, RDW-gegevens erbij", "Eén gedeelde inbox met AI-labels", "AI-opvolging: elke lead binnen een minuut een antwoord", "Vaste workflows met foto's en bevindingen", "Werkorders, planbord en onderdelen, kosten op de auto", "Publiceren vanuit het dossier naar 185+ portals", "Digitaal ondertekenen via een link", "Een digitaal dashboardkastje voor elke koper"],
     },
     journey: {
       eyebrow: "Van intake tot aflevering",
@@ -61,6 +63,8 @@ const copy = defineCopy({
       studio: { eyebrow: "Fotostudio", title: "Van terreinfoto naar studiofoto. In één klik.", lead: "Haal de achtergrond weg, zet de auto in een lichte studio, retoucheer met AI en dek het kenteken af met een blanco plaat of je logo. Rechtstreeks in het dossier, het origineel blijft bewaard.", cta: "Bekijk de Fotostudio", href: "/platform/fotostudio" },
       intake: { eyebrow: "Intake & aflevering", title: "Afwijking vastgesteld. Bevinding gemaakt.", lead: "Checklists die je team op de telefoon doorloopt. Verwacht en aangetroffen verschillen? Dan ontstaat automatisch een bevinding en zo nodig een taak.", cta: "Bekijk workflows", href: "/platform/intake-en-aflevering" },
       inbox: { eyebrow: "Gedeelde inbox", title: "Elke klantvraag in één inbox. Met de auto erbij.", lead: "WhatsApp Business, Gmail en Outlook samen. AI labelt elk bericht, geeft een leadscore en stelt een antwoord voor in jouw toon.", cta: "Bekijk de inbox", href: "/platform/inbox" },
+      workshop: { eyebrow: "Werkplaats", title: "Werkorders met de kosten op de auto.", lead: "Banden, een beurt of een upgrade: arbeid, onderdelen en uitbesteed werk op een werkorder, met kostprijs en marge. Plan je monteurs op het planbord en bestel onderdelen bij je grossier.", cta: "Bekijk de werkplaats", href: "/platform/werkplaats" },
+      aftersales: { eyebrow: "Aftersales", title: "Na de verkoop begint de klantrelatie.", lead: "Elke koper krijgt een digitaal dashboardkastje met zijn documenten, APK-datum, garantie en werkhistorie. Met automatische momenten voor een review, APK-herinnering en inruil.", cta: "Bekijk aftersales", href: "/platform/aftersales" },
       publish: { eyebrow: "Publiceren", title: "Eén keer invoeren. Overal online.", lead: "Publiceer naar mobile.de en AutoScout24 en toon je voorraad op je eigen website. Nieuwe prijs of verkocht? Alles wordt bijgewerkt.", cta: "Bekijk publiceren", href: "/platform/publiceren" },
     },
     intelligence: {
@@ -103,7 +107,7 @@ const copy = defineCopy({
     news: "New",
     heroTitle: "Every vehicle. Every detail.",
     heroAccent: "Under control.",
-    heroLead: "VINVARO brings stock, customers and operations together in one workspace. From registration and intake to test drive, contract, listing and delivery.",
+    heroLead: "VINVARO brings stock, workshop, customers and operations together in one workspace. From registration and intake to test drive, contract, listing, delivery and aftersales.",
     bookDemo: "Book a demo",
     seeHow: "See how it works",
     worksWith: "Works with",
@@ -122,8 +126,8 @@ const copy = defineCopy({
       title: "You don't need another spreadsheet.",
       accent: "You need overview.",
       beforeTitle: "Without VINVARO",
-      before: ["Stock in Excel", "Customer questions across five WhatsApp phones", "Intake on paper, photos in a camera roll", "Updating listings site by site", "Printing and scanning contracts", "Nobody knows who has the next step"],
-      after: ["One dossier per vehicle, with RDW data", "One shared inbox with AI labels", "Fixed workflows with photos and findings", "Publish straight from the dossier", "Sign digitally via a link", "Tasks and stages that guard"],
+      before: ["Stock in Excel", "Customer questions across five WhatsApp phones", "Leads left waiting overnight", "Intake on paper, photos in a camera roll", "Work orders on notes, costs never on the car", "Updating listings site by site", "Printing and scanning contracts", "After delivery you never hear from the customer again"],
+      after: ["One dossier per vehicle, with RDW data", "One shared inbox with AI labels", "AI follow-up: every lead answered within a minute", "Fixed workflows with photos and findings", "Work orders, planning board and parts, costs on the car", "Publish from the dossier to 185+ portals", "Sign digitally via a link", "A digital glovebox for every buyer"],
     },
     journey: {
       eyebrow: "From intake to delivery",
@@ -135,6 +139,8 @@ const copy = defineCopy({
       studio: { eyebrow: "Photo studio", title: "From lot photo to studio shot. In one click.", lead: "Remove the background, place the car in a bright studio, retouch with AI and cover the licence plate with a blank plate or your logo. Right in the dossier, with the original kept.", cta: "Explore the Photo studio", href: "/platform/fotostudio" },
       intake: { eyebrow: "Intake & delivery", title: "Deviation found. Finding created.", lead: "Checklists your team completes on their phone. Expected and found don't match? A finding is created automatically, and a task when needed.", cta: "Explore workflows", href: "/platform/intake-en-aflevering" },
       inbox: { eyebrow: "Shared inbox", title: "Every customer question in one inbox. With the car attached.", lead: "WhatsApp Business, Gmail and Outlook together. AI labels every message, adds a lead score and suggests a reply in your tone.", cta: "Explore the inbox", href: "/platform/inbox" },
+      workshop: { eyebrow: "Workshop", title: "Work orders with the costs on the car.", lead: "Tyres, a service or an upgrade: labour, parts and sublet work on a work order, with cost and margin. Plan your mechanics on the planning board and order parts from your wholesaler.", cta: "Explore the workshop", href: "/platform/werkplaats" },
+      aftersales: { eyebrow: "Aftersales", title: "The customer relationship starts after the sale.", lead: "Every buyer gets a digital glovebox with their documents, MOT date, warranty and service history. With automatic moments for a review, MOT reminder and trade-in.", cta: "Explore aftersales", href: "/platform/aftersales" },
       publish: { eyebrow: "Publishing", title: "Enter once. Online everywhere.", lead: "Publish to mobile.de and AutoScout24 and show your stock on your own website. New price or sold? Everything is updated.", cta: "Explore publishing", href: "/platform/publiceren" },
     },
     intelligence: {
@@ -368,6 +374,8 @@ export default async function Home() {
       <FeatureSplit {...t.splits.studio} points={points("fotostudio")} visual={<PhotoStudio />} />
       <FeatureSplit reverse {...t.splits.inbox} points={points("inbox")} visual={<InboxView />} />
       <FeatureSplit {...t.splits.publish} points={points("publiceren")} visual={<PublishFlow />} />
+      <FeatureSplit reverse {...t.splits.workshop} points={points("werkplaats")} visual={<WorkshopOrder />} />
+      <FeatureSplit {...t.splits.aftersales} points={points("aftersales")} visual={<Glovebox />} />
 
       <section className="bg-obsidian-glow relative overflow-hidden py-28 text-white sm:py-36">
         <div className="bg-grid-dark mask-fade-b pointer-events-none absolute inset-0" />
@@ -461,9 +469,9 @@ export default async function Home() {
               {t.modules.all}
             </Button>
           </div>
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-line shadow-card sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-line shadow-card sm:grid-cols-2 lg:grid-cols-4">
             {platform.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 3) * 0.05} className="bg-surface">
+              <Reveal key={p.slug} delay={(i % 4) * 0.05} className="bg-surface">
                 <Link href={`/platform/${p.slug}`} className="group flex h-full flex-col p-7 transition-colors hover:bg-canvas">
                   <div className="flex items-center justify-between">
                     <IconTile text={p.name} hint={p.title} size="lg" />

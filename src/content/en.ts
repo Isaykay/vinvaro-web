@@ -7,7 +7,7 @@ export const site = {
   category: "The Automotive Operating System",
   tagline: "Every vehicle. Every detail. Under control.",
   description:
-    "VINVARO brings vehicles, customers and operations together in one workspace. From registration and intake to test drive, contract, listing and delivery, for automotive businesses that want control without scattered systems.",
+    "VINVARO brings vehicles, customers and operations together in one workspace. From registration and intake to workshop, test drive, contract, listing, delivery and aftersales, for automotive businesses that want control without scattered systems.",
   news: { label: "New: the Workshop, with work orders, planning board and parts", href: "/platform/werkplaats" },
 };
 
@@ -35,11 +35,11 @@ export const nav: {
     },
     groups: [
       {
-        title: "Vehicles",
+        title: "Vehicles & workshop",
         links: [
           { label: "Inventory & dossier", href: "/platform/voorraad", description: "One vehicle, one complete history" },
           { label: "Intake & delivery", href: "/platform/intake-en-aflevering", description: "Fixed workflows with photos and signature" },
-          { label: "AI & findings", href: "/platform/intelligence", description: "Deviations, documents and leads with AI" },
+          { label: "Workshop", href: "/platform/werkplaats", description: "Work orders, planning board, parts and purchase invoices" },
           { label: "Photo studio", href: "/platform/fotostudio", description: "Studio photos and plate covers with AI" },
           { label: "Staff app", href: "/platform/team-app", description: "Capture on the floor, even offline" },
         ],
@@ -48,25 +48,25 @@ export const nav: {
         title: "Customers & sales",
         links: [
           { label: "Inbox", href: "/platform/inbox", description: "WhatsApp, Gmail and Outlook in one inbox" },
-          { label: "CRM & sales", href: "/platform/crm-en-verkoop", description: "Contacts, inquiries, deals and pipeline" },
-          { label: "Calendar & test drives", href: "/platform/agenda", description: "Appointments in the calendar of whoever runs them" },
-          { label: "Contracts & invoices", href: "/platform/contracten-en-facturen", description: "Sign digitally and invoice" },
-          { label: "Publishing", href: "/platform/publiceren", description: "mobile.de, AutoScout24 and your own website" },
-        ],
-      },
-      {
-        title: "VINVARO network",
-        links: [
-          { label: "Trade network", href: "/platform/handelsplein", description: "Buy and sell with other dealers, free" },
-          { label: "Marketplace", href: "/platform/marktplaats", description: "Your stock for consumers, with your reputation" },
-        ],
-      },
-      {
-        title: "New",
-        links: [
-          { label: "Workshop", href: "/platform/werkplaats", description: "Work orders, planning board, parts and purchase invoices" },
-          { label: "Check", href: "/platform/check", description: "Can this company or listing be trusted?" },
           { label: "AI follow-up", href: "/platform/ai-opvolging", description: "A good answer to every lead within a minute" },
+          { label: "CRM & sales", href: "/platform/crm-en-verkoop", description: "Contacts, inquiries, deals and pipeline" },
+          { label: "Calendar & test drives", href: "/platform/agenda", description: "Day, week and month calendar per team member" },
+          { label: "Contracts & invoices", href: "/platform/contracten-en-facturen", description: "Sign digitally and invoice" },
+        ],
+      },
+      {
+        title: "Online & network",
+        links: [
+          { label: "Publishing", href: "/platform/publiceren", description: "185+ portals and your own website" },
+          { label: "Marketplace", href: "/platform/marktplaats", description: "Your stock for consumers, with your reputation" },
+          { label: "Trade network", href: "/platform/handelsplein", description: "Buy and sell with other dealers, free" },
+        ],
+      },
+      {
+        title: "AI & aftersales",
+        links: [
+          { label: "AI & findings", href: "/platform/intelligence", description: "Deviations, documents and leads with AI" },
+          { label: "Check", href: "/platform/check", description: "Can this company or listing be trusted?" },
           { label: "Aftersales", href: "/platform/aftersales", description: "A digital glovebox for your customer" },
         ],
       },
@@ -91,6 +91,8 @@ export const nav: {
           { label: "Independent dealers", href: "/voor-autobedrijven/merkonafhankelijke-dealers", description: "Purchasing, preparation and sales in one flow" },
           { label: "Specialists", href: "/voor-autobedrijven/specialisten", description: "Premium, classic, EV and import" },
           { label: "Multi-site businesses", href: "/voor-autobedrijven/meerdere-vestigingen", description: "One way of working, insight per site" },
+          { label: "Dealers with a workshop", href: "/voor-autobedrijven/autobedrijven-met-werkplaats", description: "Sales and workshop on one dossier" },
+          { label: "Traders & export", href: "/voor-autobedrijven/handelaren", description: "Buy fast, sell on and indemnify" },
         ],
       },
       {
@@ -98,7 +100,8 @@ export const nav: {
         links: [
           { label: "Platform overview", href: "/platform", description: "Every module at a glance" },
           { label: "VINVARO Agent", href: "/agent", description: "Ask and get things done in plain language" },
-          { label: "Integrations", href: "/integraties", description: "RDW, marketplaces, inbox and calendar" },
+          { label: "Integrations", href: "/integraties", description: "RDW, marketplaces, wholesalers, inbox and calendar" },
+          { label: "Pricing", href: "/prijzen", description: "€199 per month, every module included" },
           { label: "Book a demo", href: "/demo", description: "30 minutes, on your stock and way of working" },
           { label: "Contact", href: "/contact", description: "Ask our team your question" },
         ],
@@ -304,6 +307,7 @@ export const platform: PlatformModule[] = [
     lead: "Plan appointments with customer and car attached. Each team member connects their own Google or Outlook calendar, and the appointment shows up for whoever runs it.",
     visual: "agenda",
     points: [
+      { title: "Day, week and month", body: "View your calendar per day with a column per team member, per week or per month. Click a free slot and the appointment is ready for that person and time." },
       { title: "Appointment types", body: "Test drive, handover, viewing and meeting, with customer, car, location and notes." },
       { title: "Google and Outlook", body: "Appointments appear automatically in the calendar of whoever runs them. Change or cancel in VINVARO and the calendar follows." },
       { title: "Invite the customer", body: "The customer gets a calendar invitation, and later any changes or a cancellation." },
@@ -551,6 +555,34 @@ export const segments: Segment[] = [
     ],
     modules: ["intake-en-aflevering", "team-app", "agenda", "crm-en-verkoop"],
   },
+  {
+    slug: "autobedrijven-met-werkplaats",
+    name: "Dealers with a workshop",
+    eyebrow: "For dealers with their own workshop",
+    title: "Sales and workshop on one dossier.",
+    lead: "Get stock cars ready for sale and service customer cars in the same workspace. Work orders, planning board, parts and purchase invoices hang on the car, so you see what each car really costs.",
+    pains: ["Work orders on notes and whiteboards", "Costs never reach the right car", "Ordering parts by phone", "Retyping supplier invoices"],
+    outcomes: [
+      { title: "Margin per car adds up", body: "Labour, parts and sublet work on a stock car become costs in the dossier and count in the margin." },
+      { title: "Planning board and time tracking", body: "Mechanics planned per day and week, with a timer on the web and in the app." },
+      { title: "Purchasing without retyping", body: "Order from Fource or Grossier.nu, and purchase invoices that AI reads and links to the car." },
+    ],
+    modules: ["werkplaats", "voorraad", "aftersales", "team-app"],
+  },
+  {
+    slug: "handelaren",
+    name: "Traders & export",
+    eyebrow: "For traders and exporters",
+    title: "Buy fast. Sell on fast. Everything recorded.",
+    lead: "For businesses that buy many cars and sell them on to other businesses, across borders too. Valuing, buying, indemnifying and transferring runs from one dossier, with every party checked.",
+    pains: ["Unknown parties when buying", "Indemnifying and transferring through separate portals", "Checking VAT numbers by hand", "No view of what a car has cost"],
+    outcomes: [
+      { title: "Every party checked", body: "KvK, VAT via VIES, Google reviews and website in seconds, with the result kept on the contact." },
+      { title: "RDW from the dossier", body: "Indemnify, B2B transfer and odometer with your own A2SP or RDC account." },
+      { title: "Trade network and 185+ portals", body: "Sell to other dealers at trade prices, or publish across Europe." },
+    ],
+    modules: ["check", "handelsplein", "voorraad", "contracten-en-facturen"],
+  },
 ];
 
 const categoryNames: Record<string, string> = {
@@ -630,7 +662,7 @@ export const securityControls = [
 ];
 
 export const faq = [
-  { q: "What is VINVARO?", a: "VINVARO is the operating system for automotive businesses: one workspace for vehicles, customers and operations. Inventory and vehicle dossier, intake and delivery workflows, a shared inbox, CRM, calendar, contracts, invoices and publishing to marketplaces and your own website." },
+  { q: "What is VINVARO?", a: "VINVARO is the operating system for automotive businesses: one workspace for vehicles, customers and operations. Inventory and vehicle dossier, intake and delivery workflows, the workshop, a shared inbox with AI follow-up, CRM, calendar, contracts, invoices, publishing to marketplaces and your own website, and aftersales." },
   { q: "Who is VINVARO for?", a: "Independent automotive businesses: independent dealers, specialists and businesses with multiple sites. Owners, sales, the workshop floor and administration work in the same environment." },
   { q: "What is the VINVARO Agent?", a: "An AI assistant in VINVARO that carries out your questions and instructions in plain language, typed or dictated. It can do everything you may do: create cars from a registration, change prices and stages, publish, contracts and invoices, workflows and reports. It asks you first before risky actions, and every action is in the audit log." },
   { q: "Does VINVARO work with the RDW?", a: "Yes. For Dutch registrations, VINVARO pulls make, model, MOT, inspections with defects and the odometer verdict from RDW Open Data. With your own A2SP or RDC account you indemnify, request a temporary document number, transfer to another dealer and report odometer readings, straight from the car." },
@@ -686,12 +718,13 @@ export const pricing: typeof nlPricing = {
     "AI lead follow-up",
     "Digital glovebox",
     "Financing calculator",
+    "Workshop: work orders, planning board and parts",
     "Staff app iOS and Android",
     "Support and switching help",
     "30-day free trial",
   ],
   included: [
-    "Every module: inventory, workflows, inbox, CRM, calendar, contracts, invoices, publishing, AI and the Photo studio",
+    "Every module: inventory, workflows, workshop, inbox, CRM, calendar, contracts, invoices, publishing, aftersales, AI and the Photo studio",
     "AI actions, Photo studio, e-signing and KVK lookups with normal use",
     "Publishing to your website and marketplaces",
     "RDW transactions: indemnify, registration codes, B2B transfer and odometer",

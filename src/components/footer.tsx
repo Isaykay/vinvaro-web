@@ -63,8 +63,7 @@ export async function Footer() {
     hrefs.map((href) => platform.find((p) => href.endsWith(p.slug))).filter((p) => p !== undefined).map((p) => ({ label: p.name, href: `/platform/${p.slug}` }));
 
   const columns: { title: string; links: FooterLink[] }[] = [
-    { title: t.vehicles, links: toLinks(groups[0]?.links.map((l) => l.href) ?? []) },
-    { title: t.sales, links: toLinks(groups[1]?.links.map((l) => l.href) ?? []) },
+    ...groups.map((g) => ({ title: g.title, links: toLinks(g.links.map((l) => l.href)) })),
     { title: t.forDealers, links: segments.map((s) => ({ label: s.name, href: `/voor-autobedrijven/${s.slug}` })) },
     {
       title: t.company,
@@ -113,7 +112,7 @@ export async function Footer() {
               <StoreBadges lang={lang} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:grid-cols-[repeat(4,max-content)] lg:justify-between lg:gap-x-10">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 xl:grid-cols-[repeat(6,max-content)] xl:justify-between xl:gap-x-8">
             {columns.map((col) => (
               <div key={col.title}>
                 <p className="mb-4 text-[12px] font-medium tracking-[0.06em] text-subtle uppercase">{col.title}</p>
