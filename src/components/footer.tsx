@@ -2,7 +2,7 @@ import Link from "@/components/link";
 import { getContent } from "@/lib/content";
 import { defineCopy } from "@/lib/i18n";
 import { getLang } from "@/lib/i18n-server";
-import { Container, Mark } from "@/components/ui";
+import { Mark } from "@/components/ui";
 import { Logo } from "@/components/header";
 import { LangSwitch } from "@/components/lang-switch";
 import { ContactStrip } from "@/components/sections";
@@ -82,7 +82,7 @@ export async function Footer() {
   return (
     <footer className="relative overflow-hidden border-t border-line bg-surface">
       <Mark className="pointer-events-none absolute -right-10 -bottom-20 h-[300px] w-auto text-ink/[0.025]" />
-      <Container className="relative pt-16 pb-8">
+      <div className="relative mx-auto w-full max-w-[1320px] px-5 pt-16 pb-8 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,280px)_1fr] lg:gap-20">
           <div>
             <Logo />
@@ -154,7 +154,7 @@ export async function Footer() {
             <LangSwitch />
           </div>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

@@ -560,6 +560,14 @@ export type Segment = {
   pains: string[];
   outcomes: { title: string; body: string }[];
   modules: string[];
+  visual: ModuleVisualKey;
+  /** One line per pain, in the same order: what it looks like with VINVARO. */
+  wins: string[];
+  day: { time: string; title: string; body: string; module: string }[];
+  features: { title: string; body: string; module: string }[];
+  faq: { q: string; a: string }[];
+  /** Names as in the Dutch integrations list. */
+  integrations: string[];
 };
 
 export const segments: Segment[] = [
@@ -576,6 +584,36 @@ export const segments: Segment[] = [
       { title: "Online zonder dubbel werk", body: "Publiceren naar mobile.de, AutoScout24 en je eigen website vanuit het dossier." },
     ],
     modules: ["voorraad", "intake-en-aflevering", "publiceren", "inbox"],
+    visual: "inventory",
+    wins: ["Eén dossier per auto, met kosten en marge", "Klantvragen in één inbox, met AI-opvolging", "Publiceren naar 185+ portals vanuit het dossier", "Contracten digitaal getekend via een link"],
+    day: [
+      { time: "08:30", title: "Inruilauto binnen", body: "Kenteken in, merk, model, APK en tellerstand komen uit de RDW. Je collega doorloopt de intake op de telefoon, met foto's per zone.", module: "intake-en-aflevering" },
+      { time: "10:00", title: "Verkoopklaar maken", body: "Een werkorder voor poetsen, banden en een kleine reparatie. Arbeid en onderdelen komen als kosten op de auto en tellen mee in de marge.", module: "werkplaats" },
+      { time: "11:30", title: "Foto's en online", body: "Studiofoto's met afgedekt kenteken, en met één klik online op je website, Marktplaats, AutoTrack en AutoScout24.", module: "publiceren" },
+      { time: "14:00", title: "Proefrit gepland", body: "Een vraag via je website wordt binnen een minuut beantwoord. De AI stelt een vrij moment voor in de agenda van de verkoper.", module: "ai-opvolging" },
+      { time: "16:30", title: "Verkocht en afgeleverd", body: "Koopcontract digitaal getekend, factuur naar je boekhouding, vrijwaring bij de RDW en een digitaal dashboardkastje voor de koper.", module: "contracten-en-facturen" },
+    ],
+    features: [
+      { title: "Kenteken in, dossier compleet", body: "RDW-gegevens, APK, tellerstandoordeel en marktwaarde via JP.cars. Foto's, documenten, kosten en historie in één dossier.", module: "voorraad" },
+      { title: "Stadagen en prijsadvies", body: "Per auto zie je hoe lang hij staat en wat dat kost. Staat hij te lang, dan krijg je een prijsvoorstel dat je met één klik doorvoert.", module: "voorraad" },
+      { title: "Vaste fases met verplichte stappen", body: "Een auto gaat pas naar de volgende fase als de verplichte workflows af zijn. Iedereen ziet wie de volgende stap heeft.", module: "intake-en-aflevering" },
+      { title: "Afwijkingen worden bevindingen", body: "Verwacht twee sleutels, aangetroffen één? Dan ontstaat automatisch een bevinding en zo nodig een taak, met de foto erbij.", module: "intelligence" },
+      { title: "Werkorders voor de voorbereiding", body: "Poetsen, banden, onderhoud of een upgrade. De kosten komen vanzelf bij de auto, zodat je marge klopt.", module: "werkplaats" },
+      { title: "Studiofoto's zonder studio", body: "Achtergrond weg, lichte studio, retoucheren met AI en het kenteken afdekken met je logo. Het origineel blijft bewaard.", module: "fotostudio" },
+      { title: "185+ portals vanuit het dossier", body: "Prijs of status gewijzigd? Alles wordt overal bijgewerkt. Verkocht betekent overal offline.", module: "publiceren" },
+      { title: "Eén inbox met AI-opvolging", body: "WhatsApp, Gmail en Outlook samen. Elke lead krijgt binnen een minuut een conceptantwoord met de auto en je vrije tijden.", module: "ai-opvolging" },
+      { title: "Inruil, deals en pijplijn", body: "Van aanvraag en inruiltaxatie tot deal. Je ziet per verkoper wat er openstaat en wat de volgende stap is.", module: "crm-en-verkoop" },
+      { title: "Contract, factuur en boekhouding", body: "Contracten uit je eigen sjablonen, digitaal getekend. Facturen gaan via Autoboeker naar Exact, Twinfield, SnelStart of e-Boekhouden.", module: "contracten-en-facturen" },
+      { title: "Klanten die terugkomen", body: "Een digitaal dashboardkastje met documenten, APK-datum en garantie, en automatische momenten voor een review of inruil.", module: "aftersales" },
+      { title: "Gratis inkopen en verkopen met collega's", body: "Op het Handelsplein handel je met andere autobedrijven tegen handelsprijzen. Na de deal staat de auto vanzelf in je voorraad.", module: "handelsplein" },
+    ],
+    faq: [
+      { q: "Kan ik mijn voorraad uit Excel overzetten?", a: "Ja. Je importeert voorraad en relaties uit Excel of CSV. Bij de overstap helpen we met de import en zetten we je fases en workflows klaar." },
+      { q: "Werkt VINVARO met mijn huidige advertentiesites?", a: "Ja. Je publiceert naar meer dan 185 sites, waaronder Marktplaats, AutoTrack, AutoScout24, mobile.de en Gaspedaal, en naar je eigen website via de VINVARO-feed." },
+      { q: "Heb ik een aparte boekhouding nodig?", a: "Je houdt je eigen boekhoudpakket. Facturen gaan automatisch via Autoboeker naar Exact Online, Twinfield, SnelStart of e-Boekhouden.nl." },
+      { q: "Wat kost het voor een bedrijf met 40 auto's?", a: "Het Dealer-plan kost € 199 per maand plus € 5 per auto in voorraad. Met 40 auto's is dat € 399 per maand excl. btw, met alle modules en gebruikers." },
+    ],
+    integrations: ["RDW Open Data", "A2SP (RDW)", "JP.cars", "Marktplaats", "AutoScout24", "WhatsApp Business", "Autoboeker", "Financieringsvriend"],
   },
   {
     slug: "specialisten",
@@ -590,6 +628,36 @@ export const segments: Segment[] = [
       { title: "Een aflevering die klopt", body: "Afleverprotocol met sleutels, documenten en handtekening van de klant." },
     ],
     modules: ["voorraad", "intelligence", "crm-en-verkoop", "contracten-en-facturen"],
+    visual: "intelligence",
+    wins: ["Elke staat vastgelegd, met foto per zone", "Herkomst en documenten in het dossier", "Kopers en verkopers gecontroleerd", "Een aflevering met protocol en handtekening"],
+    day: [
+      { time: "09:00", title: "Inkoop bij een onbekende partij", body: "Voor je koopt, controleert Check de verkoper: KvK, btw via VIES, Google-reviews, domein en website.", module: "check" },
+      { time: "10:30", title: "Intake per zone", body: "Lak, interieur, banden en sleutels op vaste plekken in de workflow. Wat afwijkt wordt een bevinding met de originele foto.", module: "intake-en-aflevering" },
+      { time: "12:00", title: "Documenten gelezen", body: "Kentekenbewijs, onderhoudsboekjes en facturen worden gelezen. De gegevens worden voorgesteld; jij bevestigt.", module: "intelligence" },
+      { time: "14:00", title: "Bezichtiging voor een buitenlandse koper", body: "De afspraak staat in je agenda, het btw-nummer van de koper is gecontroleerd en de advertentie staat op mobile.de.", module: "agenda" },
+      { time: "16:00", title: "Een aflevering die klopt", body: "Afleverprotocol met sleutels, documenten en handtekening. De koper krijgt een dashboardkastje met alle papieren en de garantie.", module: "aftersales" },
+    ],
+    features: [
+      { title: "Foto's per zone", body: "Vaste fotoposities in de intake, zodat elke auto op dezelfde manier is vastgelegd. Ook offline in de app.", module: "intake-en-aflevering" },
+      { title: "Herkomst en documenten", body: "Facturen, keuringsrapporten, onderhoudshistorie en importpapieren bij het voertuig, altijd terug te vinden.", module: "voorraad" },
+      { title: "AI die documenten leest", body: "Kentekenbewijzen en facturen worden uitgelezen. Elke suggestie toont waar hij vandaan komt.", module: "intelligence" },
+      { title: "Bevindingen met de originele foto", body: "Een mogelijke kras of een ontbrekende sleutel wordt een bevinding, gescheiden van wat is vastgesteld.", module: "intelligence" },
+      { title: "Check op elke partij", body: "Een score uit KvK, VIES, Google-reviews, domein, website en social media, bewaard bij de relatie.", module: "check" },
+      { title: "Internationaal verkopen", body: "mobile.de, AutoScout24 in meerdere landen en meer dan 180 andere sites, ook in Oost-Europa.", module: "publiceren" },
+      { title: "Studiofoto's voor premium auto's", body: "Een rustige studio-achtergrond en retoucheren met AI, met je logo op het kenteken.", module: "fotostudio" },
+      { title: "Marge, btw en BPM", body: "Btw- of margeregeling per auto, met BPM, en contracten met teksten per taal.", module: "contracten-en-facturen" },
+      { title: "Detailing en PPF als werkorder", body: "Lasershield, polijsten of een coating vastleggen als werkorder, met de kosten op de auto.", module: "werkplaats" },
+      { title: "Afspraken op de juiste plek", body: "Bezichtigingen en proefritten in de agenda van wie ze uitvoert, gekoppeld aan Google of Outlook.", module: "agenda" },
+      { title: "Een koper die blijft", body: "Het dashboardkastje met papieren, garantie en werkhistorie, en een inruilvoorstel als het tijd is voor de volgende auto.", module: "aftersales" },
+      { title: "Een team met dezelfde standaard", body: "De team-app met rechten per rol, zodat ook nieuwe collega's elke auto op dezelfde manier vastleggen.", module: "team-app" },
+    ],
+    faq: [
+      { q: "Kan ik extra fotoposities toevoegen voor bijzondere auto's?", a: "Ja. In de workflowsjablonen bepaal je zelf de stappen en fotoposities, bijvoorbeeld voor het motorruim, de onderkant of de documentenmap." },
+      { q: "Werkt Check ook voor buitenlandse bedrijven?", a: "Ja, voor de bronnen die internationaal werken: VIES, Google, domein, website en social media. Belgische, Duitse en Zwitserse registratienummers worden herkend." },
+      { q: "Kan ik contracten in het Engels of Duits maken?", a: "Ja. Contract- en factuurteksten zijn per taal in te stellen, zodat een buitenlandse koper documenten in zijn eigen taal krijgt." },
+      { q: "Hoe werkt de marge- of btw-regeling?", a: "Per auto leg je vast of hij onder de margeregeling of btw valt. Dat komt terug op het contract, de factuur en in de feed." },
+    ],
+    integrations: ["RDW Open Data", "VIES", "KVK Handelsregister", "mobile.de", "AutoScout24", "carVertical", "Gmail", "A2SP (RDW)"],
   },
   {
     slug: "meerdere-vestigingen",
@@ -604,6 +672,36 @@ export const segments: Segment[] = [
       { title: "Auditlog", body: "Elke wijziging met wie en wanneer, doorzoekbaar op kenteken, naam of factuurnummer." },
     ],
     modules: ["intake-en-aflevering", "team-app", "agenda", "crm-en-verkoop"],
+    visual: "agenda",
+    wins: ["Eén set workflows op alle locaties", "Voorraad, feed en team per vestiging", "Rechten per rol, ook in de app", "Een auditlog van elke wijziging"],
+    day: [
+      { time: "08:00", title: "De dag begint per vestiging", body: "Iedereen opent het overzicht van zijn eigen vestiging: voorraad, taken, aanvragen en de volgende acties.", module: "voorraad" },
+      { time: "09:30", title: "Een auto naar een andere locatie", body: "De transporteur krijgt een link als partner en legt de ophaal en aflevering vast, zonder eigen account.", module: "intake-en-aflevering" },
+      { time: "11:00", title: "De agenda van het hele team", body: "Een dagagenda met een kolom per medewerker. Klik op een vrij moment en de afspraak staat klaar voor die persoon.", module: "agenda" },
+      { time: "14:00", title: "Leads eerlijk verdeeld", body: "De gedeelde inbox wijst gesprekken toe aan de juiste vestiging en verkoper. AI-opvolging antwoordt buiten openingstijden.", module: "inbox" },
+      { time: "17:00", title: "Inzicht voor het management", body: "Omzet, marge, voorraadwaarde en debiteuren per vestiging en per rechtspersoon in één financieel overzicht.", module: "contracten-en-facturen" },
+    ],
+    features: [
+      { title: "Vestigingen met eigen voorraad", body: "Per vestiging een eigen voorraad, websitefeed, team en adres voor afspraken en proefritten.", module: "voorraad" },
+      { title: "Workflowsjablonen met versies", body: "Gepubliceerde workflows gelden op elke locatie. Een nieuwe versie geldt voor nieuwe auto's, lopende blijven kloppen.", module: "intake-en-aflevering" },
+      { title: "Rollen en rechten", body: "Per rol bepaal je welke pagina's en gegevens zichtbaar zijn, op het web en in de app. Inkoopprijzen blijven afgeschermd.", module: "team-app" },
+      { title: "Agenda per medewerker", body: "Dag-, week- en maandweergave, met een kolom per persoon en koppeling met Google of Outlook.", module: "agenda" },
+      { title: "Gedeelde inbox met toewijzing", body: "WhatsApp en mail van alle vestigingen in één inbox, met labels, toewijzing en AI-concepten.", module: "inbox" },
+      { title: "AI-opvolging buiten openingstijden", body: "Een lead om tien uur 's avonds krijgt meteen een goed antwoord. De volgende ochtend staat de afspraak al in de agenda.", module: "ai-opvolging" },
+      { title: "Meerdere rechtspersonen", body: "Per vestiging of auto bepaal je welke bv op het contract en de factuur staat.", module: "contracten-en-facturen" },
+      { title: "Planbord per monteur", body: "Werkplaatsen per locatie plannen hun monteurs op hetzelfde planbord, met de bezetting per dag.", module: "werkplaats" },
+      { title: "Elke wijziging herleidbaar", body: "Het auditlog laat zien wie wat wanneer deed, doorzoekbaar op kenteken, naam of factuurnummer.", module: "voorraad" },
+      { title: "Een app voor iedereen op de vloer", body: "Poetsers, monteurs en verkopers werken in dezelfde app, ook offline, met pushmeldingen voor hun taken.", module: "team-app" },
+      { title: "Vraag het de agent", body: "Welke vestiging heeft de meeste auto's die te lang staan? De VINVARO Agent zoekt het op en regelt de vervolgstap, met jouw rechten.", module: "intelligence" },
+      { title: "Klanten van alle locaties", body: "Eén klantbestand voor alle vestigingen, met gesprekken, deals en aftersales per klant.", module: "crm-en-verkoop" },
+    ],
+    faq: [
+      { q: "Betaal ik per vestiging?", a: "Nee. Het Dealer-plan kost € 199 per maand plus € 5 per auto in voorraad, ongeacht het aantal vestigingen of gebruikers." },
+      { q: "Kan elke vestiging een eigen website-feed hebben?", a: "Ja. Per vestiging stel je een eigen feed in, zodat elke website alleen de auto's van die locatie toont." },
+      { q: "Kan ik bepalen wat elke medewerker ziet?", a: "Ja. Per rol bepaal je welke pagina's en gegevens zichtbaar zijn, op het web en in de app. Inkoopprijzen en marges blijven zo bij wie ze nodig heeft." },
+      { q: "Hoe houd ik zicht op wat er gebeurt?", a: "Het auditlog toont elke wijziging met wie en wanneer, en het financieel rapport geeft cijfers per vestiging en rechtspersoon." },
+    ],
+    integrations: ["Google Agenda", "Outlook-agenda", "Gmail", "Outlook / Microsoft 365", "WhatsApp Business", "Autoboeker", "Websitefeed"],
   },
   {
     slug: "autobedrijven-met-werkplaats",
@@ -618,6 +716,36 @@ export const segments: Segment[] = [
       { title: "Inkoop zonder overtypen", body: "Bestellen bij Fource of Grossier.nu en inkoopfacturen die AI leest en aan de auto koppelt." },
     ],
     modules: ["werkplaats", "voorraad", "aftersales", "team-app"],
+    visual: "workshop",
+    wins: ["Werkorders met de kosten op de juiste auto", "Een planbord per monteur, met timer", "Onderdelen bestellen bij je grossier", "Inkoopfacturen gelezen door AI"],
+    day: [
+      { time: "07:45", title: "Het planbord staat klaar", body: "Elke monteur ziet zijn werkorders voor vandaag. Spoedklussen sleep je tussendoor; de bezetting per monteur is meteen zichtbaar.", module: "werkplaats" },
+      { time: "08:00", title: "Timer aan in de app", body: "De monteur start de timer op zijn telefoon. Bij een pauze zet hij hem op pauze; de uren komen vanzelf op de werkorder.", module: "team-app" },
+      { time: "10:15", title: "Onderdeel onder het minimum", body: "Remblokken zijn op. Met één klik staat er een bestelling klaar bij Fource of Grossier.nu, of per mail bij je eigen grossier.", module: "werkplaats" },
+      { time: "12:30", title: "Inkoopfactuur in de inbox", body: "De factuur van de grossier wordt gelezen en op kenteken gekoppeld aan de juiste werkorder. Jij keurt goed.", module: "inbox" },
+      { time: "16:00", title: "Klaar en gefactureerd", body: "De klantauto is klaar: met één klik een factuur, de leenauto wordt ingenomen en de klus verschijnt in het dashboardkastje van de klant.", module: "aftersales" },
+    ],
+    features: [
+      { title: "Voorraad- en klantauto's", body: "Een klus aan een voorraadauto wordt een kostenpost in het dossier. Een klantauto zoek je op kenteken, met de RDW-gegevens erbij.", module: "werkplaats" },
+      { title: "Arbeid, onderdelen en uitbesteed werk", body: "Per regel kostprijs, verkoopprijs en marge. Je uurtarief en de opslag op onderdelen stel je zelf in.", module: "werkplaats" },
+      { title: "Werkpakketten", body: "Vaste klussen zoals een kleine beurt of winterbanden leg je één keer vast en voeg je met één klik toe.", module: "werkplaats" },
+      { title: "Tijd klokken met pauze", body: "Een zwevende timer op elke pagina en in de app, met pauzeren en hervatten. Gewerkte uren gaan naar een arbeidsregel.", module: "werkplaats" },
+      { title: "Planbord per monteur", body: "Dag- en weekweergave, slepen naar een tijd en een monteur, en de werkorder staat ook in de agenda.", module: "agenda" },
+      { title: "Onderdelenvoorraad met minimum", body: "Locatie, leverancier en minimum per artikel. Een afgeronde werkorder boekt de onderdelen uit. Importeer je voorraad uit Excel.", module: "werkplaats" },
+      { title: "Bestellen bij je grossier", body: "Rechtstreeks via Fource/LKQ of Grossier.nu, of per mail met een nette pdf. Ontvangen onderdelen worden ingeboekt.", module: "werkplaats" },
+      { title: "Inkoopfacturen zonder overtypen", body: "Uit je inbox of een upload, door AI gelezen en gekoppeld op kenteken, VIN of werkordernummer. In de app scan je een factuur.", module: "intelligence" },
+      { title: "Vervangend vervoer", body: "Leenauto's met reserveringen zonder dubbele boekingen. Bij uitgifte tekent de klant op het scherm of via een link.", module: "werkplaats" },
+      { title: "Werk uitbesteden", body: "Een garagepartner krijgt een link, geeft door wat hij deed en uploadt zijn factuur. De kosten komen op de werkorder.", module: "werkplaats" },
+      { title: "Werkhistorie voor de klant", body: "Onderhoud en reparaties verschijnen in het digitale dashboardkastje, met een APK-herinnering op tijd.", module: "aftersales" },
+      { title: "Factureren en boekhouden", body: "Een klantklus wordt met één klik een factuur, die via Autoboeker in je boekhouding komt.", module: "contracten-en-facturen" },
+    ],
+    faq: [
+      { q: "Vervangt VINVARO mijn werkplaatspakket?", a: "Voor werkorders, planning, onderdelen, bestellingen, inkoopfacturen en vervangend vervoer wel. Alles hangt aan dezelfde auto's, klanten en facturen als je verkoop." },
+      { q: "Kunnen monteurs zonder computer werken?", a: "Ja. In de team-app zien ze hun werkorders, starten en pauzeren ze de timer, maken ze foto's en scannen ze facturen, ook zonder bereik." },
+      { q: "Welke grossiers zijn gekoppeld?", a: "Fource/LKQ en Grossier.nu rechtstreeks. Bij elke andere leverancier bestel je per mail met een pdf, en hun facturen worden herkend als ze in je inbox binnenkomen." },
+      { q: "Hoe zie ik wat een voorraadauto echt kost?", a: "Elke werkorder op een voorraadauto boekt arbeid, onderdelen en uitbesteed werk als kosten in het dossier. De marge per auto is daardoor altijd actueel." },
+    ],
+    integrations: ["Fource / LKQ", "Grossier.nu", "RDW Open Data", "Autoboeker", "Gmail", "WhatsApp Business"],
   },
   {
     slug: "handelaren",
@@ -632,6 +760,36 @@ export const segments: Segment[] = [
       { title: "Handelsplein en 185+ portals", body: "Verkoop aan andere autobedrijven tegen handelsprijzen, of publiceer in heel Europa." },
     ],
     modules: ["check", "handelsplein", "voorraad", "contracten-en-facturen"],
+    visual: "check",
+    wins: ["Elke partij gecheckt voor je koopt", "Vrijwaren en overdragen vanuit het dossier", "Verkopen via het Handelsplein en 185+ portals", "Inkoop, kosten en marge per auto"],
+    day: [
+      { time: "09:00", title: "Aanbod via WhatsApp", body: "Een onbekende partij biedt vijf auto's aan. Check geeft binnen seconden een score op KvK, btw, reviews en website.", module: "check" },
+      { time: "10:00", title: "Taxeren met marktdata", body: "Marktwaarde, maximale inkoopprijs en courantheid via JP.cars, met de RDW-gegevens en tellerstandoordeel erbij.", module: "voorraad" },
+      { time: "11:30", title: "Inkopen en vrijwaren", body: "Het inkoopcontract wordt digitaal getekend en je vrijwaart of draagt over met je eigen A2SP- of RDC-account.", module: "contracten-en-facturen" },
+      { time: "14:00", title: "Doorverkopen", body: "De auto's staan op het Handelsplein voor andere autobedrijven en op mobile.de en OTOMOTO voor buitenlandse kopers.", module: "handelsplein" },
+      { time: "16:30", title: "Overgedragen en gefactureerd", body: "B2B-overdracht bij de RDW, factuur met marge- of btw-regeling en de betaling afgeletterd met je bank.", module: "contracten-en-facturen" },
+    ],
+    features: [
+      { title: "Check op elke partij", body: "KvK, btw via VIES, Google-reviews met sentiment, domein, webarchief en social media, met de uitkomst bij de relatie.", module: "check" },
+      { title: "Advertenties controleren", body: "Plak een advertentielink en VINVARO vergelijkt kenteken, RDW-gegevens en de vraagprijs met de markt.", module: "check" },
+      { title: "Taxatie met JP.cars", body: "Marktwaarde, maximale inkoopprijs en courantheid direct op de auto, met je eigen account.", module: "voorraad" },
+      { title: "RDW vanuit het dossier", body: "Vrijwaren, tijdelijk documentnummer, B2B-overdracht en kilometerstand met je eigen A2SP- of RDC-account. Bewijzen direct in het dossier.", module: "voorraad" },
+      { title: "Digitaal inkopen en verkopen", body: "Inkoop- en verkoopcontracten uit je eigen sjablonen, getekend via een link, ook door buitenlandse partijen.", module: "contracten-en-facturen" },
+      { title: "Handelsplein", body: "Gratis kopen en verkopen met andere autobedrijven tegen handelsprijzen. Na de deal staat de auto vanzelf bij de koper.", module: "handelsplein" },
+      { title: "Heel Europa als markt", body: "mobile.de, AutoScout24, OTOMOTO, Autovit, 2dehands en meer dan 180 andere sites. Per auto kies je waar hij komt.", module: "publiceren" },
+      { title: "Marge en btw per auto", body: "Margeregeling of btw-auto, met inkoop, kosten en marge per auto en btw-nummers gecontroleerd via VIES.", module: "contracten-en-facturen" },
+      { title: "Inkoopfacturen gelezen", body: "Facturen van transport, keuringen en reparaties worden gelezen en als kosten op de auto geboekt.", module: "intelligence" },
+      { title: "Veel auto's tegelijk", body: "Selecteer auto's en wijzig in één keer de status, prijs of kanalen. Of vraag het de agent in gewone taal.", module: "voorraad" },
+      { title: "Betalingen per auto", body: "Aanbetalingen en betalingen per auto, afgeletterd met je bankrekening. Je ziet per auto wat er nog openstaat.", module: "contracten-en-facturen" },
+      { title: "Snelle intake", body: "Een korte intakeworkflow op de telefoon met foto's, sleutels en papieren, zodat elke auto in een paar minuten is vastgelegd.", module: "intake-en-aflevering" },
+    ],
+    faq: [
+      { q: "Kan ik vrijwaren zonder het RDW-portaal te openen?", a: "Ja. Met je eigen A2SP- of RDC-account vrijwaar je, draag je over aan een ander bedrijf en meld je kilometerstanden direct vanuit de auto in VINVARO." },
+      { q: "Werkt het voor export?", a: "Ja. Je publiceert op internationale sites zoals mobile.de, AutoScout24 en OTOMOTO, controleert btw-nummers via VIES en maakt contracten in de taal van de koper." },
+      { q: "Wat is het Handelsplein?", a: "Een gratis netwerk waar autobedrijven rechtstreeks met elkaar handelen tegen handelsprijzen. Na de deal gaat de auto vanzelf naar de voorraad van de koper." },
+      { q: "Hoe snel is een Check?", a: "Meestal binnen een paar seconden. Je ziet per bron hoe de controle verloopt, en het resultaat blijft bewaard bij de relatie." },
+    ],
+    integrations: ["A2SP (RDW)", "RDC (RDW)", "JP.cars", "VIES", "KVK Handelsregister", "mobile.de", "AutoScout24", "VINVARO Handelsplein"],
   },
 ];
 
