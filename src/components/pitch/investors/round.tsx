@@ -19,7 +19,7 @@ export function GtmSlide() {
   const channels = [
     { icon: Repeat2, title: t("Overstapdienst", "Switching service"), body: t("Wij importeren voorraad en relaties en zetten workflows klaar. Live binnen een paar dagen.", "We import stock and contacts and set up workflows. Live within a few days.") },
     { icon: MonitorPlay, title: t("Demo op eigen voorraad", "Demo on their own stock"), body: t("30 minuten, met de auto's van de dealer zelf. Daarna 30 dagen gratis.", "30 minutes, with the dealer's own cars. Then 30 days free.") },
-    { icon: Handshake, title: t("Partners", "Partners"), body: t("Autoboeker en Autus Finance zitten al in het product en openen de deur naar boekhouders en financiers.", "Autoboeker and Autus Finance are already in the product and open doors to accountants and lenders.") },
+    { icon: Handshake, title: t("Partners", "Partners"), body: t("Autoboeker, Financieringsvriend en grossiers als Fource en Grossier.nu zitten al in het product en openen de deur naar boekhouders, financiers en werkplaatsen.", "Autoboeker, Financieringsvriend and wholesalers such as Fource and Grossier.nu are already in the product and open doors to accountants, lenders and workshops.") },
     { icon: Users, title: t("Gratis netwerk", "Free network"), body: t("Handelsplein en Marktplaats trekken dealers aan die nog geen klant zijn.", "The trade network and Marketplace attract dealers who aren't customers yet.") },
   ];
   const r = 108;

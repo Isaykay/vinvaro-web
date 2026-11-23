@@ -60,7 +60,7 @@ export function IntegrationsSlide() {
   const shown = ["marktplaats", "autotrack", "autoscout24", "vinvaro"];
   const portals = integrations.filter((i) => i.category === integrations[0].category && i.slug && !shown.includes(i.slug));
   const more = integrations.find((i) => i.category === integrations[0].category && !i.slug && !i.channel);
-  const connected = integrations.filter((i) => i.status === "live" && i.category !== integrations[0].category && i.slug !== "site");
+  const connected = integrations.filter((i) => i.status !== "planned" && i.category !== integrations[0].category && i.slug !== "site");
   const planned = integrations.filter((i) => i.status === "planned");
 
   return (
@@ -73,8 +73,8 @@ export function IntegrationsSlide() {
           </Heading>
           <Lead on={on} className="max-w-sm lg:mt-0 lg:pb-1.5 lg:text-right">
             {t(
-              "Online op 185+ portals en je eigen website. Daaronder RDW-acties, JP.cars, je boekhouding, je mailbox en je agenda.",
-              "Online on 185+ portals and your own website. Underneath: RDW transactions, JP.cars, your bookkeeping, mailbox and calendar.",
+              "Online op 185+ portals en je eigen website. Daaronder RDW-acties, JP.cars, je grossier, financiering, je boekhouding, je mailbox en je agenda.",
+              "Online on 185+ portals and your own website. Underneath: RDW transactions, JP.cars, your wholesaler, financing, your bookkeeping, mailbox and calendar.",
             )}
           </Lead>
         </div>

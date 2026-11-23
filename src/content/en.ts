@@ -8,7 +8,7 @@ export const site = {
   tagline: "Every vehicle. Every detail. Under control.",
   description:
     "VINVARO brings vehicles, customers and operations together in one workspace. From registration and intake to test drive, contract, listing and delivery, for automotive businesses that want control without scattered systems.",
-  news: { label: "New: the VINVARO Agent", href: "/agent" },
+  news: { label: "New: the Workshop, with work orders, planning board and parts", href: "/platform/werkplaats" },
 };
 
 export const nav: {
@@ -64,6 +64,7 @@ export const nav: {
       {
         title: "New",
         links: [
+          { label: "Workshop", href: "/platform/werkplaats", description: "Work orders, planning board, parts and purchase invoices" },
           { label: "Check", href: "/platform/check", description: "Can this company or listing be trusted?" },
           { label: "AI follow-up", href: "/platform/ai-opvolging", description: "A good answer to every lead within a minute" },
           { label: "Aftersales", href: "/platform/aftersales", description: "A digital glovebox for your customer" },
@@ -135,6 +136,7 @@ export const platform: PlatformModule[] = [
       { title: "Margin, VAT and BPM per car", body: "Purchase, costs, asking price and margin per car, with VAT or margin scheme and BPM. Deposits and payments live on the Payments tab." },
       { title: "Many cars at once", body: "Select cars in the list and change the sales status, stage, branch or price-on-request in one go, refresh MOT data or switch channels on and off." },
       { title: "Days in stock and price advice", body: "See per car how long it has been in stock and what that costs. Set your own stock policy; when a car stays too long you get a price suggestion you apply to every channel in one click." },
+      { title: "Work orders and costs per car", body: "Tyres, a service or an upgrade on a stock car? Create a work order; labour, parts and sublet work become costs on the car and count in your margin." },
       { title: "Weekly stock overview", body: "An overview of the cars crossing your limit, in your mailbox. With a connected valuation they are revalued automatically." },
     ],
     faq: [
@@ -470,10 +472,38 @@ export const platform: PlatformModule[] = [
       { title: "Reviews at the right moment", body: "The customer writes a review in one tap, shown on your public profile and with your cars." },
       { title: "Trade-ins from your own customers", body: "What is my car worth now? The customer requests a trade-in offer and you get a lead with the car attached." },
       { title: "Quick contact", body: "Call, WhatsApp, email or directions to your branch, in one tap from the glovebox. Your warranty text is in there too." },
+      { title: "Service history and warranty", body: "Servicing and repairs from your workshop appear in the glovebox automatically, as does the warranty from the purchase contract." },
     ],
     faq: [
       { q: "Does my customer need an account?", a: "No. The customer opens the glovebox through a personal, secure link. You can revoke a link at any time." },
       { q: "Can I choose which messages go out?", a: "Yes. Each moment, such as the review request or MOT reminder, is switched on or off separately, with your own timing." },
+    ],
+  },
+  {
+    slug: "werkplaats",
+    group: "vehicles",
+    name: "Workshop",
+    module: "VINVARO Workshop",
+    eyebrow: "New · Workshop",
+    title: "Work orders, planning board and parts. Right inside VINVARO.",
+    lead: "From a set of tyres to a major service or a laser shield: record the job on a work order, for your own stock or for a customer's car. Labour, parts and sublet work with cost and margin, a planning board per mechanic and an invoice in one click.",
+    visual: "workshop",
+    steps: ["Work order", "Planning board", "Mechanic clocks in", "Cost or invoice"],
+    points: [
+      { title: "Stock and customer cars", body: "A job on a stock car becomes a cost on the car and counts in your margin. Look up a customer car by plate, with the RDW data attached; that job becomes an invoice." },
+      { title: "Labour, parts and sublet work", body: "Per line you see cost, price and margin. Set your own hourly rate and parts markup, and save recurring jobs as work packages." },
+      { title: "Time tracking", body: "Mechanics start and stop the timer on the web or in the app. Hours worked land on the work order automatically, at your internal cost per hour." },
+      { title: "Planning board per mechanic", body: "Drag work orders to a time and a mechanic. You see per day and per week who is fully booked, and the work order shows in the calendar too." },
+      { title: "Parts stock", body: "Items with location, supplier and a minimum. A completed work order issues the parts; when an item drops below its minimum you reorder in one click. Import your current stock from Excel or CSV." },
+      { title: "Order from your wholesaler", body: "By email with a clean PDF, or directly through the Fource/LKQ or Grossier.nu connection. On receipt the stock is booked in." },
+      { title: "Purchase invoices read by AI", body: "Supplier invoices from your inbox or an upload are read and linked to the right car by plate, VIN or work order number. In the app you scan an invoice with the camera." },
+      { title: "Loan cars", body: "Your loan cars with bookings, without double bookings. At hand-out you record mileage and fuel; the customer signs on screen or through a link on their own phone." },
+      { title: "Sublet work to a partner garage", body: "The partner gets a link, reports what they did and uploads their invoice. The costs land on the work order automatically." },
+    ],
+    faq: [
+      { q: "Do I need a separate workshop system?", a: "No. Work orders, planning board, parts, purchase orders and purchase invoices are part of VINVARO, linked to the same cars, customers, calendar and invoices." },
+      { q: "Can I also work on customers' cars?", a: "Yes. Look up the car by plate; VINVARO fetches the details from the RDW. After completion you create an invoice in one click, and the job shows in the service history in your customer's digital glovebox." },
+      { q: "Does it work with my wholesaler?", a: "With Fource/LKQ and Grossier.nu you order directly through the connection. With any other supplier you order by email with a PDF, and their invoices are recognised when they arrive in your inbox." },
     ],
   },
 ];
@@ -527,6 +557,7 @@ const categoryNames: Record<string, string> = {
   Voertuiggegevens: "Vehicle data",
   "RDW-diensten": "RDW services",
   Marktplaatsen: "Marketplaces",
+  Werkplaats: "Workshop",
   Berichten: "Messaging",
   Agenda: "Calendar",
   Relatiecontroles: "Contact checks",
@@ -534,7 +565,7 @@ const categoryNames: Record<string, string> = {
   Website: "Website",
 };
 
-export const integrationCategories = ["Marketplaces", "RDW services", "Vehicle data", "Messaging", "Calendar", "Contact checks", "Accounting & financing", "Website"] as const;
+export const integrationCategories = ["Marketplaces", "RDW services", "Vehicle data", "Workshop", "Messaging", "Calendar", "Contact checks", "Accounting & financing", "Website"] as const;
 
 const integrationBodies: Record<string, string> = {
   "VINVARO Marktplaats": "Your stock for free on the public VINVARO Marketplace, with your reputation.",
@@ -553,6 +584,8 @@ const integrationBodies: Record<string, string> = {
   "RDC (RDW)": "Indemnify, B2B transfer and odometer with your own RDC account and RDW certificate.",
   "VWE (RDW)": "Indemnify and odometer through your VWE account.",
   "JP.cars": "Market value, maximum purchase price and demand on the car, with your own JP.cars account.",
+  "Fource / LKQ": "Order parts from Fource with your own customer account, straight from a purchase order or work order.",
+  "Grossier.nu": "Order from your wholesaler through Grossier.nu, with your own API key. Received parts are booked into stock.",
   "WhatsApp Business": "Customer conversations in the shared inbox, with media and quick replies.",
   Gmail: "Receive and send email from VINVARO.",
   "Outlook / Microsoft 365": "Receive and send email from VINVARO.",
@@ -609,6 +642,7 @@ export const faq = [
   { q: "What is VINVARO Check?", a: "A check of a company or listing based on public sources: KvK, VAT, Google reviews, domain, website and social media. Within seconds you get a score with per source what checks out and what stands out." },
   { q: "Can VINVARO follow up leads automatically?", a: "Yes, with AI follow-up. AI drafts an answer with the car's details and your free slots, aimed at the goal you choose. It's off by default and starts with drafts you approve." },
   { q: "What is the digital glovebox?", a: "A personal page for your buyer with the documents of their car, the MOT date, a review button and a trade-in request. In your own house style, with automatic messages after the sale." },
+  { q: "Does VINVARO have a workshop module?", a: "Yes. With the Workshop you create work orders for stock and customer cars with labour, parts and sublet work, plan your mechanics on the planning board, manage your parts stock and loan cars and order from your wholesaler. Purchase invoices are recognised by AI and linked to the right car." },
   { q: "How do I get help when I'm stuck?", a: "Click Support in VINVARO. Linda, our AI assistant, answers questions straight away, day and night. During office hours (Mon–Fri 09:00–17:00) a colleague takes over the conversation, and tickets let you follow progress. The help center is full of guides." },
   { q: "How quickly can I switch?", a: "Import your stock and contacts from Excel or CSV; connect channels and calendars yourself in a few minutes. We plan the switch together in the demo." },
   { q: "What does VINVARO cost?", a: "The Dealer plan costs €199 per month plus €5 per vehicle in stock, excluding VAT. All modules, users, partners and RDW transactions are included. You start with a 30-day trial." },

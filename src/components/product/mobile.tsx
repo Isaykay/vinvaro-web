@@ -678,6 +678,85 @@ export function MobilePublish() {
   );
 }
 
+const workCopy = defineCopy({
+  nl: {
+    title: "WO-1042",
+    car: "Golf 1.5 eTSI",
+    status: "In behandeling",
+    timer: "Timer loopt",
+    stop: "Stoppen",
+    lines: "Regels",
+    rows: [
+      ["wrench", "Grote onderhoudsbeurt", "2,0 u"],
+      ["layers", "Oliefilter", "1 st"],
+      ["droplet", "Motorolie 5W-30", "4,5 l"],
+      ["users", "Uitlijnen · uitbesteed", "1"],
+    ] as [IconName, string, string][],
+    scan: "Inkoopfactuur scannen",
+    done: "Klaar melden",
+  },
+  en: {
+    title: "WO-1042",
+    car: "Golf 1.5 eTSI",
+    status: "In progress",
+    timer: "Timer running",
+    stop: "Stop",
+    lines: "Lines",
+    rows: [
+      ["wrench", "Major service", "2.0 h"],
+      ["layers", "Oil filter", "1 pc"],
+      ["droplet", "Engine oil 5W-30", "4.5 l"],
+      ["users", "Wheel alignment · sublet", "1"],
+    ] as [IconName, string, string][],
+    scan: "Scan purchase invoice",
+    done: "Mark as done",
+  },
+});
+
+/** The app's workshop tab: a work order with the timer and its lines. */
+export function MobileWorkOrder() {
+  const t = workCopy[useLang()];
+  return (
+    <PhoneFrame tab={4} header={<MobileHeader back title={t.title} right={<Icon name="more" size={16} className="text-muted" />} />}>
+      <div className="px-4 pb-4">
+        <div className="flex items-center gap-2">
+          <BrandLogo make="volkswagen" className="size-8" />
+          <span className="min-w-0 flex-1">
+            <span className="block truncate text-[12.5px] font-semibold">{t.car}</span>
+            <Tag tone="brand">{t.status}</Tag>
+          </span>
+          <Plate size="xs">R-512-FX</Plate>
+        </div>
+        <div className="mt-3 rounded-xl bg-[#0b1b3f] p-3 text-white">
+          <p className="flex items-center gap-1.5 text-[9.5px] font-medium text-white/70">
+            <span className="size-1.5 animate-soft-pulse rounded-full bg-[#12b76a]" /> {t.timer}
+          </p>
+          <div className="mt-1 flex items-end justify-between">
+            <span className="font-mono text-[24px] leading-none font-semibold tabular-nums">01:12:40</span>
+            <span className="rounded-md bg-white/15 px-2 py-1 text-[9.5px] font-semibold">{t.stop}</span>
+          </div>
+        </div>
+        <p className="mt-3 mb-1.5 text-[11px] font-semibold">{t.lines}</p>
+        <div className="divide-y divide-line rounded-xl border border-line bg-surface">
+          {t.rows.map(([icon, label, qty], i) => (
+            <div key={label} className="flex animate-row-in items-center gap-2 px-2.5 py-2 text-[10.5px]" style={delay(0.2 + i * 0.1)}>
+              <Icon name={icon} size={12} className="shrink-0 text-muted" />
+              <span className="min-w-0 flex-1 truncate font-medium">{label}</span>
+              <span className="font-mono text-[9.5px] text-muted">{qty}</span>
+            </div>
+          ))}
+        </div>
+        <span className="mt-3 flex h-8 items-center justify-center gap-1.5 rounded-[10px] border border-line bg-surface text-[10.5px] font-semibold">
+          <Icon name="camera" size={12} /> {t.scan}
+        </span>
+        <span className="mt-2 flex h-8 items-center justify-center gap-1.5 rounded-[10px] bg-brand text-[10.5px] font-semibold text-white">
+          <Icon name="check" size={12} /> {t.done}
+        </span>
+      </div>
+    </PhoneFrame>
+  );
+}
+
 /** The app screen that belongs to a platform module, for the "also in the app" section. */
 export function moduleScreens(visual: ModuleVisualKey): [() => React.JSX.Element, () => React.JSX.Element] | null {
   switch (visual) {
@@ -704,6 +783,8 @@ export function moduleScreens(visual: ModuleVisualKey): [() => React.JSX.Element
       return [MobilePublish, MobileVehicle];
     case "trade":
       return [MobileDeals, MobileVehicle];
+    case "workshop":
+      return [MobileWorkOrder, MobileCapture];
     case "check":
     case "responder":
     case "glovebox":

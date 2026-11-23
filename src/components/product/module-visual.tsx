@@ -7,6 +7,7 @@ import { AgendaWeek, ContractSign, InboxView, PublishFlow, SalesPipeline } from 
 import { MarketGrid, TradeFlow } from "@/components/product/network";
 import { PhotoStudio } from "@/components/product/studio";
 import { Glovebox, LeadResponder, TrustCheck } from "@/components/product/growth";
+import { WorkshopOrder } from "@/components/product/workshop";
 
 export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
   switch (visual) {
@@ -34,6 +35,8 @@ export function ModuleVisual({ visual }: { visual: ModuleVisualKey }) {
       return <TradeFlow />;
     case "market":
       return <MarketGrid />;
+    case "workshop":
+      return <WorkshopOrder />;
     case "check":
       return <TrustCheck />;
     case "responder":

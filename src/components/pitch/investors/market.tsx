@@ -238,8 +238,10 @@ export function CompetitionSlide() {
     [t("Workflows intake & aflevering", "Intake & delivery workflows"), ["no", "no", "partial", "yes", "yes"]],
     [t("Contracten & digitaal tekenen", "Contracts & e-signing"), ["no", "partial", "partial", "yes", "yes"]],
     [t("Facturen naar de boekhouding", "Invoices to bookkeeping"), ["no", "partial", "yes", "yes", "yes"]],
+    [t("Werkorders, onderdelen & planbord", "Work orders, parts & planning board"), ["no", "no", "yes", "yes", "yes"]],
+    [t("Aftersales & digitaal dashboardkastje", "Aftersales & digital glovebox"), ["no", "no", "partial", "partial", "yes"]],
     [t("Team-app, ook offline", "Staff app, offline too"), ["no", "partial", "no", "partial", "yes"]],
-    [t("AI: labels, documenten, foto's", "AI: labels, documents, photos"), ["no", "no", "no", "partial", "yes"]],
+    [t("AI: labels, documenten, foto's, leadopvolging", "AI: labels, documents, photos, lead follow-up"), ["no", "no", "no", "partial", "yes"]],
     [t("Eigen B2B-netwerk tussen dealers", "Own B2B network between dealers"), ["no", "no", "no", "no", "yes"]],
     [t("Betaalbaar voor zelfstandige dealer", "Affordable for independent dealers"), ["yes", "yes", "yes", "no", "yes"]],
   ];

@@ -31,7 +31,7 @@ const shell = defineCopy({
   nl: {
     nav: [
       { items: [["dashboard", "Overzicht"], ["vehicle", "Voertuigen"], ["pipeline", "Pijplijn"]] },
-      { label: "Operatie", items: [["chat", "Inbox", 4], ["mail", "Aanvragen"], ["calendar", "Agenda"], ["check", "Taken"], ["scan", "Bevindingen"], ["workflow", "Workflows"]] },
+      { label: "Operatie", items: [["chat", "Inbox", 4], ["mail", "Aanvragen"], ["calendar", "Agenda"], ["check", "Taken"], ["scan", "Bevindingen"], ["wrench", "Werkplaats"], ["workflow", "Workflows"]] },
       { label: "Verkoop", items: [["users", "Relaties"], ["contract", "Contracten"], ["euro", "Facturen"], ["gauge", "Financieel rapport"]] },
     ] as NavGroup[],
     org: "Autobedrijf De Vries",
@@ -42,7 +42,7 @@ const shell = defineCopy({
   en: {
     nav: [
       { items: [["dashboard", "Overview"], ["vehicle", "Vehicles"], ["pipeline", "Pipeline"]] },
-      { label: "Operations", items: [["chat", "Inbox", 4], ["mail", "Inquiries"], ["calendar", "Calendar"], ["check", "Tasks"], ["scan", "Findings"], ["workflow", "Workflows"]] },
+      { label: "Operations", items: [["chat", "Inbox", 4], ["mail", "Inquiries"], ["calendar", "Calendar"], ["check", "Tasks"], ["scan", "Findings"], ["wrench", "Workshop"], ["workflow", "Workflows"]] },
       { label: "Sales", items: [["users", "Contacts"], ["contract", "Contracts"], ["euro", "Invoices"], ["gauge", "Finance report"]] },
     ] as NavGroup[],
     org: "De Vries Automotive",

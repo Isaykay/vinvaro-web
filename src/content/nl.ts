@@ -21,7 +21,7 @@ export const site = {
   tagline: "Elk voertuig. Elk detail. Onder controle.",
   description:
     "VINVARO brengt voertuigen, klanten en processen samen in één werkplek. Van kenteken en intake tot proefrit, contract, publicatie en aflevering, voor autobedrijven die overzicht willen zonder losse systemen.",
-  news: { label: "Nieuw: de VINVARO Agent", href: "/agent" },
+  news: { label: "Nieuw: de Werkplaats, met werkorders, planbord en onderdelen", href: "/platform/werkplaats" },
 };
 
 export type NavLink = { label: string; href: string; description?: string; logo?: string };
@@ -84,6 +84,7 @@ export const nav: {
       {
         title: "Nieuw",
         links: [
+          { label: "Werkplaats", href: "/platform/werkplaats", description: "Werkorders, planbord, onderdelen en inkoopfacturen" },
           { label: "Check", href: "/platform/check", description: "Is dit bedrijf of deze advertentie te vertrouwen?" },
           { label: "AI-opvolging", href: "/platform/ai-opvolging", description: "Elke lead binnen een minuut een goed antwoord" },
           { label: "Aftersales", href: "/platform/aftersales", description: "Een digitaal dashboardkastje voor je klant" },
@@ -130,7 +131,7 @@ export const nav: {
   { label: "Contact", href: "/contact" },
 ];
 
-export type ModuleVisualKey = "inventory" | "intake" | "intelligence" | "studio" | "app" | "inbox" | "crm" | "agenda" | "contracts" | "publish" | "trade" | "market" | "check" | "responder" | "glovebox";
+export type ModuleVisualKey = "inventory" | "intake" | "intelligence" | "studio" | "app" | "inbox" | "crm" | "agenda" | "contracts" | "publish" | "trade" | "market" | "check" | "responder" | "glovebox" | "workshop";
 
 export type ModuleGroup = "vehicles" | "sales" | "network";
 
@@ -174,6 +175,7 @@ export const platform: PlatformModule[] = [
       { title: "Marge, btw en BPM per auto", body: "Inkoop, kosten, vraagprijs en marge per auto, met btw- of margeregeling en BPM. Aanbetalingen en betalingen staan op het tabblad Betalingen." },
       { title: "Meerdere auto's tegelijk", body: "Selecteer auto's in de lijst en wijzig in één keer de verkoopstatus, fase, vestiging of prijs op aanvraag, haal APK-gegevens op of zet kanalen aan en uit." },
       { title: "Stadagen en prijsadvies", body: "Per auto zie je hoe lang hij staat en wat dat kost. Stel je eigen voorraadbeleid in; staat een auto te lang, dan krijg je een prijsvoorstel dat je met één klik doorvoert op al je kanalen." },
+      { title: "Werkorders en kosten per auto", body: "Banden, een beurt of een upgrade op een voorraadauto? Maak een werkorder; arbeid, onderdelen en uitbesteed werk komen als kosten bij de auto en tellen mee in je marge." },
       { title: "Wekelijks voorraadoverzicht", body: "Een overzicht van de auto's die over je grens gaan, in je mailbox. Met een gekoppelde waardebepaling worden ze automatisch opnieuw gewaardeerd." },
     ],
     faq: [
@@ -509,10 +511,38 @@ export const platform: PlatformModule[] = [
       { title: "Reviews op het juiste moment", body: "De klant schrijft met één tik een review, die op je openbare profiel en bij je auto's verschijnt." },
       { title: "Inruil van je eigen klanten", body: "Wat is mijn auto nu waard? De klant vraagt een inruilvoorstel aan en jij krijgt een lead met de auto erbij." },
       { title: "Snel contact", body: "Bellen, WhatsApp, mailen of de route naar je vestiging, met één tik vanuit het dashboardkastje. Je garantietekst staat er ook in." },
+      { title: "Werkhistorie en garantie", body: "Onderhoud en reparaties uit je werkplaats verschijnen vanzelf in het dashboardkastje, net als de garantie uit het koopcontract." },
     ],
     faq: [
       { q: "Heeft mijn klant een account nodig?", a: "Nee. De klant opent het dashboardkastje via een persoonlijke, beveiligde link. Je kunt een link altijd intrekken." },
       { q: "Kan ik zelf kiezen welke berichten er gaan?", a: "Ja. Elk moment, zoals het reviewverzoek of de APK-herinnering, zet je apart aan of uit, met je eigen timing." },
+    ],
+  },
+  {
+    slug: "werkplaats",
+    group: "vehicles",
+    name: "Werkplaats",
+    module: "VINVARO Werkplaats",
+    eyebrow: "Nieuw · Werkplaats",
+    title: "Werkorders, planbord en onderdelen. Gewoon in VINVARO.",
+    lead: "Van een set banden tot een grote beurt of een lasershield: leg het werk vast op een werkorder, voor je eigen voorraad of voor de auto van een klant. Arbeid, onderdelen en uitbesteed werk met kostprijs en marge, een planbord per monteur en met één klik een factuur.",
+    visual: "workshop",
+    steps: ["Werkorder", "Planbord", "Monteur klokt", "Kosten of factuur"],
+    points: [
+      { title: "Voorraad- en klantauto's", body: "Een klus aan een voorraadauto wordt een kostenpost bij de auto en telt mee in je marge. Een klantauto zoek je op kenteken, met de RDW-gegevens erbij; die klus wordt een factuur." },
+      { title: "Arbeid, onderdelen en uitbesteed werk", body: "Per regel zie je kostprijs, verkoopprijs en marge. Uurtarief en opslag op onderdelen stel je zelf in, en vaste klussen leg je vast als werkpakket." },
+      { title: "Tijd klokken", body: "Monteurs starten en stoppen de timer op het web of in de app. Gewerkte uren komen vanzelf op de werkorder, tegen je interne kostprijs per uur." },
+      { title: "Planbord per monteur", body: "Sleep werkorders naar een tijd en een monteur. Je ziet per dag en per week wie vol zit, en de werkorder staat ook in de agenda." },
+      { title: "Onderdelenvoorraad", body: "Artikelen met locatie, leverancier en een minimum. Een afgeronde werkorder boekt de onderdelen uit; zakt een artikel onder het minimum, dan bestel je met één klik. Je huidige voorraad importeer je uit Excel of CSV." },
+      { title: "Bestellen bij je grossier", body: "Per mail met een nette pdf, of rechtstreeks via de koppeling met Fource/LKQ of Grossier.nu. Bij ontvangst wordt de voorraad ingeboekt." },
+      { title: "Inkoopfacturen herkend door AI", body: "Facturen van leveranciers uit je inbox of een upload worden gelezen en op kenteken, VIN of werkordernummer gekoppeld aan de juiste auto. In de app scan je een factuur met de camera." },
+      { title: "Vervangend vervoer", body: "Je leenauto's met reserveringen zonder dubbele boekingen. Bij uitgifte leg je kilometerstand en brandstof vast; de klant tekent op het scherm of via een link op zijn eigen telefoon." },
+      { title: "Werk uitbesteden aan een garagepartner", body: "De partner krijgt een link, geeft door wat hij heeft gedaan en uploadt zijn factuur. De kosten komen vanzelf op de werkorder." },
+    ],
+    faq: [
+      { q: "Heb ik een apart werkplaatssysteem nodig?", a: "Nee. Werkorders, planbord, onderdelen, bestellingen en inkoopfacturen zitten in VINVARO, gekoppeld aan dezelfde auto's, klanten, agenda en facturen." },
+      { q: "Kan ik ook werk doen aan auto's van klanten?", a: "Ja. Zoek de auto op kenteken; VINVARO haalt de gegevens bij de RDW op. Na afronden maak je met één klik een factuur, en de klus staat in de werkhistorie in het digitale dashboardkastje van je klant." },
+      { q: "Werkt het met mijn grossier?", a: "Met Fource/LKQ en Grossier.nu bestel je rechtstreeks via de koppeling. Bij elke andere leverancier bestel je per mail met een pdf, en hun facturen worden herkend als ze in je inbox binnenkomen." },
     ],
   },
 ];
@@ -586,7 +616,7 @@ export type Integration = {
   connectsTo?: { name: string; slug: string; soon?: boolean }[];
 };
 
-export const integrationCategories = ["Marktplaatsen", "RDW-diensten", "Voertuiggegevens", "Berichten", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Website"] as const;
+export const integrationCategories = ["Marktplaatsen", "RDW-diensten", "Voertuiggegevens", "Werkplaats", "Berichten", "Agenda", "Relatiecontroles", "Boekhouding & financiering", "Website"] as const;
 
 export const integrations: Integration[] = [
   { name: "VINVARO Marktplaats", category: "Marktplaatsen", status: "live", body: "Je voorraad gratis op de openbare VINVARO Marktplaats, met je reputatie erbij.", slug: "vinvaro" },
@@ -607,6 +637,8 @@ export const integrations: Integration[] = [
   { name: "RDW Open Data", category: "Voertuiggegevens", status: "live", body: "Kentekengegevens, APK, keuringen en tellerstandoordeel.", slug: "rdw" },
   { name: "JP.cars", category: "Voertuiggegevens", status: "live", body: "Marktwaarde, maximale inkoopprijs en courantheid op de auto, met je eigen JP.cars-account.", slug: "jpcars" },
   { name: "carVertical", category: "Voertuiggegevens", status: "planned", body: "Internationale voertuighistorie, schade en kilometerstanden.", slug: "carvertical" },
+  { name: "Fource / LKQ", category: "Werkplaats", status: "beta", body: "Onderdelen bestellen bij Fource met je eigen klantaccount, rechtstreeks vanuit een bestelling of werkorder.", slug: "fource" },
+  { name: "Grossier.nu", category: "Werkplaats", status: "beta", body: "Bestellen bij je grossier via Grossier.nu, met je eigen API-sleutel. Ontvangen onderdelen worden ingeboekt.", slug: "grossiernu" },
   { name: "WhatsApp Business", category: "Berichten", status: "beta", body: "Klantgesprekken in de gedeelde inbox, met media en snelle antwoorden.", channel: "whatsapp" },
   { name: "Gmail", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", channel: "gmail" },
   { name: "Outlook / Microsoft 365", category: "Berichten", status: "live", body: "Mail ontvangen en versturen vanuit VINVARO.", channel: "outlook" },
@@ -656,6 +688,7 @@ export const faq = [
   { q: "Wat is VINVARO Check?", a: "Een controle van een bedrijf of advertentie op basis van openbare bronnen: KvK, btw, Google-reviews, domein, website en social media. Je krijgt binnen seconden een score met per bron wat klopt en wat opvalt." },
   { q: "Kan VINVARO leads automatisch opvolgen?", a: "Ja, met AI-opvolging. De AI stelt een antwoord op met de gegevens van de auto en je vrije tijden, gericht op het doel dat jij kiest. Het staat standaard uit en begint met concepten die jij goedkeurt." },
   { q: "Wat is het digitale dashboardkastje?", a: "Een persoonlijke pagina voor je koper met de documenten van zijn auto, de APK-datum, een reviewknop en een inruilvoorstel. In je eigen huisstijl, met automatische berichten na de verkoop." },
+  { q: "Heeft VINVARO een werkplaatsmodule?", a: "Ja. Met de Werkplaats maak je werkorders voor voorraad- en klantauto's met arbeid, onderdelen en uitbesteed werk, plan je je monteurs op het planbord, beheer je je onderdelenvoorraad en vervangend vervoer en bestel je bij je grossier. Inkoopfacturen worden door AI herkend en aan de juiste auto gekoppeld." },
   { q: "Hoe krijg ik hulp als ik vastloop?", a: "Klik in VINVARO op Support. Linda, onze AI-assistent, beantwoordt vragen direct, dag en nacht. Tijdens kantooruren (ma–vr 09:00–17:00) neemt een collega het gesprek over, en via tickets volg je de voortgang. Het helpcentrum staat vol handleidingen." },
   { q: "Hoe snel kan ik overstappen?", a: "Je voorraad en relaties importeer je uit Excel of csv; kanalen en agenda's koppel je zelf in een paar minuten. We plannen de overstap samen in de demo." },
   { q: "Wat kost VINVARO?", a: "Het Dealer-plan kost € 199 per maand plus € 5 per voertuig in voorraad, exclusief btw. Alle modules, gebruikers, partners en RDW-acties zijn inbegrepen. Je start met 30 dagen proefperiode." },

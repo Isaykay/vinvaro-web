@@ -73,7 +73,7 @@ function IntelligenceWorking({ on }: { on: boolean }) {
     { make: "bmw", text: t("Bevinding · tweede sleutel", "Finding · second key"), tone: "orange" },
     { make: "kia", text: t("Antwoord voorgesteld · WhatsApp", "Reply suggested · WhatsApp"), tone: "green" },
     { make: "toyota", text: t("Studio-achtergrond toegepast", "Studio background applied"), tone: "green" },
-    { make: "renault", text: t("Partner herkend · geen lead", "Partner recognised · not a lead"), tone: "green" },
+    { make: "renault", text: t("Inkoopfactuur herkend · WO-1042", "Purchase invoice read · WO-1042"), tone: "green" },
     { make: "peugeot", text: t("Leadscore 72 · inruil", "Lead score 72 · trade-in"), tone: "green" },
   ];
   const [tick, setTick] = useState(0);
@@ -213,16 +213,16 @@ export function ComparisonSlide() {
       label: t("VINVARO · hier start je", "VINVARO · where you start"),
       title: t("Je hele bedrijf in één werkplek", "Your whole business in one workspace"),
       body: t(
-        "Voorraad, workflows, inbox, verkoop, contracten en publiceren op hetzelfde dossier. Je team houdt alles in eigen hand.",
-        "Stock, workflows, inbox, sales, contracts and publishing on the same dossier. Your team keeps everything in its own hands.",
+        "Voorraad, workflows, werkplaats, inbox, verkoop, contracten, publiceren en aftersales op hetzelfde dossier. Je team houdt alles in eigen hand.",
+        "Stock, workflows, workshop, inbox, sales, contracts, publishing and aftersales on the same dossier. Your team keeps everything in its own hands.",
       ),
     },
     {
       label: t("VINVARO Intelligence · de AI-laag", "VINVARO Intelligence · the AI layer"),
       title: t("Denkt mee bij elke stap", "Thinks along at every step"),
       body: t(
-        "Bovenop het platform. Labelt en scoort gesprekken, leest documenten, signaleert afwijkingen en stelt antwoorden voor. Je team bevestigt.",
-        "On top of the platform. Labels and scores conversations, reads documents, flags deviations and suggests replies. Your team confirms.",
+        "Bovenop het platform. Labelt en scoort gesprekken, volgt leads op, leest inkoopfacturen en documenten, signaleert afwijkingen en stelt antwoorden voor. Je team bevestigt.",
+        "On top of the platform. Labels and scores conversations, follows up leads, reads purchase invoices and documents, flags deviations and suggests replies. Your team confirms.",
       ),
     },
   ];
@@ -235,8 +235,10 @@ export function ComparisonSlide() {
     t("CRM & pijplijn", "CRM & pipeline"),
     t("Gedeelde inbox", "Shared inbox"),
     t("Workflows & intake", "Workflows & intake"),
+    t("Werkorders & onderdelen", "Work orders & parts"),
     t("Contracten & tekenen", "Contracts & signing"),
     t("Facturen naar je boekhouding", "Invoices to your bookkeeping"),
+    t("Aftersales & dashboardkastje", "Aftersales & glovebox"),
     t("Team-app, ook offline", "Staff app, offline too"),
   ];
   const other: { support: Support; note?: string }[] = [
@@ -247,8 +249,10 @@ export function ComparisonSlide() {
     { support: "partial", note: t("beperkt", "limited") },
     { support: "no" },
     { support: "no" },
+    { support: "partial", note: t("los pakket", "separate package") },
     { support: "no" },
     { support: "partial", note: t("export", "export") },
+    { support: "no" },
     { support: "no" },
   ];
 

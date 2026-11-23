@@ -20,6 +20,8 @@ export function FeaturesSlide() {
     { id: "vehicles", label: t("Voorraad & dossier", "Stock & dossier"), desc: t("Eén voertuig, één complete geschiedenis", "One vehicle, one complete history"), items: titles("voorraad") },
     { id: "workflows", label: t("Workflows", "Workflows"), desc: t("Van intake tot aflevering, elke stap vastgelegd", "From intake to delivery, every step recorded"), items: titles("intake-en-aflevering") },
     { id: "sales", label: t("Inbox & verkoop", "Inbox & sales"), desc: t("Van aanvraag tot getekende deal", "From inquiry to signed deal"), items: titles("inbox", "crm-en-verkoop") },
+    { id: "workshop", label: t("Werkplaats", "Workshop"), desc: t("Werkorders, planbord, onderdelen en inkoop", "Work orders, planning board, parts and purchasing"), items: titles("werkplaats") },
+    { id: "growth", label: t("Groei & aftersales", "Growth & aftersales"), desc: t("Leads opvolgen, partijen checken, klanten houden", "Follow up leads, check parties, keep customers"), items: titles("ai-opvolging", "check", "aftersales") },
     { id: "finance", label: t("Contracten & publiceren", "Contracts & publishing"), desc: t("Getekend, gefactureerd en overal online", "Signed, invoiced and online everywhere"), items: titles("contracten-en-facturen", "publiceren") },
     { id: "ai", label: t("AI & Fotostudio", "AI & Photo studio"), desc: t("AI die helpt controleren, niet die beslist", "AI that helps you check, not AI that decides"), items: titles("intelligence", "fotostudio") },
     { id: "team", label: t("Team & beveiliging", "Team & security"), desc: t("Rollen, rechten en de app op de werkvloer", "Roles, permissions and the app on the floor"), items: [...titles("team-app"), ...securityControls.map((c) => c.title)] },

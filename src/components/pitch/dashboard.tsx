@@ -6,7 +6,9 @@ import { ChannelLogo } from "@/components/channel-logo";
 import { DashboardScreen, PipelineBoard } from "@/components/product/hero";
 import { VehicleDossier } from "@/components/product/ops";
 import { ContractSign, InboxView, PublishFlow } from "@/components/product/sales";
+import { Glovebox } from "@/components/product/growth";
 import { PhotoStudio } from "@/components/product/studio";
+import { WorkshopOrder } from "@/components/product/workshop";
 import { motion } from "./animation";
 import { useT } from "./lang";
 import { Slide } from "./slide";
@@ -48,7 +50,7 @@ export function DashboardSlide() {
       ),
       visual: <PipelineBoard />,
       width: 1100,
-      features: [t("Je eigen fases", "Your own stages"), t("Verplichte workflows per fase", "Required workflows per stage"), t("Dagen in voorraad per auto", "Days in stock per car")],
+      features: [t("Je eigen fases", "Your own stages"), t("Verplichte workflows per fase", "Required workflows per stage"), t("Stadagen en prijsadvies per auto", "Days in stock and price advice per car")],
       href: "/platform/intake-en-aflevering",
     },
     {
@@ -80,9 +82,28 @@ export function DashboardSlide() {
       ),
       visual: <InboxView />,
       width: 780,
-      features: [t("WhatsApp, Gmail, Outlook en eigen mail", "WhatsApp, Gmail, Outlook and own mail"), t("Labels en leadscore met AI", "Labels and lead score with AI"), t("Gesprekken op het dossier", "Conversations on the dossier")],
+      features: [t("WhatsApp, Gmail, Outlook en eigen mail", "WhatsApp, Gmail, Outlook and own mail"), t("Labels en leadscore met AI", "Labels and lead score with AI"), t("AI-opvolging: elke lead binnen een minuut een concept", "AI follow-up: a draft for every lead within a minute"), t("Gesprekken op het dossier", "Conversations on the dossier")],
       logos: (["whatsapp", "gmail", "outlook", "imap"] as const).map((k) => <ChannelLogo key={k} kind={k} size={20} />),
       href: "/platform/inbox",
+    },
+    {
+      id: "workshop",
+      label: t("Werkplaats", "Workshop"),
+      title: t("Werkorders, planbord en onderdelen", "Work orders, planning board and parts"),
+      desc: t(
+        "Banden, een beurt of een upgrade: arbeid, onderdelen en uitbesteed werk op een werkorder, met kostprijs en marge. Voorraadklussen worden kosten bij de auto, klantklussen met één klik een factuur.",
+        "Tyres, a service or an upgrade: labour, parts and sublet work on a work order, with cost and margin. Stock jobs become costs on the car, customer jobs an invoice in one click.",
+      ),
+      visual: <WorkshopOrder />,
+      width: 900,
+      features: [
+        t("Tijd klokken, ook in de app", "Time tracking, also in the app"),
+        t("Planbord per monteur en vervangend vervoer", "Planning board per mechanic and loan cars"),
+        t("Onderdelen bestellen bij Fource of Grossier.nu", "Order parts from Fource or Grossier.nu"),
+        t("Inkoopfacturen gelezen door AI", "Purchase invoices read by AI"),
+      ],
+      logos: [img("fource"), img("grossiernu")],
+      href: "/platform/werkplaats",
     },
     {
       id: "contracts",
@@ -98,10 +119,10 @@ export function DashboardSlide() {
         t("Contracten uit je eigen sjablonen", "Contracts from your own templates"),
         t("Digitaal ondertekenen via een link", "Sign digitally via a link"),
         t("Btw- of margeregeling per auto", "VAT or margin scheme per car"),
-        t("Financiering via Autus Finance", "Financing via Autus Finance"),
+        t("Maandbedrag en financiering via Financieringsvriend", "Monthly payment and financing via Financieringsvriend"),
         t("Facturen automatisch naar je boekhouding", "Invoices to your bookkeeping automatically"),
       ],
-      logos: [img("autus"), img("autoboeker")],
+      logos: [img("autoboeker")],
       href: "/platform/contracten-en-facturen",
     },
     {
@@ -130,6 +151,19 @@ export function DashboardSlide() {
       width: 760,
       features: [t("Achtergrond weg of studio-achtergrond", "Remove background or studio background"), t("Kenteken afdekken met je logo", "Cover the plate with your logo"), t("Origineel blijft altijd bewaard", "The original is always kept")],
       href: "/platform/fotostudio",
+    },
+    {
+      id: "aftersales",
+      label: "Aftersales",
+      title: t("Na de verkoop begint de klantrelatie", "The relationship starts after the sale"),
+      desc: t(
+        "Elke koper krijgt een digitaal dashboardkastje met zijn documenten, APK-datum, garantie en werkhistorie, plus een knop voor een review of inruil. In jouw huisstijl.",
+        "Every buyer gets a digital glovebox with their documents, MOT date, warranty and service history, plus a button for a review or trade-in. In your house style.",
+      ),
+      visual: <Glovebox />,
+      width: 420,
+      features: [t("Documenten, APK en garantie op één link", "Documents, MOT and warranty on one link"), t("Automatische review- en APK-momenten", "Automatic review and MOT moments"), t("Inruilaanvragen van je eigen klanten", "Trade-in requests from your own customers")],
+      href: "/platform/aftersales",
     },
   ];
   const active = tabs.find((x) => x.id === activeId) ?? tabs[0];
