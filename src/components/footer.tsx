@@ -83,7 +83,7 @@ export async function Footer() {
     <footer className="relative overflow-hidden border-t border-line bg-surface">
       <Mark className="pointer-events-none absolute -right-10 -bottom-20 h-[300px] w-auto text-ink/[0.025]" />
       <Container className="relative pt-16 pb-8">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,300px)_1fr] lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,280px)_1fr] lg:gap-20">
           <div>
             <Logo />
             <p className="mt-4 text-[14px] leading-relaxed text-muted">{t.tagline}</p>
@@ -112,7 +112,7 @@ export async function Footer() {
               <StoreBadges lang={lang} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 xl:grid-cols-[repeat(6,max-content)] xl:justify-between xl:gap-x-8">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:gap-x-12">
             {columns.map((col) => (
               <div key={col.title}>
                 <p className="mb-4 text-[12px] font-medium tracking-[0.06em] text-subtle uppercase">{col.title}</p>

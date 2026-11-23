@@ -224,9 +224,9 @@ export default async function Home() {
           <div className="mx-auto max-w-[920px] animate-rise text-center">
             <Link
               href={site.news.href}
-              className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-surface py-1 pr-3 pl-1 text-[13px] text-ink-2 shadow-card transition-colors hover:text-ink"
+              className="mx-auto mb-5 inline-flex items-center gap-2 rounded-full bg-surface py-1 pr-3 pl-3 text-[13px] text-ink-2 shadow-card transition-colors hover:text-ink sm:pl-1"
             >
-              <span className="rounded-full bg-brand-50 px-2 py-0.5 font-mono text-[11px] font-medium tracking-[0.06em] text-brand uppercase">{t.news}</span>
+              <span className="hidden rounded-full bg-brand-50 px-2 py-0.5 font-mono text-[11px] font-medium tracking-[0.06em] text-brand uppercase sm:inline">{t.news}</span>
               {site.news.label}
               <ArrowRight className="size-3.5" />
             </Link>
