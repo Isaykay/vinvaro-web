@@ -243,8 +243,8 @@ export function HowSlide() {
     {
       title: t("Koppel je kanalen", "Connect your channels"),
       desc: t(
-        "WhatsApp, je mailbox en agenda koppel je zelf in een paar minuten. Daarna je RDW-provider, JP.cars, je boekhouding, je eigen website en 185+ portals.",
-        "Connect WhatsApp, your mailbox and calendar yourself in a few minutes. Then your RDW provider, JP.cars, your bookkeeping, your own website and 185+ portals.",
+        "WhatsApp (officieel via Meta, naast je bestaande app), je mailbox en agenda koppel je zelf in een paar minuten. Daarna je RDW-provider, JP.cars, je boekhouding, je eigen website en 185+ portals.",
+        "Connect WhatsApp (official via Meta, alongside your existing app), your mailbox and calendar yourself in a few minutes. Then your RDW provider, JP.cars, your bookkeeping, your own website and 185+ portals.",
       ),
       art: <ArtChannels t={t} on={on} />,
     },
@@ -286,6 +286,18 @@ export function HowSlide() {
             </motion.div>
           ))}
         </div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={on ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.5, ease }}
+          className="mx-auto mt-8 max-w-[640px] text-center text-[14px] leading-[1.55] text-muted"
+        >
+          <span className="font-medium text-ink">{t("Eerst oefenen? ", "Want to practise first? ")}</span>
+          {t(
+            "De probeeromgeving opent naast je eigen bedrijf een kopie vol voorbeeldauto's, gesprekken, contracten en facturen. Niets gaat naar buiten, dus je team leert VINVARO zonder risico.",
+            "The sandbox opens a copy next to your own company, full of sample cars, conversations, contracts and invoices. Nothing leaves VINVARO, so your team learns it without risk.",
+          )}
+        </motion.p>
       </div>
     </Slide>
   );
